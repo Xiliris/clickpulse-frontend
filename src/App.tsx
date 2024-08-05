@@ -1,38 +1,48 @@
-import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Verify from "./pages/auth/Verify";
 
-import Loading from "./components/Loading";
-const Home = lazy(() => import("./pages/Home"));
-const Auth = lazy(() => import("./pages/Login"));
+import New from "./pages/dashboard/New";
+import Script from "./pages/dashboard/Script";
+import Dashboard from "./pages/dashboard/Dashboard";
+
+import Protected from "./modules/Protected";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/verify" element={<Verify />} />
         <Route
-          path="/"
+          path="/dashboard"
           element={
-            <Suspense fallback={<Loading height="screen" />}>
-              <Home />
-            </Suspense>
+            <Protected>
+              <Dashboard />
+            </Protected>
           }
         />
         <Route
-          path="/login"
+          path="/dashboard/new"
           element={
-            <Suspense fallback={<Loading height="screen" />}>
-              <Auth />
-            </Suspense>
+            <Protected>
+              <New />
+            </Protected>
           }
         />
         <Route
-          path="/signup"
+          path="/dashboard/script"
           element={
-            <Suspense fallback={<Loading height="screen" />}>
-              <Auth />
-            </Suspense>
+            <Protected>
+              <Script />
+            </Protected>
           }
         />
+
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </BrowserRouter>
