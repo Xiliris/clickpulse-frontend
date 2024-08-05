@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Loading from "./components/Loading";
 const Home = lazy(() => import("./pages/Home"));
 const Auth = lazy(() => import("./pages/Login"));
+const Maintenance = lazy(() => import("./pages/Maintenance"));
+const SignUp = lazy(() => import("./pages/Register"));
 
 export default function App() {
   return (
@@ -26,10 +28,18 @@ export default function App() {
           }
         />
         <Route
+          path="/maintenance"
+          element={
+            <Suspense fallback={<Loading height="screen" />}>
+              <Maintenance />
+            </Suspense>
+          }
+        />
+        <Route
           path="/signup"
           element={
             <Suspense fallback={<Loading height="screen" />}>
-              <Auth />
+              <SignUp />
             </Suspense>
           }
         />

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   mode: "jit",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -9,7 +9,7 @@ export default {
           100: "#7D8597",
           200: "#4C5366",
         },
-        emphasis: "#3CBAB1", // Deep teal
+        emphasis: "#3CBAB1",
         default: {
           100: "#252A34",
           200: "#15191E",

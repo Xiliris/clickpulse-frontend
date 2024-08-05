@@ -1,9 +1,12 @@
 import { Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
-const Navbar = lazy(() => import("../components/Navbar"));
+const Navbar = lazy(() => import("../components/Home/Navbar"));
 const Button = lazy(() => import("../components/form/Button"));
 import Globe from "../assets/globe.png";
+const Pricing = lazy(() => import("../components/Home/Pricing"));
+const Hero = lazy(() => import("../components/Home/Hero"));
+const Footer = lazy(() => import("../components/Home/Footer"));
 
 export default function Home() {
   return (
@@ -32,9 +35,13 @@ export default function Home() {
         <img
           src={Globe}
           alt="Globe"
-          className="max-w-none absolute bottom-0 right-0 w-[1200px] translate-x-96 translate-y-96"
+          className="max-w-none absolute bottom-0 right-0 w-[1050px] translate-x-80 translate-y-56 opacity-60"
         />
       </main>
+      <Hero />
+      <Pricing />
+      <Footer />
+
     </Suspense>
   );
 }

@@ -11,7 +11,7 @@ const Button: FC<ButtonProps> = ({ children, addClass, type, onClick }) => {
   return (
     <button
       className={
-        "bg-emphasis text-background-100 px-6 py-2 rounded-md inline-flex items-center " +
+        "bg-emphasis text-background-100 px-6 py-2 rounded-md inline-flex items-center text-xl " +
         addClass
       }
       type={type}
