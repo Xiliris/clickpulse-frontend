@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+
 import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
+import Signup from "./pages/auth/Register";
 import Verify from "./pages/auth/Verify";
 
 import New from "./pages/dashboard/New";
 import Script from "./pages/dashboard/Script";
 import Dashboard from "./pages/dashboard/Dashboard";
 
+import Maintenance from "./pages/Maintenance";
 import Protected from "./modules/Protected";
 
 export default function App() {
@@ -16,8 +18,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/verify" element={<Verify />} />
+        <Route path="/maintenance" element={<Maintenance />} />
         <Route
           path="/dashboard"
           element={
