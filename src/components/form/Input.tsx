@@ -5,10 +5,11 @@ interface InputProps {
   placeholder: string;
   name: string;
   className?: string;
+  onChange?: () => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, placeholder, name, className }, ref) => {
+  ({ type, placeholder, name, className, onChange }, ref) => {
     return (
       <div className={`w-full ${className}`}>
         <label htmlFor={name} className="text-primary">
@@ -19,13 +20,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           placeholder={placeholder}
           name={name}
           ref={ref}
-          className={`border-secondary-200 bg-transparent border-2 rounded-md px-4 py-2 w-full text-emphasis text-xl mt-1`}
+          onChange={onChange}
+          className={`border-secondary-200 bg-transparent border-2 rounded-md px-4 py-2 w-full text-emphasis text-xl mt-1 cursor-pointer`}
         />
       </div>
     );
   }
 );
-
-Input.displayName = "Input";
 
 export default Input;
