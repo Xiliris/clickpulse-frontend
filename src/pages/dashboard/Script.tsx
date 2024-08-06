@@ -31,14 +31,12 @@ const Script: FC = () => {
 
   async function handleDomain() {
     try {
-      const res: any = await axiosInstance.post("/dashboard/new", {
+      await axiosInstance.post("/dashboard/new", {
         token: cookies.token,
         domain: `https://${domain}`,
       });
 
-      const { data } = await res;
-
-      console.log(data);
+      navigate("/dashboard");
     } catch (error: any) {
       setError(error.response.data);
     }
@@ -58,10 +56,7 @@ const Script: FC = () => {
             className={`w-full flex justify-start items-center border-2 rounded-md overflow-hidden resize-none bg-transparent text-primary py-2 px-4 ${copied.border}`}
           >
             {`<script defer data-domain="${domain}" src="https://${websiteUrl}/js/script.js"></script>`}
-            <i
-              className={`fa-solid fa-copy ml-3 cursor-pointer ${copied.color}`}
-              onClick={() => handleCopy()}
-            ></i>
+            <i className={`fa-solid fa-copy ml-3 cursor-pointer ${copied.color}`} onClick={() => handleCopy()}></i>
           </p>
           {error && <p className="text-red-400 mt-3">{error}</p>}
 

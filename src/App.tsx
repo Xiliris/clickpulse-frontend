@@ -1,17 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 
-import Login from './pages/auth/Login';
-import Signup from './pages/auth/Register';
-import Verify from './pages/auth/Verify';
-import Reset from './pages/auth/Reset';
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Register";
+import Verify from "./pages/auth/Verify";
+import Reset from "./pages/auth/Reset";
 
-import New from './pages/dashboard/New';
-import Script from './pages/dashboard/Script';
-import Dashboard from './pages/dashboard/Dashboard';
+import New from "./pages/dashboard/New";
+import Script from "./pages/dashboard/Script";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Website from "./pages/dashboard/Website";
 
-import Maintenance from './pages/Maintenance';
-import Protected from './modules/Protected';
+import Maintenance from "./pages/Maintenance";
+import Protected from "./modules/Protected";
 
 export default function App() {
   return (
@@ -28,6 +29,14 @@ export default function App() {
           element={
             <Protected>
               <Dashboard />
+            </Protected>
+          }
+        />
+        <Route
+          path="/dashboard/:id"
+          element={
+            <Protected>
+              <Website />
             </Protected>
           }
         />
