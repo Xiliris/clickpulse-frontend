@@ -2,7 +2,7 @@ import Logo from '../assets/logo.png';
 
 export default function Maintenance() {
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-default-200 text-center p-4">
+    <div className="h-[100dvh] flex flex-col items-center justify-center bg-default-200 text-center p-4">
       <img src={Logo} alt="Logo" className="mb-8 sm:w-32 w-24" />
       <div className="p-4 sm:p-8 rounded-2xl max-w-lg w-full text-base">
         <h1 className="text-3xl sm:text-4xl font-bold text-primary mb-4">
