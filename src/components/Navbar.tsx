@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import axiosInstance from "../modules/axiosInstance";
-import { CookiesProvider, useCookies } from "react-cookie";
+import { useState, useEffect } from 'react';
+import axiosInstance from '../modules/axiosInstance';
+import { CookiesProvider, useCookies } from 'react-cookie';
 
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import Button from "./form/Button";
-import Logo from "../assets/logo.png";
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import Button from './form/Button';
+import Logo from '../assets/logo.png';
 
 export default function Navbar() {
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [cookies, setCookie] = useCookies(['token']);
   const [user, setUser] = useState<any>({});
 
   const [scrollingUp, setScrollingUp] = useState(true);
@@ -28,9 +28,9 @@ export default function Navbar() {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
   const handleWhyClick = () => {
@@ -43,7 +43,7 @@ export default function Navbar() {
 
   async function getProfile() {
     try {
-      const res = await axiosInstance.post("/auth/me", {
+      const res = await axiosInstance.post('/auth/me', {
         token: cookies.token,
       });
 
@@ -60,12 +60,19 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed left-0 right-0 top-0 py-5 w-full bg-gray-800 transition-transform duration-300 ease-in-out ${
-        scrollingUp ? "translate-y-0" : "-translate-y-full"
+        scrollingUp ? 'translate-y-0' : '-translate-y-full'
       } z-50`}
     >
       <div className="flex flex-row justify-between items-center w-[70vw] mx-auto">
-        <Link to="/" className="flex items-center space-x-2 cursor-pointer">
-          <img src={Logo} alt="Logo" className="w-12 cursor-pointer" />
+        <Link
+          to="/"
+          className="flex items-center space-x-2 cursor-pointer"
+        >
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-12 cursor-pointer"
+          />
           <span className="text-3xl font-bold text-primary cursor-pointer">
             Clickpulse
           </span>
@@ -80,7 +87,7 @@ export default function Navbar() {
             <FontAwesomeIcon
               icon={faChevronDown}
               className={`transform transition-transform ${
-                isWhyClicked ? "rotate-180" : "rotate-0"
+                isWhyClicked ? 'rotate-180' : 'rotate-0'
               }`}
             />
           </div>
@@ -92,7 +99,7 @@ export default function Navbar() {
             <FontAwesomeIcon
               icon={faChevronDown}
               className={`transform transition-transform ${
-                isCommunityClicked ? "rotate-180" : "rotate-0"
+                isCommunityClicked ? 'rotate-180' : 'rotate-0'
               }`}
             />
           </div>
@@ -103,9 +110,8 @@ export default function Navbar() {
             Pricing
           </Link>
         </div>
-
         <div className="flex items-center space-x-8">
-          {user ? (
+          {user && user.username ? (
             <Link
               to="/dashboard"
               className="flex items-center space-x-1 hover:text-emphasis text-primary cursor-pointer text-xl"
@@ -114,8 +120,16 @@ export default function Navbar() {
             </Link>
           ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/start-free-trial">
+              <Link
+                to="/login"
+                className="hover:text-emphasis text-primary cursor-pointer text-xl"
+              >
+                Log In
+              </Link>
+              <Link
+                to="/start-free-trial"
+                className="cursor-pointer text-xl"
+              >
                 <Button>Sign In</Button>
               </Link>
             </>
