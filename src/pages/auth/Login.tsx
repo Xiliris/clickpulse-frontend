@@ -81,7 +81,7 @@ const Auth: FC = () => {
             />
             <div className="text-sm flex justify-between">
               <Link
-                to="/forgot-password"
+                to="/reset"
                 className="text-base text-emphasis hover:text-emphasis-light cursor-pointer"
               >
                 Forgot your password?

@@ -126,10 +126,7 @@ export default function Navbar() {
               >
                 Log In
               </Link>
-              <Link
-                to="/start-free-trial"
-                className="cursor-pointer text-xl"
-              >
+              <Link to="/signup" className="cursor-pointer text-xl">
                 <Button>Sign In</Button>
               </Link>
             </>
