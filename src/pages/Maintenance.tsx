@@ -21,6 +21,7 @@ export default function Maintenance() {
             className="text-emphasis cursor-pointer"
           >
             {' '}
+            <br />
             clickpulse.service@gmail.com
           </a>
         </p>
