@@ -115,3 +115,11 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #252A34 inset !important;
+  box-shadow: 0 0 0 30px #252A34 inset !important;
+  -webkit-text-fill-color: #A3B8C7 !important;
+  text-fill-color: #A3B8C7 !important;
+  background-color: #252A34 !important;
+}

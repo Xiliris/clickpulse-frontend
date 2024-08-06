@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
 interface InputProps {
   type: string;
@@ -9,10 +9,10 @@ interface InputProps {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, placeholder, name, className, onChange }, ref) => {
+  ({ type, placeholder, name, className = '', onChange }, ref) => {
     return (
       <div className={`w-full ${className}`}>
-        <label htmlFor={name} className="text-primary">
+        <label htmlFor={name} className="sr-only">
           {placeholder}
         </label>
         <input
@@ -21,7 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           name={name}
           ref={ref}
           onChange={onChange}
-          className={`border-secondary-200 bg-transparent border-2 rounded-md px-4 py-2 w-full text-emphasis text-xl mt-1 cursor-pointer`}
+          className="relative block w-full px-4 py-2 placeholder-secondary-100 text-primary bg-default-200 rounded-lg sm:text-lg border-2 border-secondary-200 focus:outline-none focus:ring-2 focus:ring-emphasis focus:border-transparent pr-10 cursor-pointer"
         />
       </div>
     );
