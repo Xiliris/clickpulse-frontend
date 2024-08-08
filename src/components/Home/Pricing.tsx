@@ -1,19 +1,19 @@
-import Button from "../form/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { ReactNode, FC } from "react";
+import Button from '../form/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { ReactNode, FC } from 'react';
 
 export default function Hero() {
   return (
-    <section className="bg-default-100 py-12 px-4 h-screen">
-      <div className="max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
+    <section className="bg-default-100 py-12 px-4 min-h-screen">
+      <div className="max-w-6xl mx-auto text-center h-min-screen flex flex-col justify-center">
         <h2 className="relative text-4xl font-bold text-emphasis py-2 px-4 rounded-lg mb-12 pb-3">
           Our Pricing Plans
           <span className="absolute left-0 bottom-0 w-full h-0.5 bg-emphasis rounded-sm"></span>
         </h2>
         <div className="flex flex-col md:flex-row justify-center gap-8">
-          {/* Basic */}
-          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow">
+          {/* Free */}
+          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform transition-transform hover:scale-110">
             <div className="relative flex flex-col ">
               <span className="text-primary text-3xl">Free Plan</span>
               <p className="mt-1 text-secondary-100 text-4xl">Free</p>
@@ -30,11 +30,15 @@ export default function Hero() {
             </Button>
           </div>
 
-          {/* Premium */}
-          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow">
+          {/* Basic */}
+          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform transition-transform hover:scale-110">
             <div className="relative flex flex-col ">
-              <span className="text-primary text-3xl">Basic Plan</span>
-              <p className="mt-1 text-secondary-100 text-4xl">$19.99</p>
+              <span className="text-primary text-3xl">
+                Basic Plan
+              </span>
+              <p className="mt-1 text-secondary-100 text-4xl">
+                $19.99
+              </p>
             </div>
             <hr className="border-[#4C5366]" />
             <ul className="flex flex-col gap-2 flex-grow">
@@ -51,11 +55,15 @@ export default function Hero() {
             </Button>
           </div>
 
-          {/* Premium + */}
-          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow">
+          {/* Premium */}
+          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform transition-transform hover:scale-110">
             <div className="relative flex flex-col ">
-              <span className="text-primary text-3xl">Premium Plan</span>
-              <p className="mt-1 text-secondary-100 text-4xl">$39.99</p>
+              <span className="text-primary text-3xl">
+                Premium Plan
+              </span>
+              <p className="mt-1 text-secondary-100 text-4xl">
+                $39.99
+              </p>
             </div>
             <hr className="border-[#4C5366]" />
             <ul className="flex flex-col gap-2 flex-grow">
