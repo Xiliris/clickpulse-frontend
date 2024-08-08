@@ -26,7 +26,7 @@ const MultiValue: FC<MultiValueProps> = ({ id, type, request, title }) => {
   }
 
   return (
-    <div className="text-white flex justify-between flex-col border-2 border-primary p-5 rounded-md">
+    <div className="text-white flex justify-between flex-col border-2 border-primary p-5 rounded-md w-full mx-1">
       <h1>{title}</h1>
       {page.map((item, index) => (
         <div key={index} className="flex justify-between items-center gap-10 bg-secondary-200 p-3 rounded-md mt-3">

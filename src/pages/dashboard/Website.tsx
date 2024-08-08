@@ -7,43 +7,37 @@ const SingleValue = lazy(() => import("../../components/dashboard/SingleValue"))
 const Website: FC = () => {
   const { id } = useParams();
 
+  const today = new Date().toISOString().slice(0, 10);
+
   return (
     <main className="flex flex-col justify-center items-center">
       <h1 className="text-4xl text-emphasis">Website</h1>
 
-      <h1 className="text-emphasis text-3xl mt-5 mb-2">Total</h1>
-      <div className="flex justify-between items-center w-1/2 border-2 border-emphasis p-5 rounded-lg">
+      <Container title="Total">
         <Suspense fallback={<div className="text-white">Loading...</div>}>
-          <SingleValue id={id} request={"total-views"} date={"2024-08-06"} type={"views"} title={"Total Views"} />
+          <SingleValue id={id} request={"total-views"} date={today} type={"views"} title={"Total Views"} />
         </Suspense>
 
         <Suspense fallback={<div className="text-white">Loading...</div>}>
-          <SingleValue
-            id={id}
-            request={"total-views"}
-            date={"2024-08-06"}
-            type={"page_views"}
-            title={"Total Page Views"}
-          />
+          <SingleValue id={id} request={"total-views"} date={today} type={"page_views"} title={"Total Page Views"} />
         </Suspense>
 
         <Suspense fallback={<div className="text-white">Loading...</div>}>
-          <SingleValue id={id} request={"bounce-rate"} date={"2024-08-06"} type={"bounces"} title={"Bounce Rate"} />
+          <SingleValue id={id} request={"bounce-rate"} date={today} type={"bounces"} title={"Bounce Rate"} />
         </Suspense>
 
         <Suspense fallback={<div className="text-white">Loading...</div>}>
           <SingleValue
             id={id}
             request={"session-duration"}
-            date={"2024-08-06"}
+            date={today}
             type={"duration"}
             title={"Avarage Visit Duration"}
           />
         </Suspense>
-      </div>
+      </Container>
 
-      <h1 className="text-emphasis text-3xl mt-5 mb-2">Engagement Information</h1>
-      <div className="flex justify-between items-center w-1/2 border-2 border-emphasis p-5 rounded-lg">
+      <Container title="Engagement Information">
         <Suspense fallback={<div className="text-white">Loading...</div>}>
           <MultiValue id={id} request={"entry-page"} type={"path"} title={"Entry Pages"} />
         </Suspense>
@@ -55,9 +49,8 @@ const Website: FC = () => {
         <Suspense fallback={<div className="text-white">Loading...</div>}>
           <MultiValue id={id} request={"visited-page"} type={"path"} title={"Visited Pages"} />
         </Suspense>
-      </div>
-      <h1 className="text-emphasis text-3xl mt-5 mb-2">Client Information</h1>
-      <div className="flex justify-between items-center w-1/2 border-2 border-emphasis p-5 rounded-lg">
+      </Container>
+      <Container title="Client Information">
         <Suspense fallback={<div className="text-white">Loading...</div>}>
           <MultiValue id={id} request={"devices"} type={"device"} title={"Devices"} />
         </Suspense>
@@ -69,8 +62,22 @@ const Website: FC = () => {
         <Suspense fallback={<div className="text-white">Loading...</div>}>
           <MultiValue id={id} request={"os"} type={"os"} title={"Operating Systems"} />
         </Suspense>
-      </div>
+      </Container>
     </main>
+  );
+};
+
+interface ContainerProps {
+  children: React.ReactNode;
+  title?: string;
+}
+
+const Container: FC<ContainerProps> = ({ children, title }) => {
+  return (
+    <>
+      <h1 className="text-emphasis text-3xl mt-5 mb-2">{title}</h1>
+      <div className="flex justify-between items-center w-1/2 border-2 border-emphasis p-5 rounded-lg">{children}</div>
+    </>
   );
 };
 
