@@ -37,7 +37,7 @@ const PasswordInput = forwardRef<
           name={name}
           ref={ref}
           onChange={onChange}
-          className="relative block w-full px-4 py-2 placeholder-secondary-100 text-primary bg-default-200 rounded-lg sm:text-lg border-2 border-secondary-200 focus:outline-none focus:ring-2 focus:ring-emphasis focus:border-transparent pr-10"
+          className="relative block w-full px-4 py-2 placeholder-secondary-100 text-primary bg-default-200 rounded-lg sm:text-lg border-2 border-secondary-200 focus:outline-none focus:ring-2 focus:ring-emphasis focus:border-transparent pr-10 cursor-pointer"
         />
         <i
           className={`fa-regular ${showIcon} text-secondary-100 cursor-pointer absolute right-3 top-1/2 transform -translate-y-1/2`}
