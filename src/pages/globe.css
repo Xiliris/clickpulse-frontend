@@ -1,0 +1,43 @@
+.globe-img {
+    opacity: 0.2;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: none;
+    z-index: 10;
+    width: 85vw;
+    transform: translateX(7rem) translateY(-3rem);
+  }
+  
+  @media (min-width: 450px) { 
+    .globe-img {
+      width: 75vw;
+      opacity: 0.7;
+      transform: translateX(10rem) translateY(10rem);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .globe-img {
+      width: 100vw;
+      opacity: 0.7;
+      transform: translateX(30rem) translateY(15rem);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .globe-img {
+      width: 85vw;
+      opacity: 0.7;
+      transform: translateX(29rem) translateY(15rem);
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .globe-img {
+      width: 70vw;
+      opacity: 0.7;
+      transform: translateX(25rem) translateY(15rem);
+    }
+  }
+  
