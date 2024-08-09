@@ -20,6 +20,7 @@ export default function Hero() {
         </h2>
         <div className="flex flex-wrap gap-8 justify-between xl:justify-center">
           {/* Basic */}
+
           <Card
             plan="Basic Plan"
             price="$9.99"
