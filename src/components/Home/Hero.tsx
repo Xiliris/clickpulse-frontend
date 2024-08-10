@@ -1,71 +1,87 @@
-import React from 'react';
+import React from "react";
+import { motion } from "framer-motion";
 
 interface FlipCardProps {
-  frontTitle: string;
-  backText: string;
+  title: string;
+  description: string;
+  index: number;
 }
 
-const FlipCard: React.FC<FlipCardProps> = ({
-  frontTitle,
-  backText,
-}) => {
+interface itemProp {
+  index: number;
+}
+
+const itemVariant = {
+  initial: {
+    y: 20,
+    opacity: 0,
+  },
+  animate: ({ index }: itemProp) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: index * 0.1,
+      duration: 0.2,
+      type: "spring",
+    },
+  }),
+};
+
+const FlipCard: React.FC<FlipCardProps> = ({ title, description, index }) => {
   return (
-    <div className="relative w-48 h-64 perspective-1000 group">
-      <div className="relative w-full h-full text-center transition-transform duration-800 transform-style-3d group-hover:rotate-y-180">
-        <div className="absolute flex flex-col justify-center w-full h-full bg-gradient-to-tr from-bisque via-[#ffe7de] to-[rgba(255,127,80,0.603)] text-coral border border-coral rounded-xl shadow-lg backface-hidden">
-          <p className="text-2xl font-extrabold m-0">{frontTitle}</p>
-        </div>
-        <div className="absolute flex flex-col justify-center w-full h-full bg-gradient-to-tr from-[#ffae91] via-coral to-bisque text-white border border-coral rounded-xl shadow-lg transform rotate-y-180 backface-hidden">
-          <p>{backText}</p>
-        </div>
+    <motion.article
+      variants={itemVariant}
+      initial="initial"
+      whileInView="animate"
+      custom={{ index: index }}
+      className="w-full min-h-48 bg-default-100 shadow p-4 space-y-2 rounded-md hover:-translate-y-2 duration-300"
+    >
+      <div className="w-full flex justify-start items-center">
+        <i className="fa-solid fa-user text-emphasis text-2xl"></i>
+        <h3 className="text-xl text-primary ml-4">{title}</h3>
       </div>
-    </div>
+      <p className="text-sm w-full text-gray-400 text-left">{description}</p>
+    </motion.article>
   );
 };
 
 export default function Hero() {
   return (
-    <section className="bg-default-200 py-12 min-h-screen z-10 mt-7 w-[70vw] mx-auto md:w-[90vw]">
+    <section className="bg-default-200 py-12 z-10 mt-7 w-[70vw] mx-auto md:w-[90vw]">
       <div className="mx-auto text-center relative lg:w-[70vw]">
         <h2 className="relative text-4xl font-bold text-emphasis py-2 px-4 pb-3 border-b-[0.5px] border-emphasis">
           Tracking
         </h2>
         <div className="grid md:grid-cols-2 grid-cols-3 gap-6 mt-12 justify-center">
           <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
+            title="Unique visitors"
+            description="You had xxxx amount of visitors this month"
+            index={1}
           />
           <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
+            title="Page views"
+            description="Total page views for this month are xxxx"
+            index={2}
           />
           <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
+            title="Bounce rate"
+            description="Your bounce rate this month is xx%"
+            index={3}
           />
           <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
+            title="Average visit duration"
+            description="The average visit duration is xx:xx"
+            index={4}
           />
           <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
+            title="Top page"
+            description="Your top page is 'Page Name'"
+            index={5}
           />
           <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
-          />
-          <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
-          />
-          <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
-          />
-          <FlipCard
-            frontTitle="Unique visitors"
-            backText="You had xxxx amount of visitors this month"
+            title="New vs Returning"
+            description="You have xx% new and xx% returning visitors"
+            index={6}
           />
         </div>
       </div>

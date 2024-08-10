@@ -117,9 +117,29 @@ input[type="number"] {
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #252A34 inset !important;
-  box-shadow: 0 0 0 30px #252A34 inset !important;
-  -webkit-text-fill-color: #A3B8C7 !important;
-  text-fill-color: #A3B8C7 !important;
-  background-color: #252A34 !important;
+  -webkit-box-shadow: 0 0 0 30px #252a34 inset !important;
+  box-shadow: 0 0 0 30px #252a34 inset !important;
+  -webkit-text-fill-color: #a3b8c7 !important;
+  text-fill-color: #a3b8c7 !important;
+  background-color: #252a34 !important;
+}
+
+.custom-shape-divider-top-1723244705 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1723244705 svg {
+  position: relative;
+  display: block;
+  width: calc(300% + 1.3px);
+  height: 100px;
+}
+
+.custom-shape-divider-top-1723244705 .shape-fill {
+  fill: #15191e;
 }

@@ -1,19 +1,51 @@
-import Button from '../form/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { ReactNode, FC, useState } from 'react';
+import Button from "../form/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { ReactNode, FC, useState } from "react";
+import { motion } from "framer-motion";
+
+interface itemProp {
+  index: number;
+}
+
+const itemVariant = {
+  initial: {
+    y: 20,
+    opacity: 0,
+  },
+  animate: ({ index }: itemProp) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: index * 0.1,
+      duration: 0.5,
+      type: "tween",
+    },
+  }),
+};
 
 export default function Hero() {
   const [hoveredCard, setHoveredCard] = useState<any>({
-    Basic: 'brightness-100',
-    Standard: 'brightness-100',
-    Premium: 'brightness-100',
+    Basic: "brightness-100",
+    Standard: "brightness-100",
+    Premium: "brightness-100",
   });
 
-  console.log(hoveredCard);
-
   return (
-    <section className="bg-default-100 py-32">
+    <section className="bg-default-100 py-32 relative">
+      <div className="custom-shape-divider-top-1723244705 absolute top-0 left-0">
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M1200 120L0 16.48 0 0 1200 0 1200 120z"
+            className="shape-fill"
+          ></path>
+        </svg>
+      </div>
       <div className="mx-auto text-center h-min-screen flex flex-col justify-center w-[70vw] md:w-[90vw] xl:w-[70vw]">
         <h2 className="relative flex flex-col text-4xl font-bold text-emphasis py-2 px-4 mb-12 pb-3 border-b-[0.5px] border-emphasis">
           Our Pricing Plans
@@ -24,18 +56,19 @@ export default function Hero() {
             plan="Basic Plan"
             price="$9.99"
             className={`transform ${hoveredCard.Basic}`}
+            index={2}
             onMouseEnter={() =>
               setHoveredCard({
-                Basic: 'brightness-100',
-                Standard: 'brightness-50',
-                Premium: 'brightness-50',
+                Basic: "brightness-100",
+                Standard: "brightness-50",
+                Premium: "brightness-50",
               })
             }
             onMouseLeave={() =>
               setHoveredCard({
-                Basic: 'brightness-100',
-                Standard: 'brightness-100',
-                Premium: 'brightness-100',
+                Basic: "brightness-100",
+                Standard: "brightness-100",
+                Premium: "brightness-100",
               })
             }
           >
@@ -49,18 +82,19 @@ export default function Hero() {
             plan="Standard Plan"
             price="$29.99"
             className={hoveredCard.Standard}
+            index={1}
             onMouseEnter={() =>
               setHoveredCard({
-                Basic: 'brightness-50',
-                Standard: 'brightness-100',
-                Premium: 'brightness-50',
+                Basic: "brightness-50",
+                Standard: "brightness-100",
+                Premium: "brightness-50",
               })
             }
             onMouseLeave={() =>
               setHoveredCard({
-                Basic: 'brightness-100',
-                Standard: 'brightness-100',
-                Premium: 'brightness-100',
+                Basic: "brightness-100",
+                Standard: "brightness-100",
+                Premium: "brightness-100",
               })
             }
           >
@@ -74,18 +108,19 @@ export default function Hero() {
             plan="Premium Plan"
             price="$49.99"
             className={hoveredCard.Premium}
+            index={2}
             onMouseEnter={() =>
               setHoveredCard({
-                Basic: 'brightness-50',
-                Standard: 'brightness-50',
-                Premium: 'brightness-100',
+                Basic: "brightness-50",
+                Standard: "brightness-50",
+                Premium: "brightness-100",
               })
             }
             onMouseLeave={() =>
               setHoveredCard({
-                Basic: 'brightness-100',
-                Standard: 'brightness-100',
-                Premium: 'brightness-100',
+                Basic: "brightness-100",
+                Standard: "brightness-100",
+                Premium: "brightness-100",
               })
             }
           >
@@ -109,8 +144,9 @@ interface CardInterface {
   plan: string;
   price: string;
   className?: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  index: number;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 const Card: FC<CardInterface> = ({
@@ -120,14 +156,20 @@ const Card: FC<CardInterface> = ({
   onMouseEnter,
   onMouseLeave,
   className,
+  index,
 }) => {
   return (
-    <div
+    <motion.div
+      variants={itemVariant}
+      initial="initial"
+      whileInView="animate"
+      custom={{ index: index }}
+      viewport={{ once: true, amount: 0.5 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform transition-all max-w-96 ${className}`}
+      className={`relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform max-w-96 ${className}`}
     >
-      <div className="relative flex flex-col ">
+      <div className="relative flex flex-col">
         <span className="text-primary text-3xl">{plan}</span>
         <p className="mt-1 text-secondary-100 text-4xl">{price}</p>
       </div>
@@ -137,7 +179,7 @@ const Card: FC<CardInterface> = ({
         Upgrade now
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useCallback } from 'react';
-import Logo from '../../assets/logo.png';
+import { Link } from "react-router-dom";
+import { useCallback } from "react";
+import Logo from "../../assets/logo.png";
 
 export default function Footer() {
   const scrollToTop = useCallback(() => {
@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-800 text-primary py-10">
-      <div className=" max-w-[70vw] mx-auto px-4">
+      <div className="max-w-[70vw] mx-auto px-4">
         <div className="flex md:flex-col flex-row justify-between items-center mb-8">
           <div
             onClick={scrollToTop}
