@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCallback } from "react";
 import Logo from "../../assets/logo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter, faFacebook, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   const scrollToTop = useCallback(() => {
@@ -13,8 +11,8 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-gray-800 text-primary py-10">
-      <div className="max-w-6xl mx-auto px-4">
+    <footer className="bg-default-200 text-primary py-10">
+      <div className=" max-w-[70vw] mx-auto px-4">
         <div className="flex md:flex-col flex-row justify-between items-center mb-8">
           <div onClick={scrollToTop} className="flex items-center space-x-4 cursor-pointer md:mb-4 mb-0">
             <img src={Logo} alt="Logo" className="w-12" />
@@ -52,7 +50,6 @@ export default function Footer() {
         <div className="border-t border-gray-700 pt-8">
           <div className="flex md:flex-col flex-row justify-between items-center text-center">
             <p className="text-base text-gray-400 md:mb-4 mb-0">&copy; 2024 Clickpulse. All rights reserved.</p>
-
             <div className="flex space-x-4 md:mt-4 mt-0">
               <a
                 href="https://x.com"
@@ -60,21 +57,10 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-emphasis cursor-pointer"
               >
-                <FontAwesomeIcon
-                  icon={faTwitter}
-                  className="text-xl transform transition-transform duration-300 hover:scale-125"
-                />
+                <i className="fa-brands fa-twitter text-xl transform transition-transform duration-300 hover:scale-125 cursor-pointer"></i>
               </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-emphasis cursor-pointer"
-              >
-                <FontAwesomeIcon
-                  icon={faFacebook}
-                  className="text-xl transform transition-transform duration-300 hover:scale-125"
-                />
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-emphasis">
+                <i className="fa-brands fa-facebook text-xl transform transition-transform duration-300 hover:scale-125 cursor-pointer"></i>
               </a>
               <a
                 href="https://linkedin.com"
@@ -82,10 +68,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-emphasis cursor-pointer"
               >
-                <FontAwesomeIcon
-                  icon={faLinkedin}
-                  className="text-xl transform transition-transform duration-300 hover:scale-125"
-                />
+                <i className="fa-brands fa-linkedin text-xl transform transition-transform duration-300 hover:scale-125 cursor-pointer"></i>
               </a>
             </div>
           </div>

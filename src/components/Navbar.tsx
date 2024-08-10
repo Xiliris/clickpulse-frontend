@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, FC, ReactNode } from "react";
+import { motion } from "framer-motion";
 import axiosInstance from "../modules/axiosInstance";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
@@ -7,13 +8,30 @@ import { faChevronDown, faBars, faTimes } from "@fortawesome/free-solid-svg-icon
 import Button from "./form/Button";
 import Logo from "../assets/logo.png";
 
+const variants = {
+  initial: {
+    opacity: 0,
+    y: 50,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+    },
+  },
+};
+
 const DropdownItem: FC<{ to: string; children: ReactNode }> = ({ to, children }) => {
   return (
-    <li className="flex gap-2 transform transition-transform duration-300 hover:scale-105">
-      <span className="text-primary text-sm mt-2 hover:text-emphasis">
-        <Link to={to}>{children}</Link>
-      </span>
-    </li>
+    <Link to={to}>
+      <motion.span whileHover={{ scale: 1.1 }} style={{ cursor: "pointer" }}>
+        <li className="flex gap-2 transform transition-transform duration-300 hover:scale-105 justify-center pb-2">
+          <span className="text-primary text-sm mt-2 hover:text-emphasis cursor-pointer">{children}</span>
+        </li>
+      </motion.span>
+    </Link>
   );
 };
 
@@ -26,7 +44,8 @@ export default function Navbar() {
   const [isCommunityClicked, setIsCommunityClicked] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const whyDropdownRef = useRef<HTMLDivElement>(null);
+  const communityDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getProfile();
@@ -46,8 +65,11 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (whyDropdownRef.current && !whyDropdownRef.current.contains(event.target as Node)) {
         setIsWhyClicked(false);
+      }
+
+      if (communityDropdownRef.current && !communityDropdownRef.current.contains(event.target as Node)) {
         setIsCommunityClicked(false);
       }
     };
@@ -89,28 +111,33 @@ export default function Navbar() {
           scrollingUp ? "translate-y-0" : "-translate-y-full"
         } z-50`}
       >
-        <div className="relative flex justify-between items-center w-[70vw] max-w-7xl mx-auto lg:px-0 cursor-pointer md:w-[90vw]">
+        <motion.div
+          initial="initial"
+          whileInView="animate"
+          viewport={{ amount: 0.5, once: true }}
+          className="relative flex justify-between items-center w-[70vw] md:w-[70vw] mx-auto lg:px-0"
+        >
           <Link to="/" className="flex items-center space-x-2">
             <img src={Logo} alt="Logo" className="w-12" />
             <span className="text-2xl sm:text-3xl font-bold text-primary cursor-pointer">Clickpulse</span>
           </Link>
 
-          <div className="hidden lg:flex">
+          <div className="hidden xl:flex">
             <button onClick={toggleMobileMenu} className="text-primary">
-              <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} size="lg" />
+              <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} size="xl" />
             </button>
           </div>
 
-          <div className="flex space-x-8 items-center lg:hidden">
-            <div className="relative" ref={dropdownRef}>
+          <div className="flex space-x-8 items-center xl:hidden">
+            <div className="relative" ref={whyDropdownRef}>
               <div
                 onClick={handleWhyClick}
                 className="flex items-center space-x-1 hover:text-emphasis text-primary text-lg md:text-xl cursor-pointer"
               >
-                <span>Why Clickpulse</span>
+                <span className=" cursor-pointer ">Why Clickpulse</span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`transition-transform ${isWhyClicked ? "rotate-180" : "rotate-0"}`}
+                  className={`transition-transform ${isWhyClicked ? "rotate-180" : "rotate-0 cursor-pointer "}`}
                 />
               </div>
               {isWhyClicked && (
@@ -123,12 +150,12 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative" ref={communityDropdownRef}>
               <div
                 onClick={handleCommunityClick}
                 className="flex items-center space-x-1 hover:text-emphasis text-primary md:text-lg text-xl cursor-pointer"
               >
-                <span>Community</span>
+                <span className=" cursor-pointer ">Community</span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
                   className={`transition-transform ${isCommunityClicked ? "rotate-180" : "rotate-0"}`}
@@ -144,12 +171,12 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link to="/pricing" className="hover:text-emphasis text-primary text-lg md:text-xl">
+            <Link to="/pricing" className="hover:text-emphasis text-primary text-lg md:text-xl cursor-pointer">
               Pricing
             </Link>
           </div>
 
-          <div className="lg:hidden flex items-center space-x-8">
+          <div className="xl:hidden flex items-center space-x-8">
             {user && user.username ? (
               <Link
                 to="/dashboard"
@@ -159,7 +186,7 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link to="/login" className="hover:text-emphasis text-primary md:text-lg text-xl">
+                <Link to="/login" className="hover:text-emphasis text-primary md:text-lg text-xl cursor-pointer">
                   Log In
                 </Link>
                 <Link to="/signup">
@@ -168,10 +195,10 @@ export default function Navbar() {
               </>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-gray-800 min-w-[90vw]">
+          <div className="hidden bg-gray-800 min-w-[90vw] xl:block">
             <div className="flex flex-col items-center space-y-4 py-6">
               <div className="w-full">
                 <div
@@ -185,7 +212,7 @@ export default function Navbar() {
                   />
                 </div>
                 {isWhyClicked && (
-                  <ul className="bg-gray-700 text-primary">
+                  <ul className="text-primary">
                     <DropdownItem to="/feature1">Feature 1</DropdownItem>
                     <DropdownItem to="/feature2">Feature 2</DropdownItem>
                     <DropdownItem to="/feature3">Feature 3</DropdownItem>
