@@ -2,8 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 
 interface FlipCardProps {
-  description: string;
   title: string;
+  description: string;
   index: number;
 }
 
@@ -28,7 +28,6 @@ const itemVariant = {
 };
 
 const FlipCard: React.FC<FlipCardProps> = ({ title, description, index }) => {
-  console.log(index);
   return (
     <motion.article
       variants={itemVariant}
@@ -48,56 +47,41 @@ const FlipCard: React.FC<FlipCardProps> = ({ title, description, index }) => {
 
 export default function Hero() {
   return (
-    <section className=" py-12 z-10 mt-7 mb-10 w-[70vw] mx-auto md:w-[90vw] relative">
+    <section className="bg-default-200 py-12 z-10 mt-7 w-[70vw] mx-auto md:w-[90vw]">
       <div className="mx-auto text-center relative lg:w-[70vw]">
         <h2 className="relative text-4xl font-bold text-emphasis py-2 px-4 pb-3 border-b-[0.5px] border-emphasis">
           Tracking
         </h2>
-        <div className="grid grid-cols-3 mt-12 xl:grid-cols-2 md:flex md:flex-col gap-4">
+        <div className="grid md:grid-cols-2 grid-cols-3 gap-6 mt-12 justify-center">
           <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            title="Unique visitors"
+            description="You had xxxx amount of visitors this month"
             index={1}
           />
           <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            title="Page views"
+            description="Total page views for this month are xxxx"
             index={2}
           />
           <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            title="Bounce rate"
+            description="Your bounce rate this month is xx%"
             index={3}
           />
           <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            index={1}
+            title="Average visit duration"
+            description="The average visit duration is xx:xx"
+            index={4}
           />
           <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            index={2}
+            title="Top page"
+            description="Your top page is 'Page Name'"
+            index={5}
           />
           <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            index={3}
-          />
-          <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            index={1}
-          />
-          <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            index={2}
-          />
-          <FlipCard
-            title="Lorem ipsum"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            index={3}
+            title="New vs Returning"
+            description="You have xx% new and xx% returning visitors"
+            index={6}
           />
         </div>
       </div>
