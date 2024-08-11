@@ -65,7 +65,9 @@ const Verify: FC = () => {
             </p>
           )}
           <div className="flex justify-center ">
-            <Button className="mt-4">Verify</Button>
+            <Button className="mt-4" onClick={() => verify()}>
+              Verify
+            </Button>
           </div>
           <div className="mt-4 justify-center flex">
             <Link to="/" className="text-base text-emphasis">

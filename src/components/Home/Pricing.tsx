@@ -1,8 +1,8 @@
-import Button from "../form/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { ReactNode, FC, useState } from "react";
-import { motion } from "framer-motion";
+import Button from '../form/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { ReactNode, FC } from 'react';
+import { motion } from 'framer-motion';
 
 interface itemProp {
   index: number;
@@ -19,18 +19,12 @@ const itemVariant = {
     transition: {
       delay: index * 0.1,
       duration: 0.5,
-      type: "tween",
+      type: 'tween',
     },
   }),
 };
 
 export default function Hero() {
-  const [hoveredCard, setHoveredCard] = useState<any>({
-    Basic: "brightness-100",
-    Standard: "brightness-100",
-    Premium: "brightness-100",
-  });
-
   return (
     <section className="bg-default-100 py-32 relative">
       <div className="custom-shape-divider-top-1723244705 absolute top-0 left-0">
@@ -52,78 +46,22 @@ export default function Hero() {
         </h2>
         <div className="flex flex-wrap gap-8 justify-between xl:justify-center">
           {/* Basic */}
-          <Card
-            plan="Basic Plan"
-            price="$9.99"
-            className={`transform ${hoveredCard.Basic}`}
-            index={2}
-            onMouseEnter={() =>
-              setHoveredCard({
-                Basic: "brightness-100",
-                Standard: "brightness-50",
-                Premium: "brightness-50",
-              })
-            }
-            onMouseLeave={() =>
-              setHoveredCard({
-                Basic: "brightness-100",
-                Standard: "brightness-100",
-                Premium: "brightness-100",
-              })
-            }
-          >
+
+          <Card plan="Basic Plan" price="$9.99" index={2}>
             <Item>10 users</Item>
             <Item>10 projects</Item>
             <Item>10GB storage</Item>
             <Item>Email support</Item>
           </Card>
           {/* Standard */}
-          <Card
-            plan="Standard Plan"
-            price="$29.99"
-            className={hoveredCard.Standard}
-            index={1}
-            onMouseEnter={() =>
-              setHoveredCard({
-                Basic: "brightness-50",
-                Standard: "brightness-100",
-                Premium: "brightness-50",
-              })
-            }
-            onMouseLeave={() =>
-              setHoveredCard({
-                Basic: "brightness-100",
-                Standard: "brightness-100",
-                Premium: "brightness-100",
-              })
-            }
-          >
+          <Card plan="Standard Plan" price="$29.99" index={1}>
             <Item>20 users</Item>
             <Item>20 projects</Item>
             <Item>20GB storage</Item>
             <Item>Priority email support</Item>
           </Card>
           {/* Premium */}
-          <Card
-            plan="Premium Plan"
-            price="$49.99"
-            className={hoveredCard.Premium}
-            index={2}
-            onMouseEnter={() =>
-              setHoveredCard({
-                Basic: "brightness-50",
-                Standard: "brightness-50",
-                Premium: "brightness-100",
-              })
-            }
-            onMouseLeave={() =>
-              setHoveredCard({
-                Basic: "brightness-100",
-                Standard: "brightness-100",
-                Premium: "brightness-100",
-              })
-            }
-          >
+          <Card plan="Premium Plan" price="$49.99" index={2}>
             <Item>Unlimited users</Item>
             <Item>Unlimited projects</Item>
             <Item>Unlimited storage</Item>
@@ -145,16 +83,12 @@ interface CardInterface {
   price: string;
   className?: string;
   index: number;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
 }
 
 const Card: FC<CardInterface> = ({
   children,
   plan,
   price,
-  onMouseEnter,
-  onMouseLeave,
   className,
   index,
 }) => {
@@ -165,11 +99,9 @@ const Card: FC<CardInterface> = ({
       whileInView="animate"
       custom={{ index: index }}
       viewport={{ once: true, amount: 0.5 }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       className={`relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform max-w-96 ${className}`}
     >
-      <div className="relative flex flex-col">
+      <div className="relative flex flex-col ">
         <span className="text-primary text-3xl">{plan}</span>
         <p className="mt-1 text-secondary-100 text-4xl">{price}</p>
       </div>

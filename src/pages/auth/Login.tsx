@@ -21,26 +21,30 @@ const Auth: FC = () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    if (!email || !password) {
-      setErrorMessage('Please fill in all fields');
+    if (!email && !password) {
+      setErrorMessage('Please fill in both fields');
+      return;
+    } else if (!email) {
+      setErrorMessage('Please fill in your email.');
+      return;
+    } else if (!password) {
+      setErrorMessage('Please fill in your password.');
       return;
     }
 
-    try {
-      const res = await axiosInstance.post('/auth/login', {
-        email,
-        password,
-      });
-
-      if (res.status === 200) {
+    axiosInstance
+      .post('/auth/login', { email, password })
+      .then((res) => {
         setCookie('token', res.data.token, { path: '/' });
         navigate('/');
-      } else {
-        setErrorMessage(res.data.message);
-      }
-    } catch (error: any) {
-      setErrorMessage(error.data);
-    }
+      })
+      .catch((err) => {
+        if (err.response) {
+          setErrorMessage(err.response.data);
+        } else {
+          console.log(err.message);
+        }
+      });
   }
 
   return (

@@ -38,12 +38,12 @@ const Dashboard: FC = () => {
     <CookiesProvider>
       <Navbar />
       <Header title="Dashboard" />
-      <main className="mt-40 flex flex-col justify-center items-center w-[80%] m-auto">
+      <main className="mt-40 flex flex-col justify-center items-center w-[70vw] m-auto">
         <h1 className="text-4xl text-emphasis">Select a website</h1>
         <p className="text-primary text-center w-full">
           Choose a website to view analytics and insights.
         </p>
-        <div className="w-full mt-10 flex flex-col justify-center items-center">
+        <div className="w-full mt-10 flex flex-col justify-center items-center min-h-[10vh]">
           {websites && websites.length > 0 ? (
             websites.map((website, index) => (
               <Website
@@ -54,8 +54,32 @@ const Dashboard: FC = () => {
               />
             ))
           ) : (
-            <p>No websites found</p>
+            <p className="text-primary">No websites found</p>
           )}
+          <Website
+            key={1}
+            domain={'website.domain'}
+            active={true}
+            id={'1'}
+          />
+          <Website
+            key={1}
+            domain={'website.domain'}
+            active={true}
+            id={'1'}
+          />
+          <Website
+            key={1}
+            domain={'website.domain'}
+            active={true}
+            id={'1'}
+          />
+          <Website
+            key={1}
+            domain={'website.domain'}
+            active={true}
+            id={'1'}
+          />
         </div>
         <Link to="/dashboard/new">
           <Button className="mt-5">Add Website</Button>
