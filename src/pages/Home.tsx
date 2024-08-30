@@ -36,7 +36,7 @@ export default function Home() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, amount: 0.5 }}
-          className="flex flex-col md:w-[70vw] w-[70vw] m-auto justify-center items-start h-screen md:text-center"
+          className="flex flex-col md:w-[70vw] w-[70vw] m-auto justify-center items-start h-screen md:text-start"
         >
           <div className="md:w-full w-[60%]">
             <h1 className="text-primary md:text-4xl text-6xl leading-tight">

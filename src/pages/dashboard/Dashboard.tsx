@@ -38,7 +38,7 @@ const Dashboard: FC = () => {
     <CookiesProvider>
       <Navbar />
       <Header title="Dashboard" />
-      <main className="mt-40 flex flex-col justify-center items-center w-[80%] m-auto">
+      <main className="mt-32 flex flex-col justify-center items-center w-[70vw] m-auto">
         <h1 className="text-4xl text-emphasis">Select a website</h1>
         <p className="text-primary text-center w-full">
           Choose a website to view analytics and insights.
@@ -54,8 +54,20 @@ const Dashboard: FC = () => {
               />
             ))
           ) : (
-            <p>No websites found</p>
+            <p className="text-primary">No websites found</p>
           )}
+          <Website
+            key={1}
+            domain={'website.domain'}
+            active={true}
+            id={'1'}
+          />
+          <Website
+            key={1}
+            domain={'website.domain'}
+            active={true}
+            id={'1'}
+          />
         </div>
         <Link to="/dashboard/new">
           <Button className="mt-5">Add Website</Button>
@@ -73,13 +85,18 @@ interface WebsiteProps {
 
 const Website: FC<WebsiteProps> = ({ domain, id }) => {
   return (
-    <div className="w-full border-2 border-primary rounded-lg flex justify-between items-center px-5 py-2 mt-5">
-      <p className="text-emphasis text-2xl">{domain}</p>
-
-      <Link to={`/dashboard/${id}`}>
-        <Button className="bg-emphasis text-background-100 px-6 py-2 rounded-md items-center font-medium">
-          View
-        </Button>
+    <div className="w-full border-2 border-secondary-100 rounded-lg flex justify-between items-center mt-5 min-h-[25vh] relative">
+      <p className="text-primary text-2xl absolute top-2 left-1/2 transform -translate-x-1/2">
+        {domain}
+      </p>
+      <p className="text-secondary-100 absolute top-16 left-1/2 text-2xl transform -translate-x-1/2">
+        <span>URL TU NEKI NEK IDE .COM</span>
+      </p>
+      <Link
+        to={`/dashboard/${id}`}
+        className="absolute bottom-2 right-2"
+      >
+        <Button>View</Button>
       </Link>
     </div>
   );

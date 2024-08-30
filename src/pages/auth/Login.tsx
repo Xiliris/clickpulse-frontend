@@ -21,33 +21,37 @@ const Auth: FC = () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    if (!email || !password) {
-      setErrorMessage('Please fill in all fields');
+    if (!email && !password) {
+      setErrorMessage('Please fill in both fields');
+      return;
+    } else if (!email) {
+      setErrorMessage('Please fill in your email.');
+      return;
+    } else if (!password) {
+      setErrorMessage('Please fill in your password.');
       return;
     }
 
-    try {
-      const res = await axiosInstance.post('/auth/login', {
-        email,
-        password,
-      });
-
-      if (res.status === 200) {
+    axiosInstance
+      .post('/auth/login', { email, password })
+      .then((res) => {
         setCookie('token', res.data.token, { path: '/' });
         navigate('/');
-      } else {
-        setErrorMessage(res.data.message);
-      }
-    } catch (error: any) {
-      setErrorMessage(error.data);
-    }
+      })
+      .catch((err) => {
+        if (err.response) {
+          setErrorMessage(err.response.data);
+        } else {
+          console.log(err.message);
+        }
+      });
   }
 
   return (
     <CookiesProvider>
       <Header title="Login" />
       <main className="min-h-screen flex items-center justify-center bg-default-200">
-        <div className="max-w-lg w-full space-y-10">
+        <div className="max-w-lg w-[90vw] space-y-10">
           <div className="text-center">
             <img
               className="mx-auto h-24 w-auto"
@@ -86,7 +90,7 @@ const Auth: FC = () => {
               >
                 Forgot your password?
               </Link>
-              <div className="text-center text-sm text-primary">
+              <div className="text-end text-sm text-primary">
                 Don't have an account?{' '}
                 <Link
                   to="/signup"
