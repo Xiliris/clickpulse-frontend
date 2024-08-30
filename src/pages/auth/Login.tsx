@@ -51,7 +51,7 @@ const Auth: FC = () => {
     <CookiesProvider>
       <Header title="Login" />
       <main className="min-h-screen flex items-center justify-center bg-default-200">
-        <div className="max-w-lg w-full space-y-10">
+        <div className="max-w-lg w-[90vw] space-y-10">
           <div className="text-center">
             <img
               className="mx-auto h-24 w-auto"
@@ -90,7 +90,7 @@ const Auth: FC = () => {
               >
                 Forgot your password?
               </Link>
-              <div className="text-center text-sm text-primary">
+              <div className="text-end text-sm text-primary">
                 Don't have an account?{' '}
                 <Link
                   to="/signup"

@@ -16,7 +16,7 @@ export default function Maintenance() {
           If you need to contact us, please reach out at
           <a
             href="mailto:support@example.com"
-            className="text-emphasis"
+            className="text-emphasis cursor-pointer"
           >
             {' '}
             clickpulse@support.com{' '}

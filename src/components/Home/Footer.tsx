@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { useCallback } from "react";
-import Logo from "../../assets/logo.png";
+import { Link } from 'react-router-dom';
+import { useCallback } from 'react';
+import Logo from '../../assets/logo.png';
 
 export default function Footer() {
   const scrollToTop = useCallback(() => {
@@ -18,7 +18,11 @@ export default function Footer() {
             onClick={scrollToTop}
             className="flex items-center space-x-4 cursor-pointer md:mb-4 mb-0"
           >
-            <img src={Logo} alt="Logo" className="w-12" />
+            <img
+              src={Logo}
+              alt="Logo"
+              className="w-12 cursor-pointer"
+            />
             <span className="text-2xl font-bold text-primary cursor-pointer">
               Clickpulse
             </span>
