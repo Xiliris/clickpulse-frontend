@@ -1,78 +1,72 @@
-import Button from "../form/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { ReactNode, FC } from "react";
+import Button from '../form/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { ReactNode, FC } from 'react';
+import { motion } from 'framer-motion';
+
+interface itemProp {
+  index: number;
+}
+
+const itemVariant = {
+  initial: {
+    y: 20,
+    opacity: 0,
+  },
+  animate: ({ index }: itemProp) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: index * 0.1,
+      duration: 0.5,
+      type: 'tween',
+    },
+  }),
+};
 
 export default function Hero() {
   return (
-    <section className="bg-default-100 py-12 px-4 h-screen">
-      <div className="max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
-        <h2 className="relative text-4xl font-bold text-emphasis py-2 px-4 rounded-lg mb-12 pb-3">
+    <section className="bg-default-100 py-32 relative">
+      <div className="custom-shape-divider-top-1723244705 absolute top-0 left-0">
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M1200 120L0 16.48 0 0 1200 0 1200 120z"
+            className="shape-fill"
+          ></path>
+        </svg>
+      </div>
+      <div className="mx-auto text-center h-min-screen flex flex-col justify-center w-[70vw] md:w-[90vw] xl:w-[70vw]">
+        <h2 className="relative flex flex-col text-4xl font-bold text-emphasis py-2 px-4 mb-12 pb-3 border-b-[0.5px] border-emphasis">
           Our Pricing Plans
-          <span className="absolute left-0 bottom-0 w-full h-0.5 bg-emphasis rounded-sm"></span>
         </h2>
-        <div className="flex flex-col md:flex-row justify-center gap-8">
+        <div className="flex flex-wrap gap-8 justify-between xl:justify-center">
           {/* Basic */}
-          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow">
-            <div className="relative flex flex-col ">
-              <span className="text-primary text-3xl">Free Plan</span>
-              <p className="mt-1 text-secondary-100 text-4xl">Free</p>
-            </div>
-            <hr className=" border-secondary-200" />
-            <ul className="flex flex-col gap-2 flex-grow">
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-            </ul>
-            <Button className="flex justify-between w-full">
-              Upgrade now
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Button>
-          </div>
 
+          <Card plan="Basic Plan" price="$9.99" index={2}>
+            <Item>10 users</Item>
+            <Item>10 projects</Item>
+            <Item>10GB storage</Item>
+            <Item>Email support</Item>
+          </Card>
+          {/* Standard */}
+          <Card plan="Standard Plan" price="$29.99" index={1}>
+            <Item>20 users</Item>
+            <Item>20 projects</Item>
+            <Item>20GB storage</Item>
+            <Item>Priority email support</Item>
+          </Card>
           {/* Premium */}
-          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow">
-            <div className="relative flex flex-col ">
-              <span className="text-primary text-3xl">Basic Plan</span>
-              <p className="mt-1 text-secondary-100 text-4xl">$19.99</p>
-            </div>
-            <hr className="border-[#4C5366]" />
-            <ul className="flex flex-col gap-2 flex-grow">
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              {/* Add more list items as needed */}
-            </ul>
-            <Button className="flex justify-between w-full">
-              Upgrade now
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Button>
-          </div>
-
-          {/* Premium + */}
-          <div className="relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow">
-            <div className="relative flex flex-col ">
-              <span className="text-primary text-3xl">Premium Plan</span>
-              <p className="mt-1 text-secondary-100 text-4xl">$39.99</p>
-            </div>
-            <hr className="border-[#4C5366]" />
-            <ul className="flex flex-col gap-2 flex-grow">
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              <PlanButton>Inf bas plana</PlanButton>
-              {/* Add more list items as needed */}
-            </ul>
-            <Button className="flex justify-between w-full">
-              Upgrade now
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Button>
-          </div>
+          <Card plan="Premium Plan" price="$49.99" index={2}>
+            <Item>Unlimited users</Item>
+            <Item>Unlimited projects</Item>
+            <Item>Unlimited storage</Item>
+            <Item>24/7 support</Item>
+          </Card>
         </div>
       </div>
     </section>
@@ -83,7 +77,45 @@ interface ItemInterface {
   children: ReactNode;
 }
 
-const PlanButton: FC<ItemInterface> = ({ children }) => {
+interface CardInterface {
+  children: ReactNode;
+  plan: string;
+  price: string;
+  className?: string;
+  index: number;
+}
+
+const Card: FC<CardInterface> = ({
+  children,
+  plan,
+  price,
+  className,
+  index,
+}) => {
+  return (
+    <motion.div
+      variants={itemVariant}
+      initial="initial"
+      whileInView="animate"
+      custom={{ index: index }}
+      viewport={{ once: true, amount: 0.5 }}
+      className={`relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform max-w-96 ${className}`}
+    >
+      <div className="relative flex flex-col ">
+        <span className="text-primary text-3xl">{plan}</span>
+        <p className="mt-1 text-secondary-100 text-4xl">{price}</p>
+      </div>
+      <hr className="border-[#4C5366]" />
+      <ul className="flex flex-col gap-2 flex-grow">{children}</ul>
+      <Button className="flex justify-between w-full">
+        Upgrade now
+        <FontAwesomeIcon icon={faArrowRight} />
+      </Button>
+    </motion.div>
+  );
+};
+
+const Item: FC<ItemInterface> = ({ children }) => {
   return (
     <li className="flex gap-2">
       <span className="flex items-center justify-center w-4 h-4 bg-emphasis rounded-full">
