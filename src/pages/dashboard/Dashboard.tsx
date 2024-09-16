@@ -3,6 +3,7 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import axiosInstance from '../../modules/axiosInstance';
 
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Home/Footer';
 import Header from '../../components/header';
 import Button from '../../components/form/Button';
 import { Link } from 'react-router-dom';
@@ -38,12 +39,12 @@ const Dashboard: FC = () => {
     <CookiesProvider>
       <Navbar />
       <Header title="Dashboard" />
-      <main className="mt-32 flex flex-col justify-center items-center w-[70vw] m-auto">
+      <main className="mt-32 flex flex-col justify-center items-center w-[70vw] m-auto pb-16">
         <h1 className="text-4xl text-emphasis">Select a website</h1>
         <p className="text-primary text-center w-full">
           Choose a website to view analytics and insights.
         </p>
-        <div className="w-full mt-10 flex flex-col justify-center items-center">
+        <div className="w-full mt-10 flex flex-wrap justify-center items-center gap-5">
           {websites && websites.length > 0 ? (
             websites.map((website, index) => (
               <Website
@@ -54,25 +55,38 @@ const Dashboard: FC = () => {
               />
             ))
           ) : (
-            <p className="text-primary">No websites found</p>
+            <p className="text-primary"></p>
           )}
           <Website
             key={1}
-            domain={'website.domain'}
+            domain={'adnanskopljak'}
             active={true}
             id={'1'}
           />
           <Website
-            key={1}
-            domain={'website.domain'}
+            key={2}
+            domain={'paulpravdic'}
             active={true}
-            id={'1'}
+            id={'2'}
+          />
+          <Website
+            key={3}
+            domain={'twitter'}
+            active={true}
+            id={'3'}
+          />
+          <Website
+            key={4}
+            domain={'facebook'}
+            active={true}
+            id={'4'}
           />
         </div>
         <Link to="/dashboard/new">
-          <Button className="mt-5">Add Website</Button>
+          <Button className="mt-10">Add Website</Button>
         </Link>
       </main>
+      <Footer />
     </CookiesProvider>
   );
 };
@@ -85,13 +99,13 @@ interface WebsiteProps {
 
 const Website: FC<WebsiteProps> = ({ domain, id }) => {
   return (
-    <div className="w-full border-2 border-secondary-100 rounded-lg flex justify-between items-center mt-5 min-h-[25vh] relative">
-      <p className="text-primary text-2xl absolute top-2 left-1/2 transform -translate-x-1/2">
-        {domain}
-      </p>
-      <p className="text-secondary-100 absolute top-16 left-1/2 text-2xl transform -translate-x-1/2">
-        <span>URL TU NEKI NEK IDE .COM</span>
-      </p>
+    <div className="w-96 border-2 border-secondary-100 rounded-lg flex flex-col justify-between mt-5 min-h-[25vh] relative p-4">
+      <p className="text-primary text-2xl text-center">{domain}</p>
+      <div className="flex-1 flex items-center justify-center">
+        <p className="text-secondary-100 text-2xl text-center">
+          <span>iamfromazerbaijan.com</span>
+        </p>
+      </div>
       <Link
         to={`/dashboard/${id}`}
         className="absolute bottom-2 right-2"

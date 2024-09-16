@@ -21,7 +21,8 @@ const variants = {
     y: 0,
     transition: {
       duration: 0.5,
-      type: 'spring',
+      type: 'tween',
+      ease: 'easeInOut',
     },
   },
 };

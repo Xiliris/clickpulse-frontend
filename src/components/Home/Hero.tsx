@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
 
 interface FlipCardProps {
   title: string;
@@ -22,25 +22,31 @@ const itemVariant = {
     transition: {
       delay: index * 0.1,
       duration: 0.2,
-      type: "spring",
+      type: 'spring',
     },
   }),
 };
 
-const FlipCard: React.FC<FlipCardProps> = ({ title, description, index }) => {
+const FlipCard: React.FC<FlipCardProps> = ({
+  title,
+  description,
+  index,
+}) => {
   return (
     <motion.article
       variants={itemVariant}
       initial="initial"
       whileInView="animate"
       custom={{ index: index }}
-      className="w-full min-h-48 bg-default-100 shadow p-4 space-y-2 rounded-md hover:-translate-y-2 duration-300"
+      className="w-full min-h-48 bg-default-100 shadow p-4 space-y-2 rounded-md hover:-translate-y-2 duration-300 max-w-80 lg:max-w-lg"
     >
       <div className="w-full flex justify-start items-center">
         <i className="fa-solid fa-user text-emphasis text-2xl"></i>
         <h3 className="text-xl text-primary ml-4">{title}</h3>
       </div>
-      <p className="text-sm w-full text-gray-400 text-left">{description}</p>
+      <p className="text-sm w-full text-gray-400 text-left">
+        {description}
+      </p>
     </motion.article>
   );
 };
@@ -52,7 +58,7 @@ export default function Hero() {
         <h2 className="relative text-4xl font-bold text-emphasis py-2 px-4 pb-3 border-b-[0.5px] border-emphasis">
           Tracking
         </h2>
-        <div className="grid md:grid-cols-2 grid-cols-3 gap-6 mt-12 justify-center">
+        <div className="flex flex-wrap gap-6 mt-12 justify-evenly">
           <FlipCard
             title="Unique visitors"
             description="You had xxxx amount of visitors this month"
