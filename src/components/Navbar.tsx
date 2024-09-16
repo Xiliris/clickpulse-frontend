@@ -8,6 +8,7 @@ import {
   faChevronDown,
   faBars,
   faTimes,
+  faLeaf,
 } from '@fortawesome/free-solid-svg-icons';
 import Button from './form/Button';
 import Logo from '../assets/logo.png';
@@ -15,14 +16,15 @@ import Logo from '../assets/logo.png';
 const variants = {
   initial: {
     opacity: 0,
-    y: 50,
+    y: -25,
   },
   animate: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      type: 'spring',
+      duration: 0.7,
+      type: 'tween',
+      ease: 'easeInOut',
     },
   },
 };
@@ -32,12 +34,12 @@ const DropdownItem: FC<{ to: string; children: ReactNode }> = ({
   children,
 }) => {
   return (
-    <Link to={to}>
+    <Link to={to} className="block">
       <motion.span
         whileHover={{ scale: 1.1 }}
         style={{ cursor: 'pointer' }}
       >
-        <li className="flex gap-2 bg-default-200 rounded md justify-center pb-2 cursor-pointer">
+        <li className="flex gap-2 rounded-none bg-default-200  justify-center pb-2 cursor-pointer">
           <span className="text-primary text-sm mt-2 hover:text-emphasis cursor-pointer">
             {children}
           </span>
@@ -59,9 +61,9 @@ const ProfileDrop: FC<{
         style={{ cursor: 'pointer' }}
       >
         <li
-          className={`flex gap-2 bg-default-200 rounded-md justify-center pb-2 cursor-pointer ${className}`}
+          className={`flex gap-2 rounded-md justify-center pb-2 cursor-pointer ${className}`}
         >
-          <span className="text-primary text-sm mt-2 hover:text-emphasis cursor-pointer">
+          <span className="text-primary hover:text-emphasis cursor-pointer">
             {children}
           </span>
         </li>
@@ -79,6 +81,7 @@ export default function Navbar() {
   const [isCommunityClicked, setIsCommunityClicked] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isLogged, setisLogged] = useState(false);
 
   const whyDropdownRef = useRef<HTMLDivElement>(null);
   const communityDropdownRef = useRef<HTMLDivElement>(null);
@@ -101,43 +104,46 @@ export default function Navbar() {
   }, [lastScrollY]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const isClickInsideWhyDropdown =
         whyDropdownRef.current &&
-        !whyDropdownRef.current.contains(event.target as Node)
+        whyDropdownRef.current.contains(event.target as Node);
+      const isClickInsideCommunityDropdown =
+        communityDropdownRef.current &&
+        communityDropdownRef.current.contains(event.target as Node);
+      const isClickInsideProfileMenu =
+        profileMenuRef.current &&
+        profileMenuRef.current.contains(event.target as Node);
+
+      if (
+        !isClickInsideCommunityDropdown &&
+        !isClickInsideWhyDropdown &&
+        !isClickInsideProfileMenu
       ) {
         setIsWhyClicked(false);
-      }
-
-      if (
-        communityDropdownRef.current &&
-        !communityDropdownRef.current.contains(event.target as Node)
-      ) {
         setIsCommunityClicked(false);
-      }
-
-      if (
-        profileMenuRef.current &&
-        !profileMenuRef.current.contains(event.target as Node)
-      ) {
-        setIsProfileMenuOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
 
-    return () =>
+    return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, []);
 
   const handleWhyClick = () => {
-    setIsWhyClicked((prev) => !prev);
+    setIsWhyClicked(!isWhyClicked);
     setIsCommunityClicked(false);
+    setIsProfileMenuOpen(false);
   };
 
   const handleCommunityClick = () => {
     setIsCommunityClicked(!isCommunityClicked);
-    if (isWhyClicked) setIsWhyClicked(false);
+    setIsWhyClicked(false);
+    setIsProfileMenuOpen(false);
   };
 
   const toggleMobileMenu = () => {
@@ -146,6 +152,12 @@ export default function Navbar() {
 
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen(!isProfileMenuOpen);
+    setIsCommunityClicked(false);
+    setIsWhyClicked(false);
+  };
+
+  const toggleLoggedMenu = () => {
+    setisLogged(!isLogged);
   };
 
   async function getProfile() {
@@ -167,6 +179,7 @@ export default function Navbar() {
         } z-50`}
       >
         <motion.div
+          variants={variants}
           initial="initial"
           whileInView="animate"
           viewport={{ amount: 0.5, once: true }}
@@ -178,55 +191,83 @@ export default function Navbar() {
               Clickpulse
             </span>
           </Link>
-          {/* Hidden Navbar Profile/login */}
+          {/* Hidden Navbar Profile */}
           {user && user.username ? (
-            <div className="justify-center xl:flex relative w-3/4 text-primary text-lg mx-auto hidden">
-              <div
-                onClick={toggleProfileMenu}
-                className="flex justify-between items-center py-4 text-primary rounded-none hover:text-emphasis"
-              >
-                <i className="fa-solid fa-user text-secondary-100 text-lg mr-2 cursor-pointer hover:text-emphasis"></i>
+            <>
+              <div className="justify-end mr-4 xl:flex relative w-3/4 text-primary text-lg mx-auto hidden">
+                <div className="flex justify-between items-center py-4 text-primary rounded-none hover:text-emphasis">
+                  <i
+                    className="fa-solid fa-user text-secondary-100 mr-2 cursor-pointer hover:text-emphasis"
+                    onClick={toggleProfileMenu}
+                  ></i>
+                </div>
+                {isProfileMenuOpen && (
+                  <div className="absolute justify-end top-full w-44 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col">
+                    <Link
+                      to="/dashboard"
+                      className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+                      onClick={toggleProfileMenu}
+                    >
+                      <span className="cursor-pointer">
+                        Dashboard
+                      </span>
+                    </Link>
+                    <Link
+                      to="/logout"
+                      className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+                      onClick={toggleProfileMenu}
+                    >
+                      <span className="cursor-pointer">Log out</span>
+                    </Link>
+                  </div>
+                )}
               </div>
-              {isProfileMenuOpen && (
-                <ul className="absolute left-0 w-full mt-2 bg-gray-800 text-primary flex flex-col gap-2">
-                  <li>
-                    <ProfileDrop to="/dashboard">
-                      Dashboard
-                    </ProfileDrop>
-                  </li>
-                  <li>
-                    <ProfileDrop to="/logout">Logout</ProfileDrop>
-                  </li>
-                </ul>
-              )}
-            </div>
+            </>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
-              >
-                <span>Log In</span>
-              </Link>
-              <Link
-                to="/signup"
-                className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
-              >
-                <span>Sign Up</span>
-              </Link>
+              {/* Hidden Navbar Login/signup */}
+              <div className="justify-end mr-4 xl:flex relative w-3/4 text-primary text-lg mx-auto hidden">
+                <div className="flex justify-between items-center py-4 text-primary rounded-none hover:text-emphasis">
+                  <i
+                    className="fa-solid fa-user text-secondary-100 mr-2 cursor-pointer hover:text-emphasis"
+                    onClick={toggleLoggedMenu}
+                  ></i>
+                </div>
+                {isLogged && (
+                  <div className="absolute top-full w-56 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col">
+                    <Link
+                      to="/login"
+                      className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span className="cursor-pointer">Log in</span>
+                    </Link>
+
+                    <Link
+                      to="/signup"
+                      className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span className="cursor-pointer">Sign up</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
             </>
           )}
 
-          <div className="hidden xl:flex  cursor-pointer hover:text-emphasis">
+          <div className="hidden xl:flex cursor-pointer hover:text-emphasis">
             <button
               onClick={toggleMobileMenu}
               className="text-primary"
             >
-              <FontAwesomeIcon
-                icon={isMobileMenuOpen ? faTimes : faBars}
-                className={' cursor-pointer hover:text-emphasis'}
-                size="xl"
-              />
+              <i
+                className={`cursor-pointer hover:text-emphasis ${
+                  isMobileMenuOpen
+                    ? 'fa-solid fa-times scale-[1.60]'
+                    : 'fa-solid fa-bars scale-[1.37]'
+                } w-6`}
+              ></i>
             </button>
           </div>
 
@@ -246,17 +287,29 @@ export default function Navbar() {
                 />
               </div>
               {isWhyClicked && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-gray-700 text-primary rounded-lg shadow-lg">
-                  <ul className="p-4 space-y-2 text-sm flex flex-col gap-2 mt-2">
-                    <DropdownItem to="/feature1">
-                      Feature 1
-                    </DropdownItem>
-                    <DropdownItem to="/feature2">
-                      Feature 2
-                    </DropdownItem>
-                    <DropdownItem to="/feature3">
-                      Feature 3
-                    </DropdownItem>
+                <div className="absolute top-full left-0 mt-2 w-48 bg-gray-800 text-primary rounded-lg shadow-lg">
+                  <ul className="p-4 text-sm flex flex-col gap-2">
+                    <Link
+                      to="/feature1"
+                      className="flex xl:hidden  justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span>Feature 1</span>
+                    </Link>
+                    <Link
+                      to="/feature2"
+                      className="flex xl:hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span>Feature 2</span>
+                    </Link>
+                    <Link
+                      to="/feature3"
+                      className="flex xl:hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span>Feature 3</span>
+                    </Link>
                   </ul>
                 </div>
               )}
@@ -277,17 +330,29 @@ export default function Navbar() {
                 />
               </div>
               {isCommunityClicked && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-gray-700 text-primary rounded-lg shadow-lg">
-                  <ul className="p-4 space-y-2 text-sm flex flex-col gap-2 mt-2">
-                    <DropdownItem to="/community1">
-                      Community 1
-                    </DropdownItem>
-                    <DropdownItem to="/community2">
-                      Community 2
-                    </DropdownItem>
-                    <DropdownItem to="/community3">
-                      Community 3
-                    </DropdownItem>
+                <div className="absolute top-full left-0 mt-2 w-48 bg-gray-800 text-primary rounded-lg shadow-lg">
+                  <ul className="p-4 text-sm flex flex-col gap-2">
+                    <Link
+                      to="/community1"
+                      className="flex xl:hidden  justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span>Community 1</span>
+                    </Link>
+                    <Link
+                      to="/community2"
+                      className="flex xl:hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span>Community 2</span>
+                    </Link>
+                    <Link
+                      to="/community3"
+                      className="flex xl:hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+                      onClick={toggleLoggedMenu}
+                    >
+                      <span>Community 3</span>
+                    </Link>
                   </ul>
                 </div>
               )}
@@ -319,10 +384,13 @@ export default function Navbar() {
                   />
                 </div>
                 {isProfileMenuOpen && (
-                  <div className="absolute top-full right-0 mt-2 w-48 bg-gray-700 text-primary rounded-lg shadow-lg">
-                    <ul className="p-4 space-y-2 text-sm flex flex-col gap-2 mt-2">
+                  <div className="absolute top-full w-56 right-0 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col">
+                    <ul className="p-4 text-lg flex flex-col gap-2 border-b-[1]">
                       <li>
-                        <ProfileDrop to="/dashboard">
+                        <ProfileDrop
+                          to="/dashboard"
+                          className="flex justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 rounded-none hover:text-emphasis"
+                        >
                           Dashboard
                         </ProfileDrop>
                       </li>
@@ -350,88 +418,84 @@ export default function Navbar() {
         </motion.div>
 
         {isMobileMenuOpen && (
-          <div className="w-[70vw] md:min-w-[70vw] xl:flex xl:justify-end xl:max-w-[30vw]">
-            <div className="hidden bg-gray-800 xl:flex flex-col items-center absolute right-[15vw] md:rounded-none rounded-xl">
-              <div className="items-center min-w-[30vw] md:min-w-[70vw]">
-                {/* Hidden Navbar Why Clickpulse */}
-                <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mt-4 ">
-                  <div className="relative w-3/4 text-primary text-lg cursor-pointer mx-auto">
-                    <div
-                      onClick={handleWhyClick}
-                      className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
-                    >
-                      <span className="cursor-pointer hover:text-emphasis">
-                        Why Clickpulse
-                      </span>
-                      <FontAwesomeIcon
-                        icon={faChevronDown}
-                        className={`transition-transform ${
-                          isWhyClicked ? 'rotate-180' : 'rotate-0'
-                        } cursor-pointer hover:text-emphasis`}
-                      />
-                    </div>
-                    {isWhyClicked && (
-                      <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
-                        <DropdownItem to="/feature1">
-                          Feature 1
-                        </DropdownItem>
-                        <DropdownItem to="/feature2">
-                          Feature 2
-                        </DropdownItem>
-                        <DropdownItem to="/feature3">
-                          Feature 3
-                        </DropdownItem>
-                      </ul>
-                    )}
-                  </div>
-                </div>
-
-                {/* Hidden Navbar Community */}
-                <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center">
-                  <div className="relative w-3/4 text-primary text-lg cursor-pointer mx-auto">
-                    <div
-                      onClick={handleCommunityClick}
-                      className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
-                    >
-                      <span className="cursor-pointer hover:text-emphasis">
-                        Community
-                      </span>
-                      <FontAwesomeIcon
-                        icon={faChevronDown}
-                        className={`transition-transform ${
-                          isCommunityClicked
-                            ? 'rotate-180'
-                            : 'rotate-0'
-                        } cursor-pointer hover:text-emphasis`}
-                      />
-                    </div>
-                    {isCommunityClicked && (
-                      <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
-                        <DropdownItem to="/community1">
-                          Community 1
-                        </DropdownItem>
-                        <DropdownItem to="/community2">
-                          Community 2
-                        </DropdownItem>
-                        <DropdownItem to="/community3">
-                          Community 3
-                        </DropdownItem>
-                      </ul>
-                    )}
-                  </div>
-                </div>
-
-                {/* Hidden Pricing */}
-                <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center">
-                  <Link
-                    to="/pricing"
-                    className="relative flex items-center py-4 w-3/4 text-primary rounded-none text-lg hover:text-emphasis"
+          <div className="hidden bg-gray-800 flex-col items-center absolute right-[15vw] md:right-0 md:rounded-none rounded-xl md:min-w-[100vw] xl:flex xl:justify-end xl:max-w-[30vw]">
+            <div className="items-center min-w-[30vw] md:min-w-[100vw]">
+              {/* Hidden Navbar Why Clickpulse */}
+              <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mt-4 mx-auto">
+                <div className="relative w-3/4 md:w-full text-primary text-lg cursor-pointer mx-auto">
+                  <div
+                    onClick={handleWhyClick}
+                    className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
                   >
-                    <span className="flex-grow text-center cursor-pointer hover:text-emphasis">
-                      Pricing
+                    <span className="cursor-pointer hover:text-emphasis">
+                      Why Clickpulse
                     </span>
-                  </Link>
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className={`transition-transform ${
+                        isWhyClicked ? 'rotate-180' : 'rotate-0'
+                      } cursor-pointer hover:text-emphasis`}
+                    />
+                  </div>
+                  {isWhyClicked && (
+                    <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
+                      <DropdownItem to="/feature1">
+                        Feature 1
+                      </DropdownItem>
+                      <DropdownItem to="/feature2">
+                        Feature 2
+                      </DropdownItem>
+                      <DropdownItem to="/feature3">
+                        Feature 3
+                      </DropdownItem>
+                    </ul>
+                  )}
                 </div>
+              </div>
+
+              {/* Hidden Navbar Community */}
+              <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mx-auto">
+                <div className="relative w-3/4 md:w-full text-primary text-lg cursor-pointer mx-auto">
+                  <div
+                    onClick={handleCommunityClick}
+                    className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
+                  >
+                    <span className="cursor-pointer hover:text-emphasis">
+                      Community
+                    </span>
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className={`transition-transform ${
+                        isCommunityClicked ? 'rotate-180' : 'rotate-0'
+                      } cursor-pointer hover:text-emphasis`}
+                    />
+                  </div>
+                  {isCommunityClicked && (
+                    <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
+                      <DropdownItem to="/community1">
+                        Community 1
+                      </DropdownItem>
+                      <DropdownItem to="/community2">
+                        Community 2
+                      </DropdownItem>
+                      <DropdownItem to="/community3">
+                        Community 3
+                      </DropdownItem>
+                    </ul>
+                  )}
+                </div>
+              </div>
+
+              {/* Hidden Pricing */}
+              <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mx-auto">
+                <Link
+                  to="/pricing"
+                  className="relative flex items-center py-4 text-primary rounded-none text-lg hover:text-emphasis"
+                >
+                  <span className="flex-grow text-center cursor-pointer hover:text-emphasis">
+                    Pricing
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
