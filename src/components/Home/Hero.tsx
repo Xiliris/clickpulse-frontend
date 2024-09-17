@@ -37,6 +37,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
       variants={itemVariant}
       initial="initial"
       whileInView="animate"
+      viewport={{ amount: 0.5, once: true }}
       custom={{ index: index }}
       className="w-full min-h-48 bg-default-100 shadow p-4 space-y-2 rounded-md hover:-translate-y-2 duration-300 max-w-80 lg:max-w-lg"
     >
@@ -77,17 +78,17 @@ export default function Hero() {
           <FlipCard
             title="Average visit duration"
             description="The average visit duration is xx:xx"
-            index={4}
+            index={1}
           />
           <FlipCard
             title="Top page"
             description="Your top page is 'Page Name'"
-            index={5}
+            index={2}
           />
           <FlipCard
             title="New vs Returning"
             description="You have xx% new and xx% returning visitors"
-            index={6}
+            index={3}
           />
         </div>
       </div>

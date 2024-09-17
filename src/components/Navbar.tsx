@@ -174,7 +174,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed w-full py-4 bg-gray-800 transition-transform duration-300 ease-in-out xl:bg-gray-800 ${
+        className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-300 ease-in-out ${
           scrollingUp ? 'translate-y-0' : '-translate-y-full'
         } z-50`}
       >
