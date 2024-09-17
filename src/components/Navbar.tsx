@@ -417,89 +417,108 @@ export default function Navbar() {
           </div>
         </motion.div>
 
-        {isMobileMenuOpen && (
-          <div className="hidden bg-gray-800 flex-col items-center absolute right-[15vw] md:right-0 md:rounded-none rounded-xl md:min-w-[100vw] xl:flex xl:justify-end xl:max-w-[30vw]">
-            <div className="items-center min-w-[30vw] md:min-w-[100vw]">
-              {/* Hidden Navbar Why Clickpulse */}
-              <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mt-4 mx-auto">
-                <div className="relative w-3/4 md:w-full text-primary text-lg cursor-pointer mx-auto">
-                  <div
-                    onClick={handleWhyClick}
-                    className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
-                  >
-                    <span className="cursor-pointer hover:text-emphasis">
-                      Why Clickpulse
-                    </span>
-                    <FontAwesomeIcon
-                      icon={faChevronDown}
-                      className={`transition-transform ${
-                        isWhyClicked ? 'rotate-180' : 'rotate-0'
-                      } cursor-pointer hover:text-emphasis`}
-                    />
-                  </div>
-                  {isWhyClicked && (
-                    <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
-                      <DropdownItem to="/feature1">
-                        Feature 1
-                      </DropdownItem>
-                      <DropdownItem to="/feature2">
-                        Feature 2
-                      </DropdownItem>
-                      <DropdownItem to="/feature3">
-                        Feature 3
-                      </DropdownItem>
-                    </ul>
-                  )}
-                </div>
-              </div>
+        <div
+          className={`fixed top-0 h-screen left-0 bg-gray-800 z-[99] w-screen transition-all overflow-hidden flex flex-col justify-start ${
+            isMobileMenuOpen
+              ? 'translate-x-0 opacity-100 pointer-events-auto'
+              : '-translate-x-20 opacity-0 pointer-events-none'
+          }`}
+        >
+          <div className="flex flex-col items-center w-full h-full">
+            <div className="w-[70vw] flex items-center justify-between mx-auto mt-4">
+              <Link to="/" className="flex items-center space-x-2">
+                <img src={Logo} alt="Logo" className="w-12 sm:w-8" />
+                <span className="text-2xl sm:text-xl font-bold text-primary cursor-pointer">
+                  Clickpulse
+                </span>
+              </Link>
+              <button
+                onClick={toggleMobileMenu}
+                className="text-white text-2xl focus:outline-none"
+              >
+                <FontAwesomeIcon icon={faBars} />
+              </button>
+            </div>
 
-              {/* Hidden Navbar Community */}
-              <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mx-auto">
-                <div className="relative w-3/4 md:w-full text-primary text-lg cursor-pointer mx-auto">
-                  <div
-                    onClick={handleCommunityClick}
-                    className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
-                  >
-                    <span className="cursor-pointer hover:text-emphasis">
-                      Community
-                    </span>
-                    <FontAwesomeIcon
-                      icon={faChevronDown}
-                      className={`transition-transform ${
-                        isCommunityClicked ? 'rotate-180' : 'rotate-0'
-                      } cursor-pointer hover:text-emphasis`}
-                    />
-                  </div>
-                  {isCommunityClicked && (
-                    <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
-                      <DropdownItem to="/community1">
-                        Community 1
-                      </DropdownItem>
-                      <DropdownItem to="/community2">
-                        Community 2
-                      </DropdownItem>
-                      <DropdownItem to="/community3">
-                        Community 3
-                      </DropdownItem>
-                    </ul>
-                  )}
-                </div>
-              </div>
-
-              {/* Hidden Pricing */}
-              <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mx-auto">
-                <Link
-                  to="/pricing"
-                  className="relative flex items-center py-4 text-primary rounded-none text-lg hover:text-emphasis"
+            {/* Hidden Navbar Why Clickpulse */}
+            <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mt-4 mx-auto">
+              <div className="relative w-3/4 md:w-full text-primary text-lg cursor-pointer mx-auto">
+                <div
+                  onClick={handleWhyClick}
+                  className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
                 >
-                  <span className="flex-grow text-center cursor-pointer hover:text-emphasis">
-                    Pricing
+                  <span className="cursor-pointer hover:text-emphasis">
+                    Why Clickpulse
                   </span>
-                </Link>
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className={`transition-transform ${
+                      isWhyClicked ? 'rotate-180' : 'rotate-0'
+                    } cursor-pointer hover:text-emphasis`}
+                  />
+                </div>
+                {isWhyClicked && (
+                  <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
+                    <DropdownItem to="/feature1">
+                      Feature 1
+                    </DropdownItem>
+                    <DropdownItem to="/feature2">
+                      Feature 2
+                    </DropdownItem>
+                    <DropdownItem to="/feature3">
+                      Feature 3
+                    </DropdownItem>
+                  </ul>
+                )}
               </div>
             </div>
+
+            {/* Hidden Navbar Community */}
+            <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mx-auto">
+              <div className="relative w-3/4 md:w-full text-primary text-lg cursor-pointer mx-auto">
+                <div
+                  onClick={handleCommunityClick}
+                  className="flex justify-between items-center py-4 text-primary rounded-none border-b-[1px] border-b-gray-600 cursor-pointer hover:text-emphasis"
+                >
+                  <span className="cursor-pointer hover:text-emphasis">
+                    Community
+                  </span>
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className={`transition-transform ${
+                      isCommunityClicked ? 'rotate-180' : 'rotate-0'
+                    } cursor-pointer hover:text-emphasis`}
+                  />
+                </div>
+                {isCommunityClicked && (
+                  <ul className="text-primary flex flex-col gap-2 mt-2 mb-2">
+                    <DropdownItem to="/community1">
+                      Community 1
+                    </DropdownItem>
+                    <DropdownItem to="/community2">
+                      Community 2
+                    </DropdownItem>
+                    <DropdownItem to="/community3">
+                      Community 3
+                    </DropdownItem>
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            {/* Hidden Pricing */}
+            <div className="max-w-[30vw] md:min-w-[70vw] flex justify-center mx-auto">
+              <Link
+                to="/pricing"
+                className="relative flex items-center py-4 text-primary rounded-none text-lg hover:text-emphasis"
+              >
+                <span className="flex-grow text-center cursor-pointer hover:text-emphasis">
+                  Pricing
+                </span>
+              </Link>
+            </div>
           </div>
-        )}
+        </div>
       </nav>
     </>
   );
