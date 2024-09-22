@@ -13,6 +13,7 @@ module.exports = {
         default: {
           100: "#252A34",
           200: "#15191E",
+          300: "#1A1E25",
         },
       },
       screens: {
