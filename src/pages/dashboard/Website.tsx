@@ -36,7 +36,7 @@ const Website: FC = () => {
       const data = await response.data;
 
       console.log(data);
-
+      
       setGraphDataKey(Object.keys(data[0])[1]);
       setTotalViews(formatDate(data));
     }
