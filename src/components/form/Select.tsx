@@ -3,9 +3,10 @@ import React, { useState, useRef, useEffect } from "react";
 interface SelectProps {
   options: string[];
   label: string;
+  onChange: (selected: string) => void; // onChange callback prop
 }
 
-const Select: React.FC<SelectProps> = ({ options }) => {
+const Select: React.FC<SelectProps> = ({ options, onChange }) => {
   const [selected, setSelected] = useState<string>(options[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,7 @@ const Select: React.FC<SelectProps> = ({ options }) => {
   const handleSelect = (option: string) => {
     setSelected(option);
     setIsOpen(false);
+    onChange(option); // Trigger the onChange callback when the selection changes
   };
 
   const handleClickOutside = (event: MouseEvent) => {
