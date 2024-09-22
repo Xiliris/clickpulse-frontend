@@ -6,8 +6,7 @@ import Select from "../../components/form/Select";
 
 import axiosInstance from "../../modules/axiosInstance";
 import {
-  AreaChart,
-  Area,
+  LineChart, Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -19,7 +18,7 @@ const Website: FC = () => {
   const { id } = useParams();
   const [requestType, setRequestType] = useState<string>("total-visits");
   const [graphDataKey, setGraphDataKey] = useState<string>("views");
-  const defaultDate = calculateDate(30);
+  const defaultDate = calculateDate(7);
 
   const [totalViews, setTotalViews] = useState<any[]>([]);
 
@@ -37,7 +36,7 @@ const Website: FC = () => {
       const data = await response.data;
 
       console.log(data);
-
+      
       setGraphDataKey(Object.keys(data[0])[1]);
       setTotalViews(formatDate(data));
     }
@@ -72,9 +71,21 @@ const Website: FC = () => {
 
     switch (result) {
       case "last 7 days":
-        const getWeek = calculateDate(7);
+        const getWeek = calculateDate(3);
         setStartDate(getWeek.currentDate);
         setEndDate(getWeek.targetDate);
+        break;
+
+      case "last 30 days":
+        const getMonth = calculateDate(30);
+        setStartDate(getMonth.currentDate);
+        setEndDate(getMonth.targetDate);
+        break;
+
+      case "last 12 months":
+        const getYear = calculateDate(365);
+        setStartDate(getYear.currentDate);
+        setEndDate(getYear.targetDate);
         break;
 
       default:
@@ -151,18 +162,18 @@ const Graph: FC<ContainerProps> = ({ content, yTicks, title, dataKey }) => {
       </h2>
       <div className="flex justify-between items-center w-[70vw] h-96 bg-default-300 p-5 rounded-md shadow-outline shadow-black">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
+          <LineChart
             width={500}
             height={500}
             data={content}
             margin={{ top: 30, right: 80, left: 0, bottom: 20 }}
           >
             <CartesianGrid stroke="#3B434F" vertical={false} />
-            <Area
+            <Line
               dataKey={dataKey}
-              type="monotone"
               stroke="#3CBAB1"
               fill="#3CBAB1"
+              dot={false}
               connectNulls
             />
             <XAxis
@@ -182,7 +193,7 @@ const Graph: FC<ContainerProps> = ({ content, yTicks, title, dataKey }) => {
               width={80}
             />
             <Tooltip content={<CustomToolTip trackingName={trackingName} />} />
-          </AreaChart>
+          </LineChart>
         </ResponsiveContainer>
       </div>
     </>
@@ -214,7 +225,7 @@ const CustomToolTip = ({ active, payload, label, trackingName }: any) => {
         <p className="flex items-center gap-2">
           <span className="text-md text-primary">{label}</span>
           <span className="text-primary font-bold">
-            {formatValue(payload[0].value, trackingName)} {trackingName}
+            {formatValue(payload[0].value, trackingName.toLowerCase().replace(" ", '_'))} {trackingName}
           </span>
         </p>
       </div>
@@ -248,11 +259,11 @@ function formatDate(data: any) {
 function calculateDate(pastDays: number) {
   const currentDate = new Date();
   const targetDate = new Date(currentDate);
-  targetDate.setDate(currentDate.getDate() - pastDays);
+  targetDate.setDate(currentDate.getDate() - pastDays + 1);
 
   return {
-    currentDate: currentDate.toISOString().slice(0, 10),
-    targetDate: targetDate.toISOString().slice(0, 10),
+    targetDate: currentDate.toISOString().slice(0, 10),
+    currentDate: targetDate.toISOString().slice(0, 10),
   };
 }
 
