@@ -48,28 +48,26 @@ const WhyDropdown = ({
       <div
         className={`transition-all ease-in-out duration-300 overflow-hidden ${
           isWhyClicked ? 'max-h-60' : 'max-h-0'
-        } relative ${
-          isFullWidth ? 'w-full' : 'w-48'
-        } mt-2 bg-default-200 text-primary rounded-lg`}
+        } ${
+          isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
+        } mr-9 bg-default-300 text-primary rounded-lg`}
       >
-        <ul
-          className={` text-sm flex flex-col gap-2 ${itemClassName}`}
-        >
+        <ul className={`text-sm flex flex-col ${itemClassName}`}>
           <Link
             to="/feature1"
-            className="flex justify-start items-center py-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
           >
             <span className="cursor-pointer">Feature 1</span>
           </Link>
           <Link
             to="/feature2"
-            className="flex justify-start items-center py-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
           >
             <span className="cursor-pointer">Feature 2</span>
           </Link>
           <Link
             to="/feature3"
-            className="flex justify-start items-center py-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Feature 3</span>
           </Link>
