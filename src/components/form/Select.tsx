@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 interface SelectProps {
   options: string[];
   label: string;
-  onChange: (selected: string) => void; // onChange callback prop
+  onChange: (selected: string) => void;
 }
 
 const Select: React.FC<SelectProps> = ({ options, onChange }) => {
@@ -14,7 +14,7 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
   const handleSelect = (option: string) => {
     setSelected(option);
     setIsOpen(false);
-    onChange(option); // Trigger the onChange callback when the selection changes
+    onChange(option);
   };
 
   const handleClickOutside = (event: MouseEvent) => {

@@ -15,7 +15,7 @@ import {
 } from "recharts";
 
 const Website: FC = () => {
-  const { id } = useParams();
+  const { id } = useParams(); 
   const [requestType, setRequestType] = useState<string>("total-visits");
   const [graphDataKey, setGraphDataKey] = useState<string>("views");
   const defaultDate = calculateDate(7);
@@ -36,7 +36,7 @@ const Website: FC = () => {
       const data = await response.data;
 
       console.log(data);
-
+      
       setGraphDataKey(Object.keys(data[0])[1]);
       setTotalViews(formatDate(data));
     }
@@ -71,7 +71,7 @@ const Website: FC = () => {
 
     switch (result) {
       case "last 7 days":
-        const getWeek = calculateDate(3);
+        const getWeek = calculateDate(7);
         setStartDate(getWeek.currentDate);
         setEndDate(getWeek.targetDate);
         break;
@@ -86,6 +86,11 @@ const Website: FC = () => {
         const getYear = calculateDate(365);
         setStartDate(getYear.currentDate);
         setEndDate(getYear.targetDate);
+        break;
+
+      case "all time":
+        setStartDate("");
+        setEndDate("");
         break;
 
       default:
