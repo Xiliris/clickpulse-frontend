@@ -37,14 +37,14 @@ export default function Home() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, amount: 0.5 }}
-          className="flex flex-col md:w-[70vw] w-[70vw] m-auto justify-center items-start h-screen md:text-start"
+          className="flex flex-col md:w-[90vw] w-[70vw] m-auto justify-center items-start h-screen md:text-start"
         >
           <div className="md:w-full w-[60%]">
-            <h1 className="text-primary md:text-4xl text-6xl leading-tight">
+            <h1 className="text-primary lg:text-5xl md:text-4xl text-6xl leading-tight md:w-1/2">
               Harness the <span className="text-emphasis">Pulse</span>{' '}
               of User Engagement
             </h1>
-            <p className="text-secondary-100 mt-5 md:text-lg text-2xl">
+            <p className="text-secondary-100 mt-5 md:text-lg text-2xl md:w-2/3">
               Discover in-depth analytics and insights into every
               click, scroll, and interaction on your site. ClickPulse
               empowers you to optimize your digital experience with
