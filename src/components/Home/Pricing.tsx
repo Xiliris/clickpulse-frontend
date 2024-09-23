@@ -40,7 +40,7 @@ export default function Hero() {
           ></path>
         </svg>
       </div>
-      <div className="mx-auto text-center h-min-screen flex flex-col justify-center w-[70vw] md:w-[90vw] xl:w-[70vw]">
+      <div className="mx-auto text-center h-min-screen flex flex-col justify-center w-[70vw] md:w-[90vw]">
         <h2 className="relative flex flex-col text-4xl font-bold text-emphasis py-2 px-4 mb-12 pb-3 border-b-[0.5px] border-emphasis">
           Our Pricing Plans
         </h2>

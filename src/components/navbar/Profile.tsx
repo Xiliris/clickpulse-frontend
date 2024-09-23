@@ -1,5 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faBars,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface ProfileMenuProps {
   user: { username: string } | null;
@@ -23,76 +29,78 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({
   return (
     <>
       {user && user.username ? (
-        <>
-          <div className="justify-end mr-4 xl:flex relative w-3/4 text-primary text-lg mx-auto hidden">
-            <div className="flex justify-between items-center py-4 text-primary rounded-none hover:text-emphasis">
-              <i
-                className="fa-solid fa-user text-secondary-100 mr-2 cursor-pointer hover:text-emphasis"
-                onClick={toggleProfileMenu}
-              ></i>
-            </div>
-            {isProfileMenuOpen && (
-              <div className="absolute justify-end top-full w-44 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col">
-                <Link
-                  to="/dashboard"
-                  className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
-                  onClick={toggleProfileMenu}
-                >
-                  <span className="cursor-pointer">Dashboard</span>
-                </Link>
-                <Link
-                  to="/logout"
-                  className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
-                  onClick={toggleProfileMenu}
-                >
-                  <span className="cursor-pointer">Log out</span>
-                </Link>
-              </div>
-            )}
+        <div className="relative w-3/4 text-primary text-lg mx-auto hidden xl:flex justify-end mr-4">
+          {/* User Icon */}
+          <div className="flex justify-between items-center py-4 cursor-pointer">
+            <FontAwesomeIcon
+              icon={faUser}
+              className="text-secondary-100 mr-2"
+              onClick={toggleProfileMenu}
+            />
           </div>
-        </>
-      ) : (
-        <>
-          {/* Hidden Navbar Login/signup */}
-          <div className="justify-end mr-4 xl:flex relative w-3/4 text-primary text-lg mx-auto hidden">
-            <div className="flex justify-between items-center py-4 text-primary rounded-none hover:text-emphasis">
-              <i
-                className="fa-solid fa-user text-secondary-100 mr-2 cursor-pointer hover:text-emphasis"
-                onClick={toggleLoggedMenu}
-              ></i>
-            </div>
-            {isLogged && (
-              <div className="absolute top-full w-56 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col">
-                <Link
-                  to="/login"
-                  className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
-                  onClick={toggleLoggedMenu}
-                >
-                  <span className="cursor-pointer">Log in</span>
-                </Link>
 
-                <Link
-                  to="/signup"
-                  className="xl:flex hidden justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
-                  onClick={toggleLoggedMenu}
-                >
-                  <span className="cursor-pointer">Sign up</span>
-                </Link>
-              </div>
-            )}
+          {/* Profile Dropdown */}
+          {isProfileMenuOpen && (
+            <div className="absolute top-full right-0 w-44 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col z-10">
+              <Link
+                to="/dashboard"
+                className="py-4 w-full text-center text-primary border-b-[1px] border-gray-600 hover:text-emphasis"
+                onClick={toggleProfileMenu}
+              >
+                Dashboard
+              </Link>
+              <Link
+                to="/logout"
+                className="py-4 w-full text-center text-primary hover:text-emphasis"
+                onClick={toggleProfileMenu}
+              >
+                Log out
+              </Link>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="relative w-3/4 text-primary text-lg mx-auto hidden xl:flex justify-end mr-4">
+          {/* User Icon */}
+          <div className="flex justify-between items-center py-4 cursor-pointer">
+            <FontAwesomeIcon
+              icon={faUser}
+              className="text-secondary-100 mr-2"
+              onClick={toggleLoggedMenu}
+            />
           </div>
-        </>
+
+          {/* Login/Signup Dropdown */}
+          {isLogged && (
+            <div className="absolute top-full right-0 w-56 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col z-10">
+              <Link
+                to="/login"
+                className="py-4 w-full text-center text-primary border-b-[1px] border-gray-600 hover:text-emphasis"
+                onClick={toggleLoggedMenu}
+              >
+                Log in
+              </Link>
+              <Link
+                to="/signup"
+                className="py-4 w-full text-center text-primary hover:text-emphasis"
+                onClick={toggleLoggedMenu}
+              >
+                Sign up
+              </Link>
+            </div>
+          )}
+        </div>
       )}
 
+      {/* Mobile Menu Toggle */}
       <div className="hidden xl:flex cursor-pointer hover:text-emphasis">
         <button onClick={toggleMobileMenu} className="text-primary">
-          <i
-            className={`cursor-pointer hover:text-emphasis ${
-              isMobileMenuOpen
-                ? 'fa-solid fa-times scale-[1.60]'
-                : 'fa-solid fa-bars scale-[1.37]'
-            } w-6`}
-          ></i>
+          <FontAwesomeIcon
+            icon={isMobileMenuOpen ? faTimes : faBars}
+            className={`cursor-pointer w-6 ${
+              isMobileMenuOpen ? 'scale-[1.60]' : 'scale-[1.37]'
+            }`}
+          />
         </button>
       </div>
     </>
