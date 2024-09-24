@@ -24,16 +24,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       }`}
     >
       <div className="flex flex-col items-center w-full h-full">
-        <div className="w-[90vw] flex items-center justify-between mx-auto mt-4">
+        <div className="w-[90vw] flex items-center justify-between mx-auto mt-5">
           <Link to="/" className="flex items-center space-x-2">
-            <img src={Logo} alt="Logo" className="w-12 sm:w-8" />
-            <span className="text-2xl sm:text-xl font-bold text-primary cursor-pointer">
+            <img src={Logo} alt="Logo" className="w-12 sm:w-13  " />
+            <span className="text-2xl xl:text-3xl font-bold text-primary cursor-pointer">
               Clickpulse
             </span>
           </Link>
           <i
             onClick={toggleMobileMenu}
-            className="text-primary text-2xl cursor-pointer hover:text-emphasis"
+            className="text-primary xl:text-3xl cursor-pointer hover:text-emphasis"
           >
             <FontAwesomeIcon
               icon={isMobileMenuOpen ? faTimes : faBars}
@@ -42,7 +42,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </div>
 
         {/*Why Clickpulse */}
-        <div className="w-[90vw] flex justify-between mt-4 mx-auto">
+        <div className="w-[90vw] flex justify-between mt-[45px] mx-auto">
           <WhyClickpulse
             className="relative w-full text-primary cursor-pointer mx-auto"
             isFullWidth={true}
@@ -50,7 +50,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </div>
 
         {/*Community */}
-        <div className="w-[90vw] flex justify-between mx-auto mt-2">
+        <div className="w-[90vw] flex justify-between mx-auto mt-5">
           <Community
             className="relative w-full text-primary cursor-pointer mx-auto"
             isFullWidth={true}
@@ -61,9 +61,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         <div className="w-[90vw] flex mx-auto">
           <Link
             to="/pricing"
-            className="relative flex items-start mt-2 text-primary rounded-none text-xl hover:text-emphasis"
+            className="relative flex items-start mt-5 text-primary rounded-none text-xl hover:text-emphasis"
           >
-            <span className="flex-grow text-center cursor-pointer hover:text-emphasis">
+            <span className="flex-grow text-center cursor-pointer hover:text-emphasis xl:text-2xl">
               Pricing
             </span>
           </Link>

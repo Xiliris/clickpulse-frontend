@@ -43,18 +43,18 @@ const FlipCard: React.FC<FlipCardProps> = ({
       whileInView="animate"
       viewport={{ amount: 0.5, once: true }}
       custom={{ index: index }}
-      className={`w-[70vw] md:w-[90vw] mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4`}
+      className={`w-[70vw] md:w-full mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4 md:justify-center md:items-center`}
       style={{ minHeight: '200px' }}
     >
       <div className="flex-shrink-0 w-1/2 md:w-full flex items-center justify-center">
         <img
           src="https://via.placeholder.com/150"
           alt="Flip card image"
-          className={`w-5/6 h-auto object-cover ${marginDirection}`}
+          className={`w-5/6 h-auto object-cover ${marginDirection} md:mx-auto`}
         />
       </div>
 
-      <div className="flex flex-col justify-center w-1/2 md:w-full">
+      <div className="flex flex-col justify-center w-1/2 md:w-full md:text-center">
         <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
           {title}
         </h3>
@@ -74,7 +74,7 @@ export default function Hero() {
           Tracking
         </h2>
 
-        <div className="flex flex-col gap-8 mt-12">
+        <div className="flex flex-col gap-8 mt-12 md:flex">
           <FlipCard
             title="Unique Visitors"
             description="Unique visitors represent the number of distinct individuals who visited your site within a given timeframe, regardless of how many times they visited. This metric provides a clear picture of how many actual users are engaging with your content, as it filters out multiple visits by the same user. Understanding this data helps you track the growth of your audience, and is crucial for assessing the effectiveness of campaigns aimed at reaching new users."

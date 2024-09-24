@@ -39,14 +39,14 @@ export default function Footer() {
           <div className="flex md:flex-col flex-row justify-between items-center mb-8">
             <div
               onClick={scrollToTop}
-              className="flex items-center space-x-4 cursor-pointer md:mb-4 mb-0"
+              className="flex md:flex-col items-center cursor-pointermd:mb-4 mb-0"
             >
               <img
                 src={Logo}
                 alt="Logo"
-                className="w-12 cursor-pointer"
+                className="md:w-[65px] w-12 cursor-pointer"
               />
-              <span className="text-2xl font-bold text-primary cursor-pointer">
+              <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:mt-1">
                 Clickpulse
               </span>
             </div>

@@ -40,12 +40,12 @@ const CommunityDropdown = ({
         onClick={handleCommunityClick}
         className="w-full flex items-center lg:justify-between space-x-1 hover:text-emphasis text-primary text-xl md:text-xl cursor-pointer"
       >
-        <span className="cursor-pointer">Community</span>
+        <span className="cursor-pointer xl:text-2xl">Community</span>
         <FontAwesomeIcon
           icon={faChevronDown}
           className={`transition-transform ${
             isCommunityClicked ? 'rotate-180' : 'rotate-0'
-          } cursor-pointer ml-auto`}
+          } cursor-pointer ml-auto md:text-2xl`}
         />
       </div>
       <div

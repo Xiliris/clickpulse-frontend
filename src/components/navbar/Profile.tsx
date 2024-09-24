@@ -34,14 +34,14 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({
           <div className="flex justify-between items-center py-4 cursor-pointer">
             <FontAwesomeIcon
               icon={faUser}
-              className="text-secondary-100 mr-2"
+              className="text-secondary-100 mr-2 md:text-xl"
               onClick={toggleProfileMenu}
             />
           </div>
 
           {/* Profile Dropdown */}
           {isProfileMenuOpen && (
-            <div className="absolute top-full right-0 w-44 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col z-10">
+            <div className="absolute top-full right-0 w-44 bg-default-300 text-primary rounded-lg shadow-lg flex flex-col z-10">
               <Link
                 to="/dashboard"
                 className="py-4 w-full text-center text-primary border-b-[1px] border-gray-600 hover:text-emphasis"
@@ -72,17 +72,17 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({
 
           {/* Login/Signup Dropdown */}
           {isLogged && (
-            <div className="absolute top-full right-0 w-56 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col z-10">
+            <div className="absolute top-full right-0 w-40 bg-default-300 text-primary rounded-lg shadow-lg flex flex-col z-10">
               <Link
                 to="/login"
-                className="py-4 w-full text-center text-primary border-b-[1px] border-gray-600 hover:text-emphasis"
+                className="py-4 px-4 w-full text-start text-primary border-b-[1px] border-gray-600 hover:text-emphasis"
                 onClick={toggleLoggedMenu}
               >
                 Log in
               </Link>
               <Link
                 to="/signup"
-                className="py-4 w-full text-center text-primary hover:text-emphasis"
+                className="py-4 px-4 w-full text-start text-primary hover:text-emphasis"
                 onClick={toggleLoggedMenu}
               >
                 Sign up
