@@ -53,14 +53,14 @@ export default function Navbar() {
         >
           {/* Logo and Site Title */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src={Logo} alt="Logo" className="w-12 sm:w-8" />
-            <span className="text-2xl sm:text-xl font-bold text-primary cursor-pointer">
+            <img src={Logo} alt="Logo" className="w-12 sm:w-13" />
+            <span className="text-3xl font-bold text-primary cursor-pointer">
               Clickpulse
             </span>
           </Link>
 
           {/* Desktop Navbar Links */}
-          <div className="xl:hidden flex items-center gap-6">
+          <div className="xl:hidden flex items-center gap-5">
             <WhyClickpulse />
             <Community />
             <Link
