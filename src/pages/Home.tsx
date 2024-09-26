@@ -37,10 +37,10 @@ export default function Home() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, amount: 0.5 }}
-          className="flex flex-col md:w-[90vw] w-[70vw] m-auto justify-center items-start h-screen md:text-start"
+          className="flex flex-col justify-center items-start h-screen m-auto md:w-[90vw] w-[70vw]"
         >
           <div className="md:w-full w-[60%]">
-            <h1 className="text-primary lg:text-5xl md:text-4xl text-6xl leading-tight md:w-1/2">
+            <h1 className="text-primary lg:text-5xl md:text-4xl text-6xl leading-tight">
               Harness the <span className="text-emphasis">Pulse</span>{' '}
               of User Engagement
             </h1>
@@ -54,19 +54,20 @@ export default function Home() {
               <Button className="mt-5">Get Started</Button>
             </Link>
           </div>
-        </motion.section>
 
-        <img
-          src={Globe}
-          alt="Globe"
-          className="globe-img"
-          style={{
-            pointerEvents: 'none',
-            userSelect: 'none',
-            touchAction: 'none',
-          }}
-        />
+          <img
+            src={Globe}
+            alt="Globe"
+            className="globe-img"
+            style={{
+              pointerEvents: 'none',
+              userSelect: 'none',
+              touchAction: 'none',
+            }}
+          />
+        </motion.section>
       </main>
+
       <Hero />
       <Pricing />
       <Footer />

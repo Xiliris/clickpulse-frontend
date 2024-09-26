@@ -15,6 +15,7 @@ import Websites from './pages/dashboard/Websites';
 import Maintenance from './pages/Maintenance';
 import Protected from './modules/Protected';
 import Error from './pages/error/Error';
+import Contact from './pages/Contact';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/verify" element={<Verify />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/maintenance" element={<Maintenance />} />
+        <Route path="/contact" element={<Contact />} />
         <Route
           path="/dashboard"
           element={

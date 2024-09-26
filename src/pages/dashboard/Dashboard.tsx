@@ -4,11 +4,17 @@ import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Select from "../../components/form/Select";
 
-import {formatValue, formatDate, calculateDate, capitalizeWords, formatPercentage, formatDuration, formatNumber} from '../../utils/dashboard/functions';
+import {
+  formatValue,
+  formatDate,
+  calculateDate,
+  capitalizeWords,
+} from "../../utils/dashboard/functions";
 
 import axiosInstance from "../../modules/axiosInstance";
 import {
-  LineChart, Line,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
@@ -18,49 +24,47 @@ import {
 
 const Dashboard: FC = () => {
   const { id } = useParams();
-  const [requestType, setRequestType] = useState<string>("total-visits");
-  const [graphDataKey, setGraphDataKey] = useState<string>("views");
   const defaultDate = calculateDate(7);
-
-  const [totalViews, setTotalViews] = useState<any[]>([]);
-
   const [startDate, setStartDate] = useState<any>(defaultDate.currentDate);
   const [endDate, setEndDate] = useState<any>(defaultDate.targetDate);
+
+  const [graphRequest, setGraphRequest] = useState<string>("total-visits");
+  const [graphDataKey, setGraphDataKey] = useState<string>("views");
+
+  const [totalViews, setTotalViews] = useState<any[]>([]);
 
   useEffect(() => {
     async function getTotalPageViews() {
       const response = await axiosInstance.get(
-        `/data/${requestType}/${id}?startDate=${startDate}&endDate=${endDate}`
+        `/data/${graphRequest}/${id}?startDate=${startDate}&endDate=${endDate}`
       );
       const data = await response.data;
 
-      console.log(data);
-      
       setGraphDataKey(Object.keys(data[0])[1]);
       setTotalViews(formatDate(data));
     }
 
     getTotalPageViews();
-  }, [startDate, endDate, requestType]);
+  }, [startDate, endDate, graphRequest]);
 
   function handleTypeChange(newSelection: string) {
     const result = newSelection.toLowerCase();
 
     switch (result) {
       case "total visits":
-        setRequestType("total-visits");
+        setGraphRequest("total-visits");
         break;
       case "total page visits":
-        setRequestType("total-page-visits");
+        setGraphRequest("total-page-visits");
         break;
       case "visit duration":
-        setRequestType("session-duration");
+        setGraphRequest("session-duration");
         break;
       case "bounce rate":
-        setRequestType("bounce-rate");
+        setGraphRequest("bounce-rate");
         break;
       default:
-        setRequestType("total-visits");
+        setGraphRequest("total-visits");
         break;
     }
   }
@@ -110,16 +114,6 @@ const Dashboard: FC = () => {
           <div className="flex justify-center items-center gap-4">
             <Select
               options={[
-                "Total Visits",
-                "Total Page Visits",
-                "Visit Duration",
-                "Bounce Rate",
-              ]}
-              label="Select option"
-              onChange={handleTypeChange}
-            ></Select>
-            <Select
-              options={[
                 "Last 7 Days",
                 "Last 30 days",
                 "Last 12 Months",
@@ -136,7 +130,11 @@ const Dashboard: FC = () => {
           yTicks={yTicks}
           title={"TOTAL VISITS"}
           dataKey={graphDataKey}
+          onChange={handleTypeChange}
         />
+        <div className="flex justify-center align-center gap-5">
+          <div className=""></div>
+        </div>
       </main>
     </>
   );
@@ -147,18 +145,37 @@ interface ContainerProps {
   yTicks: any;
   title: string;
   dataKey: string;
+  onChange: (selected: string) => void;
 }
 
-const Graph: FC<ContainerProps> = ({ content, yTicks, title, dataKey }) => {
+const Graph: FC<ContainerProps> = ({
+  content,
+  yTicks,
+  title,
+  dataKey,
+  onChange,
+}) => {
   const formatTargetValue = (value: number): string => {
     return formatValue(value, dataKey);
   };
   const trackingName = capitalizeWords(dataKey.replace(/_/g, " "));
   return (
     <>
-      <h2 className="text-2xl font-bold text-emphasis w-full bg-default-300 pt-6 rounded-tl-md rounded-tr-md text-center font-ibm">
-        {trackingName.toUpperCase()}
-      </h2>
+      <div className="flex justify-between items-center w-full px-[99px] pt-6 rounded-tl-md rounded-tr-md bg-default-300">
+        <h2 className="text-2xl font-bold text-emphasis font-ibm">
+          {trackingName.toUpperCase()}
+        </h2>
+        <Select
+          options={[
+            "Total Visits",
+            "Total Page Visits",
+            "Visit Duration",
+            "Bounce Rate",
+          ]}
+          label="Select option"
+          onChange={onChange}
+        ></Select>
+      </div>
       <div className="flex justify-between items-center w-[70vw] h-96 bg-default-300 p-5 rounded-md shadow-outline shadow-black">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -224,13 +241,16 @@ const CustomToolTip = ({ active, payload, label, trackingName }: any) => {
         <p className="flex items-center gap-2">
           <span className="text-md text-primary">{label}</span>
           <span className="text-primary font-bold">
-            {formatValue(payload[0].value, trackingName.toLowerCase().replace(" ", '_'))} {trackingName}
+            {formatValue(
+              payload[0].value,
+              trackingName.toLowerCase().replace(" ", "_")
+            )}{" "}
+            {trackingName}
           </span>
         </p>
       </div>
     );
   }
 };
-
 
 export default Dashboard;

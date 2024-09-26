@@ -37,12 +37,14 @@ const WhyDropdown = ({
         onClick={handleWhyClick}
         className="w-full flex items-center lg:justify-between space-x-1 hover:text-emphasis text-primary text-xl md:text-xl cursor-pointer"
       >
-        <span className="cursor-pointer">Why Clickpulse</span>
+        <span className="cursor-pointer xl:text-2xl">
+          Why Clickpulse
+        </span>
         <FontAwesomeIcon
           icon={faChevronDown}
           className={`transition-transform ${
             isWhyClicked ? 'rotate-180' : 'rotate-0'
-          } cursor-pointer lg:ml-auto`}
+          } cursor-pointer lg:ml-auto md:text-2xl`}
         />
       </div>
       <div

@@ -57,7 +57,7 @@ const formatValue = (value: number, type: string): string => {
     } else {
       formattedDuration += `${remainingSeconds}s`;
     }
-  
+    
     return formattedDuration.trim();
   }
   
