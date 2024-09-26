@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import validateDomain from "../../utils/validateDomain";
+import validateDomain from "../../utils/form/validateDomain";
 
 import Navbar from "../../components/Navbar";
 import Header from "../../components/header";
