@@ -5,7 +5,7 @@ import axiosInstance from "../../modules/axiosInstance";
 import Header from "../../components/header";
 import Input from "../../components/form/Input";
 import Button from "../../components/form/Button";
-import verifyCode from "../../utils/validateCode";
+import verifyCode from "../../utils/form/validateCode";
 import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 

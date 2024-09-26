@@ -10,7 +10,7 @@ import Logout from './pages/auth/Logout';
 import New from './pages/dashboard/New';
 import Script from './pages/dashboard/Script';
 import Dashboard from './pages/dashboard/Dashboard';
-import Website from './pages/dashboard/Website';
+import Websites from './pages/dashboard/Websites';
 
 import Maintenance from './pages/Maintenance';
 import Protected from './modules/Protected';
@@ -33,7 +33,7 @@ export default function App() {
           path="/dashboard"
           element={
             <Protected>
-              <Dashboard />
+              <Websites />
             </Protected>
           }
         />
@@ -41,7 +41,7 @@ export default function App() {
           path="/dashboard/:id"
           element={
             <Protected>
-              <Website />
+              <Dashboard />
             </Protected>
           }
         />

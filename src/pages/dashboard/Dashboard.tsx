@@ -1,119 +1,256 @@
-import { FC, useState, useEffect } from 'react';
-import { CookiesProvider, useCookies } from 'react-cookie';
-import axiosInstance from '../../modules/axiosInstance';
+import { FC, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Home/Footer';
-import Header from '../../components/header';
-import Button from '../../components/form/Button';
-import { Link } from 'react-router-dom';
+import Navbar from "../../components/Navbar";
+import Select from "../../components/form/Select";
 
-interface WebsiteData {
-  domain: string;
-  active: boolean;
-  id: string;
-}
+import {
+  formatValue,
+  formatDate,
+  calculateDate,
+  capitalizeWords,
+} from "../../utils/dashboard/functions";
+
+import axiosInstance from "../../modules/axiosInstance";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
 
 const Dashboard: FC = () => {
-  const [cookies] = useCookies(['token']);
-  const [websites, setWebsites] = useState<WebsiteData[]>([]);
+  const { id } = useParams();
+  const defaultDate = calculateDate(7);
+  const [startDate, setStartDate] = useState<any>(defaultDate.currentDate);
+  const [endDate, setEndDate] = useState<any>(defaultDate.targetDate);
+
+  const [graphRequest, setGraphRequest] = useState<string>("total-visits");
+  const [graphDataKey, setGraphDataKey] = useState<string>("views");
+
+  const [totalViews, setTotalViews] = useState<any[]>([]);
 
   useEffect(() => {
-    getWebsites();
-  }, []);
-
-  async function getWebsites() {
-    try {
+    async function getTotalPageViews() {
       const response = await axiosInstance.get(
-        `/dashboard/websites/${cookies.token}`
+        `/data/${graphRequest}/${id}?startDate=${startDate}&endDate=${endDate}`
       );
-      console.log(response.data);
+      const data = await response.data;
 
-      setWebsites(response.data);
-    } catch (error) {
-      console.error(error);
+      setGraphDataKey(Object.keys(data[0])[1]);
+      setTotalViews(formatDate(data));
+    }
+
+    getTotalPageViews();
+  }, [startDate, endDate, graphRequest]);
+
+  function handleTypeChange(newSelection: string) {
+    const result = newSelection.toLowerCase();
+
+    switch (result) {
+      case "total visits":
+        setGraphRequest("total-visits");
+        break;
+      case "total page visits":
+        setGraphRequest("total-page-visits");
+        break;
+      case "visit duration":
+        setGraphRequest("session-duration");
+        break;
+      case "bounce rate":
+        setGraphRequest("bounce-rate");
+        break;
+      default:
+        setGraphRequest("total-visits");
+        break;
     }
   }
 
+  function handleTimeChange(newSelection: string) {
+    const result = newSelection.toLowerCase();
+
+    switch (result) {
+      case "last 7 days":
+        const getWeek = calculateDate(3);
+        setStartDate(getWeek.currentDate);
+        setEndDate(getWeek.targetDate);
+        break;
+
+      case "last 30 days":
+        const getMonth = calculateDate(30);
+        setStartDate(getMonth.currentDate);
+        setEndDate(getMonth.targetDate);
+        break;
+
+      case "last 12 months":
+        const getYear = calculateDate(365);
+        setStartDate(getYear.currentDate);
+        setEndDate(getYear.targetDate);
+        break;
+
+      default:
+        const getDefaultWeek = calculateDate(7);
+        setStartDate(getDefaultWeek.currentDate);
+        setEndDate(getDefaultWeek.targetDate);
+        break;
+    }
+  }
+
+  const maxViews =
+    Math.ceil(Math.max(...totalViews.map((view) => view[graphDataKey])) / 100) *
+    100;
+
+  const yTicks = Array.from({ length: 6 }, (_, i) => i * (maxViews / 5));
+
   return (
-    <CookiesProvider>
+    <>
       <Navbar />
-      <Header title="Dashboard" />
-      <main className="mt-32 flex flex-col justify-center items-center w-[70vw] m-auto pb-16">
-        <h1 className="text-4xl text-emphasis">Select a website</h1>
-        <p className="text-primary text-center w-full">
-          Choose a website to view analytics and insights.
-        </p>
-        <div className="w-full mt-10 flex flex-wrap justify-center items-center gap-5">
-          {websites && websites.length > 0 ? (
-            websites.map((website, index) => (
-              <Website
-                key={index}
-                domain={website.domain}
-                active={website.active}
-                id={website.id}
-              />
-            ))
-          ) : (
-            <p className="text-primary"></p>
-          )}
-          <Website
-            key={1}
-            domain={'adnanskopljak'}
-            active={true}
-            id={'1'}
-          />
-          <Website
-            key={2}
-            domain={'paulpravdic'}
-            active={true}
-            id={'2'}
-          />
-          <Website
-            key={3}
-            domain={'twitter'}
-            active={true}
-            id={'3'}
-          />
-          <Website
-            key={4}
-            domain={'facebook'}
-            active={true}
-            id={'4'}
-          />
+      <main className="flex flex-col justify-center items-center mt-32 w-[70vw] mx-auto">
+        <div className="flex justify-between items-center w-full mb-8">
+          <h2 className="text-emphasis text-xl">https://adnanskopljak.com</h2>
+          <div className="flex justify-center items-center gap-4">
+            <Select
+              options={[
+                "Last 7 Days",
+                "Last 30 days",
+                "Last 12 Months",
+                "All Time",
+                "Live",
+              ]}
+              label="Select option"
+              onChange={handleTimeChange}
+            ></Select>
+          </div>
         </div>
-        <Link to="/dashboard/new">
-          <Button className="mt-10">Add Website</Button>
-        </Link>
+        <Graph
+          content={totalViews}
+          yTicks={yTicks}
+          title={"TOTAL VISITS"}
+          dataKey={graphDataKey}
+          onChange={handleTypeChange}
+        />
+        <div className="flex justify-center align-center gap-5">
+          <div className=""></div>
+        </div>
       </main>
-      <Footer />
-    </CookiesProvider>
+    </>
   );
 };
 
-interface WebsiteProps {
-  domain: string;
-  active: boolean;
-  id: string;
+interface ContainerProps {
+  content: any;
+  yTicks: any;
+  title: string;
+  dataKey: string;
+  onChange: (selected: string) => void;
 }
 
-const Website: FC<WebsiteProps> = ({ domain, id }) => {
+const Graph: FC<ContainerProps> = ({
+  content,
+  yTicks,
+  title,
+  dataKey,
+  onChange,
+}) => {
+  const formatTargetValue = (value: number): string => {
+    return formatValue(value, dataKey);
+  };
+  const trackingName = capitalizeWords(dataKey.replace(/_/g, " "));
   return (
-    <div className="w-96 border-2 border-secondary-100 rounded-lg flex flex-col justify-between mt-5 min-h-[25vh] relative p-4">
-      <p className="text-primary text-2xl text-center">{domain}</p>
-      <div className="flex-1 flex items-center justify-center">
-        <p className="text-secondary-100 text-2xl text-center">
-          <span>iamfromazerbaijan.com</span>
+    <>
+      <div className="flex justify-between items-center w-full px-[99px] pt-6 rounded-tl-md rounded-tr-md bg-default-300">
+        <h2 className="text-2xl font-bold text-emphasis font-ibm">
+          {trackingName.toUpperCase()}
+        </h2>
+        <Select
+          options={[
+            "Total Visits",
+            "Total Page Visits",
+            "Visit Duration",
+            "Bounce Rate",
+          ]}
+          label="Select option"
+          onChange={onChange}
+        ></Select>
+      </div>
+      <div className="flex justify-between items-center w-[70vw] h-96 bg-default-300 p-5 rounded-md shadow-outline shadow-black">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            width={500}
+            height={500}
+            data={content}
+            margin={{ top: 30, right: 80, left: 0, bottom: 20 }}
+          >
+            <CartesianGrid stroke="#3B434F" vertical={false} />
+            <Line
+              dataKey={dataKey}
+              stroke="#3CBAB1"
+              fill="#3CBAB1"
+              dot={false}
+              connectNulls
+            />
+            <XAxis
+              dataKey="date"
+              tick={<CustomizedXAxisTick />}
+              axisLine={{ stroke: "#A3B8C7" }}
+              interval={Math.floor(content.length / 4)}
+            />
+            <YAxis
+              tick={{ fill: "#A3B8C7" }}
+              axisLine={{ stroke: "#A3B8C7" }}
+              allowDecimals={false}
+              domain={[0, (dataMax: number) => Math.ceil(dataMax * 1.2)]}
+              tickFormatter={formatTargetValue}
+              ticks={yTicks}
+              tickLine={false}
+              width={80}
+            />
+            <Tooltip content={<CustomToolTip trackingName={trackingName} />} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </>
+  );
+};
+
+const CustomizedXAxisTick = ({ x, y, stroke, payload }: any) => {
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor="end"
+        fill="#A3B8C7"
+        transform="rotate(-35)"
+      >
+        {payload.value}
+      </text>
+    </g>
+  );
+};
+
+const CustomToolTip = ({ active, payload, label, trackingName }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="p-4 bg-default-200 flex flex-col gap-1 rounded-md">
+        <p className="text-lg text-emphasis">{trackingName}</p>
+        <p className="flex items-center gap-2">
+          <span className="text-md text-primary">{label}</span>
+          <span className="text-primary font-bold">
+            {formatValue(
+              payload[0].value,
+              trackingName.toLowerCase().replace(" ", "_")
+            )}{" "}
+            {trackingName}
+          </span>
         </p>
       </div>
-      <Link
-        to={`/dashboard/${id}`}
-        className="absolute bottom-2 right-2"
-      >
-        <Button>View</Button>
-      </Link>
-    </div>
-  );
+    );
+  }
 };
 
 export default Dashboard;
