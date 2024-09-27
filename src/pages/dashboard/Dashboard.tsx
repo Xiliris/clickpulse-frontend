@@ -30,22 +30,40 @@ const Dashboard: FC = () => {
 
   const [graphRequest, setGraphRequest] = useState<string>("total-visits");
   const [graphDataKey, setGraphDataKey] = useState<string>("views");
+  const [graphData, setGraphData] = useState<any[]>([]);
 
-  const [totalViews, setTotalViews] = useState<any[]>([]);
+  const [userAgentRequest, setUserAgentRequest] = useState<string>("browser");
+  const [userAgentKey, setUserAgentKey] = useState<string>("browser");
+  const [userAgentData, setUserAgentData] = useState<any[]>([]);
 
   useEffect(() => {
-    async function getTotalPageViews() {
-      const response = await axiosInstance.get(
+    async function getGraph() {
+      const graphResponse = await axiosInstance.get(
         `/data/${graphRequest}/${id}?startDate=${startDate}&endDate=${endDate}`
       );
-      const data = await response.data;
+      const graphData = await graphResponse.data;
 
-      setGraphDataKey(Object.keys(data[0])[1]);
-      setTotalViews(formatDate(data));
+      setGraphDataKey(Object.keys(graphData[0])[1]);
+      setGraphData(formatDate(graphData));
     }
 
-    getTotalPageViews();
+    getGraph();
   }, [startDate, endDate, graphRequest]);
+
+  useEffect(() => {
+    async function getUserAgent() {
+      const userAgentResponse = await axiosInstance.get(
+        `/data/${userAgentRequest}/${id}/?startDate=${startDate}&endDate=${endDate}`
+      );
+      const userAgentData = await userAgentResponse.data;
+      console.log(userAgentData);
+
+      setUserAgentKey(Object.keys(userAgentData[0])[1]);
+      setGraphData(formatDate(userAgentData));
+    }
+
+    getUserAgent();
+  }, [startDate, endDate, userAgentRequest]);
 
   function handleTypeChange(newSelection: string) {
     const result = newSelection.toLowerCase();
@@ -100,7 +118,7 @@ const Dashboard: FC = () => {
   }
 
   const maxViews =
-    Math.ceil(Math.max(...totalViews.map((view) => view[graphDataKey])) / 100) *
+    Math.ceil(Math.max(...graphData.map((view) => view[graphDataKey])) / 100) *
     100;
 
   const yTicks = Array.from({ length: 6 }, (_, i) => i * (maxViews / 5));
@@ -126,14 +144,18 @@ const Dashboard: FC = () => {
           </div>
         </div>
         <Graph
-          content={totalViews}
+          content={graphData}
           yTicks={yTicks}
           title={"TOTAL VISITS"}
           dataKey={graphDataKey}
           onChange={handleTypeChange}
         />
         <div className="flex justify-center align-center gap-5">
-          <div className=""></div>
+          <div className="flex flex-col">
+            {userAgentData.map((data) => {
+              return <p>hey</p>;
+            })}
+          </div>
         </div>
       </main>
     </>
