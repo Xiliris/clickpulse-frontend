@@ -16,6 +16,11 @@ import Maintenance from './pages/Maintenance';
 import Protected from './modules/Protected';
 import Error from './pages/error/Error';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/Terms';
+import AboutUs from './pages/Aboutus';
+
+import PaymentPage from './pages/Payment';
 
 export default function App() {
   return (
@@ -29,6 +34,10 @@ export default function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/maintenance" element={<Maintenance />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/payment" element={<PaymentPage />} />
         <Route
           path="/dashboard"
           element={
