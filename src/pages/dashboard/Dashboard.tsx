@@ -43,6 +43,8 @@ const Dashboard: FC = () => {
       );
       const graphData = await graphResponse.data;
 
+      console.log(graphData);
+
       setGraphDataKey(Object.keys(graphData[0])[1]);
       setGraphData(formatDate(graphData));
     }
