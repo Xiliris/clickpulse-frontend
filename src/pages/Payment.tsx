@@ -1,6 +1,7 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faArrowLeft,
   faCreditCard,
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +16,16 @@ const PaymentPage = () => {
   return (
     <section className="bg-default-200 min-h-screen flex items-center justify-center py-12">
       <div className="max-w-lg w-full bg-default-300 shadow-lg rounded-lg p-8">
+        <Link
+          to="/"
+          className="text-emphasis cursor-pointer block text-xl"
+        >
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            className="cursor-pointer"
+          />
+        </Link>
+
         <h1 className="text-4xl font-bold text-emphasis mb-6 text-center">
           Checkout
         </h1>

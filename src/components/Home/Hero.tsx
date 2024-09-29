@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import Title from './Title';
 
 interface FlipCardProps {
   title: string;
@@ -70,9 +71,7 @@ export default function Hero() {
   return (
     <section className="bg-default-200 py-12 z-10 mt-7 w-[70vw] md:w-[90vw] mx-auto">
       <div className="mx-auto text-center relative">
-        <h2 className="relative text-4xl font-bold text-emphasis py-2 px-4 pb-3 border-b-[0.5px] border-emphasis">
-          Tracking
-        </h2>
+        <Title>Tracking</Title>
 
         <div className="flex flex-col gap-8 mt-12 md:flex">
           <FlipCard

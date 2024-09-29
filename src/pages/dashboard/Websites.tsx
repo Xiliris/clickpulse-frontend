@@ -3,7 +3,7 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import axiosInstance from '../../modules/axiosInstance';
 
 import Navbar from '../../components/Navbar';
-import Footer from '../../components/Home/Footer';
+import Footer from '../../components/home/Footer';
 import Header from '../../components/header';
 import Button from '../../components/form/Button';
 import { Link } from 'react-router-dom';
