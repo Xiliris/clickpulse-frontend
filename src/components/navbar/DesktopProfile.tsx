@@ -50,9 +50,8 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
         className="flex items-center space-x-2 hover:text-emphasis text-primary md:text-lg text-lg cursor-pointer"
       >
         {getTruncatedUsername(user.username)}
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className={`transition-transform ${
+        <i
+          className={`fa-solid fa-chevron-down transition-transform ${
             isProfileMenuOpen ? 'rotate-180' : 'rotate-0'
           } ml-1 cursor-pointer`}
         />

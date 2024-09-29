@@ -40,11 +40,10 @@ const WhyDropdown = ({
         <span className="cursor-pointer xl:text-2xl">
           Why Clickpulse
         </span>
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className={`transition-transform ${
+        <i
+          className={`fa-solid fa-chevron-down transition-transform ${
             isWhyClicked ? 'rotate-180' : 'rotate-0'
-          } cursor-pointer lg:ml-auto md:text-2xl`}
+          } cursor-pointer ml-auto md:text-2xl`}
         />
       </div>
       <div
