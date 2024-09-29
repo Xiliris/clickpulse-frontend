@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { ReactNode, FC } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 interface itemProp {
   index: number;
@@ -107,10 +108,14 @@ const Card: FC<CardInterface> = ({
       </div>
       <hr className="border-[#4C5366]" />
       <ul className="flex flex-col gap-2 flex-grow">{children}</ul>
-      <Button className="flex justify-between w-full">
-        Upgrade now
-        <FontAwesomeIcon icon={faArrowRight} />
-      </Button>
+      <div>
+        <Link to={`/payment?plan=${plan}&price=${price}`}>
+          <Button className="flex justify-between w-full">
+            Upgrade now
+            <FontAwesomeIcon icon={faArrowRight} />
+          </Button>
+        </Link>
+      </div>
     </motion.div>
   );
 };

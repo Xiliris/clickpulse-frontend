@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Navbar from "../../components/Navbar";
 import Select from "../../components/form/Select";
+import StatsArticle from "../../components/dashboard/StatsArticke";
 
 import {
   formatValue,
@@ -32,10 +33,6 @@ const Dashboard: FC = () => {
   const [graphDataKey, setGraphDataKey] = useState<string>("views");
   const [graphData, setGraphData] = useState<any[]>([]);
 
-  const [userAgentRequest, setUserAgentRequest] = useState<string>("browser");
-  const [userAgentKey, setUserAgentKey] = useState<string>("browser");
-  const [userAgentData, setUserAgentData] = useState<any[]>([]);
-
   useEffect(() => {
     async function getGraph() {
       const graphResponse = await axiosInstance.get(
@@ -43,29 +40,12 @@ const Dashboard: FC = () => {
       );
       const graphData = await graphResponse.data;
 
-      console.log(graphData);
-
       setGraphDataKey(Object.keys(graphData[0])[1]);
       setGraphData(formatDate(graphData));
     }
 
     getGraph();
   }, [startDate, endDate, graphRequest]);
-
-  useEffect(() => {
-    async function getUserAgent() {
-      const userAgentResponse = await axiosInstance.get(
-        `/data/${userAgentRequest}/${id}/?startDate=${startDate}&endDate=${endDate}`
-      );
-      const userAgentData = await userAgentResponse.data;
-      console.log(userAgentData);
-
-      setUserAgentKey(Object.keys(userAgentData[0])[1]);
-      setGraphData(formatDate(userAgentData));
-    }
-
-    getUserAgent();
-  }, [startDate, endDate, userAgentRequest]);
 
   function handleTypeChange(newSelection: string) {
     const result = newSelection.toLowerCase();
@@ -152,12 +132,19 @@ const Dashboard: FC = () => {
           dataKey={graphDataKey}
           onChange={handleTypeChange}
         />
-        <div className="flex justify-center align-center gap-5">
-          <div className="flex flex-col">
-            {userAgentData.map((data) => {
-              return <p>hey</p>;
-            })}
-          </div>
+        <div className="flex gap-5 mt-6 w-full">
+          <StatsArticle
+            id={id}
+            selectionItems={["Browsers", "Devices", "OS"]}
+            startDate={startDate}
+            endDate={endDate}
+          />
+          <StatsArticle
+            id={id}
+            selectionItems={["Top Pages", "Entry Pages", "Exit Pages"]}
+            startDate={startDate}
+            endDate={endDate}
+          />
         </div>
       </main>
     </>
