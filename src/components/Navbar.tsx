@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Profile from './navbar/Profile';
@@ -8,6 +9,10 @@ import Community from './navbar/Community';
 import DesktopProfile from './navbar/DesktopProfile';
 import Button from './form/Button';
 import Logo from '../assets/logo.png';
+
+interface navbarProps {
+  width?: number;
+}
 
 const variants = {
   initial: {
@@ -25,7 +30,7 @@ const variants = {
   },
 };
 
-export default function Navbar() {
+const Navbar: FC<navbarProps> = ({ width }) => {
   const {
     user,
     scrollingUp,
@@ -36,6 +41,8 @@ export default function Navbar() {
     isLogged,
     toggleLoggedMenu,
   } = useProfileMenu();
+
+  const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
 
   return (
     <>
@@ -49,7 +56,7 @@ export default function Navbar() {
           initial="initial"
           whileInView="animate"
           viewport={{ amount: 0.5, once: true }}
-          className="relative flex justify-between items-center w-[70vw] md:w-[90vw] mx-auto lg:px-0"
+          className={`relative flex justify-between items-center ${containerWidth} md:w-[90vw] mx-auto lg:px-0`}
         >
           {/* Logo and Site Title */}
           <Link to="/" className="flex items-center space-x-2">
@@ -110,4 +117,6 @@ export default function Navbar() {
       </nav>
     </>
   );
-}
+};
+
+export default Navbar;

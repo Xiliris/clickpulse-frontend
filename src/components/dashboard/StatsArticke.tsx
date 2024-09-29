@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import axiosInstance from "../../modules/axiosInstance";
-import { formatDate } from "../../utils/dashboard/functions";
+import { formatDate, formatNumber } from "../../utils/dashboard/functions";
 
 interface StatsArticleProps {
   selectionItems: string[];
@@ -47,20 +47,20 @@ const StatsArticle: FC<StatsArticleProps> = ({
   return (
     <div className="flex flex-col bg-default-300 py-5 rounded-md gap-5 w-full px-5">
       <div className="flex justify-between items-center">
-        <h2 className="text-emphasis font-bold text-xl">
+        <h2 className="text-emphasis font-bold text-xl md:text-sm">
           {displayedMetricName}
         </h2>
-        <ul className="flex justify-between items-center gap-3 text-secondary-100">
+        <ul className="flex justify-between items-center gap-3 text-secondary-100 md:gap-2">
           {selectionItems.map((item: string) => (
             <li
-              className={`cursor-pointer leading-4 hover:text-emphasis
+              className={`cursor-pointer leading-4 hover:text-emphasis 
                 ${
                   selectedMetric.toLowerCase().replace("-", " ") ===
                   item.toLowerCase()
                     ? "text-emphasis border-b border-emphasis scale-105"
                     : "border-b border-transparent"
                 }
-                transition-colors duration-200 ease-in-out
+                transition-colors duration-200 ease-in-out md:text-xs
                 `}
               id={item}
               onClick={handleMetricSelection}
@@ -73,7 +73,7 @@ const StatsArticle: FC<StatsArticleProps> = ({
       </div>
       <ul className="flex justify-between items-center">
         <li className="text-secondary-100 capitalize"></li>
-        <li className="text-secondary-100">Visits</li>
+        <li className="text-secondary-100 md:text-xs">Visits</li>
       </ul>
       {userAgentStats.map((stat: any, index: number) => (
         <div
@@ -85,14 +85,16 @@ const StatsArticle: FC<StatsArticleProps> = ({
               src="https://via.placeholder.com/150"
               width={28}
               height={28}
-              className="w-7 h-7"
+              className="w-7 h-7 md:w-4 md:h-4"
             />
-            <p className="text-lg text-secondary-100">
+            <p className="text-lg text-secondary-100 md:text-sm">
               {stat[`${userAgentKey}`]}
             </p>
           </div>
 
-          <p className="text-lg text-secondary-100">{stat.total_visits}</p>
+          <p className="text-lg text-secondary-100 md:text-sm">
+            {formatNumber(stat.total_visits)}
+          </p>
         </div>
       ))}
     </div>

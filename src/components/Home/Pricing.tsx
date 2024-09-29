@@ -1,6 +1,4 @@
 import Button from "../form/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ReactNode, FC } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -111,7 +109,7 @@ const Card: FC<CardInterface> = ({
         <Link to={`/payment?plan=${plan}&price=${price}`}>
           <Button className="flex justify-between w-full">
             Upgrade now
-            <FontAwesomeIcon icon={faArrowRight} />
+            <i className="fa-solid fa-arrow-right cursor-pointer"></i>
           </Button>
         </Link>
       </div>

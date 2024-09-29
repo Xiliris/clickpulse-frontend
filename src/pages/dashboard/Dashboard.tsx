@@ -112,11 +112,11 @@ const Dashboard: FC = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar width={90} />
       <main className="flex flex-col justify-center items-center mt-32 w-[90vw] mx-auto">
-        <div className="flex justify-between items-center w-full mb-8">
+        <div className="flex justify-between items-center w-full mb-8 md:flex-col md:mb-5 md:gap-5">
           <h2 className="text-emphasis text-xl">https://adnanskopljak.com</h2>
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex justify-center items-center gap-4 md:w-full">
             <Select
               options={[
                 "Last 7 Days",
@@ -127,6 +127,7 @@ const Dashboard: FC = () => {
               ]}
               label="Select option"
               onChange={handleTimeChange}
+              className="md:w-full"
             ></Select>
           </div>
         </div>
@@ -169,8 +170,8 @@ const Graph: FC<ContainerProps> = ({ content, yTicks, dataKey, onChange }) => {
   const trackingName = capitalizeWords(dataKey.replace(/_/g, " "));
   return (
     <>
-      <div className="flex justify-between items-center w-full pl-[69px] pr-10 pt-6 rounded-tl-md rounded-tr-md bg-default-300">
-        <h2 className="text-2xl font-bold text-emphasis font-ibm">
+      <div className="flex justify-between items-center w-full pl-[99px] pr-10 pt-6 rounded-tl-md rounded-tr-md bg-default-300 md:flex-col md:pl-5 md:pr-6">
+        <h2 className="text-2xl font-bold text-emphasis font-ibm md:text-xl">
           {trackingName.toUpperCase()}
         </h2>
         <Select
@@ -182,15 +183,16 @@ const Graph: FC<ContainerProps> = ({ content, yTicks, dataKey, onChange }) => {
           ]}
           label="Select option"
           onChange={onChange}
+          className="md:w-full md:mt-6"
         ></Select>
       </div>
-      <div className="flex justify-between items-center w-[90vw] h-96 bg-default-300 p-5 rounded-md shadow-outline shadow-black">
+      <div className="flex justify-between items-center w-[90vw] h-96 bg-default-300 p-5 rounded-md shadow-outline shadow-black md:p-2">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={500}
             height={500}
             data={content}
-            margin={{ top: 30, right: 20, left: -30, bottom: 20 }}
+            margin={{ top: 30, right: 20, left: 0, bottom: 20 }}
           >
             <CartesianGrid stroke="#3B434F" vertical={false} />
             <Line

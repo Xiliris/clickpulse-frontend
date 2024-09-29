@@ -20,10 +20,7 @@ const PaymentPage = () => {
           to="/"
           className="text-emphasis cursor-pointer block text-xl"
         >
-          <FontAwesomeIcon
-            icon={faArrowLeft}
-            className="cursor-pointer"
-          />
+          <i className="fa-solid fa-arrow-left cursor-pointer"></i>
         </Link>
 
         <h1 className="text-4xl font-bold text-emphasis mb-6 text-center">
