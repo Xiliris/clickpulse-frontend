@@ -59,14 +59,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
         {/*Pricing */}
         <div className="w-[90vw] flex mx-auto">
-          <Link
-            to="/pricing"
+          <a
+            href="#pricing"
             className="relative flex items-start mt-5 text-primary rounded-none text-xl hover:text-emphasis"
           >
             <span className="flex-grow text-center cursor-pointer hover:text-emphasis xl:text-2xl">
               Pricing
             </span>
-          </Link>
+          </a>
         </div>
       </div>
     </div>

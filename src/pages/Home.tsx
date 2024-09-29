@@ -7,9 +7,9 @@ import './globe.css';
 
 const Navbar = lazy(() => import('../components/Navbar'));
 const Button = lazy(() => import('../components/form/Button'));
-const Pricing = lazy(() => import('../components/Home/Pricing'));
-const Hero = lazy(() => import('../components/Home/Hero'));
-const Footer = lazy(() => import('../components/Home/Footer'));
+const Pricing = lazy(() => import('../components/home/Pricing'));
+const Hero = lazy(() => import('../components/home/Hero'));
+const Footer = lazy(() => import('../components/home/Footer'));
 
 const variants = {
   initial: {
@@ -46,7 +46,7 @@ export default function Home() {
             </h1>
             <p className="text-secondary-100 mt-5 md:text-lg text-2xl md:w-2/3">
               Discover in-depth analytics and insights into every
-              click, scroll, and interaction on your site. ClickPulse
+              click, scroll, and interaction on your site. Clickpulse
               empowers you to optimize your digital experience with
               real-time data tracking.
             </p>

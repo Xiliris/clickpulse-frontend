@@ -37,13 +37,19 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
     };
   }, []);
 
+  const getTruncatedUsername = (username: string) => {
+    return username.length > 12
+      ? `${username.slice(0, 12)}...`
+      : username;
+  };
+
   return (
     <div className="relative" ref={profileMenuRef}>
       <div
         onClick={toggleProfileMenu}
         className="flex items-center space-x-2 hover:text-emphasis text-primary md:text-lg text-lg cursor-pointer"
       >
-        {user.username}
+        {getTruncatedUsername(user.username)}
         <FontAwesomeIcon
           icon={faChevronDown}
           className={`transition-transform ${

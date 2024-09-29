@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Home/Footer';
+import Footer from '../components/home/Footer';
 import Button from '../components/form/Button';
 import Input from '../components/form/Input';
 import { Link } from 'react-router-dom';
