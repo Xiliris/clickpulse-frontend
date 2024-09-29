@@ -63,12 +63,12 @@ export default function Navbar() {
           <div className="xl:hidden flex items-center gap-5">
             <WhyClickpulse />
             <Community />
-            <Link
-              to="/pricing"
+            <a
+              href="#pricing"
               className="hover:text-emphasis text-primary text-lg cursor-pointer"
             >
               Pricing
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Profile / Login */}

@@ -108,7 +108,7 @@ const AboutUs: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-center mt-12">
+        <div className="flex justify-end mt-12">
           <Link to="/">
             <Button>Return home</Button>
           </Link>

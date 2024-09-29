@@ -71,6 +71,7 @@ const Dashboard: FC = () => {
 
   function handleTimeChange(newSelection: string) {
     const result = newSelection.toLowerCase();
+    console.log(result);
 
     switch (result) {
       case "last 7 days":
@@ -90,6 +91,10 @@ const Dashboard: FC = () => {
         setStartDate(getYear.currentDate);
         setEndDate(getYear.targetDate);
         break;
+      case "all time":
+        setStartDate("");
+        setEndDate("");
+        break;
 
       default:
         const getDefaultWeek = calculateDate(7);
@@ -108,7 +113,7 @@ const Dashboard: FC = () => {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col justify-center items-center mt-32 w-[70vw] mx-auto">
+      <main className="flex flex-col justify-center items-center mt-32 w-[90vw] mx-auto">
         <div className="flex justify-between items-center w-full mb-8">
           <h2 className="text-emphasis text-xl">https://adnanskopljak.com</h2>
           <div className="flex justify-center items-center gap-4">
@@ -128,11 +133,10 @@ const Dashboard: FC = () => {
         <Graph
           content={graphData}
           yTicks={yTicks}
-          title={"TOTAL VISITS"}
           dataKey={graphDataKey}
           onChange={handleTypeChange}
         />
-        <div className="flex gap-5 mt-6 w-full">
+        <div className="grid grid-cols-2 gap-5 mt-6 w-full lg:grid-cols-1">
           <StatsArticle
             id={id}
             selectionItems={["Browsers", "Devices", "OS"]}
@@ -154,25 +158,18 @@ const Dashboard: FC = () => {
 interface ContainerProps {
   content: any;
   yTicks: any;
-  title: string;
   dataKey: string;
   onChange: (selected: string) => void;
 }
 
-const Graph: FC<ContainerProps> = ({
-  content,
-  yTicks,
-  title,
-  dataKey,
-  onChange,
-}) => {
+const Graph: FC<ContainerProps> = ({ content, yTicks, dataKey, onChange }) => {
   const formatTargetValue = (value: number): string => {
     return formatValue(value, dataKey);
   };
   const trackingName = capitalizeWords(dataKey.replace(/_/g, " "));
   return (
     <>
-      <div className="flex justify-between items-center w-full px-[99px] pt-6 rounded-tl-md rounded-tr-md bg-default-300">
+      <div className="flex justify-between items-center w-full pl-[69px] pr-10 pt-6 rounded-tl-md rounded-tr-md bg-default-300">
         <h2 className="text-2xl font-bold text-emphasis font-ibm">
           {trackingName.toUpperCase()}
         </h2>
@@ -187,18 +184,19 @@ const Graph: FC<ContainerProps> = ({
           onChange={onChange}
         ></Select>
       </div>
-      <div className="flex justify-between items-center w-[70vw] h-96 bg-default-300 p-5 rounded-md shadow-outline shadow-black">
+      <div className="flex justify-between items-center w-[90vw] h-96 bg-default-300 p-5 rounded-md shadow-outline shadow-black">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={500}
             height={500}
             data={content}
-            margin={{ top: 30, right: 80, left: 0, bottom: 20 }}
+            margin={{ top: 30, right: 20, left: -30, bottom: 20 }}
           >
             <CartesianGrid stroke="#3B434F" vertical={false} />
             <Line
               dataKey={dataKey}
               stroke="#3CBAB1"
+              strokeWidth={2}
               fill="#3CBAB1"
               dot={false}
               connectNulls

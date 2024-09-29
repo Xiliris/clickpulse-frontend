@@ -1,26 +1,26 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 
-import Login from './pages/auth/Login';
-import Signup from './pages/auth/Register';
-import Verify from './pages/auth/Verify';
-import Reset from './pages/auth/Reset';
-import Logout from './pages/auth/Logout';
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Register";
+import Verify from "./pages/auth/Verify";
+import Reset from "./pages/auth/Reset";
+import Logout from "./pages/auth/Logout";
 
-import New from './pages/dashboard/New';
-import Script from './pages/dashboard/Script';
-import Dashboard from './pages/dashboard/Dashboard';
-import Websites from './pages/dashboard/Websites';
+import New from "./pages/dashboard/New";
+import Script from "./pages/dashboard/Script";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Websites from "./pages/dashboard/Websites";
 
-import Maintenance from './pages/Maintenance';
-import Protected from './modules/Protected';
-import Error from './pages/error/Error';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfService from './pages/Terms';
-import AboutUs from './pages/Aboutus';
+import Maintenance from "./pages/Maintenance";
+import Protected from "./modules/Protected";
+import Error from "./pages/error/Error";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/Terms";
+import AboutUs from "./pages/Aboutus";
 
-import PaymentPage from './pages/Payment';
+import PaymentPage from "./pages/Payment";
 
 export default function App() {
   return (
@@ -73,9 +73,7 @@ export default function App() {
 
         <Route
           path="*"
-          element={
-            <Error type={404} message={'Page not found!'}></Error>
-          }
+          element={<Error type={404} message={"Page not found!"}></Error>}
         />
       </Routes>
     </BrowserRouter>
