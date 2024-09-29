@@ -78,7 +78,7 @@ window.addEventListener("beforeunload", () => {
 
   data.exit_page = window.location.pathname;
 
-  fetch("http://localhost:8080/dashboard/analytics", {
+  fetch("http://localhost:8080/dashboard/collect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

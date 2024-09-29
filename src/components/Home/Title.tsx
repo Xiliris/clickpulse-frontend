@@ -1,9 +1,6 @@
-import React, { ReactNode } from 'react';
-import { motion } from 'framer-motion';
-import {
-  upperItemVariant,
-  lineVariant,
-} from '../../animations/Animations';
+import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { upperItemVariant, lineVariant } from "../../animations/Animations";
 
 interface TitleProps {
   children: ReactNode;
