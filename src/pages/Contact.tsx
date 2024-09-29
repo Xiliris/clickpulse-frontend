@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      <div className="bg-default-100 h-[30vh] flex items-center justify-center">
+      <div className="bg-default-100 h-[50vh] flex items-center justify-center">
         <div className="w-full max-w-4xl p-8 text-center">
           <h2 className="text-2xl font-bold text-primary mb-4">
             Our team will check your message as soon as possible.

@@ -37,7 +37,14 @@ export default function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/payment" element={<PaymentPage />} />
+        <Route
+          path="/payment"
+          element={
+            <Protected>
+              <PaymentPage />
+            </Protected>
+          }
+        />
         <Route
           path="/dashboard"
           element={

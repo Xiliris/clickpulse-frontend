@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +15,25 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   isMobileMenuOpen,
   toggleMobileMenu,
 }) => {
+  const handlePricingClick = () => {
+    document
+      .getElementById('pricing')
+      ?.scrollIntoView({ behavior: 'smooth' });
+    toggleMobileMenu();
+  };
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <div
       className={`fixed top-0 h-screen left-0 bg-default-200 z-[99] w-screen transition-all overflow-hidden flex flex-col justify-start ${
@@ -26,7 +45,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <div className="flex flex-col items-center w-full h-full">
         <div className="w-[90vw] flex items-center justify-between mx-auto mt-5">
           <Link to="/" className="flex items-center space-x-2">
-            <img src={Logo} alt="Logo" className="w-12 sm:w-13  " />
+            <img src={Logo} alt="Logo" className="w-12 sm:w-13" />
             <span className="text-2xl xl:text-3xl font-bold text-primary cursor-pointer">
               Clickpulse
             </span>
@@ -61,6 +80,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         <div className="w-[90vw] flex mx-auto">
           <a
             href="#pricing"
+            onClick={handlePricingClick}
             className="relative flex items-start mt-5 text-primary rounded-none text-xl hover:text-emphasis"
           >
             <span className="flex-grow text-center cursor-pointer hover:text-emphasis xl:text-2xl">
