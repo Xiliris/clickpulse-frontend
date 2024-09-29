@@ -1,8 +1,9 @@
-import Button from "../form/Button";
-import { ReactNode, FC } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import Title from "./Title";
+import Button from '../form/Button';
+import { ReactNode, FC } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import Title from './Title';
+
 
 interface itemProp {
   index: number;
