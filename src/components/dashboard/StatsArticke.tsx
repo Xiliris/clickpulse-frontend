@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import axiosInstance from "../../modules/axiosInstance";
-import { formatDate, formatNumber } from "../../utils/dashboard/functions";
+import { formatNumber } from "../../utils/dashboard/functions";
+import OverlayArticle from "./OverlayArticle";
 
 interface StatsArticleProps {
   selectionItems: string[];
@@ -19,7 +20,12 @@ const StatsArticle: FC<StatsArticleProps> = ({
     selectionItems[0].toLowerCase().replace(" ", "-")
   );
   const [userAgentStats, setUserAgentStats] = useState<any[]>([]);
-  const [userAgentKey, setUserAgentKey] = useState<string>();
+  const [userAgentKey, setUserAgentKey] = useState<any>();
+  const [overlayState, setOverlayState] = useState<boolean>(false);
+
+  function handleOverlayState() {
+    setOverlayState(!overlayState);
+  }
 
   useEffect(() => {
     async function fetchUserAgentData() {
@@ -28,8 +34,9 @@ const StatsArticle: FC<StatsArticleProps> = ({
       );
       const fetchedData = await response.data;
 
-      setUserAgentKey(Object.keys(fetchedData[0])[0]);
-      setUserAgentStats(formatDate(fetchedData));
+      setUserAgentKey(Object.keys(fetchedData[0]));
+
+      setUserAgentStats(fetchedData);
     }
 
     fetchUserAgentData();
@@ -45,15 +52,16 @@ const StatsArticle: FC<StatsArticleProps> = ({
   const displayedMetricName = selectedMetric.replace("-", " ").toUpperCase();
 
   return (
-    <div className="flex flex-col bg-default-300 py-5 rounded-md gap-5 w-full px-5">
-      <div className="flex justify-between items-center border-b border-b-default-100 pb-1">
-        <h2 className="text-emphasis font-bold text-xl md:text-sm">
-          {displayedMetricName}
-        </h2>
-        <ul className="flex justify-between items-center gap-3 text-secondary-100 md:gap-2">
-          {selectionItems.map((item: string) => (
-            <li
-              className={`cursor-pointer leading-4 hover:text-emphasis 
+    <>
+      <div className="flex flex-col bg-default-300 py-5 rounded-md gap-5 w-full px-5">
+        <div className="flex justify-between items-center border-b border-b-default-100 pb-1">
+          <h2 className="text-emphasis font-bold text-xl md:text-sm">
+            {displayedMetricName}
+          </h2>
+          <ul className="flex justify-between items-center gap-3 text-secondary-100 md:gap-2">
+            {selectionItems.map((item: string) => (
+              <li
+                className={`cursor-pointer leading-4 hover:text-emphasis 
                 ${
                   selectedMetric.toLowerCase().replace("-", " ") ===
                   item.toLowerCase()
@@ -62,45 +70,57 @@ const StatsArticle: FC<StatsArticleProps> = ({
                 }
                 transition-colors duration-200 ease-in-out md:text-xs
                 `}
-              id={item}
-              onClick={handleMetricSelection}
-              key={item}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <ul className="flex justify-end items-center text-right">
-        <li className="text-secondary-100">Visits</li>
-      </ul>
-      {userAgentStats.map((stat: any, index: number) => (
-        <div
-          key={index}
-          className="flex justify-between items-center w-full border-b border-default-100 pb-1"
-        >
-          <div className="flex justify-start items-center gap-2">
-            <img
-              src="https://via.placeholder.com/150"
-              width={28}
-              height={28}
-              className="w-7 h-7 md:w-4 md:h-4"
-            />
-            <p className="text-lg text-secondary-100 md:text-sm">
-              {stat[`${userAgentKey}`]}
-            </p>
-          </div>
-          <div className="flex justify-between items-center gap-2">
-            <p className="text-lg text-secondary-100 md:text-sm">
-              {formatNumber(stat.total_visits)}
-            </p>
-          </div>
+                id={item}
+                onClick={handleMetricSelection}
+                key={item}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
-      ))}
-      <p className="text-secondary-100 mt-auto ml-auto cursor-pointer hover:text-primary transition-colors duration-200 ease-linear">
-        View more
-      </p>
-    </div>
+        <ul className="flex justify-end items-center text-right">
+          <li className="text-secondary-100">Visits</li>
+        </ul>
+        {userAgentStats.map((stat: any, index: number) => (
+          <div
+            key={index}
+            className="flex justify-between items-center w-full border-b border-default-100 pb-1"
+          >
+            <div className="flex justify-start items-center gap-2">
+              <img
+                src="https://via.placeholder.com/150"
+                width={28}
+                height={28}
+                className="w-7 h-7 md:w-4 md:h-4"
+              />
+              <p className="text-lg text-secondary-100 md:text-sm">
+                {stat[`${userAgentKey[0]}`]}
+              </p>
+            </div>
+            <div className="flex justify-between items-center gap-2">
+              <p className="text-lg text-secondary-100 md:text-sm">
+                {formatNumber(stat.visits)}
+              </p>
+            </div>
+          </div>
+        ))}
+        <p
+          className="text-secondary-100 mt-auto ml-auto cursor-pointer hover:text-primary transition-colors duration-200 ease-linear"
+          onClick={handleOverlayState}
+        >
+          View more
+        </p>
+      </div>
+      {overlayState && (
+        <OverlayArticle
+          title={selectedMetric.replace("-", " ")}
+          trackingTitle={userAgentKey}
+          trackingContent={userAgentStats}
+          close={handleOverlayState}
+        />
+      )}
+    </>
   );
 };
 
