@@ -46,7 +46,7 @@ const StatsArticle: FC<StatsArticleProps> = ({
 
   return (
     <div className="flex flex-col bg-default-300 py-5 rounded-md gap-5 w-full px-5">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center border-b border-b-default-100 pb-1">
         <h2 className="text-emphasis font-bold text-xl md:text-sm">
           {displayedMetricName}
         </h2>
@@ -71,9 +71,8 @@ const StatsArticle: FC<StatsArticleProps> = ({
           ))}
         </ul>
       </div>
-      <ul className="flex justify-between items-center">
-        <li className="text-secondary-100 capitalize"></li>
-        <li className="text-secondary-100 md:text-xs">Visits</li>
+      <ul className="flex justify-end items-center text-right">
+        <li className="text-secondary-100">Visits</li>
       </ul>
       {userAgentStats.map((stat: any, index: number) => (
         <div
@@ -91,12 +90,16 @@ const StatsArticle: FC<StatsArticleProps> = ({
               {stat[`${userAgentKey}`]}
             </p>
           </div>
-
-          <p className="text-lg text-secondary-100 md:text-sm">
-            {formatNumber(stat.total_visits)}
-          </p>
+          <div className="flex justify-between items-center gap-2">
+            <p className="text-lg text-secondary-100 md:text-sm">
+              {formatNumber(stat.total_visits)}
+            </p>
+          </div>
         </div>
       ))}
+      <p className="text-secondary-100 mt-auto ml-auto cursor-pointer hover:text-primary transition-colors duration-200 ease-linear">
+        View more
+      </p>
     </div>
   );
 };
