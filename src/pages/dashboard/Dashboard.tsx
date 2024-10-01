@@ -1,118 +1,91 @@
-import { FC, useState, useEffect } from 'react';
-import { CookiesProvider, useCookies } from 'react-cookie';
-import axiosInstance from '../../modules/axiosInstance';
+import { FC, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/Home/Footer';
-import Header from '../../components/header';
-import Button from '../../components/form/Button';
-import { Link } from 'react-router-dom';
+import Navbar from "../../components/Navbar";
+import Select from "../../components/form/Select";
+import StatsArticle from "../../components/dashboard/StatsArticke";
+import LineGraph from "../../components/dashboard/LineGraph";
 
-interface WebsiteData {
-  domain: string;
-  active: boolean;
-  id: string;
-}
+import { calculateDate } from "../../utils/dashboard/functions";
 
 const Dashboard: FC = () => {
-  const [cookies] = useCookies(['token']);
-  const [websites, setWebsites] = useState<WebsiteData[]>([]);
+  const { id } = useParams();
+  const defaultDate = calculateDate(7);
+  const [startDate, setStartDate] = useState<any>(defaultDate.currentDate);
+  const [endDate, setEndDate] = useState<any>(defaultDate.targetDate);
 
-  useEffect(() => {
-    getWebsites();
-  }, []);
+  function handleTimeChange(newSelection: string) {
+    const result = newSelection.toLowerCase();
 
-  async function getWebsites() {
-    try {
-      const response = await axiosInstance.get(
-        `/dashboard/websites/${cookies.token}`
-      );
-      console.log(response.data);
+    switch (result) {
+      case "last 7 days":
+        const getWeek = calculateDate(3);
+        setStartDate(getWeek.currentDate);
+        setEndDate(getWeek.targetDate);
+        break;
 
-      setWebsites(response.data);
-    } catch (error) {
-      console.error(error);
+      case "last 30 days":
+        const getMonth = calculateDate(30);
+        setStartDate(getMonth.currentDate);
+        setEndDate(getMonth.targetDate);
+        break;
+
+      case "last 12 months":
+        const getYear = calculateDate(365);
+        setStartDate(getYear.currentDate);
+        setEndDate(getYear.targetDate);
+        break;
+      case "all time":
+        setStartDate("");
+        setEndDate("");
+        break;
+
+      default:
+        const getDefaultWeek = calculateDate(7);
+        setStartDate(getDefaultWeek.currentDate);
+        setEndDate(getDefaultWeek.targetDate);
+        break;
     }
   }
 
   return (
-    <CookiesProvider>
-      <Navbar />
-      <Header title="Dashboard" />
-      <main className="mt-32 flex flex-col justify-center items-center w-[70vw] m-auto pb-16">
-        <h1 className="text-4xl text-emphasis">Select a website</h1>
-        <p className="text-primary text-center w-full">
-          Choose a website to view analytics and insights.
-        </p>
-        <div className="w-full mt-10 flex flex-wrap justify-center items-center gap-5">
-          {websites && websites.length > 0 ? (
-            websites.map((website, index) => (
-              <Website
-                key={index}
-                domain={website.domain}
-                active={website.active}
-                id={website.id}
-              />
-            ))
-          ) : (
-            <p className="text-primary"></p>
-          )}
-          <Website
-            key={1}
-            domain={'adnanskopljak'}
-            active={true}
-            id={'1'}
+    <>
+      <Navbar width={90} />
+      <main className="flex flex-col justify-center items-center mt-32 mb-16 w-[90vw] mx-auto">
+        <div className="flex justify-between items-center w-full mb-8 md:flex-col md:mb-5 md:gap-5">
+          <h2 className="text-emphasis text-xl">https://adnanskopljak.com</h2>
+          <div className="flex justify-center items-center gap-4 md:w-full">
+            <Select
+              options={[
+                "Last 7 Days",
+                "Last 30 days",
+                "Last 12 Months",
+                "All Time",
+                "Live",
+              ]}
+              label="Select option"
+              onChange={handleTimeChange}
+              className="md:w-full"
+            ></Select>
+          </div>
+        </div>
+        <LineGraph id={id} startDate={startDate} endDate={endDate} />
+        <div className="grid grid-cols-2 gap-5 mt-6 w-full lg:grid-cols-1">
+          <StatsArticle
+            id={id}
+            selectionItems={["Browsers", "Devices", "OS"]}
+            startDate={startDate}
+            endDate={endDate}
           />
-          <Website
-            key={2}
-            domain={'paulpravdic'}
-            active={true}
-            id={'2'}
-          />
-          <Website
-            key={3}
-            domain={'twitter'}
-            active={true}
-            id={'3'}
-          />
-          <Website
-            key={4}
-            domain={'facebook'}
-            active={true}
-            id={'4'}
+          <StatsArticle
+            id={id}
+            selectionItems={["Top Pages", "Entry Pages", "Exit Pages"]}
+            startDate={startDate}
+            endDate={endDate}
           />
         </div>
-        <Link to="/dashboard/new">
-          <Button className="mt-10">Add Website</Button>
-        </Link>
       </main>
-      <Footer />
-    </CookiesProvider>
-  );
-};
-
-interface WebsiteProps {
-  domain: string;
-  active: boolean;
-  id: string;
-}
-
-const Website: FC<WebsiteProps> = ({ domain, id }) => {
-  return (
-    <div className="w-96 border-2 border-secondary-100 rounded-lg flex flex-col justify-between mt-5 min-h-[25vh] relative p-4">
-      <p className="text-primary text-2xl text-center">{domain}</p>
-      <div className="flex-1 flex items-center justify-center">
-        <p className="text-secondary-100 text-2xl text-center">
-          <span>iamfromazerbaijan.com</span>
-        </p>
-      </div>
-      <Link
-        to={`/dashboard/${id}`}
-        className="absolute bottom-2 right-2"
-      >
-        <Button>View</Button>
-      </Link>
-    </div>
+    </>
   );
 };
 

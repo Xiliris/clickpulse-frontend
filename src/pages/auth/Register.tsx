@@ -10,9 +10,9 @@ import Header from '../../components/header';
 
 import axiosInstance from '../../modules/axiosInstance';
 
-import validatePassword from '../../utils/validatePassword';
-import validateUsername from '../../utils/validateUsername';
-import validateEmail from '../../utils/validateEmail';
+import validatePassword from '../../utils/form/validatePassword';
+import validateUsername from '../../utils/form/validateUsername';
+import validateEmail from '../../utils/form/validateEmail';
 
 export default function Register() {
   const navigate = useNavigate();

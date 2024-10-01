@@ -37,28 +37,32 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
     };
   }, []);
 
+  const getTruncatedUsername = (username: string) => {
+    return username.length > 12
+      ? `${username.slice(0, 12)}...`
+      : username;
+  };
+
   return (
     <div className="relative" ref={profileMenuRef}>
       <div
         onClick={toggleProfileMenu}
-        className="flex items-center space-x-1 hover:text-emphasis text-primary md:text-lg text-lg cursor-pointer"
+        className="flex items-center space-x-2 hover:text-emphasis text-primary md:text-lg text-lg cursor-pointer"
       >
-        <i className="fa-solid fa-user text-secondary-100 text-md mr-2"></i>
-        {user.username}
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className={`transition-transform ${
+        {getTruncatedUsername(user.username)}
+        <i
+          className={`fa-solid fa-chevron-down transition-transform ${
             isProfileMenuOpen ? 'rotate-180' : 'rotate-0'
           } ml-1 cursor-pointer`}
         />
       </div>
       {isProfileMenuOpen && (
-        <div className="absolute top-full w-56 right-0 bg-gray-800 text-primary rounded-lg shadow-lg flex flex-col">
-          <ul className="p-4 text-lg flex flex-col gap-2 border-b-[1px]">
+        <div className="absolute translate-y-5 top-full w-40 right-0 bg-default-300 text-primary rounded-lg shadow-lg flex flex-col">
+          <ul className="text-lg flex flex-col">
             <li>
               <Link
                 to="/dashboard"
-                className="flex justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 rounded-none hover:text-emphasis"
+                className="flex justify-start items-center py-4 px-4 w-full text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 rounded-none hover:text-emphasis"
               >
                 Dashboard
               </Link>
@@ -66,7 +70,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
             <li>
               <Link
                 to="/logout"
-                className="flex justify-center items-center py-4 w-3/4 mx-auto text-primary text-lg cursor-pointer rounded-none hover:text-emphasis"
+                className="flex justify-start items-center py-4 px-4 w-full text-primary text-lg cursor-pointer rounded-none hover:text-emphasis"
               >
                 Logout
               </Link>

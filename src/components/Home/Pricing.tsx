@@ -1,8 +1,9 @@
 import Button from '../form/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { ReactNode, FC } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import Title from './Title';
+
 
 interface itemProp {
   index: number;
@@ -19,14 +20,14 @@ const itemVariant = {
     transition: {
       delay: index * 0.1,
       duration: 0.5,
-      type: 'tween',
+      type: "tween",
     },
   }),
 };
 
 export default function Hero() {
   return (
-    <section className="bg-default-100 py-32 relative">
+    <section id="pricing" className="bg-default-100 py-32 relative">
       <div className="custom-shape-divider-top-1723244705 absolute top-0 left-0">
         <svg
           data-name="Layer 1"
@@ -40,10 +41,8 @@ export default function Hero() {
           ></path>
         </svg>
       </div>
-      <div className="mx-auto text-center h-min-screen flex flex-col justify-center w-[70vw] md:w-[90vw] xl:w-[70vw]">
-        <h2 className="relative flex flex-col text-4xl font-bold text-emphasis py-2 px-4 mb-12 pb-3 border-b-[0.5px] border-emphasis">
-          Our Pricing Plans
-        </h2>
+      <div className="mx-auto text-center h-min-screen flex flex-col justify-center w-[70vw] md:w-[90vw]">
+        <Title>Our Pricing Plans</Title>
         <div className="flex flex-wrap gap-8 justify-between xl:justify-center">
           {/* Basic */}
 
@@ -107,10 +106,14 @@ const Card: FC<CardInterface> = ({
       </div>
       <hr className="border-[#4C5366]" />
       <ul className="flex flex-col gap-2 flex-grow">{children}</ul>
-      <Button className="flex justify-between w-full">
-        Upgrade now
-        <FontAwesomeIcon icon={faArrowRight} />
-      </Button>
+      <div>
+        <Link to={`/payment?plan=${plan}&price=${price}`}>
+          <Button className="flex justify-between w-full">
+            Upgrade now
+            <i className="fa-solid fa-arrow-right cursor-pointer"></i>
+          </Button>
+        </Link>
+      </div>
     </motion.div>
   );
 };

@@ -3,10 +3,16 @@ import React, { useState, useRef, useEffect } from "react";
 interface SelectProps {
   options: string[];
   label: string;
-  onChange: (selected: string) => void; // onChange callback prop
+  onChange: (selected: string) => void;
+  className?: string;
 }
 
-const Select: React.FC<SelectProps> = ({ options, onChange }) => {
+const Select: React.FC<SelectProps> = ({
+  options,
+  label,
+  onChange,
+  className,
+}) => {
   const [selected, setSelected] = useState<string>(options[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -14,7 +20,7 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
   const handleSelect = (option: string) => {
     setSelected(option);
     setIsOpen(false);
-    onChange(option); // Trigger the onChange callback when the selection changes
+    onChange(option);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -34,10 +40,11 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
   }, []);
 
   return (
-    <div ref={selectRef} className="relative inline-block w-64">
+    <div className={`relative inline-block w-64 ${className}`} ref={selectRef}>
       <button
-        className="w-full bg-default-100 border border-default-100 rounded-lg shadow-md p-2 text-left focus:outline-none text-primary"
+        className="w-full bg-default-100 border border-default-100 rounded-lg p-2 text-left focus:outline-none text-primary "
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
       >
         {selected}
         <span className="absolute right-2 top-2 transform transition-transform duration-200">
@@ -49,19 +56,24 @@ const Select: React.FC<SelectProps> = ({ options, onChange }) => {
         </span>
       </button>
 
-      {isOpen && (
-        <ul className="absolute z-10 mt-1 w-full bg-default-100 border border-default-100 rounded-lg shadow-lg text-primary">
-          {options.map((option, index) => (
-            <li
-              key={index}
-              className="p-2 hover:bg-default-300 cursor-pointer transition-all duration-200"
-              onClick={() => handleSelect(option)}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul
+        className={`absolute z-10 mt-1 w-full bg-default-100 rounded-lg text-primary overflow-hidden transition-max-height ease-in-out duration-300 ${
+          isOpen ? "max-h-64" : "max-h-0"
+        }`}
+        style={{
+          maxHeight: isOpen ? "256px" : "0px", // Dropdown expands up to 256px
+        }}
+      >
+        {options.map((option, index) => (
+          <li
+            key={index}
+            className="p-2 hover:bg-default-300 cursor-pointer transition-all duration-200"
+            onClick={() => handleSelect(option)}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

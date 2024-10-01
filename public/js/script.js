@@ -25,6 +25,7 @@ const data = {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log("Running script");
   const locationInfo = await fetchLocationInfo();
   const { protocol, hostname } = window.location;
   const port = window.location.port ? `:${window.location.port}` : "";
@@ -78,7 +79,7 @@ window.addEventListener("beforeunload", () => {
 
   data.exit_page = window.location.pathname;
 
-  fetch("http://localhost:8080/dashboard/analytics", {
+  fetch("http://localhost:8080/dashboard/collect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

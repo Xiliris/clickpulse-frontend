@@ -15,11 +15,11 @@ export default function Maintenance() {
         <p className="text-xl text-secondary-100 mb-4">
           If you need to contact us, please reach out at
           <a
-            href="mailto:support@example.com"
+            href="mailto:clickpulse.team@gmail.com"
             className="text-emphasis cursor-pointer"
           >
             {' '}
-            clickpulse@support.com{' '}
+            clickpulse.team@gmail.com{' '}
           </a>
         </p>
       </div>
