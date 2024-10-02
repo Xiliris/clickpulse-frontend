@@ -75,7 +75,7 @@ const OverlayArticle: FC<OverlayArticleProps> = ({
                 {Object.entries(item).map(([key, value]: any) => (
                   <p
                     key={key}
-                    className="text-primary w-full text-right first:text-left"
+                    className="text-primary w-full text-right first:text-left "
                   >
                     {formatOverlayContent(key, value, item.visits)}
                   </p>
