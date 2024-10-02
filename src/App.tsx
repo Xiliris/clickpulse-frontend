@@ -21,6 +21,7 @@ import TermsOfService from './pages/Terms';
 import AboutUs from './pages/Aboutus';
 
 import PaymentPage from './pages/Payment';
+import PricingMore from './pages/Pricingmore';
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/pricingmore" element={<PricingMore />} />
         <Route
           path="/payment"
           element={
