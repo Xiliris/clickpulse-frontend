@@ -4,9 +4,15 @@ interface SelectProps {
   options: string[];
   label: string;
   onChange: (selected: string) => void;
+  className?: string;
 }
 
-const Select: React.FC<SelectProps> = ({ options, label, onChange }) => {
+const Select: React.FC<SelectProps> = ({
+  options,
+  label,
+  onChange,
+  className,
+}) => {
   const [selected, setSelected] = useState<string>(options[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -34,9 +40,9 @@ const Select: React.FC<SelectProps> = ({ options, label, onChange }) => {
   }, []);
 
   return (
-    <div className="relative inline-block w-64" ref={selectRef}>
+    <div className={`relative inline-block w-64 ${className}`} ref={selectRef}>
       <button
-        className="w-full bg-default-100 border border-default-100 rounded-lg p-2 text-left focus:outline-none text-primary"
+        className="w-full bg-default-100 border border-default-100 rounded-lg p-2 text-left focus:outline-none text-primary "
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >

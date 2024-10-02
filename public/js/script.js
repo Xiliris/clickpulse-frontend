@@ -22,9 +22,23 @@ const data = {
   session_start: null,
   session_end: null,
   bounce_rate: false,
+
+  elements_clicked: [],
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  document.addEventListener("click", (event) => {
+    const clickedElement = event.target;
+
+    let elementInfo = getElementInfo(clickedElement);
+
+    if (elementInfo) {
+      updateData(data.elements_clicked, elementInfo);
+    }
+
+    console.log(data.elements_clicked);
+  });
+
   const locationInfo = await fetchLocationInfo();
   const { protocol, hostname } = window.location;
   const port = window.location.port ? `:${window.location.port}` : "";
@@ -78,7 +92,7 @@ window.addEventListener("beforeunload", () => {
 
   data.exit_page = window.location.pathname;
 
-  fetch("http://localhost:8080/dashboard/analytics", {
+  fetch("http://localhost:8080/dashboard/collect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -92,5 +106,25 @@ const logPath = () => {
 
   if (!data.visited_pages.includes(path)) {
     data.visited_pages.push(path);
+  }
+};
+
+const getElementInfo = (element) => {
+  if (!element) return null;
+
+  const tagName = element.tagName; //
+  const content = element.textContent.trim();
+  const id = element.id || null;
+  return { tag: tagName, id, content };
+};
+
+const updateData = (array, elementInfo) => {
+  const existing = array.find(
+    (item) => item.content === elementInfo.content && item.id === elementInfo.id
+  );
+  if (existing) {
+    existing.clicks += 1;
+  } else {
+    array.push({ ...elementInfo, clicks: 1 });
   }
 };

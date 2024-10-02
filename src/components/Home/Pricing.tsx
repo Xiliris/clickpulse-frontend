@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Title from './Title';
 
+
 interface itemProp {
   index: number;
 }
@@ -19,7 +20,7 @@ const itemVariant = {
     transition: {
       delay: index * 0.1,
       duration: 0.5,
-      type: 'tween',
+      type: "tween",
     },
   }),
 };
