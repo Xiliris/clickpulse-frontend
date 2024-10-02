@@ -23,6 +23,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/Terms";
 import AboutUs from "./pages/Aboutus";
 import PaymentPage from "./pages/Payment";
+import PricingMore from './pages/Pricingmore';
 
 const AppLayout = () => (
   <>
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+      },
+      {
+        path: "/pricingmore",
+        element: <PricingMore />
       },
       {
         path: "/payment",

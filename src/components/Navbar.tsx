@@ -9,6 +9,8 @@ import Community from './navbar/Community';
 import DesktopProfile from './navbar/DesktopProfile';
 import Button from './form/Button';
 import Logo from '../assets/logo.png';
+import { HashLink } from 'react-router-hash-link';
+import PricingDropdown from './navbar/Pricing';
 
 interface navbarProps {
   width?: number;
@@ -45,77 +47,73 @@ const Navbar: FC<navbarProps> = ({ width }) => {
   const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
 
   return (
-    <>
-      <nav
-        className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-300 ease-in-out ${
-          scrollingUp ? 'translate-y-0' : '-translate-y-full'
-        } z-50`}
+    <nav
+      className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-300 ease-in-out ${
+        scrollingUp ? 'translate-y-0' : '-translate-y-full'
+      } z-50`}
+    >
+      <motion.div
+        variants={variants}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ amount: 0.5, once: true }}
+        className={`relative flex justify-between items-center ${containerWidth} md:w-[90vw] mx-auto lg:px-0`}
       >
-        <motion.div
-          variants={variants}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ amount: 0.5, once: true }}
-          className={`relative flex justify-between items-center ${containerWidth} md:w-[90vw] mx-auto lg:px-0`}
+        {/* Logo and Site Title */}
+        <Link
+          to="/"
+          className="flex items-center space-x-2 w-[250px]"
         >
-          {/* Logo and Site Title */}
-          <Link to="/" className="flex items-center space-x-2">
-            <img src={Logo} alt="Logo" className="w-12 sm:w-13" />
-            <span className="text-3xl font-bold text-primary cursor-pointer">
-              Clickpulse
-            </span>
-          </Link>
+          <img src={Logo} alt="Logo" className="w-12 md:w-9" />
+          <span className="text-3xl md:text-2xl font-bold text-primary cursor-pointer">
+            Clickpulse
+          </span>
+        </Link>
 
-          {/* Desktop Navbar Links */}
-          <div className="xl:hidden flex items-center gap-5">
-            <WhyClickpulse />
-            <Community />
-            <a
-              href="#pricing"
-              className="hover:text-emphasis text-primary text-lg cursor-pointer"
-            >
-              Pricing
-            </a>
-          </div>
+        {/* Centered Desktop Navbar Links */}
+        <div className="xl:hidden flex items-center gap-5 mx-auto">
+          <WhyClickpulse />
+          <Community />
+          <PricingDropdown />
+        </div>
 
-          {/* Desktop Profile / Login */}
-          <div className="xl:hidden flex items-center space-x-6">
-            {user && user.username ? (
-              <DesktopProfile user={user} />
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="hover:text-emphasis text-primary md:text-lg text-xl cursor-pointer"
-                >
-                  Log In
-                </Link>
-                <Link to="/signup">
-                  <Button>Sign In</Button>
-                </Link>
-              </>
-            )}
-          </div>
+        {/* Desktop Profile / Login */}
+        <div className="xl:hidden flex items-center space-x-6 w-[250px] justify-end">
+          {user && user.username ? (
+            <DesktopProfile user={user} />
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="hover:text-emphasis text-primary md:text-lg text-xl cursor-pointer"
+              >
+                Log In
+              </Link>
+              <Link to="/signup">
+                <Button>Sign In</Button>
+              </Link>
+            </>
+          )}
+        </div>
 
-          {/* Mobile Profile / Menu */}
-          <Profile
-            user={user}
-            isProfileMenuOpen={isProfileMenuOpen}
-            isLogged={isLogged}
-            toggleProfileMenu={toggleProfileMenu}
-            toggleLoggedMenu={toggleLoggedMenu}
-            toggleMobileMenu={toggleMobileMenu}
-            isMobileMenuOpen={isMobileMenuOpen}
-          />
-        </motion.div>
-
-        {/* Mobile Menu */}
-        <MenuNavbar
-          isMobileMenuOpen={isMobileMenuOpen}
+        {/* Mobile Profile / Menu */}
+        <Profile
+          user={user}
+          isProfileMenuOpen={isProfileMenuOpen}
+          isLogged={isLogged}
+          toggleProfileMenu={toggleProfileMenu}
+          toggleLoggedMenu={toggleLoggedMenu}
           toggleMobileMenu={toggleMobileMenu}
+          isMobileMenuOpen={isMobileMenuOpen}
         />
-      </nav>
-    </>
+      </motion.div>
+
+      {/* Mobile Menu */}
+      <MenuNavbar
+        isMobileMenuOpen={isMobileMenuOpen}
+        toggleMobileMenu={toggleMobileMenu}
+      />
+    </nav>
   );
 };
 

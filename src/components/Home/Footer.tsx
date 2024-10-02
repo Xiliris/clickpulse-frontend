@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useCallback } from 'react';
+import { useCallback, FC } from 'react';
 import Logo from '../../assets/logo.png';
 import { motion } from 'framer-motion';
 import {
@@ -8,7 +8,11 @@ import {
   upperItemVariant,
 } from '../../animations/Animations';
 
-export default function Footer() {
+interface footerProps {
+  width?: number;
+}
+
+const Footer: FC<footerProps> = ({ width }) => {
   const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
@@ -16,9 +20,11 @@ export default function Footer() {
     });
   }, []);
 
+  const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
+
   return (
     <footer className="bg-default-200 text-primary py-10">
-      <div className="max-w-[70vw] mx-auto px-4">
+      <div className={`${containerWidth} mx-auto px-4`}>
         <motion.div
           variants={upperItemVariant}
           initial="initial"
@@ -36,7 +42,7 @@ export default function Footer() {
               alt="Logo"
               className="md:w-[65px] w-12 cursor-pointer"
             />
-            <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:mt-1">
+            <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:ml-0 md:mt-2">
               Clickpulse
             </span>
           </div>
@@ -119,4 +125,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

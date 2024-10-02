@@ -45,8 +45,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <div className="flex flex-col items-center w-full h-full">
         <div className="w-[90vw] flex items-center justify-between mx-auto mt-5">
           <Link to="/" className="flex items-center space-x-2">
-            <img src={Logo} alt="Logo" className="w-12 sm:w-13" />
-            <span className="text-2xl xl:text-3xl font-bold text-primary cursor-pointer">
+            <img src={Logo} alt="Logo" className="w-12 md:w-9" />
+            <span className="text-2xl xl:text-2xl font-bold text-primary cursor-pointer">
               Clickpulse
             </span>
           </Link>

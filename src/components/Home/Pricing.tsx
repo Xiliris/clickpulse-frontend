@@ -68,6 +68,11 @@ export default function Hero() {
           </Card>
         </div>
       </div>
+      <div className="flex items-center justify-center textt-emphasis underline text-xl text-emphasis mt-[25px]">
+        <Link to="/pricingmore" className="cursor-pointer">
+          View more
+        </Link>
+      </div>
     </section>
   );
 }
