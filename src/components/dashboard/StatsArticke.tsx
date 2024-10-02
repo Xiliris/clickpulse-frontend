@@ -82,7 +82,7 @@ const StatsArticle: FC<StatsArticleProps> = ({
         <ul className="flex justify-end items-center text-right">
           <li className="text-secondary-100">Visits</li>
         </ul>
-        {userAgentStats.map((stat: any, index: number) => (
+        {userAgentStats.slice(0, 6).map((stat: any, index: number) => (
           <div
             key={index}
             className="flex justify-between items-center w-full border-b border-default-100 pb-1"
