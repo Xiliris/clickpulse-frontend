@@ -1,6 +1,9 @@
-import React, { ReactNode } from "react";
-import { motion } from "framer-motion";
-import { upperItemVariant, lineVariant } from "../../animations/Animations";
+import React, { ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import {
+  upperItemVariant,
+  lineVariant,
+} from '../../animations/Animations';
 
 interface TitleProps {
   children: ReactNode;
@@ -13,7 +16,7 @@ const Title: React.FC<TitleProps> = ({ children }) => {
         variants={upperItemVariant}
         custom={{ yHeight: 10 }}
         initial="initial"
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.5 }}
         whileInView="animate"
         className="text-4xl font-bold text-emphasis"
       >

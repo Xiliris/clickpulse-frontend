@@ -30,7 +30,7 @@ const Footer: FC<footerProps> = ({ width }) => {
           initial="initial"
           whileInView="animate"
           custom={{ yHeight: 40 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
           className="flex md:flex-col flex-row justify-between items-center mb-8"
         >
           <div
@@ -80,7 +80,7 @@ const Footer: FC<footerProps> = ({ width }) => {
             variants={lineVariant}
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.5 }}
             className="absolute h-full w-full bg-secondary-200"
           />
         </div>
@@ -89,7 +89,7 @@ const Footer: FC<footerProps> = ({ width }) => {
           variants={lowerItemVariant}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
           className="flex md:flex-col flex-row justify-between items-center text-center mt-8"
         >
           <p className="text-base md:mb-4 mb-0 text-secondary-100">

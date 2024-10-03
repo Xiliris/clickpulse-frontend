@@ -23,9 +23,16 @@ const CommunityDropdown = ({
       }
     };
 
+    const handleScroll = () => {
+      setIsCommunityClicked(false);
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

@@ -1,10 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/form/Button';
 import Navbar from '../components/Navbar';
 import Footer from '../components/home/Footer';
 import { motion } from 'framer-motion';
 import { PlanComparisonTable } from './PricingmoreTable';
+import { useLocation } from 'react-router-dom';
 
 interface CardInterface {
   plan: string;
@@ -29,9 +30,9 @@ const Card: FC<CardInterface> = ({
   return (
     <motion.div
       className="relative flex flex-col p-6 bg-default-100 rounded-lg shadow-md flex-grow"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className="absolute top-2 left-2 bg-emphasis text-black text-xs font-bold px-2 py-1 rounded">
@@ -66,9 +67,26 @@ const Card: FC<CardInterface> = ({
 };
 
 const PricingMore = () => {
-  const [billingCycle, setBillingCycle] = useState<
-    'monthly' | 'yearly'
-  >('monthly');
+  const location = useLocation();
+
+  const [billingCycle, setBillingCycle] = useState<any>(
+    window.location.hash.replace('#', '') || 'monthly'
+  );
+
+  useEffect(() => {
+    if (window.location.hash != '#plans') {
+      window.location.hash = billingCycle;
+    }
+  }, [billingCycle]);
+
+  useEffect(() => {
+    console.log(window.location.hash);
+    if (window.location.hash === '#plans') {
+      setBillingCycle('monthly');
+    } else {
+      setBillingCycle(window.location.hash.replace('#', ''));
+    }
+  }, [location]);
 
   const monthlyPlans = [
     {
@@ -139,72 +157,78 @@ const PricingMore = () => {
   return (
     <section className="bg-default-200 min-h-screen">
       <Navbar width={90} />
-      <div className="mx-auto text-center pt-32">
-        <motion.h1
-          className="text-4xl font-bold text-emphasis mb-3"
-          initial={{ y: 50, opacity: 0 }}
+      <div className="min-h-screen">
+        <div className="mx-auto text-center pt-32">
+          <motion.h1
+            className="text-4xl font-bold text-emphasis mb-3"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            More About Our Plans
+          </motion.h1>
+          <motion.p
+            className="text-lg text-secondary-100 mb-12 w-[90vw] mx-auto"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Choose a plan that fits your needs. Here are more details
+            about our offerings.
+          </motion.p>
+        </div>
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          More About Our Plans
-        </motion.h1>
-        <motion.p
-          className="text-lg text-secondary-100 mb-12 w-[90vw] mx-auto"
+          <div className="flex justify-center mb-6">
+            <button
+              onClick={() => setBillingCycle('monthly')}
+              className={`w-32 px-6 py-2 rounded-md ${
+                billingCycle === 'monthly'
+                  ? 'bg-emphasis text-black'
+                  : 'bg-default-100 text-secondary-100'
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setBillingCycle('yearly')}
+              className={`w-32 px-6 py-2 rounded-md ${
+                billingCycle === 'yearly'
+                  ? 'bg-emphasis text-black'
+                  : 'bg-default-100 text-secondary-100'
+              }`}
+            >
+              Yearly
+            </button>
+          </div>
+        </motion.div>
+
+        <motion.div
+          key={billingCycle}
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          exit={{ y: 50, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-row justify-center gap-8 w-[90vw] mx-auto md:w-[90vw] lg:flex-col mt-3"
         >
-          Choose a plan that fits your needs. Here are more details
-          about our offerings.
-        </motion.p>
+          {(billingCycle === 'monthly'
+            ? monthlyPlans
+            : yearlyPlans
+          ).map((planDetails, index) => (
+            <Card
+              key={index}
+              plan={planDetails.plan}
+              price={planDetails.price}
+              features={planDetails.features}
+              billingCycle={billingCycle}
+              index={index}
+            />
+          ))}
+        </motion.div>
       </div>
-
-      <div className="flex justify-center mb-6">
-        <button
-          onClick={() => setBillingCycle('monthly')}
-          className={`w-32 px-6 py-2 rounded-md ${
-            billingCycle === 'monthly'
-              ? 'bg-emphasis text-black'
-              : 'bg-default-100 text-secondary-100'
-          }`}
-        >
-          Monthly
-        </button>
-        <button
-          onClick={() => setBillingCycle('yearly')}
-          className={`w-32 px-6 py-2 rounded-md ${
-            billingCycle === 'yearly'
-              ? 'bg-emphasis text-black'
-              : 'bg-default-100 text-secondary-100'
-          }`}
-        >
-          Yearly
-        </button>
-      </div>
-
-      <motion.div
-        key={billingCycle}
-        initial={{ x: billingCycle === 'yearly' ? -100 : 100 }}
-        animate={{ x: 0 }}
-        exit={{ x: billingCycle === 'yearly' ? 100 : -100 }}
-        transition={{ duration: 0.5 }}
-        className="flex flex-row justify-center gap-8 w-[90vw] mx-auto md:w-[90vw] lg:flex-col mt-3"
-      >
-        {(billingCycle === 'monthly'
-          ? monthlyPlans
-          : yearlyPlans
-        ).map((planDetails, index) => (
-          <Card
-            key={index}
-            plan={planDetails.plan}
-            price={planDetails.price}
-            features={planDetails.features}
-            billingCycle={billingCycle}
-            index={index}
-          />
-        ))}
-      </motion.div>
-
       <PlanComparisonTable />
       <Footer width={90} />
     </section>

@@ -52,13 +52,19 @@ const Auth: FC = () => {
       <Header title="Login" />
       <main className="min-h-screen flex items-center justify-center bg-default-200">
         <div className="max-w-lg w-[90vw] space-y-10">
+          <Link
+            to="/"
+            className="text-emphasis cursor-pointer block text-xl"
+          >
+            <i className="fa-solid fa-arrow-left cursor-pointer"></i>
+          </Link>
           <div className="text-center">
             <img
-              className="mx-auto h-24 w-auto"
+              className="mx-auto h-16 w-auto"
               src={Logo}
               alt="Logo"
             />
-            <h2 className="mt-8 text-center text-4xl font-extrabold text-primary">
+            <h2 className="mt-8 text-center text-2xl font-extrabold text-primary">
               Log in to your account
             </h2>
           </div>
