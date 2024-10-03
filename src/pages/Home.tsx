@@ -27,19 +27,39 @@ const variants = {
   },
 };
 
+const variants2 = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "tween",
+      ease: "easeInOut",
+    },
+  },
+};
+
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
       <Navbar />
       <main className="relative min-w-screen min-h-screen">
         <motion.section
-          variants={variants}
+          variants={variants2}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, amount: 0.5 }}
           className="flex flex-col justify-center items-start h-screen m-auto md:w-[90vw] w-[70vw]"
         >
-          <div className="md:w-full w-[60%]">
+          <motion.div
+            variants={variants}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.5 }}
+            className="md:w-full w-[60%]"
+          >
             <h1 className="text-primary lg:text-5xl md:text-4xl text-6xl leading-tight">
               Harness the <span className="text-emphasis">Pulse</span> of User
               Engagement
@@ -52,7 +72,7 @@ export default function Home() {
             <Link to="/login">
               <Button className="mt-5">Get Started</Button>
             </Link>
-          </div>
+          </motion.div>
 
           <img
             src={Globe}

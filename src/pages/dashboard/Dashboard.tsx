@@ -1,12 +1,16 @@
 import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import Navbar from "../../components/Navbar";
 import Select from "../../components/form/Select";
 import StatsArticle from "../../components/dashboard/StatsArticke";
 import LineGraph from "../../components/dashboard/LineGraph";
+import WorldMap from "../../components/dashboard/WorldMap";
+import { fadeLeft, fadeRight } from "../../animations/Animations";
 
 import { calculateDate } from "../../utils/dashboard/functions";
+import Footer from "../../components/home/Footer";
 
 const Dashboard: FC = () => {
   const { id } = useParams();
@@ -53,21 +57,34 @@ const Dashboard: FC = () => {
       <Navbar width={90} />
       <main className="flex flex-col justify-center items-center mt-32 mb-16 w-[90vw] mx-auto">
         <div className="flex justify-between items-center w-full mb-8 md:flex-col md:mb-5 md:gap-5">
-          <h2 className="text-emphasis text-xl">https://adnanskopljak.com</h2>
-          <div className="flex justify-center items-center gap-4 md:w-full">
+          <motion.h2
+            variants={fadeLeft}
+            initial="initial"
+            viewport={{ once: true }}
+            whileInView="animate"
+            className="text-emphasis text-xl"
+          >
+            https://adnanskopljak.com
+          </motion.h2>
+          <motion.div
+            variants={fadeRight}
+            initial="initial"
+            viewport={{ once: true }}
+            whileInView="animate"
+            className="flex justify-center items-center gap-4 md:w-full"
+          >
             <Select
               options={[
                 "Last 7 Days",
                 "Last 30 days",
                 "Last 12 Months",
                 "All Time",
-                "Live",
               ]}
               label="Select option"
               onChange={handleTimeChange}
               className="md:w-full"
             ></Select>
-          </div>
+          </motion.div>
         </div>
         <LineGraph id={id} startDate={startDate} endDate={endDate} />
         <div className="grid grid-cols-2 gap-5 mt-6 w-full lg:grid-cols-1">
@@ -76,15 +93,57 @@ const Dashboard: FC = () => {
             selectionItems={["Browsers", "Devices", "OS"]}
             startDate={startDate}
             endDate={endDate}
+            listType={"visits"}
+            icon={true}
           />
           <StatsArticle
             id={id}
             selectionItems={["Top Pages", "Entry Pages", "Exit Pages"]}
             startDate={startDate}
             endDate={endDate}
+            listType={"visits"}
+            icon={true}
+          />
+          <StatsArticle
+            id={id}
+            selectionItems={["Button Clicks", "Anchor Clicks"]}
+            startDate={startDate}
+            endDate={endDate}
+            listType={"clicks"}
+            icon={false}
+          />
+          <StatsArticle
+            id={id}
+            selectionItems={["Visitor Source"]}
+            startDate={startDate}
+            endDate={endDate}
+            listType={"visits"}
+            icon={true}
           />
         </div>
+        <WorldMap id={id} startDate={startDate} endDate={endDate} />
       </main>
+      <div className=" w-full md:h-56 h-40 pt-6 pb-6 text-center bg-default-100">
+        <motion.div
+          className="text-2xl font-bold text-primary mb-9 mx-auto w-[90vw]"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <h2 className="mb-8">
+            If you have any features, suggestions or feedback, please reach out
+            to us at
+          </h2>
+          <a
+            href="mailto:clickpulse.team@gmail.com"
+            className="text-emphasis cursor-pointer"
+          >
+            clickpulse.team@gmail.com
+          </a>
+        </motion.div>
+      </div>
+      <Footer width={90} />
     </>
   );
 };

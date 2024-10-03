@@ -18,10 +18,6 @@
   font-family: "IBM Plex Mono", monospace;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 a {
   text-decoration: none;
 }
@@ -146,4 +142,14 @@ input:-webkit-autofill {
 
 .custom-shape-divider-top-1723244705 .shape-fill {
   fill: #15191e;
+}
+
+.google-visualization-tooltip {
+  background: transparent !important; /* Make background transparent */
+  box-shadow: none !important; /* Remove default shadow */
+  border: none !important; /* Remove default border */
+}
+
+.google-visualization-tooltip li:first-child {
+  display: none; /* Hides the first <li> child in the tooltip */
 }
