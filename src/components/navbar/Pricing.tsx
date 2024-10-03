@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { HashLink } from 'react-router-hash-link';
+import { useState, useRef, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { HashLink } from "react-router-hash-link";
 
 const PricingDropdown = ({
-  className = '',
-  itemClassName = '',
+  className = "",
+  itemClassName = "",
   isFullWidth = false,
 }) => {
   const [isPricingClicked, setIsPricingClicked] = useState(false);
@@ -29,12 +29,12 @@ const PricingDropdown = ({
       setIsPricingClicked(false);
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('scroll', handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -44,19 +44,21 @@ const PricingDropdown = ({
         onClick={handlePricingClick}
         className="w-full flex items-center space-x-1 hover:text-emphasis text-primary text-xl cursor-pointer"
       >
-        <span className="cursor-pointer xl:text-2xl">Pricing</span>
+        <span className="cursor-pointer xl:text-2xl prevent-select">
+          Pricing
+        </span>
         <FontAwesomeIcon
           icon={faChevronDown}
           className={`transition-transform ${
-            isPricingClicked ? 'rotate-180' : 'rotate-0'
+            isPricingClicked ? "rotate-180" : "rotate-0"
           } cursor-pointer`}
         />
       </div>
       <div
-        className={`transition-all ease-in-out duration-300 overflow-hidden ${
-          isPricingClicked ? 'max-h-60' : 'max-h-0'
+        className={`transition-all ease-in-out duration-200 overflow-hidden ${
+          isPricingClicked ? "max-h-60" : "max-h-0"
         } ${
-          isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
+          isFullWidth ? "w-full" : "w-40 absolute translate-y-5"
         } bg-default-300 text-primary rounded-lg`}
       >
         <ul className={`text-sm flex flex-col ${itemClassName}`}>

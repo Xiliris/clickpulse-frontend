@@ -48,7 +48,7 @@ const Navbar: FC<navbarProps> = ({ width }) => {
 
   return (
     <nav
-      className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-300 ease-in-out ${
+      className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-200 ease-in-out ${
         scrollingUp ? "translate-y-0" : "-translate-y-full"
       } z-50`}
     >
