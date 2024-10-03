@@ -23,7 +23,8 @@ const data = {
   session_end: null,
   bounce_rate: false,
 
-  elements_clicked: [],
+  buttons: [],
+  anchors: [],
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
