@@ -89,12 +89,15 @@ const OverlayArticle: FC<OverlayArticleProps> = ({
 };
 
 function formatOverlayContent(type: string, value: number, visits: number) {
+  console.log(type);
   if (type === "bounce_rate") {
     return ((value / visits) * 100).toFixed(1) + "%";
   } else if (type === "time_spent") {
     return formatDuration(Math.round(value / visits));
   } else if (type === "visits") {
     return formatNumber(visits);
+  } else if (type === "clicks") {
+    return formatNumber(value);
   } else return value;
 }
 

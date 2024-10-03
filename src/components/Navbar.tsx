@@ -1,16 +1,16 @@
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import Profile from './navbar/Profile';
-import useProfileMenu from './navbar/Hooks';
-import MenuNavbar from './navbar/MenuNavbar';
-import WhyClickpulse from './navbar/WhyClickpulse';
-import Community from './navbar/Community';
-import DesktopProfile from './navbar/DesktopProfile';
-import Button from './form/Button';
-import Logo from '../assets/logo.png';
-import { HashLink } from 'react-router-hash-link';
-import PricingDropdown from './navbar/Pricing';
+import { FC } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import Profile from "./navbar/Profile";
+import useProfileMenu from "./navbar/Hooks";
+import MenuNavbar from "./navbar/MenuNavbar";
+import WhyClickpulse from "./navbar/WhyClickpulse";
+import Community from "./navbar/Community";
+import DesktopProfile from "./navbar/DesktopProfile";
+import Button from "./form/Button";
+import Logo from "../assets/logo.png";
+import { HashLink } from "react-router-hash-link";
+import PricingDropdown from "./navbar/Pricing";
 
 interface navbarProps {
   width?: number;
@@ -26,8 +26,8 @@ const variants = {
     y: 0,
     transition: {
       duration: 0.7,
-      type: 'tween',
-      ease: 'easeInOut',
+      type: "tween",
+      ease: "easeInOut",
     },
   },
 };
@@ -44,12 +44,12 @@ const Navbar: FC<navbarProps> = ({ width }) => {
     toggleLoggedMenu,
   } = useProfileMenu();
 
-  const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
+  const containerWidth = width ? `w-[${width}vw]` : "w-[70vw]";
 
   return (
     <nav
       className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-300 ease-in-out ${
-        scrollingUp ? 'translate-y-0' : '-translate-y-full'
+        scrollingUp ? "translate-y-0" : "-translate-y-full"
       } z-50`}
     >
       <motion.div
@@ -60,10 +60,7 @@ const Navbar: FC<navbarProps> = ({ width }) => {
         className={`relative flex justify-between items-center ${containerWidth} md:w-[90vw] mx-auto lg:px-0`}
       >
         {/* Logo and Site Title */}
-        <Link
-          to="/"
-          className="flex items-center space-x-2 w-[250px]"
-        >
+        <Link to="/" className="flex items-center space-x-2 w-[250px]">
           <img src={Logo} alt="Logo" className="w-12 md:w-9" />
           <span className="text-3xl md:text-2xl font-bold text-primary cursor-pointer">
             Clickpulse

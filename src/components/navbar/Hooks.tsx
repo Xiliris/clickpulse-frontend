@@ -1,12 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-import { useCookies } from 'react-cookie';
-import axiosInstance from '../../modules/axiosInstance';
+import { useState, useEffect, useRef } from "react";
+import { useCookies } from "react-cookie";
+import { useScroll } from "framer-motion";
+import axiosInstance from "../../modules/axiosInstance";
 
 const useProfileMenu = () => {
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(["token"]);
+  const { scrollY } = useScroll();
   const [user, setUser] = useState<any>({});
   const [scrollingUp, setScrollingUp] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isWhyClicked, setIsWhyClicked] = useState(false);
   const [isCommunityClicked, setIsCommunityClicked] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -22,16 +23,23 @@ const useProfileMenu = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollingUp(currentScrollY < lastScrollY);
-      setLastScrollY(currentScrollY);
+    let oldValue = 0;
+    const unsubscribe = scrollY.onChange((currentScrollY) => {
+      let newValue = currentScrollY;
+
+      if (oldValue > newValue) {
+        setScrollingUp(true);
+      } else {
+        setScrollingUp(false);
+      }
+
+      oldValue = newValue;
+    });
+
+    return () => {
+      unsubscribe();
     };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [scrollY]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
@@ -55,12 +63,12 @@ const useProfileMenu = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, []);
 
@@ -80,7 +88,7 @@ const useProfileMenu = () => {
 
   async function getProfile() {
     try {
-      const res = await axiosInstance.post('/auth/me', {
+      const res = await axiosInstance.post("/auth/me", {
         token: cookies.token,
       });
       setUser(res.data);
