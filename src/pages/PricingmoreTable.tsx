@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export const PlanComparisonTable = () => {
   const [selectedPlan, setSelectedPlan] = useState<
-    'free' | 'basic' | 'standard' | 'premium'
-  >('free');
+    "free" | "basic" | "standard" | "premium"
+  >("free");
   const [isMobile, setIsMobile] = useState(false);
 
   const tableRowVariants = {
@@ -21,74 +21,74 @@ export const PlanComparisonTable = () => {
 
   const rows = [
     {
-      feature: 'Monthly Price',
-      free: 'Free for 14 days',
-      basic: '$7.99',
-      standard: '$14.99',
-      premium: '$39.99',
+      feature: "Monthly Price",
+      free: "Free for 14 days",
+      basic: "$7.99",
+      standard: "$14.99",
+      premium: "$39.99",
     },
     {
-      feature: 'Custom Dashboards',
-      free: '1 dashboard',
-      basic: '3 dashboards',
-      standard: '7 dashboards',
-      premium: 'Unlimited',
+      feature: "Custom Dashboards",
+      free: "1 dashboard",
+      basic: "3 dashboards",
+      standard: "7 dashboards",
+      premium: "Unlimited",
     },
     {
-      feature: 'Basic Analytics',
-      free: 'Yes',
-      basic: 'Yes',
-      standard: 'Yes',
-      premium: 'Yes',
+      feature: "Basic Analytics",
+      free: "Yes",
+      basic: "Yes",
+      standard: "Yes",
+      premium: "Yes",
     },
     {
-      feature: 'Advanced Analytics',
-      free: 'No',
-      basic: 'No',
-      standard: 'Yes',
-      premium: 'Yes',
+      feature: "Advanced Analytics",
+      free: "No",
+      basic: "No",
+      standard: "Yes",
+      premium: "Yes",
     },
     {
-      feature: 'Real-time Analytics',
-      free: 'No',
-      basic: 'No',
-      standard: 'No',
-      premium: 'Yes',
+      feature: "Real-time Analytics",
+      free: "No",
+      basic: "No",
+      standard: "No",
+      premium: "Yes",
     },
     {
-      feature: 'Team Members',
-      free: '1 user',
-      basic: '1 user',
-      standard: '3 users',
-      premium: '10 users',
+      feature: "Team Members",
+      free: "1 user",
+      basic: "1 user",
+      standard: "3 users",
+      premium: "10 users",
     },
     {
-      feature: 'Goal Tracking',
-      free: 'No',
-      basic: 'Yes',
-      standard: 'Yes',
-      premium: 'Yes',
+      feature: "Goal Tracking",
+      free: "No",
+      basic: "Yes",
+      standard: "Yes",
+      premium: "Yes",
     },
     {
-      feature: 'Event Tracking',
-      free: 'Limited to 3 events',
-      basic: '10 events',
-      standard: '30 events',
-      premium: 'Unlimited',
+      feature: "Event Tracking",
+      free: "Limited to 3 events",
+      basic: "10 events",
+      standard: "30 events",
+      premium: "Unlimited",
     },
     {
-      feature: 'User Journey Tracking',
-      free: 'No',
-      basic: 'No',
-      standard: 'Yes',
-      premium: 'Yes',
+      feature: "User Journey Tracking",
+      free: "No",
+      basic: "No",
+      standard: "Yes",
+      premium: "Yes",
     },
     {
-      feature: 'Priority Support',
-      free: 'No',
-      basic: 'No',
-      standard: 'Yes',
-      premium: 'Yes',
+      feature: "Priority Support",
+      free: "No",
+      basic: "No",
+      standard: "Yes",
+      premium: "Yes",
     },
   ];
 
@@ -97,19 +97,20 @@ export const PlanComparisonTable = () => {
       setIsMobile(window.innerWidth <= 768);
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <>
-      <div id="plans" className="mx-auto text-center w-full">
+      <div className="mx-auto text-center w-full mt-16">
         <motion.h2
-          className="text-4xl font-bold text-emphasis mt-8 mb-3 mx-auto w-[90vw]"
+          className="text-4xl font-bold text-emphasis pt-16 mx-auto w-[90vw]"
           initial={{ y: -50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, amount: 0.5 }}
+          id="plans"
         >
           Plan Comparison
         </motion.h2>
@@ -140,11 +141,7 @@ export const PlanComparisonTable = () => {
             value={selectedPlan}
             onChange={(e) =>
               setSelectedPlan(
-                e.target.value as
-                  | 'free'
-                  | 'basic'
-                  | 'standard'
-                  | 'premium'
+                e.target.value as "free" | "basic" | "standard" | "premium"
               )
             }
           >
@@ -156,30 +153,18 @@ export const PlanComparisonTable = () => {
         </div>
       )}
 
-      <div
-        id="pricing"
-        className="w-[90vw] mx-auto overflow-x-auto mb-16"
-      >
+      <div className="w-[90vw] mx-auto overflow-x-auto mb-16">
         <table className="table-auto w-full text-left text-secondary-100">
           <thead className="bg-default-100 text-primary">
             <tr>
               <th className="py-4 px-6 w-[150px]">Features</th>
-              {!isMobile && (
-                <th className="py-4 px-6 w-[120px]">Free</th>
-              )}
-              {!isMobile && (
-                <th className="py-4 px-6 w-[120px]">Basic</th>
-              )}
-              {!isMobile && (
-                <th className="py-4 px-6 w-[120px]">Standard</th>
-              )}
-              {!isMobile && (
-                <th className="py-4 px-6 w-[120px]">Premium</th>
-              )}
+              {!isMobile && <th className="py-4 px-6 w-[120px]">Free</th>}
+              {!isMobile && <th className="py-4 px-6 w-[120px]">Basic</th>}
+              {!isMobile && <th className="py-4 px-6 w-[120px]">Standard</th>}
+              {!isMobile && <th className="py-4 px-6 w-[120px]">Premium</th>}
               {isMobile && (
                 <th className="py-4 px-6 w-[120px]">
-                  {selectedPlan.charAt(0).toUpperCase() +
-                    selectedPlan.slice(1)}
+                  {selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)}
                 </th>
               )}
             </tr>
@@ -204,19 +189,13 @@ export const PlanComparisonTable = () => {
                   <td className="py-4 px-6 w-[120px]">{row.basic}</td>
                 )}
                 {!isMobile && (
-                  <td className="py-4 px-6 w-[120px]">
-                    {row.standard}
-                  </td>
+                  <td className="py-4 px-6 w-[120px]">{row.standard}</td>
                 )}
                 {!isMobile && (
-                  <td className="py-4 px-6 w-[120px]">
-                    {row.premium}
-                  </td>
+                  <td className="py-4 px-6 w-[120px]">{row.premium}</td>
                 )}
                 {isMobile && (
-                  <td className="py-4 px-6 w-[120px]">
-                    {row[selectedPlan]}
-                  </td>
+                  <td className="py-4 px-6 w-[120px]">{row[selectedPlan]}</td>
                 )}
               </motion.tr>
             ))}
@@ -224,7 +203,7 @@ export const PlanComparisonTable = () => {
         </table>
       </div>
 
-      <div className=" w-full md:h-56 h-40 pt-6 pb-6 text-center bg-default-100">
+      <div className=" w-full md:h-56 h-40 pt-6 pb-6 text-center bg-default-100 mt-32 mb-20">
         <motion.div
           className="text-2xl font-bold text-primary mb-9 mx-auto w-[90vw]"
           initial={{ y: 50, opacity: 0 }}
@@ -233,8 +212,7 @@ export const PlanComparisonTable = () => {
           viewport={{ once: true, amount: 0.5 }}
         >
           <h2 className="mb-8">
-            If you have any more questions about our plans you can
-            contact us at
+            If you have any more questions about our plans you can contact us at
           </h2>
           <a
             href="mailto:clickpulse.team@gmail.com"

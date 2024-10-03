@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const CommunityDropdown = ({
-  className = '',
-  itemClassName = '',
+  className = "",
+  itemClassName = "",
   isFullWidth = false,
 }) => {
   const [isCommunityClicked, setIsCommunityClicked] = useState(false);
@@ -27,36 +27,35 @@ const CommunityDropdown = ({
       setIsCommunityClicked(false);
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('scroll', handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <div
-      className={`relative ${className}`}
-      ref={communityDropdownRef}
-    >
+    <div className={`relative ${className}`} ref={communityDropdownRef}>
       <div
         onClick={handleCommunityClick}
         className="w-full flex items-center lg:justify-between space-x-1 hover:text-emphasis text-primary text-xl md:text-xl cursor-pointer"
       >
-        <span className="cursor-pointer xl:text-2xl">Community</span>
+        <span className="cursor-pointer xl:text-2xl prevent-select">
+          Community
+        </span>
         <i
           className={`fa-solid fa-chevron-down transition-transform ${
-            isCommunityClicked ? 'rotate-180' : 'rotate-0'
+            isCommunityClicked ? "rotate-180" : "rotate-0"
           } cursor-pointer ml-auto md:text-2xl`}
         />
       </div>
       <div
-        className={`transition-all ease-in-out duration-300 overflow-hidden ${
-          isCommunityClicked ? 'max-h-60' : 'max-h-0'
+        className={`transition-all ease-in-out duration-200 overflow-hidden ${
+          isCommunityClicked ? "max-h-60" : "max-h-0"
         } ${
-          isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
+          isFullWidth ? "w-full" : "w-40 absolute translate-y-5"
         }  bg-default-300 text-primary rounded-lg`}
       >
         <ul className={` text-sm flex flex-col ${itemClassName}`}>
