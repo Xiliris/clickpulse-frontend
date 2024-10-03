@@ -103,12 +103,13 @@ export const PlanComparisonTable = () => {
 
   return (
     <>
-      <div className="mx-auto text-center w-full">
+      <div id="plans" className="mx-auto text-center w-full">
         <motion.h2
-          className="text-4xl font-bold text-emphasis mt-16 mb-3 mx-auto w-[90vw]"
+          className="text-4xl font-bold text-emphasis mt-8 mb-3 mx-auto w-[90vw]"
           initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.5 }}
         >
           Plan Comparison
         </motion.h2>
@@ -116,8 +117,9 @@ export const PlanComparisonTable = () => {
         <motion.p
           className="text-lg text-secondary-100 mb-8 mx-auto w-[90vw]"
           initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true, amount: 0.5 }}
         >
           Compare our plans and choose the one that fits your needs.
         </motion.p>
@@ -154,7 +156,10 @@ export const PlanComparisonTable = () => {
         </div>
       )}
 
-      <div className="w-[90vw] mx-auto overflow-x-auto mb-16">
+      <div
+        id="pricing"
+        className="w-[90vw] mx-auto overflow-x-auto mb-16"
+      >
         <table className="table-auto w-full text-left text-secondary-100">
           <thead className="bg-default-100 text-primary">
             <tr>
@@ -185,8 +190,10 @@ export const PlanComparisonTable = () => {
                 key={index}
                 custom={index}
                 initial="hidden"
-                animate="visible"
+                whileInView="visible"
                 variants={tableRowVariants}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.5 }}
                 className="border-t border-secondary-200"
               >
                 <td className="py-4 px-6 w-[150px]">{row.feature}</td>
@@ -217,27 +224,25 @@ export const PlanComparisonTable = () => {
         </table>
       </div>
 
-      <div className="pt-6 pb-6 text-center bg-default-100 text-primary md:h-56 h-40 w-full">
-        <motion.h2
-          className="text-4xl font-bold mb-3 w-[90vw] mx-auto"
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-2xl mb-10">
-            If you got more questions about our plans you can contact
-            us
-          </h2>
-        </motion.h2>
-        <motion.a
-          href="mailto:clickpulse.team@gmail.com"
-          className="text-emphasis text-xl cursor-pointer"
+      <div className=" w-full md:h-56 h-40 pt-6 pb-6 text-center bg-default-100">
+        <motion.div
+          className="text-2xl font-bold text-primary mb-9 mx-auto w-[90vw]"
           initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.5 }}
         >
-          clickpulse.team@gmail.com
-        </motion.a>
+          <h2 className="mb-8">
+            If you have any more questions about our plans you can
+            contact us at
+          </h2>
+          <a
+            href="mailto:clickpulse.team@gmail.com"
+            className="text-emphasis cursor-pointer"
+          >
+            clickpulse.team@gmail.com
+          </a>
+        </motion.div>
       </div>
     </>
   );

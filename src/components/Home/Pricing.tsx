@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Title from './Title';
 
-
 interface itemProp {
   index: number;
 }
@@ -20,14 +19,14 @@ const itemVariant = {
     transition: {
       delay: index * 0.1,
       duration: 0.5,
-      type: "tween",
+      type: 'tween',
     },
   }),
 };
 
 export default function Hero() {
   return (
-    <section id="pricing" className="bg-default-100 py-32 relative">
+    <section className="bg-default-100 py-32 relative">
       <div className="custom-shape-divider-top-1723244705 absolute top-0 left-0">
         <svg
           data-name="Layer 1"
@@ -69,7 +68,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="flex items-center justify-center textt-emphasis underline text-xl text-emphasis mt-[25px]">
-        <Link to="/pricingmore" className="cursor-pointer">
+        <Link to="/pricing-more" className="cursor-pointer">
           View more
         </Link>
       </div>

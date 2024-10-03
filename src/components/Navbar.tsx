@@ -71,7 +71,7 @@ const Navbar: FC<navbarProps> = ({ width }) => {
         </Link>
 
         {/* Centered Desktop Navbar Links */}
-        <div className="xl:hidden flex items-center gap-5 mx-auto">
+        <div className="xl:hidden flex items-center gap-8 mx-auto">
           <WhyClickpulse />
           <Community />
           <PricingDropdown />

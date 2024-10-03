@@ -42,7 +42,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
       variants={itemVariant}
       initial="initial"
       whileInView="animate"
-      viewport={{ amount: 0.5, once: true }}
+      viewport={{ once: true, amount: 0.5 }}
       custom={{ index: index }}
       className={`w-[70vw] md:w-full mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4 md:justify-center md:items-center`}
       style={{ minHeight: '200px' }}
@@ -59,7 +59,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
         <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
           {title}
         </h3>
-        <p className="text-lg lg:text-sm text-primary mt-2 text-left md:text-center">
+        <p className="text-lg xl:text-base text-primary mt-2 text-left md:text-center">
           {description}
         </p>
       </div>
@@ -75,33 +75,38 @@ export default function Hero() {
 
         <div className="flex flex-col gap-8 mt-12 md:flex">
           <FlipCard
-            title="Unique Visitors"
-            description="Unique visitors represent the number of distinct individuals who visited your site within a given timeframe, regardless of how many times they visited. This metric provides a clear picture of how many actual users are engaging with your content, as it filters out multiple visits by the same user. Understanding this data helps you track the growth of your audience, and is crucial for assessing the effectiveness of campaigns aimed at reaching new users."
+            title="Site Engagement"
+            description="Key metrics like total visits, page visits, visit duration, and bounce rate help assess website performance. Total visits show overall site reach, while page visits reveal which content captures attention. Visit duration indicates whether users find the site engaging—longer visits suggest interest, while shorter ones may signal unmet expectations. The bounce rate reflects how many users view just one page; a high bounce rate suggests issues like irrelevant content, while a low rate indicates good navigation and engagement. Together, these metrics help optimize content and enhance user experience."
             index={1}
           />
           <FlipCard
-            title="Page Views"
-            description="Page views indicate the total number of pages viewed on your website over a specific period. Unlike unique visitors, this metric counts every instance of a page being loaded or reloaded, which can give insight into user engagement and interaction levels. A higher page view count suggests users are finding your content interesting enough to browse through multiple pages. However, it's important to analyze this alongside other metrics like bounce rate and visit duration to get a fuller picture."
+            title="Optimizing User Experience Through OS"
+            description="Tracking website visits by device, browser, and OS provides valuable insights into user behavior. By analyzing device types (mobile, desktop, tablet), you can optimize your site for the most common platforms. Browser and OS tracking (e.g., Chrome, Safari, iOS, Android) ensures compatibility and performance. Monitoring bounce rate and visit duration across devices helps identify areas for improvement, allowing you to tailor design and content for a better user experience."
             index={2}
           />
           <FlipCard
-            title="Bounce Rate"
-            description="Bounce rate is the percentage of visitors who navigate away from your site after viewing only one page. A high bounce rate might indicate that users aren’t finding what they’re looking for or that the content isn’t engaging enough. Conversely, a low bounce rate suggests that visitors are exploring multiple pages and spending more time on the site. Monitoring bounce rates can help in adjusting content or improving user experience to retain more visitors."
+            title="Optimising Content"
+            description="Tracking entry, exit, and top pages provides key insights into user behavior. Entry pages show where users land first, while exit pages highlight where they leave, helping identify potential content or UX issues. Top pages reveal what content resonates most. When combined with visit duration and bounce rate, you can optimize your site’s flow to improve engagement and conversions."
             index={3}
           />
           <FlipCard
-            title="Average Visit Duration"
-            description="The average visit duration measures the average amount of time users spend on your site per session. This metric helps gauge how engaging your content is and whether users are finding value in it. A longer average duration often signals that visitors are deeply exploring your site, reading articles, or engaging with multimedia content. If your average visit duration is low, it might suggest that your content is not sufficiently engaging or that users are finding what they need too quickly."
+            title="Find Your Region"
+            description="Tracking user location helps tailor content and marketing strategies to specific audiences. By analyzing regional traffic, you can identify key areas driving visits and adapt your approach accordingly. When combined with metrics like visit duration and bounce rate, location insights reveal engagement patterns. Longer visits suggest content resonates well, while higher bounce rates may indicate a need for more localized content. This data ensures your site and marketing efforts meet the needs of diverse audiences."
             index={4}
           />
           <FlipCard
-            title="Top Page"
-            description="The top page refers to the most visited page on your site within a specific timeframe. This can be your homepage, a blog post, a product page, or any other type of content. Identifying your top-performing page allows you to understand what type of content resonates most with your audience. You can use this insight to optimize similar content, refine your SEO strategy, or drive more traffic to underperforming pages by linking to them from your top page."
+            title="Most Used Elements"
+            description="
+Tracking button clicks, Monitoring button clicks and anchor clicks reveals how users engage with your site. Button click tracking shows which CTAs drive the most action, helping refine your user interface to boost conversions. Anchor click data highlights how users navigate through internal links, allowing you to optimize navigation paths and guide users more efficiently to key content or conversion points."
             index={5}
           />
           <FlipCard
-            title="New vs Returning Visitors"
-            description="This metric compares the percentage of new users versus those who have visited your site before. New visitors are important for growing your audience and expanding reach, while returning visitors indicate loyalty and engagement. A healthy balance between new and returning users suggests that you are successfully attracting new traffic while retaining existing users. Monitoring this ratio can help inform marketing strategies and content adjustments to either grow your audience or maintain existing user satisfaction."
+            title="Upcoming Features"
+            description={`Live tracking will let you monitor real-time user interactions, providing instant insights to optimize user experience on the fly.
+
+Scroll depth tracking shows how far users scroll, helping you identify engaging sections and optimize your layout for better retention.
+
+Heat maps visualize user clicks, scrolls, and hovers, highlighting attention areas and guiding improvements for better engagement and effective content placement.`}
             index={6}
           />
         </div>

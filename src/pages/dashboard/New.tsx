@@ -1,11 +1,11 @@
-import { FC, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import validateDomain from "../../utils/form/validateDomain";
+import validateDomain from '../../utils/form/validateDomain';
 
-import Navbar from "../../components/Navbar";
-import Header from "../../components/header";
-import Button from "../../components/form/Button";
+import Navbar from '../../components/Navbar';
+import Header from '../../components/header';
+import Button from '../../components/form/Button';
 
 const New: FC = () => {
   const domainRef = useRef<HTMLInputElement>(null);
@@ -16,7 +16,7 @@ const New: FC = () => {
     const domain = domainRef.current?.value.toString();
 
     if (!domain) {
-      setError("Domain is required");
+      setError('Domain is required');
       return;
     }
 
@@ -26,7 +26,7 @@ const New: FC = () => {
       return;
     }
 
-    navigate("/dashboard/script", { state: { domain } });
+    navigate('/dashboard/script', { state: { domain } });
   }
 
   return (

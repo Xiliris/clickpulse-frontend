@@ -3,26 +3,25 @@ import {
   RouterProvider,
   ScrollRestoration,
   Outlet,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Register";
-import Verify from "./pages/auth/Verify";
-import Reset from "./pages/auth/Reset";
-import Logout from "./pages/auth/Logout";
-import New from "./pages/dashboard/New";
-import Script from "./pages/dashboard/Script";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Websites from "./pages/dashboard/Websites";
-import Maintenance from "./pages/Maintenance";
-import Protected from "./modules/Protected";
-import Error from "./pages/error/Error";
-import Contact from "./pages/Contact";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/Terms";
-import AboutUs from "./pages/Aboutus";
-import PaymentPage from "./pages/Payment";
+import Home from './pages/Home';
+import Login from './pages/auth/Login';
+import Signup from './pages/auth/Register';
+import Verify from './pages/auth/Verify';
+import Reset from './pages/auth/Reset';
+import Logout from './pages/auth/Logout';
+import AddWebsite from './pages/dashboard/AddWebsite';
+import Dashboard from './pages/dashboard/Dashboard';
+import Websites from './pages/dashboard/Websites';
+import Maintenance from './pages/Maintenance';
+import Protected from './modules/Protected';
+import Error from './pages/error/Error';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/Terms';
+import AboutUs from './pages/Aboutus';
+import PaymentPage from './pages/Payment';
 import PricingMore from './pages/Pricingmore';
 
 const AppLayout = () => (
@@ -37,55 +36,55 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/login",
+        path: '/login',
         element: <Login />,
       },
       {
-        path: "/logout",
+        path: '/logout',
         element: <Logout />,
       },
       {
-        path: "/signup",
+        path: '/signup',
         element: <Signup />,
       },
       {
-        path: "/verify",
+        path: '/verify',
         element: <Verify />,
       },
       {
-        path: "/reset",
+        path: '/reset',
         element: <Reset />,
       },
       {
-        path: "/maintenance",
+        path: '/maintenance',
         element: <Maintenance />,
       },
       {
-        path: "/contact",
+        path: '/contact',
         element: <Contact />,
       },
       {
-        path: "/privacy",
+        path: '/privacy',
         element: <PrivacyPolicy />,
       },
       {
-        path: "/terms",
+        path: '/terms',
         element: <TermsOfService />,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <AboutUs />,
       },
       {
-        path: "/pricingmore",
-        element: <PricingMore />
+        path: '/pricing-more',
+        element: <PricingMore />,
       },
       {
-        path: "/payment",
+        path: '/payment',
         element: (
           <Protected>
             <PaymentPage />
@@ -93,7 +92,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard",
+        path: '/dashboard',
         element: (
           <Protected>
             <Websites />
@@ -101,23 +100,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/new",
+        path: '/dashboard/add-website',
         element: (
           <Protected>
-            <New />
+            <AddWebsite />
           </Protected>
         ),
       },
       {
-        path: "/dashboard/script",
-        element: (
-          <Protected>
-            <Script />
-          </Protected>
-        ),
-      },
-      {
-        path: "/dashboard/:id",
+        path: '/dashboard/:id',
         element: (
           <Protected>
             <Dashboard />
@@ -125,8 +116,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "*",
-        element: <Error type={404} message={"Page not found!"} />,
+        path: '*',
+        element: <Error type={404} message={'Page not found!'} />,
       },
     ],
   },

@@ -5,6 +5,7 @@ import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../../assets/logo.png';
 import WhyClickpulse from './WhyClickpulse';
 import Community from './Community';
+import PricingMenu from './PricingMenu';
 
 interface MobileMenuProps {
   isMobileMenuOpen: boolean;
@@ -77,16 +78,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </div>
 
         {/*Pricing */}
-        <div className="w-[90vw] flex mx-auto">
-          <a
-            href="#pricing"
-            onClick={handlePricingClick}
-            className="relative flex items-start mt-5 text-primary rounded-none text-xl hover:text-emphasis"
-          >
-            <span className="flex-grow text-center cursor-pointer hover:text-emphasis xl:text-2xl">
-              Pricing
-            </span>
-          </a>
+        <div className="w-[90vw] flex mx-auto justify-between mt-5">
+          <PricingMenu
+            className="relative w-full text-primary cursor-pointer mx-auto"
+            isFullWidth={true}
+          />
         </div>
       </div>
     </div>

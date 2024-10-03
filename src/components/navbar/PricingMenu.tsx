@@ -1,18 +1,26 @@
 import { useState, useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 
-const PricingDropdown = ({
+interface PricingMenuProps {
+  className?: string;
+  itemClassName?: string;
+  isFullWidth?: boolean;
+}
+
+const PricingMenu = ({
   className = '',
   itemClassName = '',
   isFullWidth = false,
-}) => {
+}: PricingMenuProps) => {
   const [isPricingClicked, setIsPricingClicked] = useState(false);
   const pricingDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const handlePricingClick = () => {
     setIsPricingClicked((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsPricingClicked(false);
   };
 
   useEffect(() => {
@@ -42,14 +50,13 @@ const PricingDropdown = ({
     <div className={`relative ${className}`} ref={pricingDropdownRef}>
       <div
         onClick={handlePricingClick}
-        className="w-full flex items-center space-x-1 hover:text-emphasis text-primary text-xl cursor-pointer"
+        className="w-full flex items-center lg:justify-between space-x-1 hover:text-emphasis text-primary text-xl md:text-xl cursor-pointer"
       >
         <span className="cursor-pointer xl:text-2xl">Pricing</span>
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className={`transition-transform ${
+        <i
+          className={`fa-solid fa-chevron-down transition-transform ${
             isPricingClicked ? 'rotate-180' : 'rotate-0'
-          } cursor-pointer`}
+          } cursor-pointer ml-auto md:text-2xl`}
         />
       </div>
       <div
@@ -60,28 +67,31 @@ const PricingDropdown = ({
         } bg-default-300 text-primary rounded-lg`}
       >
         <ul className={`text-sm flex flex-col ${itemClassName}`}>
-          <HashLink
+          <Link
             to="/pricing-more#monthly"
-            className="py-4 px-4 text-primary text-lg border-b border-gray-600 hover:text-emphasis cursor-pointer"
+            onClick={closeMenu}
+            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
           >
-            Monthly
-          </HashLink>
-          <HashLink
+            <span className="cursor-pointer">Monthly</span>
+          </Link>
+          <Link
             to="/pricing-more#yearly"
-            className="py-4 px-4 text-primary text-lg border-b border-gray-600 hover:text-emphasis cursor-pointer"
+            onClick={closeMenu}
+            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
           >
-            Yearly
-          </HashLink>
-          <HashLink
+            <span className="cursor-pointer">Yearly</span>
+          </Link>
+          <Link
             to="/pricing-more#plans"
-            className="py-4 px-4 text-primary text-lg hover:text-emphasis cursor-pointer"
+            onClick={closeMenu}
+            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
           >
-            Plans
-          </HashLink>
+            <span className="cursor-pointer">Plan</span>
+          </Link>
         </ul>
       </div>
     </div>
   );
 };
 
-export default PricingDropdown;
+export default PricingMenu;
