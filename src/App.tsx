@@ -23,6 +23,7 @@ import TermsOfService from './pages/Terms';
 import AboutUs from './pages/Aboutus';
 import PaymentPage from './pages/Payment';
 import PricingMore from './pages/Pricingmore';
+import BillingAddress from './pages/BillingAddress';
 
 const AppLayout = () => (
   <>
@@ -82,6 +83,14 @@ const router = createBrowserRouter([
       {
         path: '/pricing-more',
         element: <PricingMore />,
+      },
+      {
+        path: `/billing-address`,
+        element: (
+          <Protected>
+            <BillingAddress />
+          </Protected>
+        ),
       },
       {
         path: '/payment',
