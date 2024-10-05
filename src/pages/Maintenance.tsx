@@ -1,4 +1,4 @@
-import Logo from '../assets/logo.png';
+import Logo from "../assets/logo.png";
 
 export default function Maintenance() {
   return (
@@ -18,14 +18,13 @@ export default function Maintenance() {
             href="mailto:clickpulse.team@gmail.com"
             className="text-emphasis cursor-pointer"
           >
-            {' '}
-            clickpulse.team@gmail.com{' '}
+            {" "}
+            clickpulse.team@gmail.com{" "}
           </a>
         </p>
       </div>
       <footer className="mt-8 text-base text-secondary-100">
-        &copy; {new Date().getFullYear()} Clickpulse. All rights
-        reserved.
+        &copy; {new Date().getFullYear()} Clickpulse. All rights reserved.
       </footer>
     </div>
   );

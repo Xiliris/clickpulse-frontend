@@ -1,12 +1,13 @@
-import { FC, useState, useEffect } from 'react';
-import { CookiesProvider, useCookies } from 'react-cookie';
-import axiosInstance from '../../modules/axiosInstance';
+import { FC, useState, useEffect } from "react";
+import { CookiesProvider, useCookies } from "react-cookie";
+import axiosInstance from "../../modules/axiosInstance";
+import SplitSection from "../../components/SplitSection";
 
-import Navbar from '../../components/Navbar';
-import Footer from '../../components/home/Footer';
-import Header from '../../components/header';
-import Button from '../../components/form/Button';
-import { Link } from 'react-router-dom';
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/home/Footer";
+import Header from "../../components/header";
+import Button from "../../components/form/Button";
+import { Link } from "react-router-dom";
 
 interface WebsiteData {
   domain: string;
@@ -15,7 +16,7 @@ interface WebsiteData {
 }
 
 const Websites: FC = () => {
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(["token"]);
   const [websites, setWebsites] = useState<WebsiteData[]>([]);
 
   useEffect(() => {
@@ -27,7 +28,6 @@ const Websites: FC = () => {
       const response = await axiosInstance.get(
         `/dashboard/websites/${cookies.token}`
       );
-      console.log(response.data);
 
       setWebsites(response.data);
     } catch (error) {
@@ -39,12 +39,14 @@ const Websites: FC = () => {
     <CookiesProvider>
       <Navbar />
       <Header title="Dashboard" />
-      <main className="mt-32 flex flex-col justify-center items-center w-[70vw] m-auto pb-16">
-        <h1 className="text-4xl text-emphasis">Select a website</h1>
-        <p className="text-primary text-center w-full">
-          Choose a website to view analytics and insights.
-        </p>
-        <div className="w-full mt-10 flex flex-wrap justify-center items-center gap-5">
+      <main className="flex flex-col justify-between items-center w-[70vw] min-h-screen m-auto py-32">
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="text-4xl text-emphasis">Select a website</h1>
+          <p className="text-primary text-center w-full">
+            Choose a website to view analytics and insights.
+          </p>
+        </div>
+        <div className="w-full grid grid-cols-2 xl:grid-cols-1 justify-center items-center gap-5 mt-10">
           {websites && websites.length > 0 ? (
             websites.map((website, index) => (
               <Website
@@ -62,6 +64,9 @@ const Websites: FC = () => {
           <Button className="mt-10">Add Website</Button>
         </Link>
       </main>
+      <SplitSection>
+        If you have any questions or need assistance, please contact us at.
+      </SplitSection>
       <Footer />
     </CookiesProvider>
   );
@@ -73,21 +78,25 @@ interface WebsiteProps {
   id: string;
 }
 
-const Website: FC<WebsiteProps> = ({ domain, id }) => {
+const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
+  const name = domain.replace("https://", "").replace("http://", "");
   return (
-    <div className="w-96 border-2 border-secondary-100 rounded-lg flex flex-col justify-between mt-5 min-h-[25vh] relative p-4">
-      <p className="text-primary text-2xl text-center">{domain}</p>
-      <div className="flex-1 flex items-center justify-center">
-        <p className="text-secondary-100 text-2xl text-center">
-          <span>iamfromazerbaijan.com</span>
-        </p>
-      </div>
-      <Link
-        to={`/dashboard/${id}`}
-        className="absolute bottom-2 right-2"
-      >
-        <Button>View</Button>
-      </Link>
+    <div className=" bg-default-300  rounded-lg flex items-center gap-5 justify-between relative p-5 ">
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
+        className="w-16 h-16"
+        height={80}
+        width={80}
+        alt={`favicon of ${domain}`}
+      />
+      <p className="text-emphasis font-bold text-2xl">{name}</p>
+      {active ? (
+        <Link to={`/dashboard/${id}`}>
+          <Button>View</Button>
+        </Link>
+      ) : (
+        <Button disabled={true}>Pending</Button>
+      )}
     </div>
   );
 };

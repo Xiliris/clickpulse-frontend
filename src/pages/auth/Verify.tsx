@@ -45,7 +45,9 @@ const Verify: FC = () => {
       <div className="w-screen h-screen flex flex-col items-center justify-center bg-default-200 p-6">
         <div className="p-8 w-full max-w-md">
           <img src={Logo} alt="Logo" className="w-24 h-auto mx-auto mb-6" />
-          <h1 className="text-primary text-2xl font-bold mb-4 text-center">Verify Your Code</h1>
+          <h1 className="text-primary text-2xl font-bold mb-4 text-center">
+            Verify Your Code
+          </h1>
           <Input
             placeholder="Enter Verification Code"
             type="number"
@@ -53,7 +55,9 @@ const Verify: FC = () => {
             ref={ref}
             onChange={() => setErrorMessage("")}
           />
-          {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}
+          {errorMessage && (
+            <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+          )}
           <div className="flex justify-center ">
             <Button className="mt-4" onClick={() => verify()}>
               Verify

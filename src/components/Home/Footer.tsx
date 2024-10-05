@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
-import { useCallback, FC } from 'react';
-import Logo from '../../assets/logo.png';
-import { motion } from 'framer-motion';
+import { Link } from "react-router-dom";
+import { useCallback, FC } from "react";
+import Logo from "../../assets/logo.png";
+import { motion } from "framer-motion";
 import {
   lineVariant,
   lowerItemVariant,
   upperItemVariant,
-} from '../../animations/Animations';
+} from "../../animations/Animations";
 
 interface footerProps {
   width?: number;
@@ -16,11 +16,11 @@ const Footer: FC<footerProps> = ({ width }) => {
   const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }, []);
 
-  const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
+  const containerWidth = width ? `w-[${width}vw]` : "w-[70vw]";
 
   return (
     <footer className="bg-default-200 text-primary py-10">
@@ -40,7 +40,7 @@ const Footer: FC<footerProps> = ({ width }) => {
             <img
               src={Logo}
               alt="Logo"
-              className="md:w-[65px] w-12 cursor-pointer"
+              className="md:w-[65px] w-9 cursor-pointer"
             />
             <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:ml-0 md:mt-2">
               Clickpulse
