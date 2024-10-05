@@ -1,7 +1,11 @@
 import { FC, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axiosInstance from "../../modules/axiosInstance";
-import { formatNumber } from "../../utils/dashboard/functions";
+import {
+  formatNumber,
+  getBrowserLogo,
+  calculateLogoType,
+} from "../../utils/dashboard/functions";
 import OverlayArticle from "./OverlayArticle";
 import { fadeUp } from "../../animations/Animations";
 
@@ -102,10 +106,13 @@ const StatsArticle: FC<StatsArticleProps> = ({
             <div className="flex justify-start items-center gap-2">
               {icon && (
                 <img
-                  src="https://via.placeholder.com/150"
-                  width={28}
-                  height={28}
-                  className="w-7 h-7 md:w-4 md:h-4"
+                  src={`${calculateLogoType(
+                    Object.keys(stat)[0],
+                    stat[Object.keys(stat)[0]]
+                  )}`}
+                  width={16}
+                  height={16}
+                  className="w-4 h-4 md:w-4 md:h-4"
                 />
               )}
               <p className="text-lg text-secondary-100 md:text-sm">
