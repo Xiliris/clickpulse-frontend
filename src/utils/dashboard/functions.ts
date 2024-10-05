@@ -100,6 +100,91 @@ function formatNumber(num: number): string {
   }
 }
 
+function getBrowserLogo(browser: string) {
+  switch (browser.toLowerCase()) {
+    case "chrome":
+      return "https://simpleicons.org/icons/googlechrome.svg";
+    case "firefox":
+      return "https://simpleicons.org/icons/firefox.svg";
+    case "safari":
+      return "https://simpleicons.org/icons/safari.svg";
+    case "edge":
+      return "https://simpleicons.org/icons/microsoftedge.svg";
+    case "internet explorer":
+      return "https://simpleicons.org/icons/internetexplorer.svg";
+    case "opera":
+      return "https://simpleicons.org/icons/opera.svg";
+    case "brave":
+      return "https://simpleicons.org/icons/brave.svg";
+    case "vivaldi":
+      return "https://simpleicons.org/icons/vivaldi.svg";
+    case "duckduckgo":
+      return "https://simpleicons.org/icons/duckduckgo.svg";
+    case "konqueror":
+      return "https://simpleicons.org/icons/konqueror.svg";
+    case "lynx":
+      return "https://simpleicons.org/icons/lynx.svg";
+    case "puffin":
+      return "https://simpleicons.org/icons/puffin.svg";
+    case "maxthon":
+      return "https://simpleicons.org/icons/maxthon.svg";
+    case "waterfox":
+      return "https://simpleicons.org/icons/waterfox.svg";
+    case "seamonkey":
+      return "https://simpleicons.org/icons/seamonkey.svg";
+    case "yandex":
+      return "https://simpleicons.org/icons/yandexbrowser.svg";
+    case "avant":
+      return "https://simpleicons.org/icons/avant.svg";
+    case "rockmelt":
+      return "https://simpleicons.org/icons/rockmelt.svg";
+    case "slack":
+      return "https://simpleicons.org/icons/slack.svg";
+    case "chrome mobile":
+      return "https://simpleicons.org/icons/googlechrome.svg";
+    case "safari mobile":
+      return "https://simpleicons.org/icons/safari.svg";
+    default:
+      return "https://simpleicons.org/icons/globe.svg";
+  }
+}
+
+function getDeviceIcon(device: string) {
+  switch (device.toLowerCase()) {
+    case "desktop":
+      return "https://img.icons8.com/ios-filled/50/000000/desktop.png";
+    case "tablet":
+      return "https://img.icons8.com/ios-filled/50/000000/tablet.png";
+    case "mobile":
+      return "https://img.icons8.com/ios-filled/50/000000/smartphone.png";
+    default:
+      return "https://img.icons8.com/ios-filled/50/000000/question-mark.png";
+  }
+}
+// Example usage:
+const browserName = "Chrome";
+const logoUrl = getBrowserLogo(browserName);
+console.log(`Logo URL for ${browserName}: ${logoUrl}`);
+
+function calculateLogoType(type: any, logo: string) {
+  switch (type.toLowerCase()) {
+    case "os":
+      return "";
+
+    case "browser":
+      return "";
+
+    case "device":
+      return "";
+
+    case "source":
+      return `https://www.google.com/s2/favicons?domain=${logo}&sz=32`;
+
+    default:
+      return null;
+  }
+}
+
 export {
   formatValue,
   formatDate,
@@ -110,4 +195,6 @@ export {
   formatDuration,
   roundDuration,
   formatNumber,
+  getBrowserLogo,
+  calculateLogoType,
 };

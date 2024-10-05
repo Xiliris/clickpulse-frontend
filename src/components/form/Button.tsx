@@ -5,6 +5,7 @@ interface ButtonProps {
   children: ReactNode;
   className?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
   onClick?: () => void;
 }
 
@@ -22,7 +23,13 @@ const variants = {
   },
 };
 
-const Button: FC<ButtonProps> = ({ children, className, type, onClick }) => {
+const Button: FC<ButtonProps> = ({
+  children,
+  className,
+  type,
+  onClick,
+  disabled,
+}) => {
   return (
     <motion.button
       variants={variants}
@@ -30,11 +37,15 @@ const Button: FC<ButtonProps> = ({ children, className, type, onClick }) => {
       whileInView="animate"
       viewport={{ once: true, amount: 0.5 }}
       className={
-        "bg-emphasis px-6 py-2 rounded-md inline-flex items-center text-xl duration-200 ease-in-out hover:bg-emphasis-light hover:brightness-125 prevent-select " +
+        `px-6 py-2 rounded-md inline-flex items-center text-xl duration-200 ease-in-out prevent-select ` +
+        (disabled
+          ? "bg-secondary-100 cursor-not-allowed opacity-50 "
+          : "bg-emphasis hover:bg-emphasis-light hover:brightness-125 ") +
         className
       }
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </motion.button>
