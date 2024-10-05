@@ -5,7 +5,7 @@ import SplitSection from "../../components/SplitSection";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/home/Footer";
-import Header from "../../components/header";
+import Header from "../../components/Header";
 import Button from "../../components/form/Button";
 import { Link } from "react-router-dom";
 

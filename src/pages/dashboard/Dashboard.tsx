@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Select from "../../components/form/Select";
 import StatsArticle from "../../components/dashboard/StatsArticke";
@@ -55,6 +56,7 @@ const Dashboard: FC = () => {
 
   return (
     <>
+      <Header title="Dashboard" />
       <Navbar width={90} />
       <main className="flex flex-col justify-center items-center mt-32 mb-16 w-[90vw] mx-auto">
         <div className="flex justify-between items-center w-full mb-8 md:flex-col md:mb-5 md:gap-5">

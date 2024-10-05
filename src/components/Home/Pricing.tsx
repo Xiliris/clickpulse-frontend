@@ -111,7 +111,7 @@ const Card: FC<CardInterface> = ({
       <hr className="border-[#4C5366]" />
       <ul className="flex flex-col gap-2 flex-grow">{children}</ul>
       <div>
-        <Link to={`/payment?plan=${plan}&price=${price}`}>
+        <Link to={`/billing-address`}>
           <Button className="flex justify-between w-full">
             Upgrade now
             <i className="fa-solid fa-arrow-right cursor-pointer"></i>

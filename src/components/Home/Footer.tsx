@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCallback, FC } from "react";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo.svg";
 import { motion } from "framer-motion";
 import {
   lineVariant,
@@ -40,7 +40,7 @@ const Footer: FC<footerProps> = ({ width }) => {
             <img
               src={Logo}
               alt="Logo"
-              className="md:w-[65px] w-9 cursor-pointer"
+              className="md:w-[24px] w-[24px] cursor-pointer"
             />
             <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:ml-0 md:mt-2">
               Clickpulse

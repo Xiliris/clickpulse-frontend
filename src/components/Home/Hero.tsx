@@ -59,9 +59,9 @@ const FlipCard: React.FC<FlipCardProps> = ({
         <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
           {title}
         </h3>
-        <p className="text-lg xl:text-base text-primary mt-2 text-left md:text-center">
+        <div className="text-lg xl:text-base text-primary mt-2 text-left md:text-center">
           {description}
-        </p>
+        </div>
       </div>
     </motion.article>
   );
@@ -69,44 +69,148 @@ const FlipCard: React.FC<FlipCardProps> = ({
 
 export default function Hero() {
   return (
-    <section className="bg-default-200 py-12 z-10 mt-7 w-[70vw] md:w-[90vw] mx-auto">
+    <section className="bg-default-200 py-12 z-10 mt-7 w-[70vw] md:w-[90vw] mx-auto sm:mt-[200px]">
       <div className="mx-auto text-center relative">
-        <Title>Tracking</Title>
+        <Title>Website Analytics and Performance Tracking</Title>
 
         <div className="flex flex-col gap-8 mt-12 md:flex">
           <FlipCard
-            title="Site Engagement"
-            description="Key metrics like total visits, page visits, visit duration, and bounce rate help assess website performance. Total visits show overall site reach, while page visits reveal which content captures attention. Visit duration indicates whether users find the site engaging—longer visits suggest interest, while shorter ones may signal unmet expectations. The bounce rate reflects how many users view just one page; a high bounce rate suggests issues like irrelevant content, while a low rate indicates good navigation and engagement. Together, these metrics help optimize content and enhance user experience."
+            title="Site Engagement Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Total visits</strong> show overall site
+                  reach, providing insights into traffic trends and
+                  growth over time.
+                </li>
+                <li>
+                  <strong>Page visits</strong> reveal which content
+                  engages users, helping identify high-performing
+                  pages.
+                </li>
+                <li>
+                  <strong>Visit duration</strong> shows how long users
+                  are staying, indicating interest levels and
+                  engagement.
+                </li>
+                <li>
+                  <strong>Bounce rate</strong> reflects navigation
+                  effectiveness, helping identify potential UX issues.
+                </li>
+              </ul>
+            }
             index={1}
           />
           <FlipCard
-            title="Optimizing User Experience Through OS"
-            description="Tracking website visits by device, browser, and OS provides valuable insights into user behavior. By analyzing device types (mobile, desktop, tablet), you can optimize your site for the most common platforms. Browser and OS tracking (e.g., Chrome, Safari, iOS, Android) ensures compatibility and performance. Monitoring bounce rate and visit duration across devices helps identify areas for improvement, allowing you to tailor design and content for a better user experience."
+            title="User Experience Analytics by Device & Browser"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  Analyze traffic by <strong>device type</strong>{' '}
+                  (mobile, desktop, tablet) to optimize user
+                  experience across platforms.
+                </li>
+                <li>
+                  Ensure compatibility across browsers such as{' '}
+                  <strong>Chrome, Safari, and Firefox</strong> for
+                  seamless performance.
+                </li>
+                <li>
+                  Optimize for the best performance across devices to
+                  reduce load times and enhance mobile responsiveness.
+                </li>
+              </ul>
+            }
             index={2}
           />
           <FlipCard
-            title="Optimising Content"
-            description="Tracking entry, exit, and top pages provides key insights into user behavior. Entry pages show where users land first, while exit pages highlight where they leave, helping identify potential content or UX issues. Top pages reveal what content resonates most. When combined with visit duration and bounce rate, you can optimize your site’s flow to improve engagement and conversions."
+            title="Content Optimization Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Track entry, exit, and top pages</strong> to
+                  gain insights into what content attracts visitors
+                  initially and where they leave.
+                </li>
+                <li>
+                  Identify potential{' '}
+                  <strong>content or UX issues</strong> that may drive
+                  users away.
+                </li>
+                <li>
+                  Understand which content resonates most and optimize
+                  your strategy to boost engagement.
+                </li>
+              </ul>
+            }
             index={3}
           />
           <FlipCard
-            title="Find Your Region"
-            description="Tracking user location helps tailor content and marketing strategies to specific audiences. By analyzing regional traffic, you can identify key areas driving visits and adapt your approach accordingly. When combined with metrics like visit duration and bounce rate, location insights reveal engagement patterns. Longer visits suggest content resonates well, while higher bounce rates may indicate a need for more localized content. This data ensures your site and marketing efforts meet the needs of diverse audiences."
+            title="Regional Traffic & Audience Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Identify regions</strong> that drive the
+                  most traffic and tailor marketing strategies to key
+                  areas.
+                </li>
+                <li>
+                  Analyze engagement patterns in different locations
+                  to improve content relevancy.
+                </li>
+                <li>
+                  Create <strong>localized content</strong> based on
+                  regional trends to enhance user experience and boost
+                  conversions.
+                </li>
+              </ul>
+            }
             index={4}
           />
           <FlipCard
-            title="Most Used Elements"
-            description="
-Tracking button clicks, Monitoring button clicks and anchor clicks reveals how users engage with your site. Button click tracking shows which CTAs drive the most action, helping refine your user interface to boost conversions. Anchor click data highlights how users navigate through internal links, allowing you to optimize navigation paths and guide users more efficiently to key content or conversion points."
+            title="Element Interaction Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Track button clicks</strong> to measure the
+                  effectiveness of your calls-to-action and drive
+                  conversions.
+                </li>
+                <li>
+                  Monitor anchor clicks to optimize internal linking
+                  and guide users to relevant content efficiently.
+                </li>
+                <li>
+                  Refine UI elements to boost{' '}
+                  <strong>user navigation</strong> and improve the
+                  overall conversion funnel.
+                </li>
+              </ul>
+            }
             index={5}
           />
           <FlipCard
-            title="Upcoming Features"
-            description={`Live tracking will let you monitor real-time user interactions, providing instant insights to optimize user experience on the fly.
-
-Scroll depth tracking shows how far users scroll, helping you identify engaging sections and optimize your layout for better retention.
-
-Heat maps visualize user clicks, scrolls, and hovers, highlighting attention areas and guiding improvements for better engagement and effective content placement.`}
+            title="Upcoming Analytics Features"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Live tracking</strong> will enable real-time
+                  user interaction monitoring, providing insights as
+                  users navigate your site.
+                </li>
+                <li>
+                  <strong>Scroll depth tracking</strong> will reveal
+                  how far down users scroll on your pages, helping
+                  identify engagement levels.
+                </li>
+                <li>
+                  <strong>Heat maps</strong> will visualize user
+                  interactions like clicks and hovers, giving insight
+                  into attention hotspots and optimizing layouts
+                  accordingly.
+                </li>
+              </ul>
+            }
             index={6}
           />
         </div>

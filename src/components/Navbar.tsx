@@ -8,8 +8,7 @@ import WhyClickpulse from "./navbar/WhyClickpulse";
 import Community from "./navbar/Community";
 import DesktopProfile from "./navbar/DesktopProfile";
 import Button from "./form/Button";
-import Logo from "../assets/logo.png";
-import { HashLink } from "react-router-hash-link";
+import Logo from "../assets/logo.svg";
 import PricingDropdown from "./navbar/Pricing";
 
 interface navbarProps {
@@ -61,7 +60,7 @@ const Navbar: FC<navbarProps> = ({ width }) => {
       >
         {/* Logo and Site Title */}
         <Link to="/" className="flex items-center space-x-2 w-[250px]">
-          <img src={Logo} alt="Logo" className="w-9 md:w-9" />
+          <img src={Logo} alt="Logo" className="w-[28px] md:w-[20px] my-auto" />
           <span className="text-3xl md:text-2xl font-bold text-primary cursor-pointer">
             Clickpulse
           </span>

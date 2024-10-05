@@ -3,27 +3,28 @@ import {
   RouterProvider,
   ScrollRestoration,
   Outlet,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Register";
-import Verify from "./pages/auth/Verify";
-import Reset from "./pages/auth/Reset";
-import Logout from "./pages/auth/Logout";
-import AddWebsite from "./pages/dashboard/AddWebsite";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Websites from "./pages/dashboard/Websites";
-import Maintenance from "./pages/Maintenance";
-import Protected from "./modules/Protected";
-import Error from "./pages/error/Error";
-import Contact from "./pages/Contact";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/Terms";
-import AboutUs from "./pages/Aboutus";
-import PaymentPage from "./pages/Payment";
-import PricingMore from "./pages/Pricingmore";
-import ProtectedWebsite from "./modules/ProtectedWebsite";
+import Home from './pages/Home';
+import Login from './pages/auth/Login';
+import Signup from './pages/auth/Register';
+import Verify from './pages/auth/Verify';
+import Reset from './pages/auth/Reset';
+import Logout from './pages/auth/Logout';
+import AddWebsite from './pages/dashboard/AddWebsite';
+import Dashboard from './pages/dashboard/Dashboard';
+import Websites from './pages/dashboard/Websites';
+import Maintenance from './pages/Maintenance';
+import Protected from './modules/Protected';
+import Error from './pages/error/Error';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/Terms';
+import AboutUs from './pages/Aboutus';
+import PaymentPage from './pages/Payment';
+import PricingMore from './pages/Pricingmore';
+import ProtectedWebsite from './modules/ProtectedWebsite';
+import BillingAddress from './pages/BillingAddress';
 
 const AppLayout = () => (
   <>
@@ -37,55 +38,63 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/login",
+        path: '/login',
         element: <Login />,
       },
       {
-        path: "/logout",
+        path: '/logout',
         element: <Logout />,
       },
       {
-        path: "/signup",
+        path: '/signup',
         element: <Signup />,
       },
       {
-        path: "/verify",
+        path: '/verify',
         element: <Verify />,
       },
       {
-        path: "/reset",
+        path: '/reset',
         element: <Reset />,
       },
       {
-        path: "/maintenance",
+        path: '/maintenance',
         element: <Maintenance />,
       },
       {
-        path: "/contact",
+        path: '/contact',
         element: <Contact />,
       },
       {
-        path: "/privacy",
+        path: '/privacy',
         element: <PrivacyPolicy />,
       },
       {
-        path: "/terms",
+        path: '/terms',
         element: <TermsOfService />,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <AboutUs />,
       },
       {
-        path: "/pricing-more",
+        path: '/pricing-more',
         element: <PricingMore />,
       },
       {
-        path: "/payment",
+        path: `/billing-address`,
+        element: (
+          <Protected>
+            <BillingAddress />
+          </Protected>
+        ),
+      },
+      {
+        path: '/payment',
         element: (
           <Protected>
             <PaymentPage />
@@ -93,7 +102,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard",
+        path: '/dashboard',
         element: (
           <Protected>
             <Websites />
@@ -101,7 +110,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/add-website",
+        path: '/dashboard/add-website',
         element: (
           <Protected>
             <AddWebsite />
@@ -109,7 +118,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/:id",
+        path: '/dashboard/:id',
         element: (
           <Protected>
             <ProtectedWebsite>
@@ -119,7 +128,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "401",
+        path: '401',
         element: (
           <Error
             type={401}
@@ -130,8 +139,19 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "*",
-        element: <Error type={404} message={"Page not found!"} />,
+        path: '401',
+        element: (
+          <Error
+            type={401}
+            message={
+              "Oops! It looks like you're not authorized to access this section. Please log in or get in touch with our support team if you need assistance.!"
+            }
+          />
+        ),
+      },
+      {
+        path: '*',
+        element: <Error type={404} message={'Page not found!'} />,
       },
     ],
   },

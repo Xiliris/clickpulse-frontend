@@ -6,7 +6,7 @@
   z-index: 10;
   width: 85vw;
   transform: translateX(7rem) translateY(6rem);
-  opacity: 0.6;
+  opacity: 0.2;
 }
 
 @media (min-width: 450px) {

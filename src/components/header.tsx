@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({ title }) => {
   return (
     <Helmet>
-      <title>{title ? `ClickPulse - ${title}` : "ClickPulse"}</title>
+      <title>{title ? `Clickpulse - ${title}` : "Clickpulse"}</title>
     </Helmet>
   );
 };
