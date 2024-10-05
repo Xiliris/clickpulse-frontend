@@ -11,6 +11,7 @@ import Button from "./form/Button";
 import Logo from "../assets/logo.svg";
 import PricingDropdown from "./navbar/Pricing";
 
+
 interface navbarProps {
   width?: number;
 }
@@ -25,8 +26,8 @@ const variants = {
     y: 0,
     transition: {
       duration: 0.7,
-      type: "tween",
-      ease: "easeInOut",
+      type: 'tween',
+      ease: 'easeInOut',
     },
   },
 };
@@ -43,12 +44,12 @@ const Navbar: FC<navbarProps> = ({ width }) => {
     toggleLoggedMenu,
   } = useProfileMenu();
 
-  const containerWidth = width ? `w-[${width}vw]` : "w-[70vw]";
+  const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
 
   return (
     <nav
       className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-200 ease-in-out ${
-        scrollingUp ? "translate-y-0" : "-translate-y-full"
+        scrollingUp ? 'translate-y-0' : '-translate-y-full'
       } z-50`}
     >
       <motion.div

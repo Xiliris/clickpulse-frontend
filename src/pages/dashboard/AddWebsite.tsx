@@ -75,6 +75,7 @@ const AddWebsite: FC = () => {
             <div
               className={`w-10 h-10 flex justify-center items-center rounded-full ${
                 step === 1 ? "bg-emphasis text-white" : "bg-emphasis text-white"
+
               }`}
             >
               1
@@ -85,6 +86,7 @@ const AddWebsite: FC = () => {
             className="flex-grow h-1 bg-default-100 relative mx-4"
             initial={{ width: "0%" }}
             animate={{ width: step === 2 ? "100%" : "0%" }}
+
             transition={{ duration: 0.6 }}
           >
             <motion.div

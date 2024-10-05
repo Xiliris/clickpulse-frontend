@@ -22,8 +22,8 @@ const variants = {
     y: 0,
     transition: {
       duration: 0.5,
-      type: "tween",
-      ease: "easeInOut",
+      type: 'tween',
+      ease: 'easeInOut',
     },
   },
 };
@@ -36,8 +36,8 @@ const variants2 = {
     opacity: 1,
     transition: {
       duration: 0.5,
-      type: "tween",
-      ease: "easeInOut",
+      type: 'tween',
+      ease: 'easeInOut',
     },
   },
 };
@@ -99,9 +99,9 @@ export default function Home() {
             alt="Globe"
             className="globe-img -z-30"
             style={{
-              pointerEvents: "none",
-              userSelect: "none",
-              touchAction: "none",
+              pointerEvents: 'none',
+              userSelect: 'none',
+              touchAction: 'none',
             }}
           />
         </motion.section>
