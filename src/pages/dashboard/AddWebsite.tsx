@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CookiesProvider, useCookies } from 'react-cookie';
+import { motion } from 'framer-motion';
 import axiosInstance from '../../modules/axiosInstance';
 
 import Navbar from '../../components/Navbar';
@@ -68,6 +69,53 @@ const AddWebsite: FC = () => {
       <Navbar />
       <Header title="New Website" />
       <main className="mt-40 flex flex-col justify-center items-center w-[80%] m-auto">
+        {/* Steps in creating */}
+        <div className="flex justify-center items-center mb-10 w-full max-w-lg">
+          <div className="flex flex-col items-center">
+            <div
+              className={`w-16 h-16 flex justify-center items-center rounded-full ${
+                step === 1
+                  ? 'bg-emphasis text-white'
+                  : 'bg-default-100 text-primary'
+              }`}
+            >
+              1
+            </div>
+          </div>
+
+          <motion.div
+            className="flex-grow h-1 bg-default-100 relative mx-4"
+            initial={{ width: '0%' }}
+            animate={{ width: step === 2 ? '100%' : '0%' }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div
+              className="absolute top-0 left-0 h-full bg-emphasis"
+              initial={{ width: '0%' }}
+              animate={{ width: step === 2 ? '100%' : '0%' }}
+              transition={{ duration: 0.6 }}
+            />
+          </motion.div>
+
+          <div className="flex flex-col items-center">
+            <motion.div
+              className={`w-16 h-16 flex justify-center items-center rounded-full ${
+                step === 2 ? 'text-white' : 'text-primary'
+              }`}
+              initial={{ backgroundColor: 'bg-default-100' }}
+              animate={{
+                backgroundColor: step === 2 ? '#3CBAB1' : '#252A34',
+              }}
+              transition={{
+                delay: step === 2 ? 0.6 : 0,
+                duration: 0.3,
+              }}
+            >
+              2
+            </motion.div>
+          </div>
+        </div>
+
         {/* Step 1: Domain Entry */}
         {step === 1 && (
           <div className="mt-12 flex bg-default-300 flex-col justify-center items-center max-w-lg mx-auto p-5 rounded-md">
