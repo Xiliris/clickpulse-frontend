@@ -37,7 +37,7 @@ const Button: FC<ButtonProps> = ({
       whileInView="animate"
       viewport={{ once: true, amount: 0.5 }}
       className={
-        `px-6 py-2 rounded-md inline-flex items-center text-xl duration-200 ease-in-out prevent-select ` +
+        `px-6 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select ` +
         (disabled
           ? "bg-secondary-100 cursor-not-allowed opacity-50 "
           : "bg-emphasis hover:bg-emphasis-light hover:brightness-125 ") +

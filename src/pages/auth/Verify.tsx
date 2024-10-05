@@ -2,11 +2,11 @@ import { FC, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../modules/axiosInstance";
 
-import Header from "../../components/header";
+import Header from "../../components/Header";
 import Input from "../../components/form/Input";
 import Button from "../../components/form/Button";
 import verifyCode from "../../utils/form/validateCode";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 
 const Verify: FC = () => {

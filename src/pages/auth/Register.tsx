@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo.svg";
 
 import Input from "../../components/form/Input";
 import Button from "../../components/form/Button";
 import PasswordInput from "../../components/form/PasswordInput";
 
-import Header from "../../components/header";
+import Header from "../../components/Header";
 
 import axiosInstance from "../../modules/axiosInstance";
 

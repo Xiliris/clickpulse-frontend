@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "../components/form/Button";
 import Navbar from "../components/Navbar";
 import Footer from "../components/home/Footer";
+import Header from "../components/Header";
 import { motion } from "framer-motion";
 import { PlanComparisonTable } from "./PricingmoreTable";
 import { useLocation } from "react-router-dom";
@@ -28,38 +29,41 @@ const Card: FC<CardInterface> = ({
       : "USD / year, billed every year";
 
   return (
-    <motion.div
-      className="relative flex flex-col p-6 bg-default-100 rounded-lg shadow-md flex-grow"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 50 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <div className="absolute top-2 left-2 bg-emphasis text-black text-xs font-bold px-2 py-1 rounded">
-        {billingCycle === "monthly" ? "Monthly" : "Yearly"}
-      </div>
+    <>
+      <Header title="Pricing" />
+      <motion.div
+        className="relative flex flex-col p-6 bg-default-100 rounded-lg shadow-md flex-grow"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 50 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+      >
+        <div className="absolute top-2 left-2 bg-emphasis text-black text-xs font-bold px-2 py-1 rounded">
+          {billingCycle === "monthly" ? "Monthly" : "Yearly"}
+        </div>
 
-      <h2 className="text-2xl font-semibold pb-1 text-primary text-center">
-        {plan}
-      </h2>
-      <p className="text-xl text-secondary-100 pb-2 text-center">{price}</p>
-      <p className="w-full text-sm text-secondary-100 text-center border-b border-secondary-200 pb-2">
-        {billingMessage}
-      </p>
-      <ul className="text-secondary-100 space-y-2 w-full pt-4 text-left">
-        {features.map((feature, idx) => (
-          <li key={idx} className="flex items-center gap-2">
-            <i className="fa-solid fa-check text-emphasis"></i> {feature}
-          </li>
-        ))}
-      </ul>
-      <Link to={`/payment?plan=${plan}&price=${price}`}>
-        <Button className="mt-6 w-full justify-between">
-          Upgrade now
-          <i className="fa-solid fa-arrow-right cursor-pointer"></i>
-        </Button>
-      </Link>
-    </motion.div>
+        <h2 className="text-2xl font-semibold pb-1 text-primary text-center">
+          {plan}
+        </h2>
+        <p className="text-xl text-secondary-100 pb-2 text-center">{price}</p>
+        <p className="w-full text-sm text-secondary-100 text-center border-b border-secondary-200 pb-2">
+          {billingMessage}
+        </p>
+        <ul className="text-secondary-100 space-y-2 w-full pt-4 text-left">
+          {features.map((feature, idx) => (
+            <li key={idx} className="flex items-center gap-2">
+              <i className="fa-solid fa-check text-emphasis"></i> {feature}
+            </li>
+          ))}
+        </ul>
+        <Link to={`/payment?plan=${plan}&price=${price}`}>
+          <Button className="mt-6 w-full justify-between">
+            Upgrade now
+            <i className="fa-solid fa-arrow-right cursor-pointer"></i>
+          </Button>
+        </Link>
+      </motion.div>
+    </>
   );
 };
 
