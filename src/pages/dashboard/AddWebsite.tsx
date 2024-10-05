@@ -76,7 +76,7 @@ const AddWebsite: FC = () => {
               className={`w-16 h-16 flex justify-center items-center rounded-full ${
                 step === 1
                   ? 'bg-emphasis text-white'
-                  : 'bg-default-100 text-primary'
+                  : 'bg-emphasis text-white'
               }`}
             >
               1
@@ -154,11 +154,11 @@ const AddWebsite: FC = () => {
 
         {/* Step 2: Script Copy */}
         {step === 2 && (
-          <div className="mt-10 flex flex-col justify-center items-start p-5 rounded-md min-w-96">
-            <h2 className="text-emphasis text-2xl mb-5">
+          <div className="mt-12 flex bg-default-300 flex-col justify-center items-center max-w-lg mx-auto p-5 rounded-md">
+            <h2 className="text-emphasis text-2xl pb-4">
               Website Details
             </h2>
-            <p className="text-primary mb-1">
+            <p className="text-primary text-lg text-center mb-6">
               Add script in <code>&lt;head&gt;</code> of your HTML
               document.
             </p>
