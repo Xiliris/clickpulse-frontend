@@ -39,8 +39,6 @@ const WorldMap: FC<WorldMapProps> = ({ id, endDate, startDate }) => {
       );
       const fetchedData = await response.data;
 
-      console.log(fetchedData);
-
       setUserAgentKey(Object.keys(fetchedData[0]));
 
       setUserAgentStats(fetchedData);

@@ -1,19 +1,19 @@
-import { FC, useRef, useState } from 'react';
-import { CookiesProvider, useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import axiosInstance from '../../modules/axiosInstance';
+import { FC, useRef, useState } from "react";
+import { CookiesProvider, useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axiosInstance from "../../modules/axiosInstance";
 
-import Header from '../../components/header';
-import Input from '../../components/form/Input';
-import PasswordInput from '../../components/form/PasswordInput';
-import Button from '../../components/form/Button';
-import Logo from '../../assets/logo.png';
+import Header from "../../components/header";
+import Input from "../../components/form/Input";
+import PasswordInput from "../../components/form/PasswordInput";
+import Button from "../../components/form/Button";
+import Logo from "../../assets/logo.png";
 
 const Auth: FC = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['token']);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [cookies, setCookie] = useCookies(["token"]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -22,21 +22,21 @@ const Auth: FC = () => {
     const password = passwordRef.current?.value;
 
     if (!email && !password) {
-      setErrorMessage('Please fill in both fields');
+      setErrorMessage("Please fill in both fields");
       return;
     } else if (!email) {
-      setErrorMessage('Please fill in your email.');
+      setErrorMessage("Please fill in your email.");
       return;
     } else if (!password) {
-      setErrorMessage('Please fill in your password.');
+      setErrorMessage("Please fill in your password.");
       return;
     }
 
     axiosInstance
-      .post('/auth/login', { email, password })
+      .post("/auth/login", { email, password })
       .then((res) => {
-        setCookie('token', res.data.token, { path: '/' });
-        navigate('/');
+        setCookie("token", res.data.token, { path: "/" });
+        navigate("/");
       })
       .catch((err) => {
         if (err.response) {
@@ -52,18 +52,11 @@ const Auth: FC = () => {
       <Header title="Login" />
       <main className="min-h-screen flex items-center justify-center bg-default-200">
         <div className="max-w-lg w-[90vw] space-y-10">
-          <Link
-            to="/"
-            className="text-emphasis cursor-pointer block text-xl"
-          >
+          <Link to="/" className="text-emphasis cursor-pointer block text-xl">
             <i className="fa-solid fa-arrow-left cursor-pointer"></i>
           </Link>
           <div className="text-center">
-            <img
-              className="mx-auto h-16 w-auto"
-              src={Logo}
-              alt="Logo"
-            />
+            <img className="mx-auto h-16 w-auto" src={Logo} alt="Logo" />
             <h2 className="mt-8 text-center text-2xl font-extrabold text-primary">
               Log in to your account
             </h2>
@@ -81,13 +74,13 @@ const Auth: FC = () => {
               type="email"
               placeholder="Email address"
               ref={emailRef}
-              onChange={() => setErrorMessage('')}
+              onChange={() => setErrorMessage("")}
             />
             <PasswordInput
               name="password"
               placeholder="Password"
               ref={passwordRef}
-              onChange={() => setErrorMessage('')}
+              onChange={() => setErrorMessage("")}
             />
             <div className="text-sm flex justify-between">
               <Link
@@ -97,7 +90,7 @@ const Auth: FC = () => {
                 Forgot your password?
               </Link>
               <div className="text-end text-sm text-primary">
-                Don't have an account?{' '}
+                Don't have an account?{" "}
                 <Link
                   to="/signup"
                   className="text-base text-emphasis hover:text-emphasis-light cursor-pointer"
@@ -107,9 +100,7 @@ const Auth: FC = () => {
               </div>
             </div>
 
-            {errorMessage && (
-              <p className="text-red-400">{errorMessage}</p>
-            )}
+            {errorMessage && <p className="text-red-400">{errorMessage}</p>}
 
             <div className="flex justify-end">
               <Button type="submit" className="text-center">

@@ -63,7 +63,7 @@ const Navbar: FC<navbarProps> = ({ width }) => {
           to="/"
           className="flex items-center space-x-2 w-[250px]"
         >
-          <img src={Logo} alt="Logo" className="w-12 md:w-9" />
+          <img src={Logo} alt="Logo" className="w-9 md:w-9" />
           <span className="text-3xl md:text-2xl font-bold text-primary cursor-pointer">
             Clickpulse
           </span>

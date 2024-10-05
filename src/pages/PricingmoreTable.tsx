@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import SplitSection from "../components/SplitSection";
 
 export const PlanComparisonTable = () => {
   const [selectedPlan, setSelectedPlan] = useState<
@@ -203,25 +204,9 @@ export const PlanComparisonTable = () => {
         </table>
       </div>
 
-      <div className=" w-full md:h-56 h-40 pt-6 pb-6 text-center bg-default-100 mt-32 mb-20">
-        <motion.div
-          className="text-2xl font-bold text-primary mb-9 mx-auto w-[90vw]"
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, amount: 0.5 }}
-        >
-          <h2 className="mb-8">
-            If you have any more questions about our plans you can contact us at
-          </h2>
-          <a
-            href="mailto:clickpulse.team@gmail.com"
-            className="text-emphasis cursor-pointer"
-          >
-            clickpulse.team@gmail.com
-          </a>
-        </motion.div>
-      </div>
+      <SplitSection>
+        If you have any more questions about our plans you can contact us at
+      </SplitSection>
     </>
   );
 };

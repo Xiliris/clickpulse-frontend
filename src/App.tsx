@@ -23,6 +23,7 @@ import TermsOfService from './pages/Terms';
 import AboutUs from './pages/Aboutus';
 import PaymentPage from './pages/Payment';
 import PricingMore from './pages/Pricingmore';
+import ProtectedWebsite from './modules/ProtectedWebsite';
 import BillingAddress from './pages/BillingAddress';
 
 const AppLayout = () => (
@@ -120,8 +121,32 @@ const router = createBrowserRouter([
         path: '/dashboard/:id',
         element: (
           <Protected>
-            <Dashboard />
+            <ProtectedWebsite>
+              <Dashboard />
+            </ProtectedWebsite>
           </Protected>
+        ),
+      },
+      {
+        path: '401',
+        element: (
+          <Error
+            type={401}
+            message={
+              "Oops! It looks like you're not authorized to access this section. Please log in or get in touch with our support team if you need assistance.!"
+            }
+          />
+        ),
+      },
+      {
+        path: '401',
+        element: (
+          <Error
+            type={401}
+            message={
+              "Oops! It looks like you're not authorized to access this section. Please log in or get in touch with our support team if you need assistance.!"
+            }
+          />
         ),
       },
       {

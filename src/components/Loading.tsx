@@ -1,13 +1,9 @@
-import { FC } from 'react';
-import './Loading.scss';
+import { FC } from "react";
+import "./Loading.scss";
 
-interface LoadingProps {
-  height?: string;
-}
-
-const Loading: FC<LoadingProps> = ({ height }) => {
+const Loading: FC = () => {
   return (
-    <main className={`loading h-${height}`}>
+    <main className={`loading w-screen h-screen`}>
       <div className="loader"></div>
     </main>
   );
