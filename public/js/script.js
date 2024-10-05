@@ -23,21 +23,36 @@ const data = {
   session_end: null,
   bounce_rate: false,
 
+  referrer: document.referrer,
+
   buttons: [],
   anchors: [],
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
   document.addEventListener("click", (event) => {
-    const clickedElement = event.target;
+    const clickedElement = event.target.closest("a, button");
 
-    let elementInfo = getElementInfo(clickedElement);
+    if (clickedElement) {
+      const tagName = clickedElement.tagName;
+      const storeId = tagName === "BUTTON" ? "buttons" : "anchors";
+      const innerText = clickedElement.innerText.trim();
+      const id = clickedElement.id || null;
 
-    if (elementInfo) {
-      updateData(data.elements_clicked, elementInfo);
+      const existingEntry = data[storeId].find(
+        (entry) => entry.id === id && entry.content === innerText
+      );
+
+      if (existingEntry) {
+        existingEntry.clicks++;
+      } else {
+        data[storeId].push({
+          id: id,
+          content: innerText,
+          clicks: 1,
+        });
+      }
     }
-
-    console.log(data.elements_clicked);
   });
 
   const locationInfo = await fetchLocationInfo();
@@ -107,25 +122,5 @@ const logPath = () => {
 
   if (!data.visited_pages.includes(path)) {
     data.visited_pages.push(path);
-  }
-};
-
-const getElementInfo = (element) => {
-  if (!element) return null;
-
-  const tagName = element.tagName; //
-  const content = element.textContent.trim();
-  const id = element.id || null;
-  return { tag: tagName, id, content };
-};
-
-const updateData = (array, elementInfo) => {
-  const existing = array.find(
-    (item) => item.content === elementInfo.content && item.id === elementInfo.id
-  );
-  if (existing) {
-    existing.clicks += 1;
-  } else {
-    array.push({ ...elementInfo, clicks: 1 });
   }
 };

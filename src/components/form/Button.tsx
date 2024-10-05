@@ -30,7 +30,7 @@ const Button: FC<ButtonProps> = ({ children, className, type, onClick }) => {
       whileInView="animate"
       viewport={{ once: true, amount: 0.5 }}
       className={
-        "bg-emphasis text-background-100 px-6 py-2 rounded-md inline-flex items-center text-xl duration-200 ease-in-out hover:bg-emphasis-light hover:brightness-125 " +
+        "bg-emphasis px-6 py-2 rounded-md inline-flex items-center text-xl duration-200 ease-in-out hover:bg-emphasis-light hover:brightness-125 prevent-select " +
         className
       }
       type={type}

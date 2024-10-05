@@ -7,14 +7,12 @@ const Logout: FC = () => {
   const [, , removeCookie] = useCookies(['token']);
 
   useEffect(() => {
-    // Remove the cookie
     removeCookie('token', { path: '/' });
 
-    // Navigate to the home page
     navigate('/');
   }, [navigate, removeCookie]);
 
-  return null; // Return null as there is nothing to render
+  return null;
 };
 
 export default Logout;

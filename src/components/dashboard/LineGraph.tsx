@@ -1,7 +1,9 @@
 import { FC, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Select from "../form/Select";
 
 import axiosInstance from "../../modules/axiosInstance";
+import { fadeUp } from "../../animations/Animations";
 
 import {
   formatValue,
@@ -78,7 +80,12 @@ const LineGraph: FC<ContainerProps> = ({ id, startDate, endDate }) => {
   };
   const trackingName = capitalizeWords(graphDataKey.replace(/_/g, " "));
   return (
-    <>
+    <motion.div
+      variants={fadeUp}
+      initial="initial"
+      viewport={{ once: true, amount: 0.5 }}
+      whileInView="animate"
+    >
       <div className="flex justify-between items-center w-full pl-[79px] pr-10 pt-6 rounded-tl-md rounded-tr-md bg-default-300 md:flex-col md:pl-5 md:pr-6">
         <h2 className="text-2xl font-bold text-emphasis font-ibm md:text-xl">
           {trackingName.toUpperCase()}
@@ -132,7 +139,7 @@ const LineGraph: FC<ContainerProps> = ({ id, startDate, endDate }) => {
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </>
+    </motion.div>
   );
 };
 

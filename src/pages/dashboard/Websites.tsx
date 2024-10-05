@@ -57,32 +57,8 @@ const Websites: FC = () => {
           ) : (
             <p className="text-primary"></p>
           )}
-          <Website
-            key={1}
-            domain={'adnanskopljak'}
-            active={true}
-            id={'1'}
-          />
-          <Website
-            key={2}
-            domain={'paulpravdic'}
-            active={true}
-            id={'2'}
-          />
-          <Website
-            key={3}
-            domain={'twitter'}
-            active={true}
-            id={'3'}
-          />
-          <Website
-            key={4}
-            domain={'facebook'}
-            active={true}
-            id={'4'}
-          />
         </div>
-        <Link to="/dashboard/new">
+        <Link to="/dashboard/add-website">
           <Button className="mt-10">Add Website</Button>
         </Link>
       </main>
