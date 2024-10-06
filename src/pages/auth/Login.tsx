@@ -36,6 +36,7 @@ const Auth: FC = () => {
     axiosInstance
       .post("/auth/login", { email, password })
       .then((res) => {
+        console.log(res.data);
         setCookie("token", res.data.token, { path: "/" });
         navigate("/");
       })

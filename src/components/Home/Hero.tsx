@@ -206,7 +206,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
           width={400}
           height={400}
           loading="lazy"
-          title="title"
+          title="Clickpulse logo"
         />
       </div>
 
