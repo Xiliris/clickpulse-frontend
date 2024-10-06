@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 import {
   createBrowserRouter,
@@ -7,27 +7,30 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Register";
-import Verify from "./pages/auth/Verify";
-import Reset from "./pages/auth/Reset";
-import Logout from "./pages/auth/Logout";
-import AddWebsite from "./pages/dashboard/AddWebsite";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Websites from "./pages/dashboard/Websites";
-import Maintenance from "./pages/Maintenance";
-import Protected from "./modules/Protected";
-import Error from "./pages/error/Error";
-import Contact from "./pages/Contact";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/Terms";
-import AboutUs from "./pages/Aboutus";
-import PaymentPage from "./pages/Payment";
-import PricingMore from "./pages/Pricingmore";
-import ProtectedWebsite from "./modules/ProtectedWebsite";
-import BillingAddress from "./pages/BillingAddress";
-
+import Home from './pages/Home';
+import Login from './pages/auth/Login';
+import Signup from './pages/auth/Register';
+import Verify from './pages/auth/Verify';
+import Reset from './pages/auth/Reset';
+import Logout from './pages/auth/Logout';
+import AddWebsite from './pages/dashboard/AddWebsite';
+import Dashboard from './pages/dashboard/Dashboard';
+import Websites from './pages/dashboard/Websites';
+import Maintenance from './pages/Maintenance';
+import Protected from './modules/Protected';
+import Error from './pages/error/Error';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/Terms';
+import AboutUs from './pages/Aboutus';
+//import PaymentPage from './pages/Payment';
+import PricingMore from './pages/Pricingmore';
+import ProtectedWebsite from './modules/ProtectedWebsite';
+//import BillingAddress from './pages/BillingAddress';
+import Lightweight from './pages/Lightweight';
+import PrivacyCommitment from './pages/PrivacyCommitment';
+import EasyToUse from './pages/EasyToUse';
+import ConstantlyImproving from './pages/ConstantlyImproving';
 const AppLayout = () => (
   <>
     <ScrollRestoration />
@@ -88,6 +91,22 @@ const router = createBrowserRouter([
         element: <PricingMore />,
       },
       {
+        path: `/lightweight`,
+        element: <Lightweight />,
+      },
+      {
+        path: `/privacy-commitment`,
+        element: <PrivacyCommitment />,
+      },
+      {
+        path: `/easy-to-use`,
+        element: <EasyToUse />,
+      },
+      {
+        path: `/constantly-improving`,
+        element: <ConstantlyImproving />,
+      },
+      /*{
         path: `/billing-address`,
         element: (
           <Protected>
@@ -102,7 +121,7 @@ const router = createBrowserRouter([
             <PaymentPage />
           </Protected>
         ),
-      },
+      },*/
       {
         path: "/dashboard",
         element: (
@@ -141,7 +160,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "*",
+        path: '*',
         element: (
           <Error
             type={404}
@@ -157,6 +176,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   useEffect(() => {
+    const heading = document.getElementById('main-heading');
     const heading = document.getElementById("main-heading");
     if (heading) {
       heading.remove();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -26,6 +26,37 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({
   toggleMobileMenu,
   isMobileMenuOpen,
 }) => {
+  const profileMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(event.target as Node)
+      ) {
+        if (isProfileMenuOpen) {
+          toggleProfileMenu();
+        }
+        if (isLogged) {
+          toggleLoggedMenu();
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [
+    isProfileMenuOpen,
+    isLogged,
+    toggleProfileMenu,
+    toggleLoggedMenu,
+  ]);
+
   return (
     <>
       {user && user.username ? (
@@ -65,24 +96,24 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({
           <div className="flex justify-between items-center py-4 cursor-pointer">
             <FontAwesomeIcon
               icon={faUser}
-              className="text-secondary-100 mr-2"
+              className="text-secondary-100"
               onClick={toggleLoggedMenu}
             />
           </div>
 
           {/* Login/Signup Dropdown */}
           {isLogged && (
-            <div className="absolute top-full right-0 w-40 bg-default-300 text-primary rounded-lg shadow-lg flex flex-col z-10">
+            <div className="absolute top-full right-0 w-40 bg-default-100 text-primary rounded-lg shadow-lg flex flex-col z-10">
               <Link
                 to="/login"
-                className="py-4 px-4 w-full text-start text-primary border-b-[1px] border-gray-600 hover:text-emphasis"
+                className="py-2 mt-2 px-4 w-full text-start text-primary hover:text-emphasis"
                 onClick={toggleLoggedMenu}
               >
                 Log in
               </Link>
               <Link
                 to="/signup"
-                className="py-4 px-4 w-full text-start text-primary hover:text-emphasis"
+                className="py-2 mb-2 px-4 w-full text-start text-primary hover:text-emphasis"
                 onClick={toggleLoggedMenu}
               >
                 Sign up

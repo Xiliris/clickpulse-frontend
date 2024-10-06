@@ -1,15 +1,15 @@
-import { FC, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { CookiesProvider, useCookies } from "react-cookie";
-import { motion } from "framer-motion";
-import axiosInstance from "../../modules/axiosInstance";
+import { FC, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CookiesProvider, useCookies } from 'react-cookie';
+import { motion } from 'framer-motion';
+import axiosInstance from '../../modules/axiosInstance';
 
-import Navbar from "../../components/Navbar";
-import Header from "../../components/Header";
-import Button from "../../components/form/Button";
+import Navbar from '../../components/Navbar';
+import Header from '../../components/Header';
+import Button from '../../components/form/Button';
 
-import validateDomain from "../../utils/form/validateDomain";
-import { websiteUrl } from "../../../config.json";
+import validateDomain from '../../utils/form/validateDomain';
+import { websiteUrl } from '../../../config.json';
 
 const AddWebsite: FC = () => {
   const domainRef = useRef<HTMLInputElement>(null);
@@ -18,18 +18,18 @@ const AddWebsite: FC = () => {
   const [step, setStep] = useState<number>(1);
 
   const [copied, setCopied] = useState({
-    border: "border-primary",
-    color: "text-primary",
+    border: 'border-primary',
+    color: 'text-primary',
   });
 
-  const [cookies] = useCookies(["token"]);
+  const [cookies] = useCookies(['token']);
   const navigate = useNavigate();
 
   function handleNext() {
     const domainValue = domainRef.current?.value.toString();
 
     if (!domainValue) {
-      setError("Domain is required");
+      setError('Domain is required');
       return;
     }
 
@@ -48,17 +48,17 @@ const AddWebsite: FC = () => {
       `<script defer data-domain="https://${domain}" src="${websiteUrl}/js/script.js"></script>`
     );
 
-    setCopied({ border: "border-emphasis", color: "text-emphasis" });
+    setCopied({ border: 'border-emphasis', color: 'text-emphasis' });
   }
 
   async function handleDomainSubmission() {
     try {
-      await axiosInstance.post("/dashboard/new", {
+      await axiosInstance.post('/dashboard/new', {
         token: cookies.token,
         domain: `https://${domain}`,
       });
 
-      navigate("/dashboard");
+      navigate('/dashboard');
     } catch (error: any) {
       setError(error.response.data);
     }
@@ -74,8 +74,9 @@ const AddWebsite: FC = () => {
           <div className="flex flex-col items-center">
             <div
               className={`w-10 h-10 flex justify-center items-center rounded-full ${
-                step === 1 ? "bg-emphasis text-white" : "bg-emphasis text-white"
-
+                step === 1
+                  ? 'bg-emphasis text-white'
+                  : 'bg-emphasis text-white'
               }`}
             >
               1
@@ -84,15 +85,14 @@ const AddWebsite: FC = () => {
 
           <motion.div
             className="flex-grow h-1 bg-default-100 relative mx-4"
-            initial={{ width: "0%" }}
-            animate={{ width: step === 2 ? "100%" : "0%" }}
-
+            initial={{ width: '0%' }}
+            animate={{ width: step === 2 ? '100%' : '0%' }}
             transition={{ duration: 0.6 }}
           >
             <motion.div
               className="absolute top-0 left-0 h-full bg-emphasis"
-              initial={{ width: "0%" }}
-              animate={{ width: step === 2 ? "100%" : "0%" }}
+              initial={{ width: '0%' }}
+              animate={{ width: step === 2 ? '100%' : '0%' }}
               transition={{ duration: 0.6 }}
             />
           </motion.div>
@@ -100,11 +100,11 @@ const AddWebsite: FC = () => {
           <div className="flex flex-col items-center">
             <motion.div
               className={`w-10 h-10 flex justify-center items-center rounded-full ${
-                step === 2 ? "text-white" : "text-primary"
+                step === 2 ? 'text-white' : 'text-primary'
               }`}
-              initial={{ backgroundColor: "bg-default-100" }}
+              initial={{ backgroundColor: 'bg-default-100' }}
               animate={{
-                backgroundColor: step === 2 ? "#3CBAB1" : "#252A34",
+                backgroundColor: step === 2 ? '#3CBAB1' : '#252A34',
               }}
               transition={{
                 delay: step === 2 ? 0.6 : 0,
@@ -141,7 +141,9 @@ const AddWebsite: FC = () => {
             </div>
 
             {error && (
-              <p className="text-red-400 text-sm mt-3 text-center">{error}</p>
+              <p className="text-red-400 text-sm mt-3 text-center">
+                {error}
+              </p>
             )}
 
             <div className="w-full flex justify-end mt-5 p-2">
@@ -153,9 +155,12 @@ const AddWebsite: FC = () => {
         {/* Step 2: Script Copy */}
         {step === 2 && (
           <div className="mt-10 flex flex-col justify-center items-start p-5 rounded-md min-w-96">
-            <h2 className="text-emphasis text-2xl mb-5">Website Details</h2>
+            <h2 className="text-emphasis text-2xl mb-5">
+              Website Details
+            </h2>
             <p className="text-primary mb-1">
-              Add script in <code>&lt;head&gt;</code> of your HTML document.
+              Add script in <code>&lt;head&gt;</code> of your HTML
+              document.
             </p>
             <p
               className={`w-full flex justify-start items-center border border-secondary-100 rounded-md overflow-hidden resize-none bg-transparent text-primary py-2 px-4 ${copied.border}`}

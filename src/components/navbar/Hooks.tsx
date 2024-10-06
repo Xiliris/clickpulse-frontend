@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { useCookies } from "react-cookie";
-import { useScroll } from "framer-motion";
-import axiosInstance from "../../modules/axiosInstance";
+import { useState, useEffect, useRef } from 'react';
+import { useCookies } from 'react-cookie';
+import { useScroll } from 'framer-motion';
+import axiosInstance from '../../modules/axiosInstance';
 
 const useProfileMenu = () => {
-  const [cookies] = useCookies(["token"]);
+  const [cookies] = useCookies(['token']);
   const { scrollY } = useScroll();
   const [user, setUser] = useState<any>({});
   const [scrollingUp, setScrollingUp] = useState(true);
@@ -63,12 +63,12 @@ const useProfileMenu = () => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
   }, []);
 
@@ -86,9 +86,15 @@ const useProfileMenu = () => {
     setIsLogged(!isLogged);
   };
 
+  function handleScroll() {
+    setIsLogged(false);
+  }
+
+  document.addEventListener('scroll', handleScroll);
+
   async function getProfile() {
     try {
-      const res = await axiosInstance.post("/auth/me", {
+      const res = await axiosInstance.post('/auth/me', {
         token: cookies.token,
       });
       setUser(res.data);
