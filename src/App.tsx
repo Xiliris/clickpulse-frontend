@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -114,7 +116,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/payment',
+        path: "/payment",
         element: (
           <Protected>
             <PaymentPage />
@@ -159,25 +161,28 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '401',
+        path: '*',
         element: (
           <Error
-            type={401}
+            type={404}
             message={
-              "Oops! It looks like you're not authorized to access this section. Please log in or get in touch with our support team if you need assistance.!"
+              "Oops! This page doesn't exist. But don't worry, we'll help you find your way back."
             }
           />
         ),
-      },
-      {
-        path: '*',
-        element: <Error type={404} message={'Page not found!'} />,
       },
     ],
   },
 ]);
 
 export default function App() {
+  useEffect(() => {
+    const heading = document.getElementById('main-heading');
+    if (heading) {
+      heading.remove();
+    }
+  }, []);
+
   return (
     <>
       <RouterProvider router={router} />

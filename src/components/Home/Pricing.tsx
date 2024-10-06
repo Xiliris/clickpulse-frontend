@@ -26,7 +26,7 @@ const itemVariant = {
 
 export default function Hero() {
   return (
-    <section className="bg-default-100 py-32 relative">
+    <section className="bg-default-100 pb-16 pt-32 relative">
       <div className="custom-shape-divider-top-1723244705 absolute top-0 left-0">
         <svg
           data-name="Layer 1"
@@ -45,21 +45,21 @@ export default function Hero() {
         <div className="flex flex-wrap gap-8 justify-between xl:justify-center">
           {/* Basic */}
 
-          <Card plan="Basic Plan" price="$9.99" index={2}>
+          <Card plan="Basic Plan" price="$7.99" index={2}>
             <Item>10 users</Item>
             <Item>10 projects</Item>
             <Item>10GB storage</Item>
             <Item>Email support</Item>
           </Card>
           {/* Standard */}
-          <Card plan="Standard Plan" price="$29.99" index={1}>
+          <Card plan="Standard Plan" price="$14.99" index={1}>
             <Item>20 users</Item>
             <Item>20 projects</Item>
             <Item>20GB storage</Item>
             <Item>Priority email support</Item>
           </Card>
           {/* Premium */}
-          <Card plan="Premium Plan" price="$49.99" index={2}>
+          <Card plan="Premium Plan" price="$39.99" index={2}>
             <Item>Unlimited users</Item>
             <Item>Unlimited projects</Item>
             <Item>Unlimited storage</Item>

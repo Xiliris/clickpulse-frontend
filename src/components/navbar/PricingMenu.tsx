@@ -64,20 +64,20 @@ const PricingMenu = ({
           isPricingClicked ? 'max-h-60' : 'max-h-0'
         } ${
           isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
-        } bg-default-300 text-primary rounded-lg`}
+        } bg-default-300 lg:bg-default-200 text-primary rounded-lg`}
       >
         <ul className={`text-sm flex flex-col ${itemClassName}`}>
           <Link
             to="/pricing-more#monthly"
             onClick={closeMenu}
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+            className="flex justify-start items-center mt-2 py-2 w-full mx-auto text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Monthly</span>
           </Link>
           <Link
             to="/pricing-more#yearly"
             onClick={closeMenu}
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+            className="flex justify-start items-center py-2 w-full mx-auto text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Yearly</span>
           </Link>

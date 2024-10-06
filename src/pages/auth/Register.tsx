@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
+import Background from '../../assets/background.svg';
 
 import Input from '../../components/form/Input';
 import Button from '../../components/form/Button';
@@ -71,8 +72,12 @@ export default function Register() {
     <>
       <Header title="Register" />
 
-      <main className="min-h-screen flex items-center justify-center bg-default-200 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl w-full space-y-6">
+      <main className="min-h-screen flex items-center justify-center bg-default-200 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-5 rotate-12 scale-[1.45]"
+          style={{ backgroundImage: `url(${Background})` }}
+        ></div>
+        <div className="max-w-lg w-full space-y-8 bg-default-300 rounded-md p-10 z-20">
           <Link
             to="/"
             className="text-emphasis cursor-pointer block text-xl"
@@ -84,7 +89,7 @@ export default function Register() {
             src={Logo}
             alt="Logo"
           />
-          <h2 className=" text-center text-2xl font-extrabold text-primary">
+          <h2 className="mt-6 text-3xl font-extrabold text-primary text-center">
             Create a new account
           </h2>
           <form
@@ -125,32 +130,17 @@ export default function Register() {
               <p className="text-red-400">{errorMessage}</p>
             )}
 
-            <div className="text-center text-sm text-primary justify-between flex">
-              <Link
-                to="/login"
-                className="text-base text-emphasis hover:text-emphasis-light cursor-pointer ml-2"
-              >
-                <span className="text-primary">
-                  Already have an account?
-                </span>{' '}
-                Log in.
-              </Link>
-              <div>
+            <div className="justify-between flex pt-4">
+              <button className="px-6 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select bg-default-200 border-2 border-secondary-200 cursor-pointer">
                 <Link
-                  to="/"
-                  className="text-base text-emphasis hover:text-emphasis-light cursor-pointer"
+                  to="/login"
+                  className="text-secondary-100 cursor-pointer px-2"
                 >
-                  <span className="text-primary">
-                    Dont want to register?
-                  </span>{' '}
-                  Return home.
+                  Log In
                 </Link>
-              </div>
-            </div>
-            <div className=" flex justify-end">
-              <Button type="submit" className="text-center">
-                Register
-              </Button>
+              </button>
+
+              <Button>Register</Button>
             </div>
           </form>
         </div>

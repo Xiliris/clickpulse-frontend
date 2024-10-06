@@ -1,11 +1,19 @@
 import React, { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import Title from './Title';
+import Splash1 from '../../assets/splash1.svg';
+import Ikona1 from '../../assets/Ikona1.svg';
+import Ikona2 from '../../assets/Ikona2.svg';
+import Ikona3 from '../../assets/Ikona3.svg';
+import Ikona4 from '../../assets/Ikona4.svg';
+import Ikona5 from '../../assets/Ikona5.svg';
+import Ikona6 from '../../assets/Ikona6.svg';
 
 interface FlipCardProps {
   title: string;
   description: ReactNode;
   index: number;
+  img: string;
 }
 
 interface itemProp {
@@ -28,48 +36,9 @@ const itemVariant = {
   }),
 };
 
-const FlipCard: React.FC<FlipCardProps> = ({
-  title,
-  description,
-  index,
-}) => {
-  const isEven = index % 2 === 0;
-  const flexDirection = isEven ? 'flex-row-reverse' : 'flex-row';
-  const marginDirection = isEven ? 'ml-auto' : 'mr-auto';
-
-  return (
-    <motion.article
-      variants={itemVariant}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, amount: 0.5 }}
-      custom={{ index: index }}
-      className={`w-[70vw] md:w-full mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4 md:justify-center md:items-center`}
-      style={{ minHeight: '200px' }}
-    >
-      <div className="flex-shrink-0 w-1/2 md:w-full flex items-center justify-center">
-        <img
-          src="https://via.placeholder.com/150"
-          alt="Flip card image"
-          className={`w-5/6 h-auto object-cover ${marginDirection} md:mx-auto`}
-        />
-      </div>
-
-      <div className="flex flex-col justify-center w-1/2 md:w-full md:text-center">
-        <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
-          {title}
-        </h3>
-        <div className="text-lg xl:text-base text-primary mt-2 text-left md:text-center">
-          {description}
-        </div>
-      </div>
-    </motion.article>
-  );
-};
-
 export default function Hero() {
   return (
-    <section className="bg-default-200 py-12 z-10 mt-7 w-[70vw] md:w-[90vw] mx-auto sm:mt-[200px]">
+    <section className="bg-transparent py-16 lg:py-0 lg:pb-12 z-10 mt-7 w-[70vw] md:w-[90vw] mx-auto sm:mt-[200px]">
       <div className="mx-auto text-center relative">
         <Title>Website Analytics and Performance Tracking</Title>
 
@@ -100,6 +69,7 @@ export default function Hero() {
               </ul>
             }
             index={1}
+            img={Ikona1}
           />
           <FlipCard
             title="User Experience Analytics by Device & Browser"
@@ -122,6 +92,7 @@ export default function Hero() {
               </ul>
             }
             index={2}
+            img={Ikona2}
           />
           <FlipCard
             title="Content Optimization Analytics"
@@ -144,6 +115,7 @@ export default function Hero() {
               </ul>
             }
             index={3}
+            img={Ikona3}
           />
           <FlipCard
             title="Regional Traffic & Audience Analytics"
@@ -166,6 +138,7 @@ export default function Hero() {
               </ul>
             }
             index={4}
+            img={Ikona4}
           />
           <FlipCard
             title="Element Interaction Analytics"
@@ -188,6 +161,7 @@ export default function Hero() {
               </ul>
             }
             index={5}
+            img={Ikona5}
           />
           <FlipCard
             title="Upcoming Analytics Features"
@@ -212,9 +186,54 @@ export default function Hero() {
               </ul>
             }
             index={6}
+            img={Ikona6}
           />
         </div>
       </div>
     </section>
   );
 }
+
+const FlipCard: React.FC<FlipCardProps> = ({
+  title,
+  description,
+  index,
+  img,
+}) => {
+  const isEven = index % 2 === 0;
+  const flexDirection = isEven ? 'flex-row-reverse' : 'flex-row';
+  const marginDirection = isEven ? 'ml-auto' : 'mr-auto';
+
+  return (
+    <motion.article
+      variants={itemVariant}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.5 }}
+      custom={{ index: index }}
+      className={`w-[70vw] md:w-full mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4 md:justify-center md:items-center`}
+      style={{ minHeight: '200px' }}
+    >
+      <div className="flex-shrink-0 w-1/2 md:w-full flex items-center justify-center">
+        <img
+          src={img}
+          alt={`Image for ${title}`}
+          className={`w-4/6 h-auto object-cover ${marginDirection} md:mx-auto`}
+          width={400}
+          height={400}
+          loading="lazy"
+          title="title"
+        />
+      </div>
+
+      <div className="flex flex-col justify-center w-1/2 md:w-full md:text-center">
+        <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
+          {title}
+        </h3>
+        <div className="text-lg xl:text-base text-primary mt-2 text-left">
+          {description}
+        </div>
+      </div>
+    </motion.article>
+  );
+};

@@ -41,6 +41,10 @@ const Footer: FC<footerProps> = ({ width }) => {
               src={Logo}
               alt="Logo"
               className="md:w-[24px] w-[24px] cursor-pointer"
+              width={30}
+              height={30}
+              loading="eager"
+              title="Clickpulse logo"
             />
             <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:ml-0 md:mt-2">
               Clickpulse

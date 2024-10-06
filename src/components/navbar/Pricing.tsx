@@ -59,18 +59,18 @@ const PricingDropdown = ({
           isPricingClicked ? 'max-h-60' : 'max-h-0'
         } ${
           isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
-        } bg-default-300 text-primary rounded-lg`}
+        } bg-default-100 text-primary rounded-lg`}
       >
         <ul className={`text-sm flex flex-col ${itemClassName}`}>
           <HashLink
             to="/pricing-more#monthly"
-            className="py-4 px-4 text-primary text-lg border-b border-gray-600 hover:text-emphasis cursor-pointer"
+            className="py-2 mt-2 px-4 text-primary text-lg hover:text-emphasis cursor-pointer"
           >
             Monthly
           </HashLink>
           <HashLink
             to="/pricing-more#yearly"
-            className="py-4 px-4 text-primary text-lg hover:text-emphasis cursor-pointer"
+            className="py-2 mb-2 px-4 text-primary text-lg hover:text-emphasis cursor-pointer"
           >
             Yearly
           </HashLink>
