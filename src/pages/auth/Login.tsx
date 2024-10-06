@@ -9,6 +9,7 @@ import Input from "../../components/form/Input";
 import PasswordInput from "../../components/form/PasswordInput";
 import Button from "../../components/form/Button";
 import Logo from "../../assets/logo.svg";
+import Background from "../../assets/background.svg";
 
 const Auth: FC = () => {
   const navigate = useNavigate();
@@ -50,14 +51,18 @@ const Auth: FC = () => {
   return (
     <CookiesProvider>
       <Header title="Login" />
-      <main className="min-h-screen flex items-center justify-center bg-default-200">
-        <div className="max-w-lg w-[90vw] space-y-10">
+      <main className="relative flex items-center justify-center min-h-screen bg-default-200 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-5 rotate-12 scale-[1.45]"
+          style={{ backgroundImage: `url(${Background})` }}
+        ></div>
+        <div className="max-w-lg w-[90vw] space-y-10 bg-default-300 p-10 rounded-md z-10">
           <Link to="/" className="text-emphasis cursor-pointer block text-xl">
             <i className="fa-solid fa-arrow-left cursor-pointer"></i>
           </Link>
           <div className="text-center">
             <img className="mx-auto h-16 w-auto" src={Logo} alt="Logo" />
-            <h2 className="mt-8 text-center text-2xl font-extrabold text-primary">
+            <h2 className="mt-4 text-center text-2xl font-extrabold text-primary">
               Log in to your account
             </h2>
           </div>

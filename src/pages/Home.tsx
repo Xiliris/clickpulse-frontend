@@ -22,8 +22,8 @@ const variants = {
     y: 0,
     transition: {
       duration: 0.5,
-      type: 'tween',
-      ease: 'easeInOut',
+      type: "tween",
+      ease: "easeInOut",
     },
   },
 };
@@ -36,8 +36,8 @@ const variants2 = {
     opacity: 1,
     transition: {
       duration: 0.5,
-      type: 'tween',
-      ease: 'easeInOut',
+      type: "tween",
+      ease: "easeInOut",
     },
   },
 };
@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
       <Navbar />
-      <Header />
+      <Header title="Advanced Website Analytics and Performance Tracking" />
       <main className="relative min-w-screen min-h-screen flex flex-col justify-center items-center">
         <motion.section
           variants={variants2}
@@ -64,7 +64,11 @@ export default function Home() {
           >
             <h1 className="text-primary text-4xl xl:text-2xl lg:text-3xl md:text-4xl sm:text-xl leading-tight font-bold sm:mt-9 w-full">
               <span className="text-emphasis">Maximize</span> User Engagement
-              with <span className="text-emphasis">Powerful Insights</span>
+              with
+              <span className="text-emphasis">
+                {" "}
+                Powerful Analytics Insights
+              </span>
             </h1>
 
             <p className="text-secondary-100 mt-3 md:text-lg text-xl sm:w-full">
@@ -96,13 +100,17 @@ export default function Home() {
 
           <img
             src={Globe}
-            alt="Globe"
+            alt="Background splash art"
             className="globe-img -z-30"
             style={{
-              pointerEvents: 'none',
-              userSelect: 'none',
-              touchAction: 'none',
+              pointerEvents: "none",
+              userSelect: "none",
+              touchAction: "none",
             }}
+            width={1200}
+            height={1200}
+            loading="eager"
+            title="Backgroun splash art"
           />
         </motion.section>
       </main>

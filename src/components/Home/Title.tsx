@@ -1,9 +1,6 @@
-import React, { ReactNode } from 'react';
-import { motion } from 'framer-motion';
-import {
-  upperItemVariant,
-  lineVariant,
-} from '../../animations/Animations';
+import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { upperItemVariant, lineVariant } from "../../animations/Animations";
 
 interface TitleProps {
   children: ReactNode;
@@ -11,7 +8,7 @@ interface TitleProps {
 
 const Title: React.FC<TitleProps> = ({ children }) => {
   return (
-    <div className="relative text-center mb-8">
+    <div className="relative text-center mb-8 bg-transparent">
       <motion.h2
         variants={upperItemVariant}
         custom={{ yHeight: 10 }}
