@@ -5,7 +5,7 @@ import {
   RouterProvider,
   ScrollRestoration,
   Outlet,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
@@ -31,7 +31,6 @@ import Lightweight from './pages/Lightweight';
 import PrivacyCommitment from './pages/PrivacyCommitment';
 import EasyToUse from './pages/EasyToUse';
 import ConstantlyImproving from './pages/ConstantlyImproving';
-
 const AppLayout = () => (
   <>
     <ScrollRestoration />
@@ -44,51 +43,51 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home />,
       },
       {
-        path: '/login',
+        path: "/login",
         element: <Login />,
       },
       {
-        path: '/logout',
+        path: "/logout",
         element: <Logout />,
       },
       {
-        path: '/signup',
+        path: "/signup",
         element: <Signup />,
       },
       {
-        path: '/verify',
+        path: "/verify",
         element: <Verify />,
       },
       {
-        path: '/reset',
+        path: "/reset",
         element: <Reset />,
       },
       {
-        path: '/maintenance',
+        path: "/maintenance",
         element: <Maintenance />,
       },
       {
-        path: '/contact',
+        path: "/contact",
         element: <Contact />,
       },
       {
-        path: '/privacy',
+        path: "/privacy",
         element: <PrivacyPolicy />,
       },
       {
-        path: '/terms',
+        path: "/terms",
         element: <TermsOfService />,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <AboutUs />,
       },
       {
-        path: '/pricing-more',
+        path: "/pricing-more",
         element: <PricingMore />,
       },
       {
@@ -124,7 +123,7 @@ const router = createBrowserRouter([
         ),
       },*/
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: (
           <Protected>
             <Websites />
@@ -132,7 +131,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/add-website',
+        path: "/dashboard/add-website",
         element: (
           <Protected>
             <AddWebsite />
@@ -140,7 +139,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/:id',
+        path: "/dashboard/:id",
         element: (
           <Protected>
             <ProtectedWebsite>
@@ -150,7 +149,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '401',
+        path: "401",
         element: (
           <Error
             type={401}
@@ -178,6 +177,7 @@ const router = createBrowserRouter([
 export default function App() {
   useEffect(() => {
     const heading = document.getElementById('main-heading');
+    const heading = document.getElementById("main-heading");
     if (heading) {
       heading.remove();
     }

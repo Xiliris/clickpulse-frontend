@@ -9,6 +9,7 @@ import Ikona4 from '../../assets/Ikona4.svg';
 import Ikona5 from '../../assets/Ikona5.svg';
 import Ikona6 from '../../assets/Ikona6.svg';
 
+
 interface FlipCardProps {
   title: string;
   description: ReactNode;
@@ -31,7 +32,7 @@ const itemVariant = {
     transition: {
       delay: 0,
       duration: 0.2,
-      type: 'spring',
+      type: "spring",
     },
   }),
 };
@@ -48,19 +49,16 @@ export default function Hero() {
             description={
               <ul className="list-disc pl-5">
                 <li>
-                  <strong>Total visits</strong> show overall site
-                  reach, providing insights into traffic trends and
-                  growth over time.
+                  <strong>Total visits</strong> show overall site reach,
+                  providing insights into traffic trends and growth over time.
                 </li>
                 <li>
-                  <strong>Page visits</strong> reveal which content
-                  engages users, helping identify high-performing
-                  pages.
+                  <strong>Page visits</strong> reveal which content engages
+                  users, helping identify high-performing pages.
                 </li>
                 <li>
-                  <strong>Visit duration</strong> shows how long users
-                  are staying, indicating interest levels and
-                  engagement.
+                  <strong>Visit duration</strong> shows how long users are
+                  staying, indicating interest levels and engagement.
                 </li>
                 <li>
                   <strong>Bounce rate</strong> reflects navigation
@@ -76,18 +74,17 @@ export default function Hero() {
             description={
               <ul className="list-disc pl-5">
                 <li>
-                  Analyze traffic by <strong>device type</strong>{' '}
-                  (mobile, desktop, tablet) to optimize user
-                  experience across platforms.
+                  Analyze traffic by <strong>device type</strong> (mobile,
+                  desktop, tablet) to optimize user experience across platforms.
                 </li>
                 <li>
-                  Ensure compatibility across browsers such as{' '}
-                  <strong>Chrome, Safari, and Firefox</strong> for
-                  seamless performance.
+                  Ensure compatibility across browsers such as{" "}
+                  <strong>Chrome, Safari, and Firefox</strong> for seamless
+                  performance.
                 </li>
                 <li>
-                  Optimize for the best performance across devices to
-                  reduce load times and enhance mobile responsiveness.
+                  Optimize for the best performance across devices to reduce
+                  load times and enhance mobile responsiveness.
                 </li>
               </ul>
             }
@@ -99,18 +96,17 @@ export default function Hero() {
             description={
               <ul className="list-disc pl-5">
                 <li>
-                  <strong>Track entry, exit, and top pages</strong> to
-                  gain insights into what content attracts visitors
-                  initially and where they leave.
+                  <strong>Track entry, exit, and top pages</strong> to gain
+                  insights into what content attracts visitors initially and
+                  where they leave.
                 </li>
                 <li>
-                  Identify potential{' '}
-                  <strong>content or UX issues</strong> that may drive
-                  users away.
+                  Identify potential <strong>content or UX issues</strong> that
+                  may drive users away.
                 </li>
                 <li>
-                  Understand which content resonates most and optimize
-                  your strategy to boost engagement.
+                  Understand which content resonates most and optimize your
+                  strategy to boost engagement.
                 </li>
               </ul>
             }
@@ -122,18 +118,16 @@ export default function Hero() {
             description={
               <ul className="list-disc pl-5">
                 <li>
-                  <strong>Identify regions</strong> that drive the
-                  most traffic and tailor marketing strategies to key
-                  areas.
+                  <strong>Identify regions</strong> that drive the most traffic
+                  and tailor marketing strategies to key areas.
                 </li>
                 <li>
-                  Analyze engagement patterns in different locations
-                  to improve content relevancy.
+                  Analyze engagement patterns in different locations to improve
+                  content relevancy.
                 </li>
                 <li>
-                  Create <strong>localized content</strong> based on
-                  regional trends to enhance user experience and boost
-                  conversions.
+                  Create <strong>localized content</strong> based on regional
+                  trends to enhance user experience and boost conversions.
                 </li>
               </ul>
             }
@@ -146,17 +140,15 @@ export default function Hero() {
               <ul className="list-disc pl-5">
                 <li>
                   <strong>Track button clicks</strong> to measure the
-                  effectiveness of your calls-to-action and drive
-                  conversions.
+                  effectiveness of your calls-to-action and drive conversions.
                 </li>
                 <li>
-                  Monitor anchor clicks to optimize internal linking
-                  and guide users to relevant content efficiently.
+                  Monitor anchor clicks to optimize internal linking and guide
+                  users to relevant content efficiently.
                 </li>
                 <li>
-                  Refine UI elements to boost{' '}
-                  <strong>user navigation</strong> and improve the
-                  overall conversion funnel.
+                  Refine UI elements to boost <strong>user navigation</strong>{" "}
+                  and improve the overall conversion funnel.
                 </li>
               </ul>
             }
@@ -168,20 +160,19 @@ export default function Hero() {
             description={
               <ul className="list-disc pl-5">
                 <li>
-                  <strong>Live tracking</strong> will enable real-time
-                  user interaction monitoring, providing insights as
-                  users navigate your site.
+                  <strong>Live tracking</strong> will enable real-time user
+                  interaction monitoring, providing insights as users navigate
+                  your site.
                 </li>
                 <li>
-                  <strong>Scroll depth tracking</strong> will reveal
-                  how far down users scroll on your pages, helping
-                  identify engagement levels.
+                  <strong>Scroll depth tracking</strong> will reveal how far
+                  down users scroll on your pages, helping identify engagement
+                  levels.
                 </li>
                 <li>
-                  <strong>Heat maps</strong> will visualize user
-                  interactions like clicks and hovers, giving insight
-                  into attention hotspots and optimizing layouts
-                  accordingly.
+                  <strong>Heat maps</strong> will visualize user interactions
+                  like clicks and hovers, giving insight into attention hotspots
+                  and optimizing layouts accordingly.
                 </li>
               </ul>
             }

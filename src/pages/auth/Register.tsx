@@ -132,6 +132,7 @@ export default function Register() {
 
             <div className="justify-between flex pt-4">
               <button className="px-6 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select bg-default-200 border-2 border-secondary-200 cursor-pointer">
+
                 <Link
                   to="/login"
                   className="text-secondary-100 cursor-pointer px-2"
