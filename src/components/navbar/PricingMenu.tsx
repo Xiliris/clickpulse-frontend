@@ -77,17 +77,17 @@ const PricingMenu = ({
           <Link
             to="/pricing-more#yearly"
             onClick={closeMenu}
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Yearly</span>
           </Link>
-          <Link
+          {/*<Link
             to="/pricing-more#plans"
             onClick={closeMenu}
             className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Plan</span>
-          </Link>
+          </Link>*/}
         </ul>
       </div>
     </div>

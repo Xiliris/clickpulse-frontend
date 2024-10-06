@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import axiosInstance from '../../modules/axiosInstance';
 
 import Navbar from '../../components/Navbar';
-import Header from '../../components/header';
+import Header from '../../components/Header';
 import Button from '../../components/form/Button';
 
 import validateDomain from '../../utils/form/validateDomain';
@@ -67,13 +67,13 @@ const AddWebsite: FC = () => {
   return (
     <CookiesProvider>
       <Navbar />
-      <Header title="New Website" />
+      <Header title="Add Website" />
       <main className="mt-40 flex flex-col justify-center items-center w-[80%] m-auto">
         {/* Steps in creating */}
         <div className="flex justify-center items-center mb-10 w-full max-w-lg">
           <div className="flex flex-col items-center">
             <div
-              className={`w-16 h-16 flex justify-center items-center rounded-full ${
+              className={`w-10 h-10 flex justify-center items-center rounded-full ${
                 step === 1
                   ? 'bg-emphasis text-white'
                   : 'bg-emphasis text-white'
@@ -99,7 +99,7 @@ const AddWebsite: FC = () => {
 
           <div className="flex flex-col items-center">
             <motion.div
-              className={`w-16 h-16 flex justify-center items-center rounded-full ${
+              className={`w-10 h-10 flex justify-center items-center rounded-full ${
                 step === 2 ? 'text-white' : 'text-primary'
               }`}
               initial={{ backgroundColor: 'bg-default-100' }}
@@ -154,11 +154,11 @@ const AddWebsite: FC = () => {
 
         {/* Step 2: Script Copy */}
         {step === 2 && (
-          <div className="mt-12 flex bg-default-300 flex-col justify-center items-center max-w-lg mx-auto p-5 rounded-md">
-            <h2 className="text-emphasis text-2xl pb-4">
+          <div className="mt-10 flex flex-col justify-center items-start p-5 rounded-md min-w-96">
+            <h2 className="text-emphasis text-2xl mb-5">
               Website Details
             </h2>
-            <p className="text-primary text-lg text-center mb-6">
+            <p className="text-primary mb-1">
               Add script in <code>&lt;head&gt;</code> of your HTML
               document.
             </p>

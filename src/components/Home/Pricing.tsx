@@ -104,16 +104,21 @@ const Card: FC<CardInterface> = ({
       viewport={{ once: true, amount: 0.5 }}
       className={`relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform max-w-96 ${className}`}
     >
-      <div className="relative flex flex-col ">
+      <div className="relative flex flex-col w-fit mx-auto">
         <span className="text-primary text-3xl">{plan}</span>
-        <p className="mt-1 text-secondary-100 text-4xl">{price}</p>
+        <p className="text-xl text-secondary-100 mb-2 text-center w-fit mx-auto flex justify-center items-center">
+          <span className="relative cross-line">{price}</span>
+          <span className="text-emphasis ml-4 font-bold">
+            <div className="pulse">FREE</div>
+          </span>
+        </p>
       </div>
       <hr className="border-[#4C5366]" />
       <ul className="flex flex-col gap-2 flex-grow">{children}</ul>
       <div>
-        <Link to={`/billing-address`}>
+        <Link to={`/signup`}>
           <Button className="flex justify-between w-full">
-            Upgrade now
+            Free While in Beta
             <i className="fa-solid fa-arrow-right cursor-pointer"></i>
           </Button>
         </Link>

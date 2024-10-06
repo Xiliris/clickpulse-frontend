@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faBars } from "@fortawesome/free-solid-svg-icons";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo.svg";
 import WhyClickpulse from "./WhyClickpulse";
 import Community from "./Community";
 import PricingMenu from "./PricingMenu";

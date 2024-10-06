@@ -1,5 +1,19 @@
 {
   "apiBaseUrl": "http://localhost:8080",
   "websiteUrl": "http://localhost:5173",
-  "supportEmail": "support@clickpulse.xyz"
+  "supportEmail": "support@clickpulse.xyz",
+  "plans": {
+    "basic": {
+      "monthly": 7.99,
+      "yearly": 79.99
+    },
+    "standard": {
+      "monthly": 19.99,
+      "yearly": 199.99
+    },
+    "premium": {
+      "monthly": 39.99,
+      "yearly": 399.99
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Button from '../../components/form/Button';
 import { Link } from 'react-router-dom';
+import { supportEmail } from '../../../config.json';
 
 interface ErrorProps {
   type: number;
@@ -24,10 +25,10 @@ const Error: FC<ErrorProps> = ({ type, message }) => {
         <p className="text-primary mt-4">
           To report an error contact us at <br />
           <a
-            href="mailto:clickpulse.team@gmail.com"
+            href={`mailto:${supportEmail}`}
             className="text-emphasis cursor-pointer"
           >
-            clickpulse.team@gmail.com
+            {supportEmail}
           </a>
         </p>
       </div>
