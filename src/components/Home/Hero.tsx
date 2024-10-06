@@ -2,6 +2,12 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Title from "./Title";
 import Splash1 from "../../assets/splash1.svg";
+import Ikona1 from "../../assets/Ikona1.svg";
+import Ikona2 from "../../assets/Ikona2.svg";
+import Ikona3 from "../../assets/Ikona3.svg";
+import Ikona4 from "../../assets/Ikona4.svg";
+import Ikona5 from "../../assets/Ikona5.svg";
+import Ikona6 from "../../assets/Ikona6.svg";
 
 interface FlipCardProps {
   title: string;
@@ -16,7 +22,7 @@ interface itemProp {
 
 const itemVariant = {
   initial: {
-    y: 50,
+    y: 100,
     opacity: 0,
   },
   animate: ({ index }: itemProp) => ({
@@ -24,8 +30,8 @@ const itemVariant = {
     opacity: 1,
     transition: {
       delay: 0,
-      duration: 0.2,
-      type: "spring",
+      duration: 0.1,
+      type: "linear",
     },
   }),
 };
@@ -36,7 +42,7 @@ export default function Hero() {
       <div className="mx-auto text-center relative">
         <Title>Website Analytics and Performance Tracking</Title>
 
-        <div className="flex flex-col gap-8 mt-12 md:flex">
+        <div className="flex flex-col gap-16 mt-12 md:flex">
           <FlipCard
             title="Site Engagement Analytics"
             description={
@@ -60,7 +66,7 @@ export default function Hero() {
               </ul>
             }
             index={1}
-            img={Splash1}
+            img={Ikona1}
           />
           <FlipCard
             title="User Experience Analytics by Device & Browser"
@@ -82,7 +88,7 @@ export default function Hero() {
               </ul>
             }
             index={2}
-            img={Splash1}
+            img={Ikona2}
           />
           <FlipCard
             title="Content Optimization Analytics"
@@ -104,7 +110,7 @@ export default function Hero() {
               </ul>
             }
             index={3}
-            img={Splash1}
+            img={Ikona3}
           />
           <FlipCard
             title="Regional Traffic & Audience Analytics"
@@ -125,7 +131,7 @@ export default function Hero() {
               </ul>
             }
             index={4}
-            img={Splash1}
+            img={Ikona4}
           />
           <FlipCard
             title="Element Interaction Analytics"
@@ -146,7 +152,7 @@ export default function Hero() {
               </ul>
             }
             index={5}
-            img={Splash1}
+            img={Ikona5}
           />
           <FlipCard
             title="Upcoming Analytics Features"
@@ -170,7 +176,7 @@ export default function Hero() {
               </ul>
             }
             index={6}
-            img={Splash1}
+            img={Ikona6}
           />
         </div>
       </div>
@@ -202,7 +208,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
         <img
           src={img}
           alt={`Image for ${title}`}
-          className={`w-4/6 h-auto object-cover ${marginDirection} md:mx-auto`}
+          className={`h-auto object-cover ${marginDirection} md:mx-auto`}
           width={400}
           height={400}
           loading="lazy"
@@ -211,10 +217,10 @@ const FlipCard: React.FC<FlipCardProps> = ({
       </div>
 
       <div className="flex flex-col justify-center w-1/2 md:w-full md:text-center">
-        <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
+        <h3 className="text-4xl xl:text-2xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
           {title}
         </h3>
-        <div className="text-lg xl:text-base text-primary mt-2 text-left">
+        <div className="text-xl xl:text-base text-primary mt-2 text-left">
           {description}
         </div>
       </div>

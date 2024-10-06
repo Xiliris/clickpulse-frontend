@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import { useCallback, FC } from "react";
-import Logo from "../../assets/logo.svg";
-import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
+import { useCallback, FC } from 'react';
+import Logo from '../../assets/logo.svg';
+import { motion } from 'framer-motion';
 import {
   lineVariant,
   lowerItemVariant,
   upperItemVariant,
-} from "../../animations/Animations";
+} from '../../animations/Animations';
 
 interface footerProps {
   width?: number;
@@ -16,11 +16,11 @@ const Footer: FC<footerProps> = ({ width }) => {
   const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, []);
 
-  const containerWidth = width ? `w-[${width}vw]` : "w-[70vw]";
+  const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
 
   return (
     <footer className="bg-default-200 text-primary py-10">
@@ -123,6 +123,14 @@ const Footer: FC<footerProps> = ({ width }) => {
               className="hover:text-emphasis cursor-pointer"
             >
               <i className="fa-brands fa-linkedin text-xl transform transition-transform duration-300 hover:scale-125 cursor-pointer"></i>
+            </a>
+            <a
+              href="https://discord.gg/9eWFeSW7pz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-emphasis cursor-pointer"
+            >
+              <i className="fab fa-discord text-xl transform transition-transform duration-300 hover:scale-125 cursor-pointer"></i>
             </a>
           </div>
         </motion.div>

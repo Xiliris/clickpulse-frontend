@@ -1,16 +1,16 @@
-import { Suspense, lazy, ReactNode, FC } from "react";
-import { Link } from "react-router-dom";
-import Loading from "../components/Loading";
-import Globe from "../assets/globe.png";
-import { motion } from "framer-motion";
-import "./globe.css";
+import { Suspense, lazy, ReactNode, FC } from 'react';
+import { Link } from 'react-router-dom';
+import Loading from '../components/Loading';
+import Globe from '../assets/globe.png';
+import { motion } from 'framer-motion';
+import './globe.css';
 
-const Navbar = lazy(() => import("../components/Navbar"));
-const Header = lazy(() => import("../components/Header"));
-const Button = lazy(() => import("../components/form/Button"));
-const Pricing = lazy(() => import("../components/home/Pricing"));
-const Hero = lazy(() => import("../components/home/Hero"));
-const Footer = lazy(() => import("../components/home/Footer"));
+const Navbar = lazy(() => import('../components/Navbar'));
+const Header = lazy(() => import('../components/Header'));
+const Button = lazy(() => import('../components/form/Button'));
+const Pricing = lazy(() => import('../components/home/Pricing'));
+const Hero = lazy(() => import('../components/home/Hero'));
+const Footer = lazy(() => import('../components/home/Footer'));
 
 const variants = {
   initial: {
@@ -63,18 +63,21 @@ export default function Home() {
             className="md:w-full w-[60%] sm:w-full"
           >
             <h1 className="text-primary text-4xl xl:text-2xl lg:text-3xl md:text-4xl sm:text-xl leading-tight font-bold sm:mt-9 w-full">
-              <span className="text-emphasis">Maximize</span> User Engagement
-              with
+              <span className="text-emphasis">Maximize</span> User
+              Engagement with
               <span className="text-emphasis">
-                {" "}
+                {' '}
                 Powerful Analytics Insights
               </span>
             </h1>
 
             <p className="text-secondary-100 mt-3 md:text-lg text-xl sm:w-full">
-              Leverage{" "}
-              <span className="text-primary font-bold">Clickpulse</span> to
-              understand and optimize user behavior like never before.
+              Leverage{' '}
+              <span className="text-primary font-bold">
+                Clickpulse
+              </span>{' '}
+              to understand and optimize user behavior like never
+              before.
             </p>
 
             <ul className="mt-6 space-y-4 text-secondary-100 list-inside sm:w-full">
@@ -86,11 +89,11 @@ export default function Home() {
             </ul>
 
             <p className="text-secondary-100 mt-4 md:text-lg text-xl sm:w-full">
-              Benefit from dedicated customer support and expert insights that
-              set us apart.
+              Benefit from dedicated customer support and expert
+              insights that set us apart.
             </p>
 
-            <Link to="/login">
+            <Link to="/signup">
               <Button className="mt-5 sm:px-4 sm:w-full justify-between gap-5">
                 Start Your Free Trial!
                 <i className="fa-solid fa-arrow-right cursor-pointer"></i>
@@ -137,7 +140,11 @@ const Item: FC<itemProps> = ({ children }) => {
         viewBox="0 0 24 24"
         strokeWidth="2"
       >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12l5 5L19 7" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M5 12l5 5L19 7"
+        />
       </svg>
       <span>{children}</span>
     </li>

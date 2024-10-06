@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import SplitSection from "../components/SplitSection";
+/*import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import SplitSection from '../components/SplitSection';
 
 export const PlanComparisonTable = () => {
   const [selectedPlan, setSelectedPlan] = useState<
-    "free" | "basic" | "standard" | "premium"
-  >("free");
+    'free' | 'basic' | 'standard' | 'premium'
+  >('free');
   const [isMobile, setIsMobile] = useState(false);
 
   const tableRowVariants = {
@@ -22,74 +22,74 @@ export const PlanComparisonTable = () => {
 
   const rows = [
     {
-      feature: "Monthly Price",
-      free: "Free for 14 days",
-      basic: "$7.99",
-      standard: "$14.99",
-      premium: "$39.99",
+      feature: 'Monthly Price',
+      free: 'Free for 14 days',
+      basic: '$7.99',
+      standard: '$14.99',
+      premium: '$39.99',
     },
     {
-      feature: "Custom Dashboards",
-      free: "1 dashboard",
-      basic: "3 dashboards",
-      standard: "7 dashboards",
-      premium: "Unlimited",
+      feature: 'Custom Dashboards',
+      free: '1 dashboard',
+      basic: '3 dashboards',
+      standard: '7 dashboards',
+      premium: 'Unlimited',
     },
     {
-      feature: "Basic Analytics",
-      free: "Yes",
-      basic: "Yes",
-      standard: "Yes",
-      premium: "Yes",
+      feature: 'Basic Analytics',
+      free: 'Yes',
+      basic: 'Yes',
+      standard: 'Yes',
+      premium: 'Yes',
     },
     {
-      feature: "Advanced Analytics",
-      free: "No",
-      basic: "No",
-      standard: "Yes",
-      premium: "Yes",
+      feature: 'Advanced Analytics',
+      free: 'No',
+      basic: 'No',
+      standard: 'Yes',
+      premium: 'Yes',
     },
     {
-      feature: "Real-time Analytics",
-      free: "No",
-      basic: "No",
-      standard: "No",
-      premium: "Yes",
+      feature: 'Real-time Analytics',
+      free: 'No',
+      basic: 'No',
+      standard: 'No',
+      premium: 'Yes',
     },
     {
-      feature: "Team Members",
-      free: "1 user",
-      basic: "1 user",
-      standard: "3 users",
-      premium: "10 users",
+      feature: 'Team Members',
+      free: '1 user',
+      basic: '1 user',
+      standard: '3 users',
+      premium: '10 users',
     },
     {
-      feature: "Goal Tracking",
-      free: "No",
-      basic: "Yes",
-      standard: "Yes",
-      premium: "Yes",
+      feature: 'Goal Tracking',
+      free: 'No',
+      basic: 'Yes',
+      standard: 'Yes',
+      premium: 'Yes',
     },
     {
-      feature: "Event Tracking",
-      free: "Limited to 3 events",
-      basic: "10 events",
-      standard: "30 events",
-      premium: "Unlimited",
+      feature: 'Event Tracking',
+      free: 'Limited to 3 events',
+      basic: '10 events',
+      standard: '30 events',
+      premium: 'Unlimited',
     },
     {
-      feature: "User Journey Tracking",
-      free: "No",
-      basic: "No",
-      standard: "Yes",
-      premium: "Yes",
+      feature: 'User Journey Tracking',
+      free: 'No',
+      basic: 'No',
+      standard: 'Yes',
+      premium: 'Yes',
     },
     {
-      feature: "Priority Support",
-      free: "No",
-      basic: "No",
-      standard: "Yes",
-      premium: "Yes",
+      feature: 'Priority Support',
+      free: 'No',
+      basic: 'No',
+      standard: 'Yes',
+      premium: 'Yes',
     },
   ];
 
@@ -98,8 +98,8 @@ export const PlanComparisonTable = () => {
       setIsMobile(window.innerWidth <= 768);
     };
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -127,8 +127,8 @@ export const PlanComparisonTable = () => {
         </motion.p>
       </div>
 
-      {/* Mobile dropdown menu */}
-      {isMobile && (
+      /* Mobile dropdown menu */
+/*{isMobile && (
         <div className="mb-8 text-center">
           <label
             htmlFor="plan-select"
@@ -142,7 +142,11 @@ export const PlanComparisonTable = () => {
             value={selectedPlan}
             onChange={(e) =>
               setSelectedPlan(
-                e.target.value as "free" | "basic" | "standard" | "premium"
+                e.target.value as
+                  | 'free'
+                  | 'basic'
+                  | 'standard'
+                  | 'premium'
               )
             }
           >
@@ -154,18 +158,27 @@ export const PlanComparisonTable = () => {
         </div>
       )}
 
-      <div className="w-[90vw] mx-auto overflow-x-auto mb-16">
+      <div className="w-[90vw] mx-auto overflow-x-auto overflow-y-hidden mb-16">
         <table className="table-auto w-full text-left text-secondary-100">
           <thead className="bg-default-100 text-primary">
             <tr>
               <th className="py-4 px-6 w-[150px]">Features</th>
-              {!isMobile && <th className="py-4 px-6 w-[120px]">Free</th>}
-              {!isMobile && <th className="py-4 px-6 w-[120px]">Basic</th>}
-              {!isMobile && <th className="py-4 px-6 w-[120px]">Standard</th>}
-              {!isMobile && <th className="py-4 px-6 w-[120px]">Premium</th>}
+              {!isMobile && (
+                <th className="py-4 px-6 w-[120px]">Free</th>
+              )}
+              {!isMobile && (
+                <th className="py-4 px-6 w-[120px]">Basic</th>
+              )}
+              {!isMobile && (
+                <th className="py-4 px-6 w-[120px]">Standard</th>
+              )}
+              {!isMobile && (
+                <th className="py-4 px-6 w-[120px]">Premium</th>
+              )}
               {isMobile && (
                 <th className="py-4 px-6 w-[120px]">
-                  {selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)}
+                  {selectedPlan.charAt(0).toUpperCase() +
+                    selectedPlan.slice(1)}
                 </th>
               )}
             </tr>
@@ -190,23 +203,25 @@ export const PlanComparisonTable = () => {
                   <td className="py-4 px-6 w-[120px]">{row.basic}</td>
                 )}
                 {!isMobile && (
-                  <td className="py-4 px-6 w-[120px]">{row.standard}</td>
+                  <td className="py-4 px-6 w-[120px]">
+                    {row.standard}
+                  </td>
                 )}
                 {!isMobile && (
-                  <td className="py-4 px-6 w-[120px]">{row.premium}</td>
+                  <td className="py-4 px-6 w-[120px]">
+                    {row.premium}
+                  </td>
                 )}
                 {isMobile && (
-                  <td className="py-4 px-6 w-[120px]">{row[selectedPlan]}</td>
+                  <td className="py-4 px-6 w-[120px]">
+                    {row[selectedPlan]}
+                  </td>
                 )}
               </motion.tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      <SplitSection>
-        If you have any more questions about our plans you can contact us at
-      </SplitSection>
     </>
   );
-};
+};*/

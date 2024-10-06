@@ -10,7 +10,7 @@ import DesktopProfile from "./navbar/DesktopProfile";
 import Button from "./form/Button";
 import Logo from "../assets/logo.svg";
 import PricingDropdown from "./navbar/Pricing";
-
+import Spinner from "./Spinner";
 interface navbarProps {
   width?: number;
 }
@@ -34,6 +34,7 @@ const variants = {
 const Navbar: FC<navbarProps> = ({ width }) => {
   const {
     user,
+    loadingUser,
     scrollingUp,
     isMobileMenuOpen,
     toggleMobileMenu,
@@ -69,7 +70,7 @@ const Navbar: FC<navbarProps> = ({ width }) => {
             loading="eager"
             title="Clickpulse logo"
           />
-          <span className="text-3xl md:text-2xl font-bold text-primary cursor-pointer">
+          <span className="text-2xl md:text-2xl font-bold text-primary cursor-pointer">
             Clickpulse
           </span>
         </Link>
@@ -83,7 +84,9 @@ const Navbar: FC<navbarProps> = ({ width }) => {
 
         {/* Desktop Profile / Login */}
         <div className="xl:hidden flex items-center space-x-6 w-[250px] justify-end">
-          {user && user.username ? (
+          {loadingUser ? (
+            <Spinner className="justify-end" />
+          ) : user && user.username ? (
             <DesktopProfile user={user} />
           ) : (
             <>

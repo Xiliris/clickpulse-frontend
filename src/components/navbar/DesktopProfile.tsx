@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 interface User {
   username: string;
@@ -31,9 +29,16 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       }
     };
 
+    const handleScroll = () => {
+      setIsProfileMenuOpen(false);
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -57,12 +62,12 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
         />
       </div>
       {isProfileMenuOpen && (
-        <div className="absolute translate-y-5 top-full w-40 right-0 bg-default-300 text-primary rounded-lg shadow-lg flex flex-col">
+        <div className="absolute translate-y-5 top-full w-40 right-0 bg-default-100 text-primary rounded-lg shadow-lg flex flex-col">
           <ul className="text-lg flex flex-col">
             <li>
               <Link
                 to="/dashboard"
-                className="flex justify-start items-center py-4 px-4 w-full text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 rounded-none hover:text-emphasis"
+                className="flex justify-start items-center py-4 px-4 w-full text-primary text-lg cursor-pointer rounded-none hover:text-emphasis"
               >
                 Dashboard
               </Link>

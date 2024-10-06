@@ -36,7 +36,6 @@ const Auth: FC = () => {
     axiosInstance
       .post("/auth/login", { email, password })
       .then((res) => {
-        console.log(res.data);
         setCookie("token", res.data.token, { path: "/" });
         navigate("/");
       })
@@ -68,7 +67,7 @@ const Auth: FC = () => {
             </h2>
           </div>
           <form
-            className="mt-10 space-y-8"
+            className="mt-10 space-y-4"
             onSubmit={(e) => {
               e.preventDefault();
               login();
@@ -95,22 +94,22 @@ const Auth: FC = () => {
               >
                 Forgot your password?
               </Link>
-              <div className="text-end text-sm text-primary">
-                Don't have an account?{" "}
-                <Link
-                  to="/signup"
-                  className="text-base text-emphasis hover:text-emphasis-light cursor-pointer"
-                >
-                  Register here
-                </Link>
-              </div>
             </div>
 
             {errorMessage && <p className="text-red-400">{errorMessage}</p>}
 
-            <div className="flex justify-end">
+            <div className="justify-between flex pt-4">
+              <button className="px-6 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select bg-default-200 border-2 border-secondary-200 cursor-pointer">
+                <Link
+                  to="/signup"
+                  className="text-secondary-100 cursor-pointer"
+                >
+                  Register
+                </Link>
+              </button>
+
               <Button type="submit" className="text-center">
-                Log In
+                <span className="px-2">Log In</span>
               </Button>
             </div>
           </form>

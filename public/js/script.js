@@ -108,7 +108,7 @@ window.addEventListener("beforeunload", () => {
 
   data.exit_page = window.location.pathname;
 
-  fetch("http://localhost:8080/dashboard/collect", {
+  fetch("https://api.clickpulse.xyz/dashboard/collect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

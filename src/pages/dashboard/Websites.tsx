@@ -47,7 +47,7 @@ const Websites: FC = () => {
             Choose a website to view analytics and insights.
           </p>
         </div>
-        <div className="w-full flex  justify-center items-center gap-5 mt-10">
+        <div className="w-full flex flex-col justify-center items-center gap-5 mt-10">
           {websites && websites.length > 0 ? (
             websites.map((website, index) => (
               <Website
@@ -58,7 +58,7 @@ const Websites: FC = () => {
               />
             ))
           ) : (
-            <p className="text-primary"></p>
+            <p className="text-primary">Please add a website.</p>
           )}
         </div>
         <Link to="/dashboard/add-website">
@@ -85,15 +85,15 @@ const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
     <div className=" bg-default-300  rounded-lg flex items-center gap-5 justify-between relative p-5 px-10 ">
       <img
         src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
-        className="w-16 h-16"
+        className="w-16 md:w-8"
         height={80}
         width={80}
         alt={`favicon of ${domain}`}
       />
-      <p className="text-emphasis font-bold text-2xl">{name}</p>
+      <p className="text-emphasis font-bold text-2xl md:text-base">{name}</p>
       {active ? (
         <Link to={`/dashboard/${id}`}>
-          <Button>View</Button>
+          <Button className="md:text-sm md:px-3 md:py-1">View</Button>
         </Link>
       ) : (
         <Button disabled={true}>Pending</Button>

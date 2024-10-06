@@ -1,5 +1,19 @@
 {
   "apiBaseUrl": "https://api.clickpulse.xyz",
   "websiteUrl": "http://www.clickpulse.xyz",
-  "supportEmail": "support@clickpulse.xyz"
+  "supportEmail": "support@clickpulse.xyz",
+  "plans": {
+    "basic": {
+      "monthly": 7.99,
+      "yearly": 79.99
+    },
+    "standard": {
+      "monthly": 14.99,
+      "yearly": 149.99
+    },
+    "premium": {
+      "monthly": 39.99,
+      "yearly": 399.99
+    }
+  }
 }
