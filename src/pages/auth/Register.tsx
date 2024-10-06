@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.svg";
+import Background from "../../assets/background.svg";
 
 import Input from "../../components/form/Input";
 import Button from "../../components/form/Button";
@@ -71,9 +72,16 @@ export default function Register() {
     <>
       <Header title="Register" />
 
-      <main className="min-h-screen flex items-center justify-center bg-default-200 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl w-full space-y-8">
-          <img className="mx-auto h-24 w-auto" src={Logo} alt="Logo" />
+      <main className="min-h-screen flex items-center justify-center bg-default-200 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-5 rotate-12 scale-[1.45]"
+          style={{ backgroundImage: `url(${Background})` }}
+        ></div>
+        <div className="max-w-lg w-full space-y-8 bg-default-300 rounded-md p-10 z-20">
+          <Link to="/" className="text-emphasis cursor-pointer block text-xl">
+            <i className="fa-solid fa-arrow-left cursor-pointer"></i>
+          </Link>
+          <img className="mx-auto h-16 w-auto" src={Logo} alt="Logo" />
           <h2 className="mt-6 text-3xl font-extrabold text-primary text-center">
             Create a new account
           </h2>
@@ -116,7 +124,7 @@ export default function Register() {
             <div className="text-center text-sm text-primary justify-between flex">
               <Link
                 to="/login"
-                className="text-base text-emphasis hover:text-emphasis-light cursor-pointer ml-2"
+                className="text-base text-emphasis hover:text-emphasis-light cursor-pointer"
               >
                 <span className="text-primary">Already have an account?</span>{" "}
                 Log in.

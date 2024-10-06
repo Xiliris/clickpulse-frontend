@@ -44,7 +44,15 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <div className="flex flex-col items-center w-full h-full">
         <div className="w-[90vw] flex items-center justify-between mx-auto mt-5">
           <Link to="/" className="flex items-center space-x-2">
-            <img src={Logo} alt="Logo" className="w-12 md:w-9" />
+            <img
+              src={Logo}
+              alt="Clickpulse Logo"
+              className="w-[28px] md:w-9"
+              width={30}
+              height={30}
+              loading="eager"
+              title="Clickpulse logo"
+            />
             <span className="text-2xl xl:text-2xl font-bold text-primary cursor-pointer prevent-select">
               Clickpulse
             </span>

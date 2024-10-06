@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from "react";
 import { CookiesProvider, useCookies } from "react-cookie";
 import axiosInstance from "../../modules/axiosInstance";
 import SplitSection from "../../components/SplitSection";
+import Background from "../../assets/Background2.jpg";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/home/Footer";
@@ -46,7 +47,7 @@ const Websites: FC = () => {
             Choose a website to view analytics and insights.
           </p>
         </div>
-        <div className="w-full grid grid-cols-2 xl:grid-cols-1 justify-center items-center gap-5 mt-10">
+        <div className="w-full flex  justify-center items-center gap-5 mt-10">
           {websites && websites.length > 0 ? (
             websites.map((website, index) => (
               <Website
@@ -81,7 +82,7 @@ interface WebsiteProps {
 const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
   const name = domain.replace("https://", "").replace("http://", "");
   return (
-    <div className=" bg-default-300  rounded-lg flex items-center gap-5 justify-between relative p-5 ">
+    <div className=" bg-default-300  rounded-lg flex items-center gap-5 justify-between relative p-5 px-10 ">
       <img
         src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
         className="w-16 h-16"

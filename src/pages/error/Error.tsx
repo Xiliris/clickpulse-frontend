@@ -1,6 +1,9 @@
-import { FC } from 'react';
-import Button from '../../components/form/Button';
-import { Link } from 'react-router-dom';
+import { FC } from "react";
+import Button from "../../components/form/Button";
+import Logo from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Background from "../../assets/background.svg";
 
 interface ErrorProps {
   type: number;
@@ -8,30 +11,30 @@ interface ErrorProps {
 }
 
 const Error: FC<ErrorProps> = ({ type, message }) => {
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-default-200">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-emphasis mb-4">
-          We hit a roadblock, <br /> page isn't here!
-        </h1>
-        <p className="text-3xl text-primary mb-4">
-          {type === 404 ? 'Error 404' : `Error ${type}`}
-        </p>
-        <Link to="/">
-          <Button>Home</Button>
-        </Link>
+  const errorNumber = type.toString().split("")[2] || "0";
 
-        <p className="text-primary mt-4">
-          To report an error contact us at <br />
-          <a
-            href="mailto:clickpulse.team@gmail.com"
-            className="text-emphasis cursor-pointer"
-          >
-            clickpulse.team@gmail.com
-          </a>
-        </p>
+  return (
+    <>
+      <Navbar />
+      <div className="relative flex items-center justify-center min-h-screen bg-default-200 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-5 rotate-12 scale-[1.45]"
+          style={{ backgroundImage: `url(${Background})` }}
+        ></div>
+        <div className="relative flex flex-col justify-center items-center max-w-lg z-10">
+          <div className="flex justify-center items-center gap-3">
+            <p className="text-[80px] text-emphasis font-thin">4</p>
+            <img src={Logo} alt="Clickpulse logo" className="w-16 mx-auto" />
+            <p className="text-[80px] text-emphasis font-thin">{errorNumber}</p>
+          </div>
+
+          <p className="text-primary text-xl text-center">{message}</p>
+          <Link to="/">
+            <Button className="mt-7">Back to Homepage!</Button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
