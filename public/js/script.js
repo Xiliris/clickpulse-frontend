@@ -30,6 +30,7 @@ const data = {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log('Clickpulse script loaded!');
   document.addEventListener("click", (event) => {
     const clickedElement = event.target.closest("a, button");
 

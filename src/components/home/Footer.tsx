@@ -58,12 +58,15 @@ const Footer: FC<footerProps> = ({ width }) => {
             >
               About Us
             </Link>
-            <Link
-              to="/contact"
+            <a
+              href="mailto:support@clickpulse.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-emphasis cursor-pointer transform transition-transform duration-300 hover:scale-105"
             >
               Contact
-            </Link>
+            </a>
+
             <Link
               to="/privacy"
               className="hover:text-emphasis cursor-pointer transform transition-transform duration-300 hover:scale-105"

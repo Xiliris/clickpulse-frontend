@@ -3,7 +3,7 @@ function verifyCode(code: number) {
     return "Please fill in all fields";
   }
 
-  if (code.toString().length !== 4) {
+  if (code.toString().length !== 5) {
     return "Code must be 5 digits long";
   }
 

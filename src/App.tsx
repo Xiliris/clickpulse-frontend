@@ -17,7 +17,6 @@ import Websites from "./pages/dashboard/Websites";
 import Maintenance from "./pages/Maintenance";
 import Protected from "./modules/Protected";
 import Error from "./pages/error/Error";
-import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/Terms";
 import AboutUs from "./pages/Aboutus";
@@ -74,10 +73,6 @@ const router = createBrowserRouter([
       {
         path: "/maintenance",
         element: <Maintenance />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
       },
       {
         path: "/privacy",
