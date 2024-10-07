@@ -143,7 +143,7 @@ const LineGraph: FC<ContainerProps> = ({ id, startDate, endDate }) => {
   );
 };
 
-const CustomizedXAxisTick = ({ x, y, stroke, payload }: any) => {
+const CustomizedXAxisTick = ({ x, y, payload }: any) => {
   return (
     <g transform={`translate(${x},${y})`}>
       <text
