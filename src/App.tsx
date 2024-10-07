@@ -29,6 +29,9 @@ import Lightweight from "./pages/Lightweight";
 import PrivacyCommitment from "./pages/PrivacyCommitment";
 import EasyToUse from "./pages/EasyToUse";
 import ConstantlyImproving from "./pages/ConstantlyImproving";
+import ResetPassword from "./pages/auth/ResetPassword";
+import ChangePassword from "./pages/auth/ChangePassword";
+
 const AppLayout = () => (
   <>
     <ScrollRestoration />
@@ -63,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/reset",
         element: <Reset />,
+      },
+      {
+        path: "/reset/:token",
+        element: <ResetPassword />,
       },
       {
         path: "/maintenance",
@@ -125,6 +132,15 @@ const router = createBrowserRouter([
         element: (
           <Protected>
             <Websites />
+          </Protected>
+        ),
+      },
+
+      {
+        path: "/change-password",
+        element: (
+          <Protected>
+            <ChangePassword />
           </Protected>
         ),
       },

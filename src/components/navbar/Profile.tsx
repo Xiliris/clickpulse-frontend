@@ -1,11 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faUser,
-  faBars,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 interface ProfileMenuProps {
   user: { username: string } | null;
@@ -43,46 +39,47 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
-  }, [
-    isProfileMenuOpen,
-    isLogged,
-    toggleProfileMenu,
-    toggleLoggedMenu,
-  ]);
+  }, [isProfileMenuOpen, isLogged, toggleProfileMenu, toggleLoggedMenu]);
 
   return (
     <>
       {user && user.username ? (
         <div className="relative w-3/4 text-primary text-lg mx-auto hidden xl:flex justify-end mr-4">
           {/* User Icon */}
-          <div className="flex justify-between items-center py-4 cursor-pointer">
-            <FontAwesomeIcon
-              icon={faUser}
-              className="text-secondary-100 mr-2 md:text-xl"
+          <div className="flex justify-between items-center py-4">
+            <i
+              className="fa-solid fa-user text-secondary-100 mr-2 md:text-xl cursor-pointer"
               onClick={toggleProfileMenu}
-            />
+            ></i>
           </div>
 
           {/* Profile Dropdown */}
           {isProfileMenuOpen && (
-            <div className="absolute top-full right-0 w-44 bg-default-300 text-primary rounded-lg shadow-lg flex flex-col z-10">
+            <div className="absolute top-full right-0 w-56 bg-default-300 text-primary rounded-lg shadow-lg flex flex-col z-10">
               <Link
                 to="/dashboard"
-                className="py-4 w-full text-center text-primary border-b-[1px] border-gray-600 hover:text-emphasis"
+                className="py-4 w-full text-center text-primary border-b-[1px] border-gray-600 hover:text-emphasis cursor-pointer"
                 onClick={toggleProfileMenu}
               >
                 Dashboard
               </Link>
               <Link
+                to="/change-password"
+                className="py-4 w-full text-center text-primary border-b-[1px] border-gray-600 hover:text-emphasis cursor-pointer"
+                onClick={toggleProfileMenu}
+              >
+                Change Password
+              </Link>
+              <Link
                 to="/logout"
-                className="py-4 w-full text-center text-primary hover:text-emphasis"
+                className="py-4 w-full text-center text-primary hover:text-emphasis cursor-pointer"
                 onClick={toggleProfileMenu}
               >
                 Log out
@@ -129,7 +126,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({
           <FontAwesomeIcon
             icon={isMobileMenuOpen ? faTimes : faBars}
             className={`cursor-pointer w-6 ${
-              isMobileMenuOpen ? 'scale-[1.60]' : 'scale-[1.37]'
+              isMobileMenuOpen ? "scale-[1.60]" : "scale-[1.37]"
             }`}
           />
         </button>

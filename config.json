@@ -1,6 +1,6 @@
 {
-  "apiBaseUrl": "https://api.clickpulse.xyz",
-  "websiteUrl": "http://www.clickpulse.xyz",
+  "apiBaseUrl": "http://localhost:8080",
+  "websiteUrl": "https://www.clickpulse.xyz",
   "supportEmail": "support@clickpulse.xyz",
   "plans": {
     "basic": {

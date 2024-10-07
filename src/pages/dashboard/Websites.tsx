@@ -2,7 +2,6 @@ import { FC, useState, useEffect } from "react";
 import { CookiesProvider, useCookies } from "react-cookie";
 import axiosInstance from "../../modules/axiosInstance";
 import SplitSection from "../../components/SplitSection";
-import Background from "../../assets/Background2.jpg";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/home/Footer";

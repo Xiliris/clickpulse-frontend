@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Title from "./Title";
-import Splash1 from "../../assets/splash1.svg";
 import Ikona1 from "../../assets/Ikona1.svg";
 import Ikona2 from "../../assets/Ikona2.svg";
 import Ikona3 from "../../assets/Ikona3.svg";
@@ -16,16 +15,12 @@ interface FlipCardProps {
   img: string;
 }
 
-interface itemProp {
-  index: number;
-}
-
 const itemVariant = {
   initial: {
     y: 100,
     opacity: 0,
   },
-  animate: ({ index }: itemProp) => ({
+  animate: {
     y: 0,
     opacity: 1,
     transition: {
@@ -33,7 +28,7 @@ const itemVariant = {
       duration: 0.1,
       type: "linear",
     },
-  }),
+  },
 };
 
 export default function Hero() {
