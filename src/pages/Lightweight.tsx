@@ -7,13 +7,14 @@ const Lightweight = () => {
       title: 'Our Offering: Lightweight Script',
       content: (
         <>
-          At ClickPulse, we are committed to providing you with
+          At Clickpulse, we are committed to providing you with
           powerful analytics tools that respect your users' privacy
           while being incredibly easy to implement and use. One of our
           standout features is our lightweight script, designed to
           optimize your website's performance and user experience.
         </>
       ),
+      icon: 'fa-solid fa-code',
     },
     {
       title: 'Why Choose a Lightweight Script?',
@@ -27,6 +28,7 @@ const Lightweight = () => {
           which can significantly impact your visibility and traffic.
         </>
       ),
+      icon: 'fa-solid fa-bolt',
     },
     {
       title: 'Seamless Integration',
@@ -41,19 +43,22 @@ const Lightweight = () => {
           without any technical hassles.
         </>
       ),
+
+      icon: `fa-solid fa-cogs`,
     },
     {
       title: 'Minimized Impact on Performance',
       content: (
         <>
           Unlike heavier analytics solutions that can slow down your
-          site, ClickPulse's lightweight script is optimized for speed
+          site, Clickpulse's lightweight script is optimized for speed
           and efficiency. This means less loading time, a lower bounce
           rate, and higher conversion rates. Users can interact with
           your content without the lag that often accompanies more
           bloated analytics systems.
         </>
       ),
+      icon: 'fa-solid fa-chart-line',
     },
     {
       title: 'Mobile Optimization',
@@ -68,6 +73,8 @@ const Lightweight = () => {
           users who browse and shop on-the-go.
         </>
       ),
+
+      icon: 'fa-solid fa-mobile-alt',
     },
     {
       title: 'Reduced Data Transfer',
@@ -77,11 +84,12 @@ const Lightweight = () => {
           transferred between the server and the client. This
           reduction in data usage is not only beneficial for your
           website’s performance but also for users with limited
-          bandwidth or data plans. By using ClickPulse, you’re
+          bandwidth or data plans. By using Clickpulse, you’re
           contributing to a more efficient internet by reducing
           unnecessary data consumption.
         </>
       ),
+      icon: 'fa-solid fa-plug',
     },
     {
       title: 'Real-Time Insights',
@@ -95,6 +103,7 @@ const Lightweight = () => {
           adjust your strategies.
         </>
       ),
+      icon: `fa-solid fa-sync-alt`,
     },
     {
       title: 'Future-Proofing Your Site',
@@ -108,6 +117,7 @@ const Lightweight = () => {
           maintaining optimal performance.
         </>
       ),
+      icon: ' fa-solid fa-shield',
     },
   ];
 
@@ -115,16 +125,21 @@ const Lightweight = () => {
     <>
       <Navbar />
       <div className="bg-default-200 min-h-screen py-10">
-        <div className="w-[70vw] mx-auto mt-24 grid md:grid-cols-1 grid-cols-2 gap-6">
+        <div className="w-[70vw] mx-auto mt-24 grid lg:grid-cols-1 grid-cols-2 gap-8">
           {sections.map((section, index) => (
             <div
               key={index}
-              className=" text-default-100 p-4 rounded-lg w-fit"
+              className="bg-default-300 p-6 rounded-md"
             >
-              <h2 className="text-2xl font-semibold text-emphasis">
-                {section.title}
-              </h2>
-              <p className="text-primary mt-2">{section.content}</p>
+              <div className="flex items-center mb-4">
+                <i
+                  className={`${section.icon} text-3xl text-emphasis mr-4`}
+                ></i>
+                <h2 className="text-2xl font-semibold text-emphasis">
+                  {section.title}
+                </h2>
+              </div>
+              <p className="text-primary">{section.content}</p>
             </div>
           ))}
         </div>

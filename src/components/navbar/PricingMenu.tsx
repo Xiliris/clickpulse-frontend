@@ -64,7 +64,7 @@ const PricingMenu = ({
           isPricingClicked ? 'max-h-60' : 'max-h-0'
         } ${
           isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
-        } bg-default-300 lg:bg-default-200 text-primary rounded-lg`}
+        } bg-default-300 xl:bg-default-200 text-primary rounded-lg`}
       >
         <ul className={`text-sm flex flex-col ${itemClassName}`}>
           <Link

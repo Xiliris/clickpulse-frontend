@@ -3,6 +3,7 @@ import { ReactNode, FC } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Title from './Title';
+import { HashLink } from 'react-router-hash-link';
 
 interface itemProp {
   index: number;
@@ -46,31 +47,34 @@ export default function Hero() {
           {/* Basic */}
 
           <Card plan="Basic Plan" price="$7.99" index={2}>
-            <Item>10 users</Item>
-            <Item>10 projects</Item>
-            <Item>10GB storage</Item>
+            <Item>1 users</Item>
+            <Item>3 dashboards</Item>
+            <Item>Basic Analytics</Item>
             <Item>Email support</Item>
           </Card>
           {/* Standard */}
           <Card plan="Standard Plan" price="$14.99" index={1}>
-            <Item>20 users</Item>
-            <Item>20 projects</Item>
-            <Item>20GB storage</Item>
+            <Item>3 users</Item>
+            <Item>10 dashboards</Item>
+            <Item>Advanced Analytics</Item>
             <Item>Priority email support</Item>
           </Card>
           {/* Premium */}
           <Card plan="Premium Plan" price="$39.99" index={2}>
-            <Item>Unlimited users</Item>
-            <Item>Unlimited projects</Item>
-            <Item>Unlimited storage</Item>
+            <Item>10 users</Item>
+            <Item>Unlimited dashboards</Item>
+            <Item>Real-Time Analytics</Item>
             <Item>24/7 support</Item>
           </Card>
         </div>
       </div>
       <div className="flex items-center justify-center textt-emphasis underline text-xl text-emphasis mt-[25px]">
-        <Link to="/pricing-more" className="cursor-pointer">
+        <HashLink
+          to="/pricing-more#monthly"
+          className="cursor-pointer"
+        >
           View more
-        </Link>
+        </HashLink>
       </div>
     </section>
   );

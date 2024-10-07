@@ -4,19 +4,20 @@ import Footer from '../components/home/Footer';
 const EasyToUse = () => {
   const sections = [
     {
-      title: 'Easy to Use: Experience Simplicity with ClickPulse',
+      title: 'Easy to Use: Experience Simplicity with Clickpulse',
       content: (
         <>
-          At ClickPulse, we believe that powerful analytics should not
+          At Clickpulse, we believe that powerful analytics should not
           come with a steep learning curve. Our platform is designed
           to be user-friendly and intuitive, allowing users of all
           skill levels to harness the full potential of their data
           without the hassle. Whether you're a business owner,
-          marketer, or developer, ClickPulse provides an
+          marketer, or developer, Clickpulse provides an
           easy-to-navigate experience that gets you up and running in
           no time.
         </>
       ),
+      icon: 'fa-solid fa-tasks',
     },
     {
       title: 'Intuitive Interface',
@@ -30,12 +31,13 @@ const EasyToUse = () => {
           complex menus.
         </>
       ),
+      icon: 'fa-solid fa-desktop',
     },
     {
       title: 'Seamless Integration',
       content: (
         <>
-          ClickPulse integrates seamlessly with your existing tools
+          Clickpulse integrates seamlessly with your existing tools
           and workflows. Whether you’re using popular CMS platforms,
           e-commerce solutions, or marketing software, our platform
           can be set up quickly with minimal effort. The
@@ -44,38 +46,41 @@ const EasyToUse = () => {
           technical expertise.
         </>
       ),
+      icon: 'fa-solid fa-plug',
     },
     {
       title: 'Quick Setup',
       content: (
         <>
-          Setting up ClickPulse is a breeze. Our step-by-step
+          Setting up Clickpulse is a breeze. Our step-by-step
           onboarding process guides you through the essentials,
           ensuring that you are ready to start tracking your analytics
           in no time. With clear instructions and helpful prompts, you
           won’t waste precious time figuring things out.
         </>
       ),
+      icon: 'fa-solid fa-cogs',
     },
     {
       title: 'Real-Time Analytics',
       content: (
         <>
           Understanding your data is crucial for making informed
-          decisions. ClickPulse provides real-time analytics that
+          decisions. Clickpulse provides real-time analytics that
           allow you to monitor performance and trends as they happen.
           Our intuitive graphs and charts make it easy to interpret
           data, enabling you to focus on what matters most—growing
           your business.
         </>
       ),
+      icon: 'fa-solid fa-chart-line',
     },
     {
       title: 'Comprehensive Support Resources',
       content: (
         <>
           We know that sometimes you might need a little extra help.
-          That’s why ClickPulse offers a wealth of support resources,
+          That’s why Clickpulse offers a wealth of support resources,
           including detailed documentation, tutorials, and FAQs. Our
           dedicated support team is also just a message away, ready to
           assist you with any questions or issues that may arise. We
@@ -83,12 +88,13 @@ const EasyToUse = () => {
           experience.
         </>
       ),
+      icon: 'fa-solid fa-life-ring',
     },
     {
       title: 'Customization Made Simple',
       content: (
         <>
-          ClickPulse allows you to customize your analytics experience
+          Clickpulse allows you to customize your analytics experience
           to meet your unique needs. With simple options for setting
           up goals, tracking conversions, and generating reports, you
           can tailor your dashboard to focus on the metrics that
@@ -96,24 +102,26 @@ const EasyToUse = () => {
           you get the insights you need without unnecessary clutter.
         </>
       ),
+      icon: 'fa-solid fa-sliders-h',
     },
     {
       title: 'Mobile-Friendly Experience',
       content: (
         <>
           In today’s fast-paced world, having access to your analytics
-          on the go is essential. ClickPulse is designed to be
+          on the go is essential. Clickpulse is designed to be
           mobile-friendly, allowing you to view your data anytime,
           anywhere. Whether you’re in the office or out and about, you
           can stay updated on your performance with ease.
         </>
       ),
+      icon: 'fa-solid fa-mobile-alt',
     },
     {
       title: 'User Feedback-Driven Development',
       content: (
         <>
-          At ClickPulse, we continuously seek user feedback to enhance
+          At Clickpulse, we continuously seek user feedback to enhance
           our platform. We listen to your suggestions and regularly
           implement improvements to ensure our analytics tools remain
           user-friendly and effective. Your experience matters to us,
@@ -121,6 +129,7 @@ const EasyToUse = () => {
           needs.
         </>
       ),
+      icon: 'fa-solid fa-comments',
     },
   ];
 
@@ -128,16 +137,21 @@ const EasyToUse = () => {
     <>
       <Navbar />
       <div className="bg-default-200 min-h-screen py-10">
-        <div className="w-[70vw] mx-auto mt-24 grid md:grid-cols-1 grid-cols-2 gap-6">
+        <div className="w-[70vw] mx-auto mt-24 grid lg:grid-cols-1 grid-cols-2 gap-8">
           {sections.map((section, index) => (
             <div
               key={index}
-              className="text-default-100 p-4 rounded-lg w-fit"
+              className="bg-default-300 p-6 rounded-md"
             >
-              <h2 className="text-2xl font-semibold text-emphasis">
-                {section.title}
-              </h2>
-              <p className="text-primary mt-2">{section.content}</p>
+              <div className="flex items-center mb-4">
+                <i
+                  className={`${section.icon} text-3xl text-emphasis mr-4`}
+                ></i>
+                <h2 className="text-2xl font-semibold text-emphasis">
+                  {section.title}
+                </h2>
+              </div>
+              <p className="text-primary">{section.content}</p>
             </div>
           ))}
         </div>

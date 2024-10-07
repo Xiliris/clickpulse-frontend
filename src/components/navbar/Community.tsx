@@ -58,14 +58,14 @@ const CommunityDropdown = ({
           isCommunityClicked ? 'max-h-65' : 'max-h-0'
         } ${
           isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
-        }  lg:bg-default-200 bg-default-100 text-primary rounded-lg`}
+        }  xl:bg-default-200 bg-default-100 text-primary rounded-lg`}
       >
         <ul className={` text-sm flex flex-col ${itemClassName}`}>
           <a
             href="https://x.com/ClickpulseTeam"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex justify-start items-center mt-2 py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
+            className="flex justify-start items-center mt-2 py-2 px-4 xl:px-0 w-full mx-auto text-primary xl:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Twitter</span>
           </a>
@@ -73,7 +73,7 @@ const CommunityDropdown = ({
             href="https://www.tiktok.com/@clickpulseteam"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex justify-start items-center py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
+            className="flex justify-start items-center py-2 px-4 xl:px-0 w-full mx-auto text-primary xl:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Tiktok</span>
           </a>
@@ -81,7 +81,7 @@ const CommunityDropdown = ({
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex justify-start items-center py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
+            className="flex justify-start items-center py-2 px-4 xl:px-0 w-full mx-auto text-primary xl:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">LinkedIn</span>
           </a>
@@ -89,7 +89,7 @@ const CommunityDropdown = ({
             href="https://discord.gg/9eWFeSW7pz"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex justify-start items-center mb-2 py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
+            className="flex justify-start items-center mb-2 py-2 px-4 xl:px-0 w-full mx-auto text-primary xl:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
             <span className="cursor-pointer">Discord</span>
           </a>
