@@ -1,13 +1,21 @@
 import { FC, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import axiosInstance from "../../modules/axiosInstance";
-import { formatNumber } from "../../utils/dashboard/functions";
+import {
+  formatNumber,
+  getBrowserLogo,
+  calculateLogoType,
+} from "../../utils/dashboard/functions";
 import OverlayArticle from "./OverlayArticle";
+import { fadeUp } from "../../animations/Animations";
 
 interface StatsArticleProps {
   selectionItems: string[];
   startDate: Date;
   endDate: Date;
   id: string | undefined;
+  listType: string;
+  icon: boolean;
 }
 
 const StatsArticle: FC<StatsArticleProps> = ({
@@ -15,6 +23,8 @@ const StatsArticle: FC<StatsArticleProps> = ({
   id,
   startDate,
   endDate,
+  listType,
+  icon,
 }) => {
   const [selectedMetric, setSelectedMetric] = useState<string>(
     selectionItems[0].toLowerCase().replace(" ", "-")
@@ -53,7 +63,13 @@ const StatsArticle: FC<StatsArticleProps> = ({
 
   return (
     <>
-      <div className="flex flex-col bg-default-300 py-5 rounded-md gap-5 w-full px-5">
+      <motion.div
+        variants={fadeUp}
+        initial="initial"
+        viewport={{ once: true, amount: 0.3 }}
+        whileInView="animate"
+        className="flex flex-col bg-default-300 py-5 rounded-md gap-5 w-full px-5 min-h-[465px]"
+      >
         <div className="flex justify-between items-center border-b border-b-default-100 pb-1">
           <h2 className="text-emphasis font-bold text-xl md:text-sm">
             {displayedMetricName}
@@ -80,27 +96,32 @@ const StatsArticle: FC<StatsArticleProps> = ({
           </ul>
         </div>
         <ul className="flex justify-end items-center text-right">
-          <li className="text-secondary-100">Visits</li>
+          <li className="text-secondary-100 capitalize">{listType}</li>
         </ul>
-        {userAgentStats.map((stat: any, index: number) => (
+        {userAgentStats.slice(0, 6).map((stat: any, index: number) => (
           <div
             key={index}
             className="flex justify-between items-center w-full border-b border-default-100 pb-1"
           >
             <div className="flex justify-start items-center gap-2">
-              <img
-                src="https://via.placeholder.com/150"
-                width={28}
-                height={28}
-                className="w-7 h-7 md:w-4 md:h-4"
-              />
+              {icon && (
+                <img
+                  src={`${calculateLogoType(
+                    Object.keys(stat)[0],
+                    stat[Object.keys(stat)[0]]
+                  )}`}
+                  width={16}
+                  height={16}
+                  className="w-4 h-4 md:w-4 md:h-4"
+                />
+              )}
               <p className="text-lg text-secondary-100 md:text-sm">
                 {stat[`${userAgentKey[0]}`]}
               </p>
             </div>
             <div className="flex justify-between items-center gap-2">
               <p className="text-lg text-secondary-100 md:text-sm">
-                {formatNumber(stat.visits)}
+                {formatNumber(stat[listType])}
               </p>
             </div>
           </div>
@@ -111,7 +132,7 @@ const StatsArticle: FC<StatsArticleProps> = ({
         >
           View more
         </p>
-      </div>
+      </motion.div>
       {overlayState && (
         <OverlayArticle
           title={selectedMetric.replace("-", " ")}

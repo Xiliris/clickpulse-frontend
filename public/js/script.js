@@ -22,10 +22,39 @@ const data = {
   session_start: null,
   session_end: null,
   bounce_rate: false,
+
+  referrer: document.referrer,
+
+  buttons: [],
+  anchors: [],
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  console.log("Running script");
+  document.addEventListener("click", (event) => {
+    const clickedElement = event.target.closest("a, button");
+
+    if (clickedElement) {
+      const tagName = clickedElement.tagName;
+      const storeId = tagName === "BUTTON" ? "buttons" : "anchors";
+      const innerText = clickedElement.innerText.trim();
+      const id = clickedElement.id || null;
+
+      const existingEntry = data[storeId].find(
+        (entry) => entry.id === id && entry.content === innerText
+      );
+
+      if (existingEntry) {
+        existingEntry.clicks++;
+      } else {
+        data[storeId].push({
+          id: id,
+          content: innerText,
+          clicks: 1,
+        });
+      }
+    }
+  });
+
   const locationInfo = await fetchLocationInfo();
   const { protocol, hostname } = window.location;
   const port = window.location.port ? `:${window.location.port}` : "";
@@ -79,7 +108,7 @@ window.addEventListener("beforeunload", () => {
 
   data.exit_page = window.location.pathname;
 
-  fetch("http://localhost:8080/dashboard/collect", {
+  fetch("https://api.clickpulse.xyz/dashboard/collect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

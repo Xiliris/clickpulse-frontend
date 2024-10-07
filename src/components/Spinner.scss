@@ -1,0 +1,35 @@
+.spinner-parent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .spinner {
+    width: 25px;
+    height: 25px;
+    display: grid;
+    animation: spinner-plncf9 3s infinite;
+  }
+
+  .spinner::before,
+  .spinner::after {
+    content: "";
+    grid-area: 1/1;
+    border: 3px solid;
+    border-radius: 50%;
+    border-color: #3cbab1 #3cbab1 #0000 #0000;
+    mix-blend-mode: darken;
+    animation: spinner-plncf9 1s infinite linear;
+  }
+
+  .spinner::after {
+    border-color: #0000 #0000 #1a1e25 #1a1e25;
+    animation-direction: reverse;
+  }
+
+  @keyframes spinner-plncf9 {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+}

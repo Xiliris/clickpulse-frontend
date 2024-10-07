@@ -1,111 +1,224 @@
-import React, { ReactNode } from 'react';
-import { motion } from 'framer-motion';
-import Title from './Title';
+import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
+import Title from "./Title";
+import Ikona1 from "../../assets/Ikona1.svg";
+import Ikona2 from "../../assets/Ikona2.svg";
+import Ikona3 from "../../assets/Ikona3.svg";
+import Ikona4 from "../../assets/Ikona4.svg";
+import Ikona5 from "../../assets/Ikona5.svg";
+import Ikona6 from "../../assets/Ikona6.svg";
 
 interface FlipCardProps {
   title: string;
   description: ReactNode;
   index: number;
-}
-
-interface itemProp {
-  index: number;
+  img: string;
 }
 
 const itemVariant = {
   initial: {
-    y: 50,
+    y: 100,
     opacity: 0,
   },
-  animate: ({ index }: itemProp) => ({
+  animate: {
     y: 0,
     opacity: 1,
     transition: {
       delay: 0,
-      duration: 0.2,
-      type: 'spring',
+      duration: 0.1,
+      type: "linear",
     },
-  }),
-};
-
-const FlipCard: React.FC<FlipCardProps> = ({
-  title,
-  description,
-  index,
-}) => {
-  const isEven = index % 2 === 0;
-  const flexDirection = isEven ? 'flex-row-reverse' : 'flex-row';
-  const marginDirection = isEven ? 'ml-auto' : 'mr-auto';
-
-  return (
-    <motion.article
-      variants={itemVariant}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ amount: 0.5, once: true }}
-      custom={{ index: index }}
-      className={`w-[70vw] md:w-full mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4 md:justify-center md:items-center`}
-      style={{ minHeight: '200px' }}
-    >
-      <div className="flex-shrink-0 w-1/2 md:w-full flex items-center justify-center">
-        <img
-          src="https://via.placeholder.com/150"
-          alt="Flip card image"
-          className={`w-5/6 h-auto object-cover ${marginDirection} md:mx-auto`}
-        />
-      </div>
-
-      <div className="flex flex-col justify-center w-1/2 md:w-full md:text-center">
-        <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
-          {title}
-        </h3>
-        <p className="text-lg lg:text-sm text-primary mt-2 text-left md:text-center">
-          {description}
-        </p>
-      </div>
-    </motion.article>
-  );
+  },
 };
 
 export default function Hero() {
   return (
-    <section className="bg-default-200 py-12 z-10 mt-7 w-[70vw] md:w-[90vw] mx-auto">
+    <section className="bg-transparent py-16 lg:py-0 lg:pb-12 z-10 mt-7 w-[70vw] md:w-[90vw] mx-auto sm:mt-[200px]">
       <div className="mx-auto text-center relative">
-        <Title>Tracking</Title>
+        <Title>Website Analytics and Performance Tracking</Title>
 
-        <div className="flex flex-col gap-8 mt-12 md:flex">
+        <div className="flex flex-col gap-16 mt-12 md:flex">
           <FlipCard
-            title="Unique Visitors"
-            description="Unique visitors represent the number of distinct individuals who visited your site within a given timeframe, regardless of how many times they visited. This metric provides a clear picture of how many actual users are engaging with your content, as it filters out multiple visits by the same user. Understanding this data helps you track the growth of your audience, and is crucial for assessing the effectiveness of campaigns aimed at reaching new users."
+            title="Site Engagement Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Total visits</strong> show overall site reach,
+                  providing insights into traffic trends and growth over time.
+                </li>
+                <li>
+                  <strong>Page visits</strong> reveal which content engages
+                  users, helping identify high-performing pages.
+                </li>
+                <li>
+                  <strong>Visit duration</strong> shows how long users are
+                  staying, indicating interest levels and engagement.
+                </li>
+                <li>
+                  <strong>Bounce rate</strong> reflects navigation
+                  effectiveness, helping identify potential UX issues.
+                </li>
+              </ul>
+            }
             index={1}
+            img={Ikona1}
           />
           <FlipCard
-            title="Page Views"
-            description="Page views indicate the total number of pages viewed on your website over a specific period. Unlike unique visitors, this metric counts every instance of a page being loaded or reloaded, which can give insight into user engagement and interaction levels. A higher page view count suggests users are finding your content interesting enough to browse through multiple pages. However, it's important to analyze this alongside other metrics like bounce rate and visit duration to get a fuller picture."
+            title="User Experience Analytics by Device & Browser"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  Analyze traffic by <strong>device type</strong> (mobile,
+                  desktop, tablet) to optimize user experience across platforms.
+                </li>
+                <li>
+                  Ensure compatibility across browsers such as{" "}
+                  <strong>Chrome, Safari, and Firefox</strong> for seamless
+                  performance.
+                </li>
+                <li>
+                  Optimize for the best performance across devices to reduce
+                  load times and enhance mobile responsiveness.
+                </li>
+              </ul>
+            }
             index={2}
+            img={Ikona2}
           />
           <FlipCard
-            title="Bounce Rate"
-            description="Bounce rate is the percentage of visitors who navigate away from your site after viewing only one page. A high bounce rate might indicate that users aren’t finding what they’re looking for or that the content isn’t engaging enough. Conversely, a low bounce rate suggests that visitors are exploring multiple pages and spending more time on the site. Monitoring bounce rates can help in adjusting content or improving user experience to retain more visitors."
+            title="Content Optimization Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Track entry, exit, and top pages</strong> to gain
+                  insights into what content attracts visitors initially and
+                  where they leave.
+                </li>
+                <li>
+                  Identify potential <strong>content or UX issues</strong> that
+                  may drive users away.
+                </li>
+                <li>
+                  Understand which content resonates most and optimize your
+                  strategy to boost engagement.
+                </li>
+              </ul>
+            }
             index={3}
+            img={Ikona3}
           />
           <FlipCard
-            title="Average Visit Duration"
-            description="The average visit duration measures the average amount of time users spend on your site per session. This metric helps gauge how engaging your content is and whether users are finding value in it. A longer average duration often signals that visitors are deeply exploring your site, reading articles, or engaging with multimedia content. If your average visit duration is low, it might suggest that your content is not sufficiently engaging or that users are finding what they need too quickly."
+            title="Regional Traffic & Audience Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Identify regions</strong> that drive the most traffic
+                  and tailor marketing strategies to key areas.
+                </li>
+                <li>
+                  Analyze engagement patterns in different locations to improve
+                  content relevancy.
+                </li>
+                <li>
+                  Create <strong>localized content</strong> based on regional
+                  trends to enhance user experience and boost conversions.
+                </li>
+              </ul>
+            }
             index={4}
+            img={Ikona4}
           />
           <FlipCard
-            title="Top Page"
-            description="The top page refers to the most visited page on your site within a specific timeframe. This can be your homepage, a blog post, a product page, or any other type of content. Identifying your top-performing page allows you to understand what type of content resonates most with your audience. You can use this insight to optimize similar content, refine your SEO strategy, or drive more traffic to underperforming pages by linking to them from your top page."
+            title="Element Interaction Analytics"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Track button clicks</strong> to measure the
+                  effectiveness of your calls-to-action and drive conversions.
+                </li>
+                <li>
+                  Monitor anchor clicks to optimize internal linking and guide
+                  users to relevant content efficiently.
+                </li>
+                <li>
+                  Refine UI elements to boost <strong>user navigation</strong>{" "}
+                  and improve the overall conversion funnel.
+                </li>
+              </ul>
+            }
             index={5}
+            img={Ikona5}
           />
           <FlipCard
-            title="New vs Returning Visitors"
-            description="This metric compares the percentage of new users versus those who have visited your site before. New visitors are important for growing your audience and expanding reach, while returning visitors indicate loyalty and engagement. A healthy balance between new and returning users suggests that you are successfully attracting new traffic while retaining existing users. Monitoring this ratio can help inform marketing strategies and content adjustments to either grow your audience or maintain existing user satisfaction."
+            title="Upcoming Analytics Features"
+            description={
+              <ul className="list-disc pl-5">
+                <li>
+                  <strong>Live tracking</strong> will enable real-time user
+                  interaction monitoring, providing insights as users navigate
+                  your site.
+                </li>
+                <li>
+                  <strong>Scroll depth tracking</strong> will reveal how far
+                  down users scroll on your pages, helping identify engagement
+                  levels.
+                </li>
+                <li>
+                  <strong>Heat maps</strong> will visualize user interactions
+                  like clicks and hovers, giving insight into attention hotspots
+                  and optimizing layouts accordingly.
+                </li>
+              </ul>
+            }
             index={6}
+            img={Ikona6}
           />
         </div>
       </div>
     </section>
   );
 }
+
+const FlipCard: React.FC<FlipCardProps> = ({
+  title,
+  description,
+  index,
+  img,
+}) => {
+  const isEven = index % 2 === 0;
+  const flexDirection = isEven ? "flex-row-reverse" : "flex-row";
+  const marginDirection = isEven ? "ml-auto" : "mr-auto";
+
+  return (
+    <motion.article
+      variants={itemVariant}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.5 }}
+      custom={{ index: index }}
+      className={`w-[70vw] md:w-full mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4 md:justify-center md:items-center`}
+      style={{ minHeight: "200px" }}
+    >
+      <div className="flex-shrink-0 w-1/2 md:w-full flex items-center justify-center">
+        <img
+          src={img}
+          alt={`Image for ${title}`}
+          className={`h-auto object-cover ${marginDirection} md:mx-auto`}
+          width={400}
+          height={400}
+          loading="lazy"
+          title="Clickpulse logo"
+        />
+      </div>
+
+      <div className="flex flex-col justify-center w-1/2 md:w-full md:text-center">
+        <h3 className="text-4xl xl:text-2xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
+          {title}
+        </h3>
+        <div className="text-xl xl:text-base text-primary mt-2 text-left">
+          {description}
+        </div>
+      </div>
+    </motion.article>
+  );
+};

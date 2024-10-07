@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 const CommunityDropdown = ({
   className = '',
@@ -23,9 +22,16 @@ const CommunityDropdown = ({
       }
     };
 
+    const handleScroll = () => {
+      setIsCommunityClicked(false);
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -38,7 +44,9 @@ const CommunityDropdown = ({
         onClick={handleCommunityClick}
         className="w-full flex items-center lg:justify-between space-x-1 hover:text-emphasis text-primary text-xl md:text-xl cursor-pointer"
       >
-        <span className="cursor-pointer xl:text-2xl">Community</span>
+        <span className="cursor-pointer xl:text-2xl prevent-select">
+          Socials
+        </span>
         <i
           className={`fa-solid fa-chevron-down transition-transform ${
             isCommunityClicked ? 'rotate-180' : 'rotate-0'
@@ -46,31 +54,45 @@ const CommunityDropdown = ({
         />
       </div>
       <div
-        className={`transition-all ease-in-out duration-300 overflow-hidden ${
-          isCommunityClicked ? 'max-h-60' : 'max-h-0'
+        className={`transition-all ease-in-out duration-200 overflow-hidden ${
+          isCommunityClicked ? 'max-h-65' : 'max-h-0'
         } ${
           isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
-        }  bg-default-300 text-primary rounded-lg`}
+        }  lg:bg-default-200 bg-default-100 text-primary rounded-lg`}
       >
         <ul className={` text-sm flex flex-col ${itemClassName}`}>
-          <Link
-            to="/community1"
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+          <a
+            href="https://x.com/ClickpulseTeam"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-start items-center mt-2 py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
-            <span className="cursor-pointer">Community 1</span>
-          </Link>
-          <Link
-            to="/community2"
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+            <span className="cursor-pointer">Twitter</span>
+          </a>
+          <a
+            href="https://www.tiktok.com/@clickpulseteam"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-start items-center py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
-            <span className="cursor-pointer">Community 2</span>
-          </Link>
-          <Link
-            to="/community3"
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+            <span className="cursor-pointer">Tiktok</span>
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-start items-center py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
-            <span className="cursor-pointer">Community 3</span>
-          </Link>
+            <span className="cursor-pointer">LinkedIn</span>
+          </a>
+          <a
+            href="https://discord.gg/9eWFeSW7pz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex justify-start items-center mb-2 py-2 px-4 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
+          >
+            <span className="cursor-pointer">Discord</span>
+          </a>
         </ul>
       </div>
     </div>

@@ -1,7 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const WhyDropdown = ({
   className = '',
@@ -25,9 +23,16 @@ const WhyDropdown = ({
       }
     };
 
+    const handleScroll = () => {
+      setIsWhyClicked(false);
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -37,7 +42,7 @@ const WhyDropdown = ({
         onClick={handleWhyClick}
         className="w-full flex items-center lg:justify-between space-x-1 hover:text-emphasis text-primary text-xl md:text-xl cursor-pointer"
       >
-        <span className="cursor-pointer xl:text-2xl">
+        <span className="cursor-pointer xl:text-2xl prevent-select">
           Why Clickpulse
         </span>
         <i
@@ -47,30 +52,38 @@ const WhyDropdown = ({
         />
       </div>
       <div
-        className={`transition-all ease-in-out duration-300 overflow-hidden ${
-          isWhyClicked ? 'max-h-60' : 'max-h-0'
+        className={`transition-all ease-in-out duration-200 overflow-hidden ${
+          isWhyClicked ? 'max-h-65' : 'max-h-0'
         } ${
-          isFullWidth ? 'w-full' : 'w-40 absolute translate-y-5'
-        } mr-9 bg-default-300 text-primary rounded-lg`}
+          isFullWidth ? 'w-full' : 'w-56 absolute translate-y-5'
+        } mr-9 bg-default-100 lg:bg-default-200 text-primary rounded-lg`}
       >
         <ul className={`text-sm flex flex-col ${itemClassName}`}>
           <Link
-            to="/feature1"
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+            to="/lightweight"
+            className="flex mt-2 justify-start items-center py-2 px-4 lg:px-0  w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
-            <span className="cursor-pointer">Feature 1</span>
+            <span className="cursor-pointer">Lightweight Script</span>
           </Link>
           <Link
-            to="/feature2"
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer border-b-[1px] border-gray-600 hover:text-emphasis"
+            to="/privacy-commitment"
+            className="flex justify-start items-center py-2 px-4 lg:px-0  w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
-            <span className="cursor-pointer">Feature 2</span>
+            <span className="cursor-pointer">Privacy Commitment</span>
           </Link>
           <Link
-            to="/feature3"
-            className="flex justify-start items-center py-4 px-4 w-full mx-auto text-primary text-lg cursor-pointer hover:text-emphasis"
+            to="/easy-to-use"
+            className="flex justify-start items-center py-2 px-4 lg:px-0  w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
           >
-            <span className="cursor-pointer">Feature 3</span>
+            <span className="cursor-pointer">Easy To Use</span>
+          </Link>
+          <Link
+            to="/constantly-improving"
+            className="flex justify-start items-center py-2 px-4 mb-2 lg:px-0 w-full mx-auto text-primary lg:text-secondary-100 text-lg cursor-pointer hover:text-emphasis"
+          >
+            <span className="cursor-pointer">
+              Constantly Improving
+            </span>
           </Link>
         </ul>
       </div>

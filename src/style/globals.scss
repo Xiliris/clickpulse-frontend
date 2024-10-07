@@ -6,6 +6,9 @@
   body {
     @apply bg-default-200;
   }
+  .cross-line::after {
+    @apply bg-primary
+  }
 }
 
 *,
@@ -16,10 +19,6 @@
 
 .font-ibm {
   font-family: "IBM Plex Mono", monospace;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 a {
@@ -146,4 +145,52 @@ input:-webkit-autofill {
 
 .custom-shape-divider-top-1723244705 .shape-fill {
   fill: #15191e;
+}
+
+.google-visualization-tooltip {
+  background: transparent !important; /* Make background transparent */
+  box-shadow: none !important; /* Remove default shadow */
+  border: none !important; /* Remove default border */
+}
+
+.google-visualization-tooltip li:first-child {
+  display: none; /* Hides the first <li> child in the tooltip */
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+*::selection {
+  background-color: #1a1e25;
+  color: #3cbab1;
+}
+
+
+.cross-line::after {
+  content: '';
+  width: 120%;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -10%;
+
+}
+
+
+.pulse {
+  animation: pulseAnimation 1s linear infinite;
+}
+
+@keyframes pulseAnimation {
+  0% {
+    transform: scale(1);
+  } 50% {
+   transform: scale(1.1);
+  } 100% {
+    transform: scale(1);
+  }
 }

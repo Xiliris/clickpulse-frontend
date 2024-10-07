@@ -1,20 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import { FC, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { FC, useEffect } from "react";
 
 const Logout: FC = () => {
   const navigate = useNavigate();
-  const [, , removeCookie] = useCookies(['token']);
+  const [, , removeCookie] = useCookies(["token"]);
 
   useEffect(() => {
-    // Remove the cookie
-    removeCookie('token', { path: '/' });
+    removeCookie("token", { path: "/" });
+    sessionStorage.removeItem("user");
 
-    // Navigate to the home page
-    navigate('/');
+    navigate("/");
   }, [navigate, removeCookie]);
 
-  return null; // Return null as there is nothing to render
+  return null;
 };
 
 export default Logout;

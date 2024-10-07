@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Title from './Title';
 
-
 interface itemProp {
   index: number;
 }
@@ -20,14 +19,14 @@ const itemVariant = {
     transition: {
       delay: index * 0.1,
       duration: 0.5,
-      type: "tween",
+      type: 'tween',
     },
   }),
 };
 
 export default function Hero() {
   return (
-    <section id="pricing" className="bg-default-100 py-32 relative">
+    <section className="bg-default-100 pb-16 pt-32 relative">
       <div className="custom-shape-divider-top-1723244705 absolute top-0 left-0">
         <svg
           data-name="Layer 1"
@@ -46,27 +45,32 @@ export default function Hero() {
         <div className="flex flex-wrap gap-8 justify-between xl:justify-center">
           {/* Basic */}
 
-          <Card plan="Basic Plan" price="$9.99" index={2}>
+          <Card plan="Basic Plan" price="$7.99" index={2}>
             <Item>10 users</Item>
             <Item>10 projects</Item>
             <Item>10GB storage</Item>
             <Item>Email support</Item>
           </Card>
           {/* Standard */}
-          <Card plan="Standard Plan" price="$29.99" index={1}>
+          <Card plan="Standard Plan" price="$14.99" index={1}>
             <Item>20 users</Item>
             <Item>20 projects</Item>
             <Item>20GB storage</Item>
             <Item>Priority email support</Item>
           </Card>
           {/* Premium */}
-          <Card plan="Premium Plan" price="$49.99" index={2}>
+          <Card plan="Premium Plan" price="$39.99" index={2}>
             <Item>Unlimited users</Item>
             <Item>Unlimited projects</Item>
             <Item>Unlimited storage</Item>
             <Item>24/7 support</Item>
           </Card>
         </div>
+      </div>
+      <div className="flex items-center justify-center textt-emphasis underline text-xl text-emphasis mt-[25px]">
+        <Link to="/pricing-more" className="cursor-pointer">
+          View more
+        </Link>
       </div>
     </section>
   );
@@ -100,16 +104,21 @@ const Card: FC<CardInterface> = ({
       viewport={{ once: true, amount: 0.5 }}
       className={`relative flex flex-col gap-4 p-4 w-76 bg-default-200 rounded-xl shadow-inner flex-grow transform max-w-96 ${className}`}
     >
-      <div className="relative flex flex-col ">
+      <div className="relative flex flex-col w-fit mx-auto">
         <span className="text-primary text-3xl">{plan}</span>
-        <p className="mt-1 text-secondary-100 text-4xl">{price}</p>
+        <p className="text-xl text-secondary-100 mb-2 text-center w-fit mx-auto flex justify-center items-center">
+          <span className="relative cross-line">{price}</span>
+          <span className="text-emphasis ml-4 font-bold">
+            <div className="pulse">FREE</div>
+          </span>
+        </p>
       </div>
       <hr className="border-[#4C5366]" />
       <ul className="flex flex-col gap-2 flex-grow">{children}</ul>
       <div>
-        <Link to={`/payment?plan=${plan}&price=${price}`}>
+        <Link to={`/signup`}>
           <Button className="flex justify-between w-full">
-            Upgrade now
+            Free While in Beta
             <i className="fa-solid fa-arrow-right cursor-pointer"></i>
           </Button>
         </Link>

@@ -75,7 +75,7 @@ const OverlayArticle: FC<OverlayArticleProps> = ({
                 {Object.entries(item).map(([key, value]: any) => (
                   <p
                     key={key}
-                    className="text-primary w-full text-right first:text-left"
+                    className="text-primary w-full text-right first:text-left "
                   >
                     {formatOverlayContent(key, value, item.visits)}
                   </p>
@@ -89,12 +89,15 @@ const OverlayArticle: FC<OverlayArticleProps> = ({
 };
 
 function formatOverlayContent(type: string, value: number, visits: number) {
+  console.log(type);
   if (type === "bounce_rate") {
     return ((value / visits) * 100).toFixed(1) + "%";
   } else if (type === "time_spent") {
     return formatDuration(Math.round(value / visits));
   } else if (type === "visits") {
     return formatNumber(visits);
+  } else if (type === "clicks") {
+    return formatNumber(value);
   } else return value;
 }
 

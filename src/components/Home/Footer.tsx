@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useCallback } from 'react';
-import Logo from '../../assets/logo.png';
+import { useCallback, FC } from 'react';
+import Logo from '../../assets/logo.svg';
 import { motion } from 'framer-motion';
 import {
   lineVariant,
@@ -8,7 +8,11 @@ import {
   upperItemVariant,
 } from '../../animations/Animations';
 
-export default function Footer() {
+interface footerProps {
+  width?: number;
+}
+
+const Footer: FC<footerProps> = ({ width }) => {
   const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
@@ -16,15 +20,17 @@ export default function Footer() {
     });
   }, []);
 
+  const containerWidth = width ? `w-[${width}vw]` : 'w-[70vw]';
+
   return (
     <footer className="bg-default-200 text-primary py-10">
-      <div className="max-w-[70vw] mx-auto px-4">
+      <div className={`${containerWidth} mx-auto px-4`}>
         <motion.div
           variants={upperItemVariant}
           initial="initial"
           whileInView="animate"
           custom={{ yHeight: 40 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
           className="flex md:flex-col flex-row justify-between items-center mb-8"
         >
           <div
@@ -34,9 +40,13 @@ export default function Footer() {
             <img
               src={Logo}
               alt="Logo"
-              className="md:w-[65px] w-12 cursor-pointer"
+              className="md:w-[24px] w-[24px] cursor-pointer"
+              width={30}
+              height={30}
+              loading="eager"
+              title="Clickpulse logo"
             />
-            <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:mt-1">
+            <span className="text-2xl font-bold text-primary cursor-pointer ml-2 md:ml-0 md:mt-2">
               Clickpulse
             </span>
           </div>
@@ -74,7 +84,7 @@ export default function Footer() {
             variants={lineVariant}
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.5 }}
             className="absolute h-full w-full bg-secondary-200"
           />
         </div>
@@ -83,7 +93,7 @@ export default function Footer() {
           variants={lowerItemVariant}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
           className="flex md:flex-col flex-row justify-between items-center text-center mt-8"
         >
           <p className="text-base md:mb-4 mb-0 text-secondary-100">
@@ -114,9 +124,19 @@ export default function Footer() {
             >
               <i className="fa-brands fa-linkedin text-xl transform transition-transform duration-300 hover:scale-125 cursor-pointer"></i>
             </a>
+            <a
+              href="https://discord.gg/9eWFeSW7pz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-emphasis cursor-pointer"
+            >
+              <i className="fab fa-discord text-xl transform transition-transform duration-300 hover:scale-125 cursor-pointer"></i>
+            </a>
           </div>
         </motion.div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

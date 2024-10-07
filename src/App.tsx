@@ -11,8 +11,7 @@ import Signup from "./pages/auth/Register";
 import Verify from "./pages/auth/Verify";
 import Reset from "./pages/auth/Reset";
 import Logout from "./pages/auth/Logout";
-import New from "./pages/dashboard/New";
-import Script from "./pages/dashboard/Script";
+import AddWebsite from "./pages/dashboard/AddWebsite";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Websites from "./pages/dashboard/Websites";
 import Maintenance from "./pages/Maintenance";
@@ -22,7 +21,16 @@ import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/Terms";
 import AboutUs from "./pages/Aboutus";
-import PaymentPage from "./pages/Payment";
+//import PaymentPage from './pages/Payment';
+import PricingMore from "./pages/Pricingmore";
+import ProtectedWebsite from "./modules/ProtectedWebsite";
+//import BillingAddress from './pages/BillingAddress';
+import Lightweight from "./pages/Lightweight";
+import PrivacyCommitment from "./pages/PrivacyCommitment";
+import EasyToUse from "./pages/EasyToUse";
+import ConstantlyImproving from "./pages/ConstantlyImproving";
+import ResetPassword from "./pages/auth/ResetPassword";
+import ChangePassword from "./pages/auth/ChangePassword";
 
 const AppLayout = () => (
   <>
@@ -60,6 +68,10 @@ const router = createBrowserRouter([
         element: <Reset />,
       },
       {
+        path: "/reset/:token",
+        element: <ResetPassword />,
+      },
+      {
         path: "/maintenance",
         element: <Maintenance />,
       },
@@ -80,13 +92,41 @@ const router = createBrowserRouter([
         element: <AboutUs />,
       },
       {
+        path: "/pricing-more",
+        element: <PricingMore />,
+      },
+      {
+        path: `/lightweight`,
+        element: <Lightweight />,
+      },
+      {
+        path: `/privacy-commitment`,
+        element: <PrivacyCommitment />,
+      },
+      {
+        path: `/easy-to-use`,
+        element: <EasyToUse />,
+      },
+      {
+        path: `/constantly-improving`,
+        element: <ConstantlyImproving />,
+      },
+      /*{
+        path: `/billing-address`,
+        element: (
+          <Protected>
+            <BillingAddress />
+          </Protected>
+        ),
+      },
+      {
         path: "/payment",
         element: (
           <Protected>
             <PaymentPage />
           </Protected>
         ),
-      },
+      },*/
       {
         path: "/dashboard",
         element: (
@@ -95,19 +135,20 @@ const router = createBrowserRouter([
           </Protected>
         ),
       },
+
       {
-        path: "/dashboard/new",
+        path: "/change-password",
         element: (
           <Protected>
-            <New />
+            <ChangePassword />
           </Protected>
         ),
       },
       {
-        path: "/dashboard/script",
+        path: "/dashboard/add-website",
         element: (
           <Protected>
-            <Script />
+            <AddWebsite />
           </Protected>
         ),
       },
@@ -115,13 +156,33 @@ const router = createBrowserRouter([
         path: "/dashboard/:id",
         element: (
           <Protected>
-            <Dashboard />
+            <ProtectedWebsite>
+              <Dashboard />
+            </ProtectedWebsite>
           </Protected>
         ),
       },
       {
+        path: "401",
+        element: (
+          <Error
+            type={401}
+            message={
+              "Oops! It looks like you're not authorized to access this section. Please log in or get in touch with our support team if you need assistance.!"
+            }
+          />
+        ),
+      },
+      {
         path: "*",
-        element: <Error type={404} message={"Page not found!"} />,
+        element: (
+          <Error
+            type={404}
+            message={
+              "Oops! This page doesn't exist. But don't worry, we'll help you find your way back."
+            }
+          />
+        ),
       },
     ],
   },

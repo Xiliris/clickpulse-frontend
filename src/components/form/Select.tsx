@@ -7,12 +7,7 @@ interface SelectProps {
   className?: string;
 }
 
-const Select: React.FC<SelectProps> = ({
-  options,
-  label,
-  onChange,
-  className,
-}) => {
+const Select: React.FC<SelectProps> = ({ options, onChange, className }) => {
   const [selected, setSelected] = useState<string>(options[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement>(null);

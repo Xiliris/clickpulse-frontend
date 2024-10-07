@@ -8,12 +8,12 @@ interface TitleProps {
 
 const Title: React.FC<TitleProps> = ({ children }) => {
   return (
-    <div className="relative text-center mb-8">
+    <div className="relative text-center mb-8 bg-transparent">
       <motion.h2
         variants={upperItemVariant}
         custom={{ yHeight: 10 }}
         initial="initial"
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.5 }}
         whileInView="animate"
         className="text-4xl font-bold text-emphasis"
       >
