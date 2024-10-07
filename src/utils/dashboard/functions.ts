@@ -149,18 +149,6 @@ function getBrowserLogo(browser: string) {
   }
 }
 
-function getDeviceIcon(device: string) {
-  switch (device.toLowerCase()) {
-    case "desktop":
-      return "https://img.icons8.com/ios-filled/50/000000/desktop.png";
-    case "tablet":
-      return "https://img.icons8.com/ios-filled/50/000000/tablet.png";
-    case "mobile":
-      return "https://img.icons8.com/ios-filled/50/000000/smartphone.png";
-    default:
-      return "https://img.icons8.com/ios-filled/50/000000/question-mark.png";
-  }
-}
 // Example usage:
 const browserName = "Chrome";
 const logoUrl = getBrowserLogo(browserName);

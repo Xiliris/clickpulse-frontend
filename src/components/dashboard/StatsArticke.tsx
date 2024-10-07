@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import axiosInstance from "../../modules/axiosInstance";
 import {
   formatNumber,
-  getBrowserLogo,
   calculateLogoType,
 } from "../../utils/dashboard/functions";
 import OverlayArticle from "./OverlayArticle";
