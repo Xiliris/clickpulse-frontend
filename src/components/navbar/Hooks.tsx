@@ -1,12 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-import { useCookies } from 'react-cookie';
-import { useScroll } from 'framer-motion';
-import axiosInstance from '../../modules/axiosInstance';
+import { useState, useEffect, useRef } from "react";
+import { useCookies } from "react-cookie";
+import { useScroll } from "framer-motion";
+import axiosInstance from "../../modules/axiosInstance";
 
 const useProfileMenu = () => {
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(["token"]);
   const { scrollY } = useScroll();
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<any>(null);
+  const [loadingUser, setLoadingUser] = useState<boolean>(true);
   const [scrollingUp, setScrollingUp] = useState(true);
   const [isWhyClicked, setIsWhyClicked] = useState(false);
   const [isCommunityClicked, setIsCommunityClicked] = useState(false);
@@ -19,7 +20,11 @@ const useProfileMenu = () => {
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getProfile();
+    if (!user) {
+      getProfile();
+    } else {
+      setLoadingUser(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -63,12 +68,12 @@ const useProfileMenu = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, []);
 
@@ -90,21 +95,34 @@ const useProfileMenu = () => {
     setIsLogged(false);
   }
 
-  document.addEventListener('scroll', handleScroll);
+  document.addEventListener("scroll", handleScroll);
 
   async function getProfile() {
-    try {
-      const res = await axiosInstance.post('/auth/me', {
-        token: cookies.token,
-      });
-      setUser(res.data);
-    } catch (err) {
-      console.log(err);
+    const storedUser = sessionStorage.getItem("user");
+    if (!cookies.token) return setLoadingUser(false);
+
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setLoadingUser(false);
+    } else {
+      try {
+        const res = await axiosInstance.post("/auth/me", {
+          token: cookies.token,
+        });
+
+        setUser(res.data);
+        sessionStorage.setItem("user", JSON.stringify(res.data));
+        setLoadingUser(false);
+      } catch (err) {
+        console.error("Error fetching user:", err);
+        setLoadingUser(false);
+      }
     }
   }
 
   return {
     user,
+    loadingUser,
     scrollingUp,
     isWhyClicked,
     setIsWhyClicked,

@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   createBrowserRouter,
   RouterProvider,
@@ -7,30 +5,33 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import Home from './pages/Home';
-import Login from './pages/auth/Login';
-import Signup from './pages/auth/Register';
-import Verify from './pages/auth/Verify';
-import Reset from './pages/auth/Reset';
-import Logout from './pages/auth/Logout';
-import AddWebsite from './pages/dashboard/AddWebsite';
-import Dashboard from './pages/dashboard/Dashboard';
-import Websites from './pages/dashboard/Websites';
-import Maintenance from './pages/Maintenance';
-import Protected from './modules/Protected';
-import Error from './pages/error/Error';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfService from './pages/Terms';
-import AboutUs from './pages/Aboutus';
+import Home from "./pages/Home";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Register";
+import Verify from "./pages/auth/Verify";
+import Reset from "./pages/auth/Reset";
+import Logout from "./pages/auth/Logout";
+import AddWebsite from "./pages/dashboard/AddWebsite";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Websites from "./pages/dashboard/Websites";
+import Maintenance from "./pages/Maintenance";
+import Protected from "./modules/Protected";
+import Error from "./pages/error/Error";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/Terms";
+import AboutUs from "./pages/Aboutus";
 //import PaymentPage from './pages/Payment';
-import PricingMore from './pages/Pricingmore';
-import ProtectedWebsite from './modules/ProtectedWebsite';
+import PricingMore from "./pages/Pricingmore";
+import ProtectedWebsite from "./modules/ProtectedWebsite";
 //import BillingAddress from './pages/BillingAddress';
-import Lightweight from './pages/Lightweight';
-import PrivacyCommitment from './pages/PrivacyCommitment';
-import EasyToUse from './pages/EasyToUse';
-import ConstantlyImproving from './pages/ConstantlyImproving';
+import Lightweight from "./pages/Lightweight";
+import PrivacyCommitment from "./pages/PrivacyCommitment";
+import EasyToUse from "./pages/EasyToUse";
+import ConstantlyImproving from "./pages/ConstantlyImproving";
+import ResetPassword from "./pages/auth/ResetPassword";
+import ChangePassword from "./pages/auth/ChangePassword";
+
 const AppLayout = () => (
   <>
     <ScrollRestoration />
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/reset",
         element: <Reset />,
+      },
+      {
+        path: "/reset/:token",
+        element: <ResetPassword />,
       },
       {
         path: "/maintenance",
@@ -130,6 +135,15 @@ const router = createBrowserRouter([
           </Protected>
         ),
       },
+
+      {
+        path: "/change-password",
+        element: (
+          <Protected>
+            <ChangePassword />
+          </Protected>
+        ),
+      },
       {
         path: "/dashboard/add-website",
         element: (
@@ -160,7 +174,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '*',
+        path: "*",
         element: (
           <Error
             type={404}
@@ -175,14 +189,6 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  useEffect(() => {
-    const heading = document.getElementById('main-heading');
-    const heading = document.getElementById("main-heading");
-    if (heading) {
-      heading.remove();
-    }
-  }, []);
-
   return (
     <>
       <RouterProvider router={router} />

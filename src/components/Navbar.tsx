@@ -1,16 +1,16 @@
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import Profile from './navbar/Profile';
-import useProfileMenu from './navbar/Hooks';
-import MenuNavbar from './navbar/MenuNavbar';
-import WhyClickpulse from './navbar/WhyClickpulse';
-import Community from './navbar/Community';
-import DesktopProfile from './navbar/DesktopProfile';
-import Button from './form/Button';
-import Logo from '../assets/logo.svg';
-import PricingDropdown from './navbar/Pricing';
-
+import { FC } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import Profile from "./navbar/Profile";
+import useProfileMenu from "./navbar/Hooks";
+import MenuNavbar from "./navbar/MenuNavbar";
+import WhyClickpulse from "./navbar/WhyClickpulse";
+import Community from "./navbar/Community";
+import DesktopProfile from "./navbar/DesktopProfile";
+import Button from "./form/Button";
+import Logo from "../assets/logo.svg";
+import PricingDropdown from "./navbar/Pricing";
+import Spinner from "./Spinner";
 interface navbarProps {
   width?: number;
 }
@@ -34,6 +34,7 @@ const variants = {
 const Navbar: FC<navbarProps> = ({ width }) => {
   const {
     user,
+    loadingUser,
     scrollingUp,
     isMobileMenuOpen,
     toggleMobileMenu,
@@ -59,10 +60,7 @@ const Navbar: FC<navbarProps> = ({ width }) => {
         className={`relative flex justify-between items-center ${containerWidth} md:w-[90vw] mx-auto lg:px-0`}
       >
         {/* Logo and Site Title */}
-        <Link
-          to="/"
-          className="flex items-center space-x-2 w-[250px]"
-        >
+        <Link to="/" className="flex items-center space-x-2 w-[250px]">
           <img
             src={Logo}
             alt="Logo"
@@ -86,7 +84,9 @@ const Navbar: FC<navbarProps> = ({ width }) => {
 
         {/* Desktop Profile / Login */}
         <div className="xl:hidden flex items-center space-x-6 w-[250px] justify-end">
-          {user && user.username ? (
+          {loadingUser ? (
+            <Spinner className="justify-end" />
+          ) : user && user.username ? (
             <DesktopProfile user={user} />
           ) : (
             <>

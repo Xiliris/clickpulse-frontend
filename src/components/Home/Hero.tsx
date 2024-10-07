@@ -1,14 +1,12 @@
-import React, { ReactNode } from 'react';
-import { motion } from 'framer-motion';
-import Title from './Title';
-import Splash1 from '../../assets/splash1.svg';
-import Ikona1 from '../../assets/Ikona1.svg';
-import Ikona2 from '../../assets/Ikona2.svg';
-import Ikona3 from '../../assets/Ikona3.svg';
-import Ikona4 from '../../assets/Ikona4.svg';
-import Ikona5 from '../../assets/Ikona5.svg';
-import Ikona6 from '../../assets/Ikona6.svg';
-
+import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
+import Title from "./Title";
+import Ikona1 from "../../assets/Ikona1.svg";
+import Ikona2 from "../../assets/Ikona2.svg";
+import Ikona3 from "../../assets/Ikona3.svg";
+import Ikona4 from "../../assets/Ikona4.svg";
+import Ikona5 from "../../assets/Ikona5.svg";
+import Ikona6 from "../../assets/Ikona6.svg";
 
 interface FlipCardProps {
   title: string;
@@ -17,24 +15,20 @@ interface FlipCardProps {
   img: string;
 }
 
-interface itemProp {
-  index: number;
-}
-
 const itemVariant = {
   initial: {
-    y: 50,
+    y: 100,
     opacity: 0,
   },
-  animate: ({ index }: itemProp) => ({
+  animate: {
     y: 0,
     opacity: 1,
     transition: {
       delay: 0,
-      duration: 0.2,
-      type: "spring",
+      duration: 0.1,
+      type: "linear",
     },
-  }),
+  },
 };
 
 export default function Hero() {
@@ -43,7 +37,7 @@ export default function Hero() {
       <div className="mx-auto text-center relative">
         <Title>Website Analytics and Performance Tracking</Title>
 
-        <div className="flex flex-col gap-8 mt-12 md:flex">
+        <div className="flex flex-col gap-16 mt-12 md:flex">
           <FlipCard
             title="Site Engagement Analytics"
             description={
@@ -192,8 +186,8 @@ const FlipCard: React.FC<FlipCardProps> = ({
   img,
 }) => {
   const isEven = index % 2 === 0;
-  const flexDirection = isEven ? 'flex-row-reverse' : 'flex-row';
-  const marginDirection = isEven ? 'ml-auto' : 'mr-auto';
+  const flexDirection = isEven ? "flex-row-reverse" : "flex-row";
+  const marginDirection = isEven ? "ml-auto" : "mr-auto";
 
   return (
     <motion.article
@@ -203,25 +197,25 @@ const FlipCard: React.FC<FlipCardProps> = ({
       viewport={{ once: true, amount: 0.5 }}
       custom={{ index: index }}
       className={`w-[70vw] md:w-full mx-auto space-y-2 hover:-translate-y-2 duration-300 flex ${flexDirection} gap-16 md:flex-col md:gap-4 md:justify-center md:items-center`}
-      style={{ minHeight: '200px' }}
+      style={{ minHeight: "200px" }}
     >
       <div className="flex-shrink-0 w-1/2 md:w-full flex items-center justify-center">
         <img
           src={img}
           alt={`Image for ${title}`}
-          className={`w-4/6 h-auto object-cover ${marginDirection} md:mx-auto`}
+          className={`h-auto object-cover ${marginDirection} md:mx-auto`}
           width={400}
           height={400}
           loading="lazy"
-          title="title"
+          title="Clickpulse logo"
         />
       </div>
 
       <div className="flex flex-col justify-center w-1/2 md:w-full md:text-center">
-        <h3 className="text-3xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
+        <h3 className="text-4xl xl:text-2xl lg:text-2xl md:text-lg text-emphasis font-bold text-left md:text-center">
           {title}
         </h3>
-        <div className="text-lg xl:text-base text-primary mt-2 text-left">
+        <div className="text-xl xl:text-base text-primary mt-2 text-left">
           {description}
         </div>
       </div>
