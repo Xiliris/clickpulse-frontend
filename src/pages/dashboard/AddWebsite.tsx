@@ -9,7 +9,7 @@ import Header from "../../components/Header";
 import Button from "../../components/form/Button";
 
 import validateDomain from "../../utils/form/validateDomain";
-import { websiteUrl } from "../../../config.json";
+import { apiBaseUrl } from "../../../config.json";
 
 const AddWebsite: FC = () => {
   const domainRef = useRef<HTMLInputElement>(null);
@@ -45,7 +45,7 @@ const AddWebsite: FC = () => {
 
   function handleCopy() {
     navigator.clipboard.writeText(
-      `<script defer data-domain="https://${domain}" src="${websiteUrl}/js/script.js"></script>`
+      `<script defer data-domain="https://${domain}" src="${apiBaseUrl}/script.mjs"></script>`
     );
 
     setCopied({ border: "border-emphasis", color: "text-emphasis" });
