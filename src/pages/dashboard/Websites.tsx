@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from "react";
 import { CookiesProvider, useCookies } from "react-cookie";
 import axiosInstance from "../../modules/axiosInstance";
 import SplitSection from "../../components/SplitSection";
+import Spinner from "../../components/Spinner";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/home/Footer";
@@ -18,6 +19,7 @@ interface WebsiteData {
 const Websites: FC = () => {
   const [cookies] = useCookies(["token"]);
   const [websites, setWebsites] = useState<WebsiteData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getWebsites();
@@ -30,6 +32,7 @@ const Websites: FC = () => {
       );
 
       setWebsites(response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -46,18 +49,24 @@ const Websites: FC = () => {
             Choose a website to view analytics and insights.
           </p>
         </div>
-        <div className="w-full flex flex-col justify-center items-center gap-5 mt-10">
-          {websites && websites.length > 0 ? (
-            websites.map((website, index) => (
-              <Website
-                key={index}
-                domain={website.domain}
-                active={website.active}
-                id={website.id}
-              />
-            ))
-          ) : (
-            <p className="text-primary">Please add a website.</p>
+        <div className="w-full flex flex-col justify-center items-center gap-5 mt-10 relative">
+          {!loading &&
+            (websites && websites.length > 0 ? (
+              websites.map((website, index) => (
+                <Website
+                  key={index}
+                  domain={website.domain}
+                  active={website.active}
+                  id={website.id}
+                />
+              ))
+            ) : (
+              <p className="text-primary">Please add a website.</p>
+            ))}
+          {loading && (
+            <div className="w-full h-full absolute top-0 left-0 flex justify-center items-center bg-default-200">
+              <Spinner className="justify-center" />
+            </div>
           )}
         </div>
         <Link to="/dashboard/add-website">
@@ -129,7 +138,7 @@ const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
         </div>
       )}
       {removeOverlay && (
-        <div className="w-full h-full absolute flex flex-col justify-center items-center bg-[rgba(0,0,0,0.5)]">
+        <div className="w-full h-full absolute flex flex-col justify-center items-center ">
           <div className="bg-default-100 p-10 rounded-md md:text-center max-w-[90vw]">
             <p className="text-primary text-2xl">
               Are you sure you want to remove{" "}

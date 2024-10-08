@@ -82,14 +82,6 @@ const Verify: FC = () => {
               </Button>
             </div>
           </form>
-          <div className="mt-4 text-sm text-center">
-            <Link
-              to="/"
-              className="text-base text-emphasis hover:text-emphasis-light"
-            >
-              Back to Home
-            </Link>
-          </div>
         </div>
       </main>
       <footer className="mt-8 text-base text-secondary-100 text-center">

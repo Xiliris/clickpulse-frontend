@@ -1,21 +1,21 @@
-import { FC, useRef, useState } from "react";
-import { CookiesProvider, useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import axiosInstance from "../../modules/axiosInstance";
+import { FC, useRef, useState } from 'react';
+import { CookiesProvider, useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import axiosInstance from '../../modules/axiosInstance';
 
-import Header from "../../components/Header";
-import Input from "../../components/form/Input";
-import PasswordInput from "../../components/form/PasswordInput";
-import Button from "../../components/form/Button";
-import Logo from "../../assets/logo.svg";
-import Background from "../../assets/background.svg";
-import Spinner from "../../components/Spinner";
+import Header from '../../components/Header';
+import Input from '../../components/form/Input';
+import PasswordInput from '../../components/form/PasswordInput';
+import Button from '../../components/form/Button';
+import Logo from '../../assets/logo.svg';
+import Background from '../../assets/background.svg';
+import Spinner from '../../components/Spinner';
 
 const Auth: FC = () => {
   const navigate = useNavigate();
-  const [, setCookie] = useCookies(["token"]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [, setCookie] = useCookies(['token']);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,21 +25,21 @@ const Auth: FC = () => {
     const password = passwordRef.current?.value;
 
     if (!email && !password) {
-      setErrorMessage("Please fill in both fields");
+      setErrorMessage('Please fill in both fields');
       return;
     } else if (!email) {
-      setErrorMessage("Please fill in your email.");
+      setErrorMessage('Please fill in your email.');
       return;
     } else if (!password) {
-      setErrorMessage("Please fill in your password.");
+      setErrorMessage('Please fill in your password.');
       return;
     }
 
     axiosInstance
-      .post("/auth/login", { email, password })
+      .post('/auth/login', { email, password })
       .then((res) => {
-        setCookie("token", res.data.token, { path: "/" });
-        navigate("/");
+        setCookie('token', res.data.token, { path: '/' });
+        navigate('/');
         setLoading(false);
       })
       .catch((err) => {
@@ -61,15 +61,23 @@ const Auth: FC = () => {
           style={{ backgroundImage: `url(${Background})` }}
         ></div>
         <div className="max-w-lg w-[90vw] space-y-10 bg-default-300 p-10 rounded-md z-10 relative overflow-hidden">
-          <Link to="/" className="text-emphasis cursor-pointer block text-xl">
+          <Link
+            to="/"
+            className="text-emphasis cursor-pointer block text-xl"
+          >
             <i className="fa-solid fa-arrow-left cursor-pointer"></i>
           </Link>
           <div className="text-center">
-            <img className="mx-auto h-16 w-auto" src={Logo} alt="Logo" />
+            <img
+              className="mx-auto h-16 w-auto"
+              src={Logo}
+              alt="Logo"
+            />
             <h2 className="mt-4 text-center text-2xl font-extrabold text-primary">
               Log in to your account
             </h2>
           </div>
+
           <form
             className="mt-10 space-y-4"
             onSubmit={(e) => {
@@ -87,13 +95,13 @@ const Auth: FC = () => {
               type="email"
               placeholder="Email address"
               ref={emailRef}
-              onChange={() => setErrorMessage("")}
+              onChange={() => setErrorMessage('')}
             />
             <PasswordInput
               name="password"
               placeholder="Password"
               ref={passwordRef}
-              onChange={() => setErrorMessage("")}
+              onChange={() => setErrorMessage('')}
             />
             <div className="text-sm flex justify-between">
               <Link
@@ -104,11 +112,19 @@ const Auth: FC = () => {
               </Link>
             </div>
 
-            {errorMessage && <p className="text-red-400">{errorMessage}</p>}
+            {errorMessage && (
+              <p className="text-red-400">{errorMessage}</p>
+            )}
 
             <div className="justify-between flex pt-4">
-              <Link to="/signup" className="text-secondary-100 cursor-pointer">
-                <button className="px-6 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select bg-default-200 border-2 border-secondary-200 cursor-pointer">
+              <Link
+                to="/signup"
+                className="text-secondary-100 cursor-pointer"
+              >
+                <button
+                  type="button"
+                  className="px-6 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select bg-default-200 border-2 border-secondary-200 cursor-pointer"
+                >
                   Register
                 </button>
               </Link>

@@ -1,12 +1,11 @@
 import { FC, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Button from '../components/form/Button';
 import Navbar from '../components/Navbar';
 import Footer from '../components/home/Footer';
 import Header from '../components/Header';
 import { motion } from 'framer-motion';
 /*import { PlanComparisonTable } from './PricingmoreTable';*/
-import { useLocation } from 'react-router-dom';
 import { plans } from '../../config.json';
 import SplitSection from '../components/SplitSection';
 
