@@ -9,7 +9,7 @@ import Header from "../../components/Header";
 import Button from "../../components/form/Button";
 
 import validateDomain from "../../utils/form/validateDomain";
-import { apiBaseUrl, websiteUrl } from "../../../config.json";
+import { apiBaseUrl } from "../../../config.json";
 
 const AddWebsite: FC = () => {
   const domainRef = useRef<HTMLInputElement>(null);
