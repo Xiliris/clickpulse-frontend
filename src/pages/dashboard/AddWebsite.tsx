@@ -45,7 +45,7 @@ const AddWebsite: FC = () => {
 
   function handleCopy() {
     navigator.clipboard.writeText(
-      `<script defer data-domain="https://${domain}" src="${apiBaseUrl}/script.mjs"></script>`
+      `<script defer type="module" data-domain="https://${domain}" src="${apiBaseUrl}/script.mjs"></script>`
     );
 
     setCopied({ border: "border-emphasis", color: "text-emphasis" });
