@@ -159,7 +159,7 @@ const AddWebsite: FC = () => {
             <p
               className={`w-full flex justify-start items-center border border-secondary-100 rounded-md overflow-hidden resize-none bg-transparent text-primary py-2 px-4 ${copied.border}`}
             >
-              {`<script defer type="module" data-domain="https://${domain}" src="${websiteUrl}/js/script.js"></script>`}
+              {`<script defer type="module" data-domain="https://${domain}" src="${apiBaseUrl}/script.mjs"></script>`}
               <i
                 className={`fa-solid fa-copy ml-3 cursor-pointer ${copied.color}`}
                 onClick={handleCopy}
