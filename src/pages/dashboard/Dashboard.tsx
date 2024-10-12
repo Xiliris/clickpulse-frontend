@@ -21,6 +21,7 @@ const Dashboard: FC = () => {
     defaultDate.currentDate
   );
   const [endDate, setEndDate] = useState<any>(defaultDate.targetDate);
+  const [loading, setLoading] = useState<boolean>(false);
 
   function handleTimeChange(newSelection: string) {
     const result = newSelection.toLowerCase();
