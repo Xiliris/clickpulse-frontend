@@ -97,7 +97,7 @@ const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
     try {
       const response: any = await axiosInstance.post("/dashboard/remove", {
         token: cookies.token,
-        domain,
+        domain: name,
       });
       if (response.data) {
       }
