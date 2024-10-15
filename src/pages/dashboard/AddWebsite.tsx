@@ -55,7 +55,7 @@ const AddWebsite: FC = () => {
     try {
       await axiosInstance.post("/dashboard/new", {
         token: cookies.token,
-        domain: `https://${domain}`,
+        domain: domain,
       });
 
       navigate("/dashboard");
