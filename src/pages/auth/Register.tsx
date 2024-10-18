@@ -63,11 +63,12 @@ export default function Register() {
       if (response.status === 200) {
         navigate('/verify');
       } else {
-        setErrorMessage(response.data.message);
+        setErrorMessage(response.data);
       }
       setLoading(false);
     } catch (error: any) {
-      setErrorMessage(error.data);
+      setLoading(false);
+      setErrorMessage(error.response.data);
     }
   }
 
@@ -75,7 +76,7 @@ export default function Register() {
     <>
       <Header title="Register" />
 
-      <main className="min-h-screen flex items-center justify-center bg-default-200 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <main className="h-full flex items-center justify-center bg-default-200 py-12 lg:py-0 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-5 rotate-12 scale-[1.45]"
           style={{ backgroundImage: `url(${Background})` }}
@@ -139,7 +140,7 @@ export default function Register() {
             <div className="justify-between flex pt-4">
               <button
                 type="button"
-                className="px-6 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select bg-default-200 border-2 border-secondary-200 cursor-pointer"
+                className="px-2 py-2 rounded-md inline-flex items-center text-center text-xl duration-200 ease-in-out prevent-select bg-default-200 border-2 border-secondary-200 cursor-pointer"
               >
                 <Link
                   to="/login"

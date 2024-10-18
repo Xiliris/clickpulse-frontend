@@ -7,7 +7,7 @@
     @apply bg-default-200;
   }
   .cross-line::after {
-    @apply bg-primary
+    @apply bg-primary;
   }
 }
 
@@ -164,22 +164,19 @@ input:-webkit-autofill {
 }
 
 *::selection {
-  background-color: #1a1e25;
+  background-color: black;
   color: #3cbab1;
 }
 
-
 .cross-line::after {
-  content: '';
+  content: "";
   width: 120%;
   height: 2px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   left: -10%;
-
 }
-
 
 .pulse {
   animation: pulseAnimation 1s linear infinite;
@@ -188,9 +185,11 @@ input:-webkit-autofill {
 @keyframes pulseAnimation {
   0% {
     transform: scale(1);
-  } 50% {
-   transform: scale(1.1);
-  } 100% {
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
     transform: scale(1);
   }
 }

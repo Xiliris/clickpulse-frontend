@@ -1,6 +1,8 @@
 import { FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CookiesProvider, useCookies } from 'react-cookie';
 import axiosInstance from '../../modules/axiosInstance';
+import Background from '../../assets/background.svg';
 
 import Header from '../../components/Header';
 import Input from '../../components/form/Input';
@@ -11,6 +13,7 @@ import { Link } from 'react-router-dom';
 
 const Verify: FC = () => {
   const ref = useRef<HTMLInputElement>(null);
+  const [, setCookie] = useCookies(['token']);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
 
@@ -30,6 +33,7 @@ const Verify: FC = () => {
       });
 
       if (response.status === 200) {
+        setCookie('token', response.data.token, { path: '/' });
         navigate('/pricing-more');
       } else {
         setErrorMessage(response.data.message);
@@ -40,10 +44,13 @@ const Verify: FC = () => {
   }
 
   return (
-    <>
+    <CookiesProvider>
       <Header title="Verify" />
-      <main className="min-h-screen flex items-center justify-center bg-default-200">
-        <div className="max-w-lg w-[90vw] space-y-10 bg-default-300 p-10 rounded-md">
+      <main className="h-full flex items-center justify-center bg-default-200 my-12">
+        <div
+          className="max-w-lg w-[90vw] space-y-10 bg-default-300 p-10 rounded-md"
+          style={{ backgroundImage: `url(${Background})` }}
+        >
           <Link
             to="/"
             className="text-emphasis cursor-pointer block text-xl"
@@ -57,8 +64,11 @@ const Verify: FC = () => {
               alt="Logo"
             />
             <h2 className="mt-4 text-center text-2xl font-extrabold text-primary">
-              Verify Your Code
+              Enter Verification Code
             </h2>
+            <p className="text-secondary-100 mt-3 text-xl">
+              Check your email for the verification code
+            </p>
           </div>
           <form
             className="space-y-6"
@@ -84,11 +94,7 @@ const Verify: FC = () => {
           </form>
         </div>
       </main>
-      <footer className="mt-8 text-base text-secondary-100 text-center">
-        &copy; {new Date().getFullYear()} Clickpulse. All rights
-        reserved.
-      </footer>
-    </>
+    </CookiesProvider>
   );
 };
 
