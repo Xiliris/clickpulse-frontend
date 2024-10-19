@@ -9,7 +9,7 @@ function Desktop({ loadingUser, user }: any) {
   const navigate = useNavigate();
   return (
     <>
-      <ul className="flex justify-between items-center gap-5 lg:hidden ml-10 mr-auto">
+      <ul className="flex justify-between items-center gap-5 lg:hidden">
         <Container title="Why us?">
           <Item href="/lightweight" icon="fa-feather">
             Lightweight Script
