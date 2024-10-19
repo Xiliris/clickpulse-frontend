@@ -55,7 +55,7 @@ const Auth: FC = () => {
   return (
     <CookiesProvider>
       <Header title="Login" />
-      <main className="relative flex items-center justify-center min-h-screen bg-default-200">
+      <main className="h-screen relative flex items-center justify-center bg-default-200">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-5 rotate-12 scale-[1.45]"
           style={{ backgroundImage: `url(${Background})` }}

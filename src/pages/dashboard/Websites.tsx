@@ -111,7 +111,7 @@ const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
   return (
     <>
       {!deleted && (
-        <div className=" bg-default-300  rounded-lg flex items-center gap-5 justify-between relative p-5 px-10">
+        <div className=" bg-default-300  rounded-lg flex items-center justify-between relative p-5 px-5 w-full max-w-[500px]">
           <img
             src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
             className="w-16 md:w-8"
@@ -119,9 +119,7 @@ const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
             width={80}
             alt={`favicon of ${domain}`}
           />
-          <p className="text-emphasis font-bold text-2xl md:text-base">
-            {name}
-          </p>
+          <p className="text-emphasis font-bold text-2xl md:text-sm">{name}</p>
           {active ? (
             <Link to={`/dashboard/${id}`}>
               <Button className="md:text-sm md:px-3 md:py-1">View</Button>
