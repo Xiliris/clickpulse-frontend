@@ -59,7 +59,7 @@ function Desktop({ loadingUser, user }: any) {
           </Item>
         </Container>
       </ul>
-      <div className="w-[160px] flex justify-end items-center">
+      <div className="w-[160px] flex justify-end items-center lg:hidden">
         {loadingUser ? (
           <Spinner className="justify-end w-24 lg:hidden" />
         ) : user ? (
