@@ -1,19 +1,12 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import Profile from "./navbar/Profile";
-import useProfileMenu from "./navbar/Hooks";
-import MenuNavbar from "./navbar/MenuNavbar";
-import WhyClickpulse from "./navbar/WhyClickpulse";
-import Community from "./navbar/Community";
-import DesktopProfile from "./navbar/DesktopProfile";
-import Button from "./form/Button";
+import { HashLink } from "react-router-hash-link";
+import { useCookies } from "react-cookie";
+import axiosInstance from "../modules/axiosInstance";
+import Desktop from "./navbar/Desktop";
+import Mobile from "./navbar/Mobile";
+
 import Logo from "../assets/logo.svg";
-import PricingDropdown from "./navbar/Pricing";
-import Spinner from "./Spinner";
-interface navbarProps {
-  width?: number;
-}
 
 const variants = {
   initial: {
@@ -31,96 +24,85 @@ const variants = {
   },
 };
 
-const Navbar: FC<navbarProps> = ({ width }) => {
-  const {
-    user,
-    loadingUser,
-    scrollingUp,
-    isMobileMenuOpen,
-    toggleMobileMenu,
-    isProfileMenuOpen,
-    toggleProfileMenu,
-    isLogged,
-    toggleLoggedMenu,
-  } = useProfileMenu();
+interface navbarProps {
+  width?: number;
+}
 
+const Navbar: FC<navbarProps> = ({ width }) => {
   const containerWidth = width ? `w-[${width}vw]` : "w-[70vw]";
+  const [loadingUser, setLoadingUser] = useState<boolean>(true);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [user, setUser] = useState<any>(null);
+  const [cookies] = useCookies(["token"]);
+
+  function handleToggle() {
+    setIsActive((prev) => !prev);
+  }
+
+  useEffect(() => {
+    async function getProfile() {
+      const storedUser = sessionStorage.getItem("user");
+      if (!cookies.token) return setLoadingUser(false);
+
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+        setLoadingUser(false);
+      } else {
+        try {
+          const res = await axiosInstance.post("/auth/me", {
+            token: cookies.token,
+          });
+
+          setUser(res.data);
+          sessionStorage.setItem("user", JSON.stringify(res.data));
+          setLoadingUser(false);
+        } catch (err) {
+          console.error("Error fetching user:", err);
+          setLoadingUser(false);
+        }
+      }
+    }
+
+    getProfile();
+  }, []);
+
+  let navStyle = isActive
+    ? "bg-default-200"
+    : "bg-default-300 bg-opacity-30  backdrop-blur-sm";
 
   return (
-    <nav
-      className={`fixed w-full py-4 bg-[rgba(21,25,30,0.5)] backdrop-blur-sm transition-transform duration-200 ease-in-out ${
-        scrollingUp ? "translate-y-0" : "-translate-y-full"
-      } z-50`}
+    <motion.header
+      variants={variants}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ amount: 0.5, once: true }}
+      className={`w-full fixed z-50 ${navStyle}`}
     >
-      <motion.div
-        variants={variants}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ amount: 0.5, once: true }}
-        className={`relative flex justify-between items-center ${containerWidth} md:w-[90vw] mx-auto lg:px-0`}
+      <nav
+        className={`${containerWidth} mx-auto py-5 md:w-[90vw] flex justify-between items-center`}
       >
-        {/* Logo and Site Title */}
-        <Link to="/" className="flex items-center space-x-2 w-[250px]">
+        <HashLink
+          to="/"
+          className="flex items-center justify-start gap-2 cursor-pointer"
+        >
           <img
             src={Logo}
-            alt="Logo"
-            className="w-[28px] md:w-[20px] my-auto "
+            alt="logo"
             width={30}
             height={30}
             loading="eager"
-            title="Clickpulse logo"
+            title="Logo"
+            className="cursor-pointer"
           />
-          <span className="text-2xl md:text-2xl font-bold text-primary cursor-pointer">
+          <p className="text-emphasis font-bold text-2xl cursor-pointer">
             Clickpulse
-          </span>
-        </Link>
+          </p>
+        </HashLink>
 
-        {/* Centered Desktop Navbar Links */}
-        <div className="xl:hidden flex items-center gap-8 mx-auto">
-          <WhyClickpulse />
-          <Community />
-          <PricingDropdown />
-        </div>
-
-        {/* Desktop Profile / Login */}
-        <div className="xl:hidden flex items-center space-x-6 w-[250px] justify-end">
-          {loadingUser ? (
-            <Spinner className="justify-end" />
-          ) : user && user.username ? (
-            <DesktopProfile user={user} />
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="hover:text-emphasis text-primary md:text-lg text-xl cursor-pointer"
-              >
-                Log In
-              </Link>
-              <Link to="/signup">
-                <Button>Sign In</Button>
-              </Link>
-            </>
-          )}
-        </div>
-
-        {/* Mobile Profile / Menu */}
-        <Profile
-          user={user}
-          isProfileMenuOpen={isProfileMenuOpen}
-          isLogged={isLogged}
-          toggleProfileMenu={toggleProfileMenu}
-          toggleLoggedMenu={toggleLoggedMenu}
-          toggleMobileMenu={toggleMobileMenu}
-          isMobileMenuOpen={isMobileMenuOpen}
-        />
-      </motion.div>
-
-      {/* Mobile Menu */}
-      <MenuNavbar
-        isMobileMenuOpen={isMobileMenuOpen}
-        toggleMobileMenu={toggleMobileMenu}
-      />
-    </nav>
+        <Mobile user={user} handleToggle={handleToggle} isActive={isActive} />
+        <Desktop loadingUser={loadingUser} user={user} />
+      </nav>
+    </motion.header>
   );
 };
 

@@ -34,6 +34,8 @@ module.exports = {
 
         sm: { max: "450px" },
         // => @media (max-width: 450px) { ... }
+        cmd: { min: "767px" },
+        clg: { min: "1023px" },
       },
     },
   },
