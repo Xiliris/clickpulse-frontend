@@ -185,7 +185,7 @@ function Overlay({ user }: any) {
               </Button>
               <Button
                 className="w-full justify-center lg:text-lg"
-                onClick={() => navigate("/register")}
+                onClick={() => navigate("/signup")}
               >
                 Register
               </Button>
