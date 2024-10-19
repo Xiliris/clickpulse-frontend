@@ -4,12 +4,13 @@ import Container from "./Container";
 import ExternalItem from "./ExternalItem";
 import Spinner from "../Spinner";
 import Button from "../form/Button";
+import SecondaryButton from "../form/SecondaryButton";
 
 function Desktop({ loadingUser, user }: any) {
   const navigate = useNavigate();
   return (
     <>
-      <ul className="flex justify-between items-center gap-5 lg:hidden">
+      <ul className="flex justify-between items-center gap-5 lg:hidden ml-10 mr-auto">
         <Container title="Why us?">
           <Item href="/lightweight" icon="fa-feather">
             Lightweight Script
@@ -65,12 +66,14 @@ function Desktop({ loadingUser, user }: any) {
         ) : user ? (
           <UserProfile user={user} />
         ) : (
-          <Button
-            onClick={() => navigate("/login")}
-            className="cmd:text-base cmd:py-1.5 cmd:px-5 lg:hidden"
-          >
-            Login
-          </Button>
+          <>
+            <Button
+              onClick={() => navigate("/login")}
+              className="ml-5 cmd:text-base cmd:py-1.5 cmd:px-5 lg:hidden"
+            >
+              Login
+            </Button>
+          </>
         )}
       </div>
     </>

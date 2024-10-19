@@ -203,7 +203,7 @@ const FlipCard: React.FC<FlipCardProps> = ({
         <img
           src={img}
           alt={`Image for ${title}`}
-          className={`h-auto object-cover ${marginDirection} md:mx-auto`}
+          className={`h-auto object-cover ${marginDirection} md:mx-auto md:w-2/5`}
           width={400}
           height={400}
           loading="lazy"
