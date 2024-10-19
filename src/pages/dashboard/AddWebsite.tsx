@@ -151,17 +151,23 @@ const AddWebsite: FC = () => {
 
         {/* Step 2: Script Copy */}
         {step === 2 && (
-          <div className="mt-10 flex flex-col justify-center items-start p-5 rounded-md min-w-96">
-            <h2 className="text-emphasis text-2xl mb-5">Website Details</h2>
+          <div className="mt-10 flex flex-col justify-center items-start p-5 rounded-md w-[70vw] lg:w-[90vw]">
+            <h2 className="text-emphasis text-2xl mb-2">Website Details</h2>
+            <p className="text-primary mb-5">
+              Please remember that when you add a script to your website, you
+              must open it to load. To check if it's ready and running, press
+              F12 to open the console.
+            </p>
+
             <p className="text-primary mb-1">
               Add script in <code>&lt;head&gt;</code> of your HTML document.
             </p>
             <p
-              className={`w-full flex justify-start items-center border border-secondary-100 rounded-md overflow-hidden resize-none bg-transparent text-primary py-2 px-4 ${copied.border}`}
+              className={`w-full h-auto flex justify-start items-center border rounded-md overflow-hidden resize-none bg-transparent text-primary py-2 px-4 relative ${copied.border}`}
             >
               {`<script defer type="module" data-domain="https://${domain}" src="${apiBaseUrl}/script.mjs"></script>`}
               <i
-                className={`fa-solid fa-copy ml-3 cursor-pointer ${copied.color}`}
+                className={`fa-solid fa-copy ml-3 cursor-pointer absolute right-0 px-4 h-full flex items-center justify-center bg-default-200 ${copied.color}`}
                 onClick={handleCopy}
               ></i>
             </p>

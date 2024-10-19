@@ -42,7 +42,7 @@ const Websites: FC = () => {
     <CookiesProvider>
       <Navbar />
       <Header title="Dashboard" />
-      <main className="flex flex-col justify-between items-center w-[70vw] min-h-screen m-auto py-32">
+      <main className="flex flex-col justify-between items-center w-[70vw] min-h-screen m-auto py-32 lg:w-[90vw]">
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-4xl text-emphasis">Select a website</h1>
           <p className="text-primary text-center w-full">
@@ -108,24 +108,36 @@ const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
     setRemoveOverlay(false);
   }
 
+  const getTruncated = (value: string) => {
+    if (window.innerWidth > 767) return value;
+    return value.length > 18 ? `${value.slice(0, 18)}...` : value;
+  };
+
   return (
     <>
       {!deleted && (
-        <div className=" bg-default-300  rounded-lg flex items-center justify-between relative p-5 px-5 w-full max-w-[500px]">
+        <div className=" bg-default-300  rounded-lg flex items-center justify-start gap-5 relative p-5 px-5 w-full max-w-[500px]">
           <img
             src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
-            className="w-16 md:w-8"
+            className="w-11 md:w-8"
             height={80}
             width={80}
             alt={`favicon of ${domain}`}
           />
-          <p className="text-emphasis font-bold text-2xl md:text-sm">{name}</p>
+          <p className="text-emphasis font-bold text-2xl md:text-sm">
+            {getTruncated(name)}
+          </p>
           {active ? (
-            <Link to={`/dashboard/${id}`}>
+            <Link to={`/dashboard/${id}`} className="ml-auto">
               <Button className="md:text-sm md:px-3 md:py-1">View</Button>
             </Link>
           ) : (
-            <Button disabled={true}>Pending</Button>
+            <Button
+              className="ml-auto md:text-sm md:px-3 md:py-1"
+              disabled={true}
+            >
+              Pending
+            </Button>
           )}
           <p className="flex justify-center items-center absolute right-0 top-0 translate-x-1/3 -translate-y-1/3">
             <i
