@@ -4,6 +4,7 @@ import Select from "../form/Select";
 
 import axiosInstance from "../../modules/axiosInstance";
 import { fadeUp } from "../../animations/Animations";
+import Spinner from "../Spinner";
 
 import {
   formatValue,
@@ -32,6 +33,7 @@ const LineGraph: FC<ContainerProps> = ({ id, startDate, endDate }) => {
   const [graphRequest, setGraphRequest] = useState<string>("total-visits");
   const [graphDataKey, setGraphDataKey] = useState<string>("views");
   const [graphData, setGraphData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function getGraph() {
@@ -42,6 +44,8 @@ const LineGraph: FC<ContainerProps> = ({ id, startDate, endDate }) => {
 
       setGraphDataKey(Object.keys(graphData[0])[1]);
       setGraphData(formatDate(graphData));
+
+      setLoading(false);
     }
 
     getGraph();
@@ -85,7 +89,11 @@ const LineGraph: FC<ContainerProps> = ({ id, startDate, endDate }) => {
       initial="initial"
       viewport={{ once: true, amount: 0.5 }}
       whileInView="animate"
+      className="relative"
     >
+      {loading && (
+        <Spinner className="justify-center absolute bg-default-300 top-0 left-0 z-30" />
+      )}
       <div className="flex justify-between items-center w-full pl-[79px] pr-10 pt-6 rounded-tl-md rounded-tr-md bg-default-300 md:flex-col md:pl-5 md:pr-6">
         <h2 className="text-2xl font-bold text-emphasis font-ibm md:text-xl">
           {trackingName.toUpperCase()}

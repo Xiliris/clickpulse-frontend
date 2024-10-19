@@ -41,6 +41,11 @@ const OverlayArticle: FC<OverlayArticleProps> = ({
     };
   }, []);
 
+  const getTruncated = (value: string) => {
+    if (window.innerWidth > 767) return value;
+    return value.length > 12 ? `${value.slice(0, 12)}...` : value;
+  };
+
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black bg-opacity-50 flex items-center justify-center">
       <div
@@ -75,9 +80,14 @@ const OverlayArticle: FC<OverlayArticleProps> = ({
                 {Object.entries(item).map(([key, value]: any) => (
                   <p
                     key={key}
-                    className="text-primary w-full text-right first:text-left "
+                    className="text-primary w-full text-right  first:text-left"
                   >
-                    {formatOverlayContent(key, value, item.visits)}
+                    {getTruncated(
+                      formatOverlayContent(key, value, item.visits).replaceAll(
+                        "%20",
+                        " "
+                      )
+                    )}
                   </p>
                 ))}
               </li>
@@ -88,8 +98,11 @@ const OverlayArticle: FC<OverlayArticleProps> = ({
   );
 };
 
-function formatOverlayContent(type: string, value: number, visits: number) {
-  console.log(type);
+function formatOverlayContent(
+  type: string,
+  value: number,
+  visits: number
+): any {
   if (type === "bounce_rate") {
     return ((value / visits) * 100).toFixed(1) + "%";
   } else if (type === "time_spent") {

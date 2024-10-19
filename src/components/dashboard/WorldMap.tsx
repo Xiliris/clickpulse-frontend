@@ -6,6 +6,7 @@ import { fadeUp } from "../../animations/Animations";
 import axiosInstance from "../../modules/axiosInstance";
 
 import OverlayArticle from "./OverlayArticle";
+import Spinner from "../Spinner";
 
 interface WorldMapProps {
   id: string | undefined;
@@ -31,6 +32,7 @@ const WorldMap: FC<WorldMapProps> = ({ id, endDate, startDate }) => {
   const [userAgentStats, setUserAgentStats] = useState<any[]>([]);
   const [userAgentKey, setUserAgentKey] = useState<any>();
   const [overlayState, setOverlayState] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchUserAgentData() {
@@ -42,6 +44,7 @@ const WorldMap: FC<WorldMapProps> = ({ id, endDate, startDate }) => {
       setUserAgentKey(Object.keys(fetchedData[0]));
 
       setUserAgentStats(fetchedData);
+      setLoading(false);
     }
 
     fetchUserAgentData();
@@ -71,8 +74,11 @@ const WorldMap: FC<WorldMapProps> = ({ id, endDate, startDate }) => {
         initial="initial"
         viewport={{ once: true, amount: 0.3 }}
         whileInView="animate"
-        className="p-5 bg-default-300 rounded-md mt-5 w-full"
+        className="p-5 bg-default-300 rounded-md mt-5 w-full relative"
       >
+        {loading && (
+          <Spinner className="justify-center absolute bg-default-300 top-0 left-0 z-30" />
+        )}
         <div className="flex justify-between items-center border-b border-b-default-100 pb-1">
           <h2 className="text-emphasis font-bold text-xl md:text-sm">
             WORLD MAP

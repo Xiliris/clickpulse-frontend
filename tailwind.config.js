@@ -10,6 +10,9 @@ module.exports = {
           200: "#4C5366",
         },
         emphasis: "#3CBAB1",
+        lighter: {
+          emphasis: "rgba(60, 186, 177, 0.5)",
+        },
         default: {
           100: "#252A34",
           200: "#15191E",
