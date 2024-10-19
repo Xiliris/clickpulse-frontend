@@ -131,7 +131,7 @@ function Overlay({ user }: any) {
           </ExternalItem>
           <ExternalItem
             href="https://discord.gg/9eWFeSW7pz"
-            icon="fa-brands fa-discord scale-[0.95] -translate-x-px"
+            icon="fa-brands fa-discord  -translate-x-[3px]"
             className="justify-between flex-row-reverse"
           >
             Discord

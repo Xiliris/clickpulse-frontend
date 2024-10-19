@@ -40,7 +40,7 @@ const Container: FC<ContainerProp> = ({ title, children, className }) => {
     <div className={className}>
       <p
         onClick={handleToggle}
-        className="text-primary flex justify-center items-center cursor-pointer group hover:text-emphasis"
+        className="text-primary flex justify-center items-center cursor-pointer group hover:text-emphasis "
         ref={containerRef}
       >
         {title}
