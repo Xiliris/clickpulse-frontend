@@ -93,9 +93,9 @@ export default function Home() {
               insights that set us apart.
             </p>
 
-            <Link to="/signup">
+           <Link to="/dashboard">
               <Button className="mt-5 sm:px-4 sm:w-full justify-between gap-5">
-                Start Your Free Trial!
+                It is currently free!
                 <i className="fa-solid fa-arrow-right cursor-pointer"></i>
               </Button>
             </Link>
