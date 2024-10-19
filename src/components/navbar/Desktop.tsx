@@ -4,7 +4,6 @@ import Container from "./Container";
 import ExternalItem from "./ExternalItem";
 import Spinner from "../Spinner";
 import Button from "../form/Button";
-import SecondaryButton from "../form/SecondaryButton";
 
 function Desktop({ loadingUser, user }: any) {
   const navigate = useNavigate();
