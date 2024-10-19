@@ -136,7 +136,7 @@ const Website: FC<WebsiteProps> = ({ domain, id, active }) => {
         </div>
       )}
       {removeOverlay && (
-        <div className="w-full h-full absolute flex flex-col justify-center items-center ">
+        <div className="w-full h-full absolute flex flex-col justify-center items-center z-30">
           <div className="bg-default-100 p-10 rounded-md md:text-center max-w-[90vw]">
             <p className="text-primary text-2xl">
               Are you sure you want to remove{" "}
