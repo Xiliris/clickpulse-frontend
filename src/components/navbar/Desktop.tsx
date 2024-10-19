@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import Item from "./Item";
 import Container from "./Container";
 import ExternalItem from "./ExternalItem";
 import Spinner from "../Spinner";
+import Button from "../form/Button";
 
 function Desktop({ loadingUser, user }: any) {
+  const navigate = useNavigate();
   return (
     <>
       <ul className="flex justify-between items-center gap-5 lg:hidden">
@@ -56,24 +59,37 @@ function Desktop({ loadingUser, user }: any) {
           </Item>
         </Container>
       </ul>
-      {loadingUser ? (
-        <Spinner className="justify-end w-24 lg:hidden" />
-      ) : (
-        user && (
-          <Container title={user.username} className="lg:hidden">
-            <Item href="/dashboard" icon="fa-tachometer-alt">
-              Dashboard
-            </Item>
-            <Item href="/change-password" icon="fa-key">
-              Change Password
-            </Item>
-            <Item href="/logout" icon="fa-sign-out-alt">
-              Logout
-            </Item>
-          </Container>
-        )
-      )}
+      <div className="w-[160px] flex justify-end items-center">
+        {loadingUser ? (
+          <Spinner className="justify-end w-24 lg:hidden" />
+        ) : user ? (
+          <UserProfile user={user} />
+        ) : (
+          <Button
+            onClick={() => navigate("/login")}
+            className="cmd:text-base cmd:py-1.5 cmd:px-5 lg:hidden"
+          >
+            Login
+          </Button>
+        )}
+      </div>
     </>
+  );
+}
+
+function UserProfile({ user }: any) {
+  return (
+    <Container title={user.username} className="lg:hidden">
+      <Item href="/dashboard" icon="fa-tachometer-alt">
+        Dashboard
+      </Item>
+      <Item href="/change-password" icon="fa-key">
+        Change Password
+      </Item>
+      <Item href="/logout" icon="fa-sign-out-alt">
+        Logout
+      </Item>
+    </Container>
   );
 }
 
