@@ -49,6 +49,7 @@ const StatsArticle: FC<StatsArticleProps> = ({
         setUserAgentKey(Object.keys(fetchedData[0]));
 
         setUserAgentStats(fetchedData);
+
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -154,7 +155,7 @@ interface ItemProps {
 function Item({ index, icon, stat, userAgentKey, listType }: ItemProps) {
   const getTruncated = (value: string) => {
     if (window.innerWidth > 767) return value;
-    return value.length > 12 ? `${value.slice(0, 12)}...` : value;
+    return value.length > 25 ? `${value.slice(0, 25)}...` : value;
   };
   return (
     <div
@@ -174,7 +175,11 @@ function Item({ index, icon, stat, userAgentKey, listType }: ItemProps) {
           />
         )}
         <p className="text-lg text-secondary-100 md:text-sm">
-          {getTruncated(stat[`${userAgentKey[0]}`].replaceAll("%20", " "))}
+          {getTruncated(
+            stat[`${userAgentKey[0]}`]
+              .replaceAll("%20", "")
+              .replaceAll("https://www.", "")
+          )}
         </p>
       </div>
       <div className="flex justify-between items-center gap-2">
